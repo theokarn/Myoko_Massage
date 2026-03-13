@@ -212,7 +212,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
             overflow: hidden;
         }
 
@@ -237,14 +236,14 @@
             position: relative;
             z-index: 1;
             color: #EDE6D4;
-            padding: 0 20px;
+            padding: 0 30px;
         }
 
         .hero h1 {
             font-size: clamp(2.2rem, 8vw, 5.5rem);
             font-weight: 400;
             letter-spacing: -0.01em;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             line-height: 1.15;
             color: #EDE6D4;
             font-family: 'Gowun Batang', serif;
@@ -256,7 +255,7 @@
         .hero p {
             font-size: clamp(0.95rem, 2vw, 1.3rem);
             font-weight: 300;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
             max-width: 600px;
             opacity: 0;
             margin-left: auto;
@@ -453,6 +452,7 @@
             cursor: pointer;
             transition: all 0.4s ease;
             position: relative;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .service-card:hover {
@@ -532,10 +532,7 @@
         }
 
         /* ── ABOUT ── */
-        .about {
-            background: #EDE6D4;
-            padding: 0;
-        }
+        .about { background: #EDE6D4; padding: 0; }
 
         .about-container {
             display: grid;
@@ -602,6 +599,7 @@
             max-width: 550px;
         }
 
+        /* ── REVIEWS ── */
         .reviews-photos-section {
             background: #4B4D39;
             padding: 80px 40px 60px;
@@ -822,56 +820,54 @@
         }
         .fade-in-up.appear { opacity: 1; transform: translateY(0); }
 
-        /* ════════════════════════════════
-           TABLET  (max-width: 1024px)
-        ════════════════════════════════ */
+        /* ════════════════════════════
+           TABLET  ≤ 1024px
+        ════════════════════════════ */
         @media (max-width: 1024px) {
             nav { padding: 20px 35px; }
-
             .services-content-side { padding: 60px 40px; }
-
-            .definition-side,
-            .text-side { padding: 80px 40px; }
-
+            .definition-side, .text-side { padding: 80px 40px; }
             .service-card { padding: 28px; }
-
             .service-card h3 { font-size: 1.6rem; }
             .service-price   { font-size: 1.4rem; }
         }
 
-        /* ════════════════════════════════
-           MOBILE  (max-width: 768px)
-        ════════════════════════════════ */
+        /* ════════════════════════════
+           MOBILE  ≤ 768px
+        ════════════════════════════ */
         @media (max-width: 768px) {
 
-            /* Nav */
-            nav {
-                padding: 15px 20px;
-            }
+            nav { padding: 15px 20px; }
 
-            .menu-close {
-                top: 20px;
-                right: 20px;
-            }
+            .menu-close { top: 20px; right: 20px; }
 
-            /* Hero */
+            /* Hero — fixed + roomy */
             .hero {
                 height: 100svh;
-                padding: 0 25px;
+                padding: 0;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .hero-content {
+                padding: 0 28px;
+                margin-bottom: 8vh;
             }
 
             .hero h1 {
                 font-size: clamp(2rem, 9vw, 3rem);
-                margin-bottom: 15px;
+                margin-bottom: 22px;
+                line-height: 1.2;
             }
 
             .hero p {
                 font-size: 1rem;
-                margin-bottom: 30px;
+                margin-bottom: 42px;
+                letter-spacing: 0.5px;
             }
 
             .cta-btn {
-                padding: 14px 35px;
+                padding: 16px 40px;
                 font-size: 13px;
             }
 
@@ -886,9 +882,7 @@
                 min-height: auto;
             }
 
-            .definition-word {
-                font-size: clamp(3rem, 15vw, 5rem);
-            }
+            .definition-word { font-size: clamp(3rem, 15vw, 5rem); }
 
             .text-side {
                 padding: 50px 25px 70px;
@@ -924,51 +918,31 @@
             .services-header {
                 flex-direction: row;
                 align-items: center;
-                gap: 0;
                 margin-bottom: 30px;
             }
 
             .services-title { font-size: clamp(2rem, 8vw, 2.8rem); }
-
             .page-indicator { gap: 5px; }
             .page-label     { font-size: 0.7rem; letter-spacing: 1.5px; }
 
-            .nav-arrow {
-                width: 42px;
-                height: 42px;
-                font-size: 1.6rem;
-            }
-
+            .nav-arrow { width: 42px; height: 42px; font-size: 1.6rem; }
             .services-nav { gap: 10px; }
-
             .services-page { gap: 15px; }
 
-            .service-card {
-                padding: 22px;
-                /* Disable slide animation on mobile — tap feels better */
-            }
+            /* Cards: no slide/scale on mobile */
+            .service-card { padding: 22px; }
+            .service-card:hover { transform: none; box-shadow: none; border-color: transparent; }
+            .service-card.active { transform: none; box-shadow: 0 6px 20px rgba(75,77,57,0.2); }
 
-            .service-card:hover {
-                transform: none;
-            }
-
-            .service-card.active {
-                transform: none;
-                box-shadow: 0 6px 20px rgba(75,77,57,0.2);
-            }
-
-            .service-card h3   { font-size: 1.4rem; }
-            .service-price     { font-size: 1.3rem; }
-            .service-duration  { font-size: 0.85rem; }
+            .service-card h3    { font-size: 1.4rem; }
+            .service-price      { font-size: 1.3rem; }
+            .service-duration   { font-size: 0.85rem; }
             .service-description { font-size: 0.95rem; }
 
             /* Contact */
-            .contact {
-                padding: 70px 25px;
-            }
-
-            .contact h2       { font-size: clamp(2rem, 8vw, 3rem); }
-            .contact-intro    { font-size: 1rem; margin-bottom: 35px; }
+            .contact { padding: 70px 25px; }
+            .contact h2    { font-size: clamp(2rem, 8vw, 3rem); }
+            .contact-intro { font-size: 1rem; margin-bottom: 35px; }
 
             .whatsapp-btn {
                 width: 100%;
@@ -977,50 +951,42 @@
                 font-size: 16px;
             }
 
-            input, textarea {
-                font-size: 16px; /* prevents iOS zoom on focus */
-                padding: 14px;
-            }
+            /* Prevents iOS zoom on input focus */
+            input, textarea { font-size: 16px; padding: 14px; }
+            button[type="submit"] { font-size: 16px; padding: 18px; }
 
-            button[type="submit"] {
-                font-size: 16px;
-                padding: 18px;
-            }
-
-            /* Footer */
             footer { padding: 25px 20px; font-size: 13px; }
         }
 
-        /* ════════════════════════════════
-           SMALL PHONES  (max-width: 480px)
-        ════════════════════════════════ */
+        /* ════════════════════════════
+           SMALL PHONES  ≤ 480px
+        ════════════════════════════ */
         @media (max-width: 480px) {
-
             .logo-name     { font-size: 18px; }
             .logo-location { font-size: 9px; letter-spacing: 2px; }
 
-            .hero h1 { font-size: clamp(1.8rem, 10vw, 2.5rem); }
-            .hero p  { font-size: 0.95rem; }
+            .hero-content  { margin-bottom: 10vh; }
+            .hero h1       { font-size: clamp(1.8rem, 10vw, 2.5rem); }
+            .hero p        { font-size: 0.95rem; }
 
             .definition-side { padding: 60px 20px 40px; }
             .text-side        { padding: 40px 20px 60px; }
             .definition-word  { font-size: clamp(2.8rem, 18vw, 4rem); }
 
-            .services-image-side { height: 30vh; }
+            .services-image-side   { height: 30vh; }
             .services-content-side { padding: 35px 15px 50px; }
-
-            .service-card { padding: 18px; }
-            .service-card h3 { font-size: 1.25rem; }
-            .service-price   { font-size: 1.2rem; }
+            .service-card          { padding: 18px; }
+            .service-card h3       { font-size: 1.25rem; }
+            .service-price         { font-size: 1.2rem; }
 
             .reviews-photos-section { padding: 40px 15px 30px; }
-            .slider-img { width: 200px; height: 140px; }
+            .slider-img             { width: 200px; height: 140px; }
 
             .contact { padding: 60px 20px; }
 
-            .overlay-links { gap: 30px; }
+            .overlay-links    { gap: 30px; }
             .overlay-links li a { font-size: clamp(2rem, 10vw, 3rem); }
-            .overlay-ig { font-size: 0.9rem; margin-top: 40px; }
+            .overlay-ig       { font-size: 0.9rem; margin-top: 40px; }
         }
     </style>
 </head>
@@ -1309,6 +1275,9 @@
             const label2    = document.getElementById('label-2');
             let currentPage = 0;
 
+            // Detect touch device — disable mouseenter on touch screens
+            const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
             function setImage(serviceName) {
                 images.forEach(img => img.classList.remove('active'));
                 const target = document.querySelector(`.service-image[data-service="${serviceName}"]`);
@@ -1334,14 +1303,19 @@
             nextBtn.addEventListener('click', () => { if (currentPage < pages.length - 1) showPage(++currentPage); });
 
             cards.forEach(card => {
+                // Single tap/click activates immediately
                 card.addEventListener('click', function() {
                     cards.forEach(c => c.classList.remove('active'));
                     this.classList.add('active');
                     setImage(this.getAttribute('data-service'));
                 });
-                card.addEventListener('mouseenter', function() {
-                    setImage(this.getAttribute('data-service'));
-                });
+
+                // Hover image switching — desktop only
+                if (!isTouchDevice) {
+                    card.addEventListener('mouseenter', function() {
+                        setImage(this.getAttribute('data-service'));
+                    });
+                }
             });
 
             showPage(0);
