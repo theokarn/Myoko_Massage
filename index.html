@@ -22,9 +22,7 @@
             background: #EDE6D4;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         /* ── NAVBAR ── */
         nav {
@@ -46,7 +44,6 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        /* Logo */
         .logo {
             display: flex;
             flex-direction: column;
@@ -75,15 +72,9 @@
             margin-top: 4px;
         }
 
-        nav.scrolled .logo-name {
-            color: #4B4D39;
-        }
+        nav.scrolled .logo-name { color: #4B4D39; }
+        nav.scrolled .logo-location { color: rgba(75, 77, 57, 0.6); }
 
-        nav.scrolled .logo-location {
-            color: rgba(75, 77, 57, 0.6);
-        }
-
-        /* Hamburger pill button */
         .menu-pill {
             background: rgba(237, 230, 212, 0.15);
             border: 1.5px solid rgba(237, 230, 212, 0.5);
@@ -95,20 +86,18 @@
             gap: 5px;
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
+            min-height: 44px;
+            min-width: 44px;
         }
 
-        .menu-pill:hover {
-            background: rgba(237, 230, 212, 0.25);
-        }
+        .menu-pill:hover { background: rgba(237, 230, 212, 0.25); }
 
         nav.scrolled .menu-pill {
             background: rgba(75, 77, 57, 0.08);
             border-color: rgba(75, 77, 57, 0.3);
         }
 
-        nav.scrolled .menu-pill:hover {
-            background: rgba(75, 77, 57, 0.15);
-        }
+        nav.scrolled .menu-pill:hover { background: rgba(75, 77, 57, 0.15); }
 
         .menu-pill span {
             display: block;
@@ -119,17 +108,13 @@
             transition: background 0.3s ease;
         }
 
-        nav.scrolled .menu-pill span {
-            background: #4B4D39;
-        }
+        nav.scrolled .menu-pill span { background: #4B4D39; }
 
-        /* ── FULLSCREEN MENU OVERLAY ── */
+        /* ── MENU OVERLAY ── */
         .menu-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: #4B4D39;
             z-index: 999;
             display: flex;
@@ -148,8 +133,7 @@
 
         .menu-close {
             position: absolute;
-            top: 35px;
-            right: 50px;
+            top: 35px; right: 50px;
             background: transparent;
             border: none;
             cursor: pointer;
@@ -158,11 +142,14 @@
             font-weight: 300;
             line-height: 1;
             transition: opacity 0.3s;
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .menu-close:hover {
-            opacity: 0.6;
-        }
+        .menu-close:hover { opacity: 0.6; }
 
         .overlay-links {
             display: flex;
@@ -179,24 +166,21 @@
             color: #EDE6D4;
             text-decoration: none;
             letter-spacing: 1px;
-            transition: opacity 0.3s ease;
             display: block;
             text-align: center;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s ease;
+            min-height: 44px;
         }
 
-        .overlay-links li a:hover {
-            opacity: 0.6;
-        }
+        .overlay-links li a:hover { opacity: 0.6; }
 
         .menu-overlay.open .overlay-links li a {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Staggered animation delays */
         .overlay-links li:nth-child(1) a { transition-delay: 0.1s; }
         .overlay-links li:nth-child(2) a { transition-delay: 0.2s; }
         .overlay-links li:nth-child(3) a { transition-delay: 0.3s; }
@@ -211,19 +195,17 @@
             text-decoration: none;
             opacity: 0;
             transition: opacity 0.4s ease 0.5s, color 0.3s ease;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
         }
 
-        .menu-overlay.open .overlay-ig {
-            opacity: 1;
-        }
-
-        .overlay-ig:hover {
-            color: #EDE6D4;
-        }
+        .menu-overlay.open .overlay-ig { opacity: 1; }
+        .overlay-ig:hover { color: #EDE6D4; }
 
         /* ── HERO ── */
         .hero {
-            height: 110vh;
+            height: 100svh;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -236,10 +218,8 @@
 
         #hero-video {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             object-fit: cover;
             z-index: -1;
             filter: brightness(0.9);
@@ -247,10 +227,8 @@
 
         .hero-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.2);
             z-index: 0;
         }
@@ -259,10 +237,11 @@
             position: relative;
             z-index: 1;
             color: #EDE6D4;
+            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-size: clamp(2.2rem, 8vw, 5.5rem);
             font-weight: 400;
             letter-spacing: -0.01em;
             margin-bottom: 20px;
@@ -275,7 +254,7 @@
         }
 
         .hero p {
-            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-size: clamp(0.95rem, 2vw, 1.3rem);
             font-weight: 300;
             margin-bottom: 40px;
             max-width: 600px;
@@ -306,6 +285,7 @@
             opacity: 0;
             animation: fadeInUp 1.5s ease forwards;
             animation-delay: 2.0s;
+            min-height: 44px;
         }
 
         .cta-btn:hover {
@@ -390,7 +370,6 @@
             margin: 0;
         }
 
-        /* Page indicator */
         .page-indicator {
             display: flex;
             flex-direction: column;
@@ -453,12 +432,10 @@
             display: none;
             flex-direction: column;
             gap: 25px;
-            overflow: visible;
         }
 
         .services-page.active { display: flex; }
 
-        /* Add-ons page header */
         .addons-label {
             font-family: 'Lato', sans-serif;
             font-size: 0.75rem;
@@ -468,7 +445,6 @@
             margin-bottom: -10px;
         }
 
-        /* Service Cards */
         .service-card {
             background: #FFFFFF;
             border: 2px solid transparent;
@@ -499,7 +475,6 @@
             color: #EDE6D4;
         }
 
-        /* Add-on badge */
         .addon-badge {
             display: inline-block;
             font-family: 'Lato', sans-serif;
@@ -553,16 +528,7 @@
             font-size: 1rem;
             color: #333333;
             line-height: 1.7;
-            margin: 0 0 20px 0;
-        }
-
-        
-        @media (max-width: 768px) {
-            .services-container { grid-template-columns: 1fr; }
-            .services-image-side { min-height: 50vh; order: 1; }
-            .services-content-side { padding: 60px 30px; order: 2; }
-            .services-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .service-card { padding: 25px; }
+            margin: 0;
         }
 
         /* ── ABOUT ── */
@@ -720,17 +686,7 @@
             100% { transform: translateX(-50%); }
         }
 
-        .photo-slider:hover .slider-track {
-            animation-play-state: paused;
-        }
-
-        @media (max-width: 768px) {
-            .about-container { grid-template-columns: 1fr; min-height: auto; }
-            .definition-side, .text-side { padding: 80px 30px; min-height: 80vh; }
-            .reviews-photos-section { padding: 60px 20px 40px; }
-            .review-cards { grid-template-columns: 1fr; }
-            .slider-img { width: 280px; height: 200px; }
-        }
+        .photo-slider:hover .slider-track { animation-play-state: paused; }
 
         /* ── CONTACT ── */
         .contact {
@@ -777,6 +733,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            min-height: 44px;
         }
 
         .whatsapp-btn:hover {
@@ -798,9 +755,7 @@
             color: #EDE6D4;
         }
 
-        input::placeholder, textarea::placeholder {
-            color: rgba(237,230,212,0.6);
-        }
+        input::placeholder, textarea::placeholder { color: rgba(237,230,212,0.6); }
 
         input:focus, textarea:focus {
             outline: none;
@@ -822,6 +777,7 @@
             letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s;
+            min-height: 44px;
         }
 
         button[type="submit"]:hover {
@@ -835,12 +791,6 @@
             text-align: center;
             padding: 35px;
             font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            nav { padding: 20px 25px; }
-            .menu-close { right: 25px; }
-            .contact { padding: 60px 25px; }
         }
 
         /* ── SCROLL ANIMATIONS ── */
@@ -871,6 +821,207 @@
             transition: opacity 1s ease-out, transform 1s ease-out;
         }
         .fade-in-up.appear { opacity: 1; transform: translateY(0); }
+
+        /* ════════════════════════════════
+           TABLET  (max-width: 1024px)
+        ════════════════════════════════ */
+        @media (max-width: 1024px) {
+            nav { padding: 20px 35px; }
+
+            .services-content-side { padding: 60px 40px; }
+
+            .definition-side,
+            .text-side { padding: 80px 40px; }
+
+            .service-card { padding: 28px; }
+
+            .service-card h3 { font-size: 1.6rem; }
+            .service-price   { font-size: 1.4rem; }
+        }
+
+        /* ════════════════════════════════
+           MOBILE  (max-width: 768px)
+        ════════════════════════════════ */
+        @media (max-width: 768px) {
+
+            /* Nav */
+            nav {
+                padding: 15px 20px;
+            }
+
+            .menu-close {
+                top: 20px;
+                right: 20px;
+            }
+
+            /* Hero */
+            .hero {
+                height: 100svh;
+                padding: 0 25px;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 9vw, 3rem);
+                margin-bottom: 15px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+
+            .cta-btn {
+                padding: 14px 35px;
+                font-size: 13px;
+            }
+
+            /* About */
+            .about-container {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .definition-side {
+                padding: 70px 25px 50px;
+                min-height: auto;
+            }
+
+            .definition-word {
+                font-size: clamp(3rem, 15vw, 5rem);
+            }
+
+            .text-side {
+                padding: 50px 25px 70px;
+                min-height: auto;
+            }
+
+            .text-side h2 { font-size: clamp(2rem, 8vw, 2.8rem); }
+            .text-side p  { font-size: 1rem; }
+
+            /* Reviews */
+            .reviews-photos-section { padding: 50px 20px 40px; }
+            .review-cards           { grid-template-columns: 1fr; gap: 20px; }
+            .review-card            { padding: 22px; }
+            .slider-img             { width: 240px; height: 170px; }
+
+            /* Services */
+            .services-container {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .services-image-side {
+                height: 35vh;
+                order: 1;
+                position: relative;
+            }
+
+            .services-content-side {
+                padding: 45px 20px 60px;
+                order: 2;
+            }
+
+            .services-header {
+                flex-direction: row;
+                align-items: center;
+                gap: 0;
+                margin-bottom: 30px;
+            }
+
+            .services-title { font-size: clamp(2rem, 8vw, 2.8rem); }
+
+            .page-indicator { gap: 5px; }
+            .page-label     { font-size: 0.7rem; letter-spacing: 1.5px; }
+
+            .nav-arrow {
+                width: 42px;
+                height: 42px;
+                font-size: 1.6rem;
+            }
+
+            .services-nav { gap: 10px; }
+
+            .services-page { gap: 15px; }
+
+            .service-card {
+                padding: 22px;
+                /* Disable slide animation on mobile — tap feels better */
+            }
+
+            .service-card:hover {
+                transform: none;
+            }
+
+            .service-card.active {
+                transform: none;
+                box-shadow: 0 6px 20px rgba(75,77,57,0.2);
+            }
+
+            .service-card h3   { font-size: 1.4rem; }
+            .service-price     { font-size: 1.3rem; }
+            .service-duration  { font-size: 0.85rem; }
+            .service-description { font-size: 0.95rem; }
+
+            /* Contact */
+            .contact {
+                padding: 70px 25px;
+            }
+
+            .contact h2       { font-size: clamp(2rem, 8vw, 3rem); }
+            .contact-intro    { font-size: 1rem; margin-bottom: 35px; }
+
+            .whatsapp-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 16px 20px;
+                font-size: 16px;
+            }
+
+            input, textarea {
+                font-size: 16px; /* prevents iOS zoom on focus */
+                padding: 14px;
+            }
+
+            button[type="submit"] {
+                font-size: 16px;
+                padding: 18px;
+            }
+
+            /* Footer */
+            footer { padding: 25px 20px; font-size: 13px; }
+        }
+
+        /* ════════════════════════════════
+           SMALL PHONES  (max-width: 480px)
+        ════════════════════════════════ */
+        @media (max-width: 480px) {
+
+            .logo-name     { font-size: 18px; }
+            .logo-location { font-size: 9px; letter-spacing: 2px; }
+
+            .hero h1 { font-size: clamp(1.8rem, 10vw, 2.5rem); }
+            .hero p  { font-size: 0.95rem; }
+
+            .definition-side { padding: 60px 20px 40px; }
+            .text-side        { padding: 40px 20px 60px; }
+            .definition-word  { font-size: clamp(2.8rem, 18vw, 4rem); }
+
+            .services-image-side { height: 30vh; }
+            .services-content-side { padding: 35px 15px 50px; }
+
+            .service-card { padding: 18px; }
+            .service-card h3 { font-size: 1.25rem; }
+            .service-price   { font-size: 1.2rem; }
+
+            .reviews-photos-section { padding: 40px 15px 30px; }
+            .slider-img { width: 200px; height: 140px; }
+
+            .contact { padding: 60px 20px; }
+
+            .overlay-links { gap: 30px; }
+            .overlay-links li a { font-size: clamp(2rem, 10vw, 3rem); }
+            .overlay-ig { font-size: 0.9rem; margin-top: 40px; }
+        }
     </style>
 </head>
 <body>
@@ -1097,12 +1248,10 @@
         menuOpen.addEventListener('click', () => menuOverlay.classList.add('open'));
         menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
 
-        // Close on nav link click
         document.querySelectorAll('.overlay-nav-link').forEach(link => {
             link.addEventListener('click', () => menuOverlay.classList.remove('open'));
         });
 
-        // Close on Escape key
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') menuOverlay.classList.remove('open');
         });
@@ -1151,14 +1300,14 @@
     <script>
         // Service cards + pagination
         document.addEventListener('DOMContentLoaded', () => {
-            const cards      = document.querySelectorAll('.service-card');
-            const images     = document.querySelectorAll('.service-image');
-            const pages      = document.querySelectorAll('.services-page');
-            const prevBtn    = document.querySelector('.prev-arrow');
-            const nextBtn    = document.querySelector('.next-arrow');
-            const label1     = document.getElementById('label-1');
-            const label2     = document.getElementById('label-2');
-            let currentPage  = 0;
+            const cards     = document.querySelectorAll('.service-card');
+            const images    = document.querySelectorAll('.service-image');
+            const pages     = document.querySelectorAll('.services-page');
+            const prevBtn   = document.querySelector('.prev-arrow');
+            const nextBtn   = document.querySelector('.next-arrow');
+            const label1    = document.getElementById('label-1');
+            const label2    = document.getElementById('label-2');
+            let currentPage = 0;
 
             function setImage(serviceName) {
                 images.forEach(img => img.classList.remove('active'));
@@ -1173,7 +1322,6 @@
                 prevBtn.disabled = index === 0;
                 nextBtn.disabled = index === pages.length - 1;
 
-                // Auto-select first card on page
                 const firstCard = pages[index].querySelector('.service-card');
                 if (firstCard) {
                     cards.forEach(c => c.classList.remove('active'));
@@ -1183,7 +1331,7 @@
             }
 
             prevBtn.addEventListener('click', () => { if (currentPage > 0) showPage(--currentPage); });
-            nextBtn.addEventListener('click', () => { if (currentPage < pages.length-1) showPage(++currentPage); });
+            nextBtn.addEventListener('click', () => { if (currentPage < pages.length - 1) showPage(++currentPage); });
 
             cards.forEach(card => {
                 card.addEventListener('click', function() {
