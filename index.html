@@ -75,14 +75,13 @@
         nav.scrolled .logo-name     { color: #4B4D39; }
         nav.scrolled .logo-location { color: rgba(75, 77, 57, 0.6); }
 
-        /* ── HAMBURGER ── */
+        /* ── HAMBURGER — 2 bars → X ── */
         .hamburger {
             background: transparent;
             border: none;
             cursor: pointer;
             padding: 8px;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             width: 44px;
@@ -98,27 +97,27 @@
             border-radius: 2px;
             position: absolute;
             transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-                        opacity   0.3s ease,
                         background 0.3s ease;
         }
 
-        .hamburger .bar:nth-child(1) { transform: translateY(-7px); }
-        .hamburger .bar:nth-child(2) { transform: translateY(0); }
-        .hamburger .bar:nth-child(3) { transform: translateY(7px); }
+        .hamburger .bar:nth-child(1) { transform: translateY(-5px); }
+        .hamburger .bar:nth-child(2) { transform: translateY(5px); }
 
         /* Animate to X */
         .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
-        .hamburger.open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
-        .hamburger.open .bar:nth-child(3) { transform: translateY(0) rotate(-45deg); }
+        .hamburger.open .bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
 
-        nav.scrolled .hamburger .bar           { background: #4B4D39; }
-        .hamburger.open .bar                   { background: #EDE6D4 !important; }
+        /* Dark bars when nav is scrolled (light background) */
+        nav.scrolled .hamburger .bar { background: #4B4D39; }
 
-        /* ── MENU OVERLAY ── */
+        /* Dark bars when overlay is open (beige background) */
+        .hamburger.open .bar { background: #4B4D39 !important; }
+
+        /* ── MENU OVERLAY — beige bg, olive text ── */
         .menu-overlay {
             position: fixed;
             inset: 0;
-            background: #4B4D39;
+            background: #EDE6D4;
             z-index: 99;
             display: flex;
             flex-direction: column;
@@ -146,7 +145,7 @@
             font-family: 'Gowun Batang', serif;
             font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 400;
-            color: #EDE6D4;
+            color: #4B4D39;
             text-decoration: none;
             letter-spacing: 1px;
             display: block;
@@ -169,13 +168,13 @@
         .overlay-links li:nth-child(3) a { transition-delay: 0.24s; }
         .overlay-links li:nth-child(4) a { transition-delay: 0.32s; }
 
-        .overlay-links li a:hover { opacity: 0.55; }
+        .overlay-links li a:hover { opacity: 0.45; }
 
         .overlay-ig {
             margin-top: 55px;
             font-family: 'Lato', sans-serif;
             font-size: 1rem;
-            color: rgba(237, 230, 212, 0.55);
+            color: rgba(75, 77, 57, 0.5);
             letter-spacing: 1.5px;
             text-decoration: none;
             opacity: 0;
@@ -186,7 +185,7 @@
         }
 
         .menu-overlay.open .overlay-ig { opacity: 1; }
-        .overlay-ig:hover { color: #EDE6D4; }
+        .overlay-ig:hover { color: #4B4D39; }
 
         /* ── HERO ── */
         .hero {
@@ -809,26 +808,17 @@
 
             nav { padding: 16px 20px; }
 
-            /* Hero: 100dvh fills the full screen correctly on mobile */
             .hero {
                 height: 100vh;
                 height: 100dvh;
             }
 
-            /* 
-             * Safari iOS bottom toolbar is transparent and overlaps the page.
-             * We shift content upward by padding-bottom so flexbox centers
-             * within the truly *visible* area, not the full viewport.
-             */
             .hero-content {
                 padding: 0 24px 83px;
             }
 
-            /* iOS Safari only — fine-tune if needed */
             @supports (-webkit-touch-callout: none) {
-                .hero-content {
-                    padding-bottom: 83px;
-                }
+                .hero-content { padding-bottom: 83px; }
             }
 
             .hero h1 {
@@ -837,18 +827,9 @@
                 line-height: 1.2;
             }
 
-            .hero p {
-                font-size: 1rem;
-                margin-bottom: 40px;
-            }
+            .hero p       { font-size: 1rem; margin-bottom: 40px; }
+            .cta-btn      { padding: 16px 40px; font-size: 12px; letter-spacing: 2px; }
 
-            .cta-btn {
-                padding: 16px 40px;
-                font-size: 12px;
-                letter-spacing: 2px;
-            }
-
-            /* About */
             .about-container { grid-template-columns: 1fr; min-height: auto; }
             .definition-side { padding: 70px 25px 50px; min-height: auto; }
             .definition-word { font-size: clamp(3rem, 15vw, 5rem); }
@@ -856,13 +837,11 @@
             .text-side h2    { font-size: clamp(2rem, 8vw, 2.8rem); }
             .text-side p     { font-size: 1rem; }
 
-            /* Reviews */
             .reviews-photos-section { padding: 50px 20px 40px; }
             .review-cards           { grid-template-columns: 1fr; gap: 20px; }
             .review-card            { padding: 22px; }
             .slider-img             { width: 240px; height: 170px; }
 
-            /* Services */
             .services-container    { grid-template-columns: 1fr; min-height: auto; }
             .services-image-side   { height: 35vh; order: 1; }
             .services-content-side { padding: 45px 20px 60px; order: 2; }
@@ -882,7 +861,6 @@
             .service-duration    { font-size: 0.85rem; }
             .service-description { font-size: 0.95rem; }
 
-            /* Contact */
             .contact        { padding: 70px 25px; }
             .contact h2     { font-size: clamp(2rem, 8vw, 3rem); }
             .contact-intro  { font-size: 1rem; margin-bottom: 35px; }
@@ -932,8 +910,8 @@
             <span class="logo-name">Myōko Massage</span>
             <span class="logo-location">Mykonos</span>
         </a>
+        <!-- 2 bars only -->
         <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
-            <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </button>
