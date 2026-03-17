@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Lato:wght@300;400;700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Lato:wght@300;400;700&family=Gowun+Batang:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <title>Myōko Massage – Mobile Massage Service</title>
     <style>
         * {
@@ -72,8 +72,20 @@
             margin-top: 4px;
         }
 
+        /* Logo colors when scrolled (not on hero) */
         nav.scrolled .logo-name     { color: #4B4D39; }
         nav.scrolled .logo-location { color: rgba(75, 77, 57, 0.6); }
+
+        /* Logo colors when menu is open — always dark on beige overlay */
+        nav.menu-open .logo-name     { color: #4B4D39; }
+        nav.menu-open .logo-location { color: rgba(75, 77, 57, 0.6); }
+
+        /*
+         * SPECIAL CASE: hero + menu open but NOT scrolled
+         * The logo starts beige (on hero video). When menu opens from hero,
+         * the overlay is beige so we must darken the logo.
+         * We achieve this by the menu-open class on nav (set in JS).
+         */
 
         /* ── HAMBURGER — 2 bars → X ── */
         .hamburger {
@@ -87,6 +99,7 @@
             width: 44px;
             height: 44px;
             position: relative;
+            z-index: 101;
         }
 
         .hamburger .bar {
@@ -107,22 +120,20 @@
         .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
         .hamburger.open .bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
 
-        /* Dark bars when nav is scrolled (light background) */
+        /* Dark bars when scrolled */
         nav.scrolled .hamburger .bar { background: #4B4D39; }
 
-        /* Dark bars when overlay is open (beige background) */
+        /* Dark bars when overlay open (beige bg) */
         .hamburger.open .bar { background: #4B4D39 !important; }
 
-        /* ── MENU OVERLAY — beige bg, olive text ── */
+        /* ── MENU OVERLAY — left-aligned, Inter font, photo panel ── */
         .menu-overlay {
             position: fixed;
             inset: 0;
             background: #EDE6D4;
             z-index: 99;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1);
@@ -133,59 +144,93 @@
             pointer-events: all;
         }
 
+        /* Left panel — links */
+        .overlay-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 60px 80px 80px;
+        }
+
         .overlay-links {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 40px;
+            align-items: flex-start;
+            gap: 12px;
             list-style: none;
+            margin-bottom: 60px;
         }
 
         .overlay-links li a {
-            font-family: 'Gowun Batang', serif;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 400;
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 300;
             color: #4B4D39;
             text-decoration: none;
-            letter-spacing: 1px;
+            letter-spacing: -0.02em;
             display: block;
-            text-align: center;
             opacity: 0;
-            transform: translateY(25px);
+            transform: translateX(-20px);
             transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1),
                         transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
-                        color 0.3s ease;
-            min-height: 44px;
+                        color 0.2s ease;
         }
 
         .menu-overlay.open .overlay-links li a {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
         }
 
         .overlay-links li:nth-child(1) a { transition-delay: 0.08s; }
-        .overlay-links li:nth-child(2) a { transition-delay: 0.16s; }
-        .overlay-links li:nth-child(3) a { transition-delay: 0.24s; }
-        .overlay-links li:nth-child(4) a { transition-delay: 0.32s; }
+        .overlay-links li:nth-child(2) a { transition-delay: 0.14s; }
+        .overlay-links li:nth-child(3) a { transition-delay: 0.20s; }
+        .overlay-links li:nth-child(4) a { transition-delay: 0.26s; }
 
-        .overlay-links li a:hover { opacity: 0.45; }
+        .overlay-links li a:hover { color: rgba(75, 77, 57, 0.4); }
 
         .overlay-ig {
-            margin-top: 55px;
             font-family: 'Lato', sans-serif;
-            font-size: 1rem;
-            color: rgba(75, 77, 57, 0.5);
+            font-size: 0.9rem;
+            color: rgba(75, 77, 57, 0.45);
             letter-spacing: 1.5px;
             text-decoration: none;
             opacity: 0;
-            transition: opacity 0.45s ease 0.42s, color 0.3s ease;
-            display: flex;
+            transition: opacity 0.45s ease 0.35s, color 0.3s ease;
+            display: inline-flex;
             align-items: center;
             min-height: 44px;
         }
 
         .menu-overlay.open .overlay-ig { opacity: 1; }
         .overlay-ig:hover { color: #4B4D39; }
+
+        /* Right panel — photo (hidden on mobile) */
+        .overlay-photo {
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overlay-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.04);
+            transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
+        }
+
+        .menu-overlay.open .overlay-photo img {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Hide photo panel on mobile */
+        @media (max-width: 768px) {
+            .menu-overlay          { grid-template-columns: 1fr; }
+            .overlay-photo         { display: none; }
+            .overlay-left          { padding: 80px 35px; }
+        }
 
         /* ── HERO ── */
         .hero {
@@ -799,6 +844,7 @@
             .service-card { padding: 28px; }
             .service-card h3 { font-size: 1.6rem; }
             .service-price   { font-size: 1.4rem; }
+            .overlay-left    { padding: 80px 40px; }
         }
 
         /* ════════════════════════════
@@ -813,9 +859,7 @@
                 height: 100dvh;
             }
 
-            .hero-content {
-                padding: 0 24px 83px;
-            }
+            .hero-content { padding: 0 24px 83px; }
 
             @supports (-webkit-touch-callout: none) {
                 .hero-content { padding-bottom: 83px; }
@@ -827,8 +871,8 @@
                 line-height: 1.2;
             }
 
-            .hero p       { font-size: 1rem; margin-bottom: 40px; }
-            .cta-btn      { padding: 16px 40px; font-size: 12px; letter-spacing: 2px; }
+            .hero p    { font-size: 1rem; margin-bottom: 40px; }
+            .cta-btn   { padding: 16px 40px; font-size: 12px; letter-spacing: 2px; }
 
             .about-container { grid-template-columns: 1fr; min-height: auto; }
             .definition-side { padding: 70px 25px 50px; min-height: auto; }
@@ -896,21 +940,20 @@
 
             .contact { padding: 60px 20px; }
 
-            .overlay-links      { gap: 28px; }
-            .overlay-links li a { font-size: clamp(2rem, 10vw, 3rem); }
-            .overlay-ig         { font-size: 0.9rem; margin-top: 40px; }
+            .overlay-links      { gap: 8px; }
+            .overlay-links li a { font-size: clamp(1.8rem, 9vw, 2.6rem); }
+            .overlay-ig         { font-size: 0.85rem; margin-top: 40px; }
         }
     </style>
 </head>
 <body>
 
     <!-- Navigation -->
-    <nav>
+    <nav id="mainNav">
         <a href="#home" class="logo">
             <span class="logo-name">Myōko Massage</span>
             <span class="logo-location">Mykonos</span>
         </a>
-        <!-- 2 bars only -->
         <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -919,13 +962,20 @@
 
     <!-- Fullscreen Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay">
-        <ul class="overlay-links">
-            <li><a href="#home"     class="overlay-nav-link">Home</a></li>
-            <li><a href="#about"    class="overlay-nav-link">About</a></li>
-            <li><a href="#services" class="overlay-nav-link">Services</a></li>
-            <li><a href="#contact"  class="overlay-nav-link">Book</a></li>
-        </ul>
-        <a href="https://instagram.com/myokomassage" target="_blank" class="overlay-ig">@myokomassage</a>
+        <!-- Left: links -->
+        <div class="overlay-left">
+            <ul class="overlay-links">
+                <li><a href="#home"     class="overlay-nav-link">Home</a></li>
+                <li><a href="#about"    class="overlay-nav-link">About</a></li>
+                <li><a href="#services" class="overlay-nav-link">Services</a></li>
+                <li><a href="#contact"  class="overlay-nav-link">Book</a></li>
+            </ul>
+            <a href="https://instagram.com/myokomassage" target="_blank" class="overlay-ig">@myokomassage</a>
+        </div>
+        <!-- Right: photo (hidden on mobile) -->
+        <div class="overlay-photo">
+            <img src="massage1.jpg" alt="Myōko Massage">
+        </div>
     </div>
 
     <!-- Hero -->
@@ -1110,26 +1160,30 @@
     </footer>
 
     <script>
-        // Navbar scroll
+        // ── Navbar scroll state
+        const mainNav = document.getElementById('mainNav');
+
         window.addEventListener('scroll', () => {
-            document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 80);
+            mainNav.classList.toggle('scrolled', window.scrollY > 80);
         });
     </script>
 
     <script>
-        // Hamburger ↔ X + overlay
+        // ── Hamburger ↔ X + overlay + logo color fix
         const menuToggle  = document.getElementById('menuToggle');
         const menuOverlay = document.getElementById('menuOverlay');
 
         function openMenu() {
             menuOverlay.classList.add('open');
             menuToggle.classList.add('open');
+            mainNav.classList.add('menu-open');
             document.body.style.overflow = 'hidden';
         }
 
         function closeMenu() {
             menuOverlay.classList.remove('open');
             menuToggle.classList.remove('open');
+            mainNav.classList.remove('menu-open');
             document.body.style.overflow = '';
         }
 
@@ -1147,7 +1201,7 @@
     </script>
 
     <script>
-        // Scroll animations
+        // ── Scroll animations
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('appear'); });
         }, { threshold: 0.2, rootMargin: '0px 0px -100px 0px' });
@@ -1164,14 +1218,12 @@
     </script>
 
     <script>
-        // Smooth scroll — ease-out quart, duration scaled by distance
+        // ── Smooth scroll
         function smoothScrollTo(targetY, duration) {
             const startY = window.pageYOffset;
             const diff   = targetY - startY;
             let startTime = null;
-
             const easeOutQuart = t => 1 - Math.pow(1 - t, 4);
-
             function step(timestamp) {
                 if (!startTime) startTime = timestamp;
                 const elapsed  = timestamp - startTime;
@@ -1179,7 +1231,6 @@
                 window.scrollTo(0, startY + diff * easeOutQuart(progress));
                 if (progress < 1) requestAnimationFrame(step);
             }
-
             requestAnimationFrame(step);
         }
 
@@ -1197,7 +1248,7 @@
     </script>
 
     <script>
-        // Service cards + pagination
+        // ── Service cards + pagination
         document.addEventListener('DOMContentLoaded', () => {
             const cards     = document.querySelectorAll('.service-card');
             const images    = document.querySelectorAll('.service-image');
