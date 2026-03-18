@@ -14,8 +14,9 @@
             font-family: 'Lato', sans-serif;
             background: #EDE6D4;
             color: #4B4D39;
-            min-height: 100vh;
-            overflow-x: hidden;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
         }
 
         /* ── NAVBAR ── */
@@ -28,6 +29,11 @@
             justify-content: space-between;
             align-items: center;
             z-index: 100;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+
+        nav.scrolled {
             background: rgba(237, 230, 212, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0,0,0,0.07);
@@ -45,8 +51,9 @@
             font-family: 'Gowun Batang', serif;
             font-size: 22px;
             font-weight: 400;
-            color: #4B4D39;
+            color: #EDE6D4;
             letter-spacing: 0.5px;
+            transition: color 0.3s ease;
         }
 
         .logo-location {
@@ -55,9 +62,15 @@
             font-weight: 400;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: rgba(75, 77, 57, 0.6);
+            color: rgba(237, 230, 212, 0.75);
             margin-top: 4px;
+            transition: color 0.3s ease;
         }
+
+        nav.scrolled .logo-name     { color: #4B4D39; }
+        nav.scrolled .logo-location { color: rgba(75,77,57,0.6); }
+        nav.menu-open .logo-name     { color: #4B4D39; }
+        nav.menu-open .logo-location { color: rgba(75,77,57,0.6); }
 
         .hamburger {
             background: transparent;
@@ -67,27 +80,27 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             position: relative;
             z-index: 101;
         }
 
         .hamburger .bar {
             display: block;
-            width: 24px;
-            height: 2px;
-            background: #4B4D39;
+            width: 24px; height: 2px;
+            background: #EDE6D4;
             border-radius: 2px;
             position: absolute;
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-                        background 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), background 0.3s ease;
         }
 
         .hamburger .bar:nth-child(1) { transform: translateY(-5px); }
         .hamburger .bar:nth-child(2) { transform: translateY(5px); }
         .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
         .hamburger.open .bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
+
+        nav.scrolled .hamburger .bar { background: #4B4D39; }
+        .hamburger.open .bar         { background: #4B4D39 !important; }
 
         /* ── MENU OVERLAY ── */
         .menu-overlay {
@@ -99,7 +112,7 @@
             grid-template-columns: 1fr 1fr;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1);
         }
 
         .menu-overlay.open { opacity: 1; pointer-events: all; }
@@ -108,8 +121,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 80px 60px 80px 80px;
-            padding-top: 140px;
+            padding: 140px 60px 80px 80px;
         }
 
         .overlay-links {
@@ -131,24 +143,22 @@
             display: block;
             opacity: 0;
             transform: translateX(-20px);
-            transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1),
-                        transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+            transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1),
+                        transform 0.45s cubic-bezier(0.23,1,0.32,1),
                         color 0.2s ease;
         }
 
         .menu-overlay.open .overlay-links li a { opacity: 1; transform: translateX(0); }
-
         .overlay-links li:nth-child(1) a { transition-delay: 0.08s; }
         .overlay-links li:nth-child(2) a { transition-delay: 0.14s; }
         .overlay-links li:nth-child(3) a { transition-delay: 0.20s; }
         .overlay-links li:nth-child(4) a { transition-delay: 0.26s; }
-
-        .overlay-links li a:hover { color: rgba(75, 77, 57, 0.4); }
+        .overlay-links li a:hover { color: rgba(75,77,57,0.4); }
 
         .overlay-ig {
             font-family: 'Lato', sans-serif;
             font-size: 0.9rem;
-            color: rgba(75, 77, 57, 0.45);
+            color: rgba(75,77,57,0.45);
             letter-spacing: 1.5px;
             text-decoration: none;
             opacity: 0;
@@ -162,7 +172,6 @@
         .overlay-ig:hover { color: #4B4D39; }
 
         .overlay-photo {
-            display: block;
             position: relative;
             overflow: hidden;
         }
@@ -177,226 +186,288 @@
 
         .menu-overlay.open .overlay-photo img { opacity: 1; transform: scale(1); }
 
-        @media (max-width: 768px) {
-            .menu-overlay  { grid-template-columns: 1fr; }
-            .overlay-photo { display: none; }
-            .overlay-left  { padding: 120px 35px 80px; }
+        /* ── MAIN SPLIT LAYOUT ── */
+        .reserve-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100vh;
+            height: 100dvh;
         }
 
-        /* ── PAGE CONTENT ── */
-        .page-content {
-            padding-top: 110px;
-            min-height: 100vh;
+        /* ── LEFT: PHOTO PANEL ── */
+        .photo-panel {
+            position: relative;
+            overflow: hidden;
+            background: #4B4D39;
+        }
+
+        .panel-img {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.7s ease;
+        }
+
+        .panel-img.active { opacity: 1; }
+
+        .panel-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(75,77,57,0.25), transparent);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Step label on photo */
+        .photo-label {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            z-index: 2;
+            color: rgba(237,230,212,0.8);
+            font-family: 'Lato', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* ── RIGHT: CONTENT PANEL ── */
+        .content-panel {
+            background: #EDE6D4;
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
+            padding: 0;
         }
 
-        /* ── PROGRESS BAR ── */
+        /* Progress bar */
         .progress-wrap {
             display: flex;
             align-items: center;
-            justify-content: center;
+            padding: 100px 60px 0;
             gap: 0;
-            padding: 40px 20px 0;
         }
 
         .progress-step {
             display: flex;
             align-items: center;
             gap: 10px;
-            cursor: default;
         }
 
         .step-circle {
-            width: 32px;
-            height: 32px;
+            width: 28px; height: 28px;
             border-radius: 50%;
-            border: 2px solid rgba(75, 77, 57, 0.25);
+            border: 2px solid rgba(75,77,57,0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Lato', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            color: rgba(75, 77, 57, 0.35);
+            color: rgba(75,77,57,0.3);
             transition: all 0.4s ease;
             flex-shrink: 0;
         }
 
         .step-label {
             font-family: 'Lato', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 1.5px;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(75, 77, 57, 0.35);
+            color: rgba(75,77,57,0.3);
             transition: all 0.4s ease;
             white-space: nowrap;
         }
 
         .progress-line {
-            width: 60px;
             height: 1px;
-            background: rgba(75, 77, 57, 0.2);
-            margin: 0 14px;
+            width: 40px;
+            background: rgba(75,77,57,0.15);
+            margin: 0 12px;
             flex-shrink: 0;
             transition: background 0.4s ease;
         }
 
-        .progress-step.active   .step-circle { border-color: #4B4D39; color: #4B4D39; background: #4B4D39; color: #EDE6D4; }
-        .progress-step.active   .step-label  { color: #4B4D39; font-weight: 700; }
-        .progress-step.done     .step-circle { border-color: #4B4D39; background: #4B4D39; color: #EDE6D4; }
-        .progress-step.done     .step-label  { color: rgba(75,77,57,0.6); }
-        .progress-line.done                  { background: #4B4D39; }
+        .progress-step.active .step-circle {
+            border-color: #4B4D39;
+            background: #4B4D39;
+            color: #EDE6D4;
+        }
+        .progress-step.active .step-label { color: #4B4D39; font-weight: 700; }
+        .progress-step.done .step-circle  {
+            border-color: #4B4D39;
+            background: #4B4D39;
+            color: #EDE6D4;
+        }
+        .progress-step.done .step-label   { color: rgba(75,77,57,0.5); }
+        .progress-line.done                { background: #4B4D39; }
 
-        /* ── STEPS CONTAINER ── */
-        .steps-container {
+        /* Steps */
+        .steps-wrap {
             flex: 1;
+            padding: 40px 60px 60px;
             display: flex;
             flex-direction: column;
-            padding: 50px 40px 60px;
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
         }
 
         .step { display: none; }
         .step.active {
             display: flex;
             flex-direction: column;
-            animation: stepIn 0.45s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            flex: 1;
+            animation: stepIn 0.4s cubic-bezier(0.23,1,0.32,1) forwards;
         }
 
         @keyframes stepIn {
-            from { opacity: 0; transform: translateY(18px); }
+            from { opacity: 0; transform: translateY(14px); }
             to   { opacity: 1; transform: translateY(0); }
         }
 
         .step-heading {
             font-family: 'Gowun Batang', serif;
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
             font-weight: 400;
             color: #4B4D39;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            line-height: 1.15;
         }
 
         .step-sub {
             font-family: 'Lato', sans-serif;
-            font-size: 1rem;
-            color: rgba(75, 77, 57, 0.6);
-            margin-bottom: 40px;
+            font-size: 0.95rem;
+            color: rgba(75,77,57,0.55);
+            margin-bottom: 35px;
             font-weight: 300;
         }
 
-        /* ── SERVICE CARDS ── */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 50px;
+        /* ── SERVICE ROWS ── */
+        .service-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
         }
 
-        .r-card {
+        .s-row {
             background: #fff;
             border: 2px solid transparent;
-            border-radius: 14px;
-            padding: 30px 24px;
+            border-radius: 12px;
+            padding: 22px 28px;
             cursor: pointer;
-            transition: all 0.35s ease;
-            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
             -webkit-tap-highlight-color: transparent;
         }
 
-        .r-card:hover {
-            border-color: rgba(75, 77, 57, 0.3);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(75,77,57,0.1);
+        .s-row:hover {
+            border-color: rgba(75,77,57,0.25);
+            transform: translateX(6px);
+            box-shadow: 0 6px 20px rgba(75,77,57,0.08);
         }
 
-        .r-card.selected {
+        .s-row.selected {
             background: #4B4D39;
             border-color: #4B4D39;
-            transform: translateY(-4px);
-            box-shadow: 0 12px 35px rgba(75,77,57,0.25);
+            transform: translateX(6px);
+            box-shadow: 0 8px 25px rgba(75,77,57,0.2);
         }
 
-        .r-card.none-card {
-            background: transparent;
-            border: 2px dashed rgba(75, 77, 57, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .s-row-left { display: flex; flex-direction: column; gap: 4px; }
 
-        .r-card.none-card.selected {
-            background: #4B4D39;
-            border-style: solid;
-        }
-
-        .card-name {
+        .s-row-name {
             font-family: 'Gowun Batang', serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 400;
             color: #4B4D39;
-            margin-bottom: 6px;
             transition: color 0.3s ease;
         }
 
-        .card-duration {
+        .s-row-duration {
             font-family: 'Lato', sans-serif;
-            font-size: 0.85rem;
-            color: #888;
+            font-size: 0.82rem;
+            color: rgba(75,77,57,0.5);
             font-style: italic;
-            margin-bottom: 14px;
             transition: color 0.3s ease;
         }
 
-        .card-desc {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            transition: color 0.3s ease;
-        }
+        .s-row-right { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
 
-        .card-price {
+        .s-row-price {
             font-family: 'Lato', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: #4B4D39;
             transition: color 0.3s ease;
         }
 
-        .card-badge {
+        .s-row-arrow {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(75,77,57,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: rgba(75,77,57,0.4);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .s-row.selected .s-row-name,
+        .s-row.selected .s-row-duration,
+        .s-row.selected .s-row-price { color: #EDE6D4; }
+
+        .s-row.selected .s-row-arrow {
+            border-color: rgba(237,230,212,0.4);
+            color: #EDE6D4;
+            background: rgba(237,230,212,0.15);
+        }
+
+        /* None option for addons */
+        .s-row.none-row {
+            background: transparent;
+            border: 2px dashed rgba(75,77,57,0.2);
+            justify-content: center;
+        }
+
+        .s-row.none-row .s-row-name {
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            color: rgba(75,77,57,0.45);
+            letter-spacing: 0.5px;
+        }
+
+        .s-row.none-row.selected {
+            background: #4B4D39;
+            border-style: solid;
+        }
+
+        .s-row.none-row.selected .s-row-name { color: #EDE6D4; }
+
+        /* Addon badge */
+        .s-row-badge {
             display: inline-block;
             font-family: 'Lato', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            background: rgba(75, 77, 57, 0.1);
+            background: rgba(75,77,57,0.08);
             color: #4B4D39;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 20px;
-            margin-bottom: 12px;
             transition: all 0.3s ease;
         }
 
-        .none-label {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            color: rgba(75,77,57,0.5);
-            transition: color 0.3s ease;
-        }
-
-        /* Selected state — all text turns beige */
-        .r-card.selected .card-name,
-        .r-card.selected .card-price,
-        .r-card.selected .card-duration,
-        .r-card.selected .card-desc,
-        .r-card.selected .none-label { color: #EDE6D4; }
-
-        .r-card.selected .card-badge {
+        .s-row.selected .s-row-badge {
             background: rgba(237,230,212,0.2);
             color: #EDE6D4;
         }
@@ -406,11 +477,11 @@
             display: none;
             background: #fff;
             border-radius: 12px;
-            padding: 20px 28px;
-            margin-bottom: 36px;
+            padding: 18px 24px;
+            margin-bottom: 28px;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
@@ -418,45 +489,46 @@
 
         .summary-text {
             font-family: 'Lato', sans-serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #4B4D39;
+            line-height: 1.5;
         }
 
         .summary-text strong {
             font-family: 'Gowun Batang', serif;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
         }
 
         .summary-total {
             font-family: 'Lato', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: #4B4D39;
             white-space: nowrap;
         }
 
         /* ── FORM ── */
-        .reserve-form { display: flex; flex-direction: column; gap: 16px; }
+        .reserve-form { display: flex; flex-direction: column; gap: 14px; flex: 1; }
 
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group { display: flex; flex-direction: column; gap: 5px; }
 
         .form-group label {
             font-family: 'Lato', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: rgba(75,77,57,0.6);
+            color: rgba(75,77,57,0.55);
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
-            padding: 14px 16px;
-            border: 1.5px solid rgba(75,77,57,0.2);
+            padding: 13px 16px;
+            border: 1.5px solid rgba(75,77,57,0.15);
             border-radius: 8px;
-            font-size: 15px;
+            font-size: 14px;
             font-family: 'Lato', sans-serif;
             background: #fff;
             color: #4B4D39;
@@ -466,37 +538,31 @@
 
         .form-group input:focus,
         .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #4B4D39;
-        }
+        .form-group select:focus { outline: none; border-color: #4B4D39; }
 
         .form-group input::placeholder,
-        .form-group textarea::placeholder { color: rgba(75,77,57,0.35); }
+        .form-group textarea::placeholder { color: rgba(75,77,57,0.3); }
 
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
+        .form-group textarea { min-height: 90px; resize: vertical; }
 
         /* ── NAV BUTTONS ── */
         .step-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 40px;
-            gap: 16px;
+            margin-top: 30px;
+            gap: 14px;
         }
 
         .btn-back {
             background: transparent;
-            border: 2px solid rgba(75,77,57,0.3);
+            border: 2px solid rgba(75,77,57,0.25);
             color: #4B4D39;
-            padding: 0 32px;
-            height: 52px;
+            padding: 0 28px;
+            height: 50px;
             border-radius: 30px;
             font-family: 'Lato', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -507,22 +573,18 @@
             justify-content: center;
         }
 
-        .btn-back:hover {
-            border-color: #4B4D39;
-            background: rgba(75,77,57,0.05);
-        }
-
+        .btn-back:hover { border-color: #4B4D39; background: rgba(75,77,57,0.04); }
         .btn-back.hidden { visibility: hidden; }
 
         .btn-next {
             background: #4B4D39;
             border: none;
             color: #EDE6D4;
-            padding: 0 48px;
-            height: 52px;
+            padding: 0 44px;
+            height: 50px;
             border-radius: 30px;
             font-family: 'Lato', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -536,60 +598,57 @@
         .btn-next:hover {
             background: #3a3c2a;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(75,77,57,0.3);
+            box-shadow: 0 8px 25px rgba(75,77,57,0.25);
         }
 
         .btn-next:disabled {
-            opacity: 0.35;
+            opacity: 0.3;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
 
-        /* ── SUCCESS STATE ── */
+        /* ── SUCCESS ── */
         .success-screen {
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 80px 40px;
+            padding: 60px 40px;
             animation: stepIn 0.5s ease forwards;
         }
 
         .success-screen.visible { display: flex; }
 
-        .success-icon {
-            font-size: 3rem;
-            margin-bottom: 24px;
-        }
+        .success-icon { font-size: 2.5rem; margin-bottom: 20px; }
 
         .success-screen h2 {
             font-family: 'Gowun Batang', serif;
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
             font-weight: 400;
             color: #4B4D39;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .success-screen p {
             font-family: 'Lato', sans-serif;
-            font-size: 1rem;
-            color: rgba(75,77,57,0.65);
-            max-width: 440px;
+            font-size: 0.95rem;
+            color: rgba(75,77,57,0.6);
+            max-width: 380px;
             line-height: 1.7;
-            margin-bottom: 40px;
+            margin-bottom: 36px;
         }
 
         .btn-home {
             background: #4B4D39;
             color: #EDE6D4;
-            padding: 0 48px;
-            height: 52px;
+            padding: 0 44px;
+            height: 50px;
             border-radius: 30px;
             text-decoration: none;
             font-family: 'Lato', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -599,56 +658,57 @@
             transition: all 0.3s ease;
         }
 
-        .btn-home:hover {
-            background: #3a3c2a;
-            transform: translateY(-2px);
-        }
+        .btn-home:hover { background: #3a3c2a; transform: translateY(-2px); }
 
-        /* ════════════════ TABLET ════════════════ */
-        @media (max-width: 1024px) {
-            nav { padding: 20px 35px; }
-            .steps-container { padding: 40px 30px 50px; }
-            .cards-grid { gap: 16px; }
-            .overlay-left { padding: 80px 40px; }
-        }
-
-        /* ════════════════ MOBILE ════════════════ */
+        /* ════════════ MOBILE ════════════ */
         @media (max-width: 768px) {
+            body { overflow: auto; height: auto; }
+
+            .reserve-layout {
+                grid-template-columns: 1fr;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .photo-panel { display: none; }
+
             nav { padding: 16px 20px; }
-            .page-content { padding-top: 90px; }
-            .progress-wrap { gap: 0; padding: 30px 16px 0; }
-            .progress-line { width: 30px; margin: 0 8px; }
-            .step-label { font-size: 0.65rem; letter-spacing: 1px; }
-            .steps-container { padding: 30px 20px 50px; }
-            .step-heading { font-size: clamp(1.8rem, 7vw, 2.5rem); margin-bottom: 6px; }
-            .step-sub { font-size: 0.9rem; margin-bottom: 28px; }
+            nav .logo-name     { color: #4B4D39; }
+            nav .logo-location { color: rgba(75,77,57,0.6); }
+            nav .hamburger .bar { background: #4B4D39; }
 
-            .cards-grid { grid-template-columns: 1fr; gap: 14px; }
+            .content-panel { overflow-y: visible; }
 
-            .r-card { padding: 22px 20px; }
-            .r-card:hover { transform: none; }
-            .r-card.selected { transform: none; }
-            .card-name { font-size: 1.3rem; }
-            .card-price { font-size: 1.2rem; }
+            .progress-wrap { padding: 90px 20px 0; }
+            .progress-line { width: 24px; margin: 0 8px; }
+            .step-label    { font-size: 0.62rem; letter-spacing: 1px; }
+
+            .steps-wrap { padding: 28px 20px 50px; }
+            .step-heading { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+
+            .s-row { padding: 18px 20px; }
+            .s-row:hover { transform: none; }
+            .s-row.selected { transform: none; }
+            .s-row-name { font-size: 1.2rem; }
+            .s-row-price { font-size: 1.1rem; }
 
             .form-row { grid-template-columns: 1fr; }
             .form-group input,
             .form-group textarea,
             .form-group select { font-size: 16px; }
 
-            .step-nav { flex-direction: row; }
-            .btn-back { padding: 0 20px; font-size: 12px; }
-            .btn-next { padding: 0 28px; font-size: 12px; flex: 1; }
+            .btn-next { flex: 1; }
             .btn-back.hidden { display: none; }
 
-            .summary-pill { padding: 16px 20px; }
+            .menu-overlay  { grid-template-columns: 1fr; }
+            .overlay-photo { display: none; }
+            .overlay-left  { padding: 120px 35px 80px; }
         }
 
         @media (max-width: 480px) {
             .logo-name { font-size: 18px; }
-            .logo-location { font-size: 9px; }
             .step-label { display: none; }
-            .progress-line { width: 24px; }
+            .progress-line { width: 18px; }
         }
     </style>
 </head>
@@ -682,161 +742,205 @@
         </div>
     </div>
 
-    <!-- Page Content -->
-    <div class="page-content">
+    <!-- Split Layout -->
+    <div class="reserve-layout">
 
-        <!-- Progress -->
-        <div class="progress-wrap">
-            <div class="progress-step active" id="prog-1">
-                <div class="step-circle">1</div>
-                <span class="step-label">Experience</span>
+        <!-- LEFT: Photo -->
+        <div class="photo-panel" id="photoPanel">
+            <div class="panel-img active" id="img-default">
+                <img src="swedish-massage.jpg" alt="Myōko Massage">
             </div>
-            <div class="progress-line" id="line-1"></div>
-            <div class="progress-step" id="prog-2">
-                <div class="step-circle">2</div>
-                <span class="step-label">Enhance</span>
+            <div class="panel-img" id="img-swedish">
+                <img src="swedish-massage.jpg" alt="Swedish Massage">
             </div>
-            <div class="progress-line" id="line-2"></div>
-            <div class="progress-step" id="prog-3">
-                <div class="step-circle">3</div>
-                <span class="step-label">Details</span>
+            <div class="panel-img" id="img-deep">
+                <img src="deep-tissue-massage.jpg" alt="Deep Tissue Massage">
             </div>
+            <div class="panel-img" id="img-sports">
+                <img src="sports-massage.jpg" alt="Sports Massage">
+            </div>
+            <div class="panel-img" id="img-cupping">
+                <img src="cupping-therapy.jpg" alt="Cupping Therapy">
+            </div>
+            <div class="panel-img" id="img-aroma">
+                <img src="aromatherapy-massage.jpg" alt="Aromatherapy">
+            </div>
+            <div class="photo-overlay"></div>
+            <div class="photo-label" id="photo-label">Myōko Massage · Mykonos</div>
         </div>
 
-        <!-- Steps -->
-        <div class="steps-container">
+        <!-- RIGHT: Content -->
+        <div class="content-panel">
 
-            <!-- STEP 1 -->
-            <div class="step active" id="step-1">
-                <h2 class="step-heading">Choose Your Experience</h2>
-                <p class="step-sub">Select the massage that suits you best.</p>
-                <div class="cards-grid" id="service-grid">
-                    <div class="r-card" data-name="Swedish Massage" data-price="100">
-                        <div class="card-name">Swedish Massage</div>
-                        <div class="card-duration">60 minutes</div>
-                        <div class="card-desc">Gentle, flowing strokes to promote relaxation, improve circulation, and ease muscle tension.</div>
-                        <div class="card-price">€100</div>
-                    </div>
-                    <div class="r-card" data-name="Deep Tissue Massage" data-price="120">
-                        <div class="card-name">Deep Tissue Massage</div>
-                        <div class="card-duration">60 minutes</div>
-                        <div class="card-desc">Targeted pressure to release chronic muscle tension and knots. Ideal for persistent pain and tightness.</div>
-                        <div class="card-price">€120</div>
-                    </div>
-                    <div class="r-card" data-name="Sports Massage" data-price="90">
-                        <div class="card-name">Sports Massage</div>
-                        <div class="card-duration">60 minutes</div>
-                        <div class="card-desc">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery.</div>
-                        <div class="card-price">€90</div>
-                    </div>
+            <!-- Progress -->
+            <div class="progress-wrap" id="progressWrap">
+                <div class="progress-step active" id="prog-1">
+                    <div class="step-circle">1</div>
+                    <span class="step-label">Experience</span>
                 </div>
-                <div class="step-nav">
-                    <button class="btn-back hidden">Back</button>
-                    <button class="btn-next" id="next-1" disabled>Continue</button>
+                <div class="progress-line" id="line-1"></div>
+                <div class="progress-step" id="prog-2">
+                    <div class="step-circle">2</div>
+                    <span class="step-label">Enhance</span>
+                </div>
+                <div class="progress-line" id="line-2"></div>
+                <div class="progress-step" id="prog-3">
+                    <div class="step-circle">3</div>
+                    <span class="step-label">Details</span>
                 </div>
             </div>
 
-            <!-- STEP 2 -->
-            <div class="step" id="step-2">
-                <h2 class="step-heading">Enhance Your Session</h2>
-                <p class="step-sub">Add an optional treatment to complement your massage.</p>
-                <div class="cards-grid" id="addon-grid">
-                    <div class="r-card" data-name="Cupping Therapy" data-price="20">
-                        <span class="card-badge">Add-on</span>
-                        <div class="card-name">Cupping Therapy</div>
-                        <div class="card-duration">15–20 minutes</div>
-                        <div class="card-desc">Ancient suction technique that lifts fascia, improves blood flow, and releases deep muscle tension.</div>
-                        <div class="card-price">+€20</div>
-                    </div>
-                    <div class="r-card" data-name="Aromatherapy" data-price="15">
-                        <span class="card-badge">Add-on</span>
-                        <div class="card-name">Aromatherapy</div>
-                        <div class="card-duration">Included in session</div>
-                        <div class="card-desc">Custom essential oil blend — lavender, peppermint, or sweet orange — for deeper relaxation.</div>
-                        <div class="card-price">+€15</div>
-                    </div>
-                    <div class="r-card none-card selected" data-name="None" data-price="0">
-                        <span class="none-label">No add-on</span>
-                    </div>
-                </div>
-                <div class="step-nav">
-                    <button class="btn-back" id="back-2">Back</button>
-                    <button class="btn-next" id="next-2">Continue</button>
-                </div>
-            </div>
+            <div class="steps-wrap">
 
-            <!-- STEP 3 -->
-            <div class="step" id="step-3">
-                <h2 class="step-heading">Your Details</h2>
-                <p class="step-sub">Fill in your information and we'll confirm your reservation.</p>
-
-                <!-- Summary pill -->
-                <div class="summary-pill visible" id="summary-pill">
-                    <div class="summary-text">
-                        <strong id="sum-service">—</strong>
-                        <span id="sum-addon"></span>
-                    </div>
-                    <div class="summary-total" id="sum-total">€—</div>
-                </div>
-
-                <form class="reserve-form" id="reserveForm"
-                      action="https://formspree.io/f/YOUR_FORM_ID"
-                      method="POST">
-
-                    <!-- Hidden fields populated by JS -->
-                    <input type="hidden" name="service"  id="f-service">
-                    <input type="hidden" name="addon"    id="f-addon">
-                    <input type="hidden" name="total"    id="f-total">
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" name="name" placeholder="Maria Papadaki" required>
+                <!-- STEP 1 -->
+                <div class="step active" id="step-1">
+                    <h2 class="step-heading">Choose Your Experience</h2>
+                    <p class="step-sub">Select the massage that suits you best.</p>
+                    <div class="service-list">
+                        <div class="s-row" data-service="swedish" data-img="img-swedish" data-name="Swedish Massage" data-price="100">
+                            <div class="s-row-left">
+                                <div class="s-row-name">Swedish Massage</div>
+                                <div class="s-row-duration">60 minutes</div>
+                            </div>
+                            <div class="s-row-right">
+                                <div class="s-row-price">€100</div>
+                                <div class="s-row-arrow">→</div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="email" placeholder="maria@email.com" required>
+                        <div class="s-row" data-service="deep" data-img="img-deep" data-name="Deep Tissue Massage" data-price="120">
+                            <div class="s-row-left">
+                                <div class="s-row-name">Deep Tissue Massage</div>
+                                <div class="s-row-duration">60 minutes</div>
+                            </div>
+                            <div class="s-row-right">
+                                <div class="s-row-price">€120</div>
+                                <div class="s-row-arrow">→</div>
+                            </div>
+                        </div>
+                        <div class="s-row" data-service="sports" data-img="img-sports" data-name="Sports Massage" data-price="90">
+                            <div class="s-row-left">
+                                <div class="s-row-name">Sports Massage</div>
+                                <div class="s-row-duration">60 minutes</div>
+                            </div>
+                            <div class="s-row-right">
+                                <div class="s-row-price">€90</div>
+                                <div class="s-row-arrow">→</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Phone</label>
-                            <input type="tel" name="phone" placeholder="+30 694 000 0000" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Preferred Date</label>
-                            <input type="date" name="date" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Preferred Time</label>
-                        <select name="time" required>
-                            <option value="" disabled selected>Select a time slot</option>
-                            <option>Morning — 09:00 to 12:00</option>
-                            <option>Afternoon — 12:00 to 17:00</option>
-                            <option>Evening — 17:00 to 21:00</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Location / Notes</label>
-                        <textarea name="message" placeholder="Your villa or hotel address, any special requests..."></textarea>
-                    </div>
-
                     <div class="step-nav">
-                        <button type="button" class="btn-back" id="back-3">Back</button>
-                        <button type="submit" class="btn-next">Send Reservation</button>
+                        <button class="btn-back hidden">Back</button>
+                        <button class="btn-next" id="next-1" disabled>Continue</button>
                     </div>
-                </form>
-            </div>
+                </div>
 
-            <!-- SUCCESS -->
-            <div class="success-screen" id="success-screen">
-                <div class="success-icon">🌿</div>
-                <h2>Reservation Received</h2>
-                <p>Thank you. We'll confirm your session within 24 hours. Look forward to seeing you in Mykonos.</p>
-                <a href="index.html" class="btn-home">Back to Home</a>
-            </div>
+                <!-- STEP 2 -->
+                <div class="step" id="step-2">
+                    <h2 class="step-heading">Enhance Your Session</h2>
+                    <p class="step-sub">Add an optional treatment to your massage.</p>
+                    <div class="service-list">
+                        <div class="s-row" data-addon="cupping" data-img="img-cupping" data-name="Cupping Therapy" data-price="20">
+                            <div class="s-row-left">
+                                <span class="s-row-badge">Add-on</span>
+                                <div class="s-row-name">Cupping Therapy</div>
+                                <div class="s-row-duration">15–20 minutes</div>
+                            </div>
+                            <div class="s-row-right">
+                                <div class="s-row-price">+€20</div>
+                                <div class="s-row-arrow">→</div>
+                            </div>
+                        </div>
+                        <div class="s-row" data-addon="aroma" data-img="img-aroma" data-name="Aromatherapy" data-price="15">
+                            <div class="s-row-left">
+                                <span class="s-row-badge">Add-on</span>
+                                <div class="s-row-name">Aromatherapy</div>
+                                <div class="s-row-duration">Included in session</div>
+                            </div>
+                            <div class="s-row-right">
+                                <div class="s-row-price">+€15</div>
+                                <div class="s-row-arrow">→</div>
+                            </div>
+                        </div>
+                        <div class="s-row none-row selected" data-addon="none" data-img="img-default" data-name="None" data-price="0">
+                            <div class="s-row-name">No add-on</div>
+                        </div>
+                    </div>
+                    <div class="step-nav">
+                        <button class="btn-back" id="back-2">Back</button>
+                        <button class="btn-next" id="next-2">Continue</button>
+                    </div>
+                </div>
 
+                <!-- STEP 3 -->
+                <div class="step" id="step-3">
+                    <h2 class="step-heading">Your Details</h2>
+                    <p class="step-sub">We'll confirm your reservation within 24 hours.</p>
+
+                    <div class="summary-pill visible" id="summary-pill">
+                        <div class="summary-text">
+                            <strong id="sum-service">—</strong>
+                            <span id="sum-addon"></span>
+                        </div>
+                        <div class="summary-total" id="sum-total">€—</div>
+                    </div>
+
+                    <form class="reserve-form" id="reserveForm"
+                          action="https://formspree.io/f/YOUR_FORM_ID"
+                          method="POST">
+                        <input type="hidden" name="service" id="f-service">
+                        <input type="hidden" name="addon"   id="f-addon">
+                        <input type="hidden" name="total"   id="f-total">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" name="name" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" placeholder="your@email.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="tel" name="phone" placeholder="+30 694 000 0000" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Preferred Date</label>
+                                <input type="date" name="date" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Time</label>
+                            <select name="time" required>
+                                <option value="" disabled selected>Select a time slot</option>
+                                <option>Morning — 09:00 to 12:00</option>
+                                <option>Afternoon — 12:00 to 17:00</option>
+                                <option>Evening — 17:00 to 21:00</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Location / Notes</label>
+                            <textarea name="message" placeholder="Villa or hotel address, any special requests..."></textarea>
+                        </div>
+
+                        <div class="step-nav">
+                            <button type="button" class="btn-back" id="back-3">Back</button>
+                            <button type="submit" class="btn-next">Send Reservation</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- SUCCESS -->
+                <div class="success-screen" id="success-screen">
+                    <div class="success-icon">🌿</div>
+                    <h2>Reservation Received</h2>
+                    <p>Thank you. We'll confirm your session within 24 hours. Looking forward to seeing you in Mykonos.</p>
+                    <a href="index.html" class="btn-home">Back to Home</a>
+                </div>
+
+            </div>
         </div>
     </div>
 
@@ -849,6 +953,7 @@
         menuToggle.addEventListener('click', () => {
             const open = menuToggle.classList.toggle('open');
             menuOverlay.classList.toggle('open', open);
+            mainNav.classList.toggle('menu-open', open);
             document.body.style.overflow = open ? 'hidden' : '';
         });
 
@@ -856,6 +961,7 @@
             if (e.key === 'Escape') {
                 menuToggle.classList.remove('open');
                 menuOverlay.classList.remove('open');
+                mainNav.classList.remove('menu-open');
                 document.body.style.overflow = '';
             }
         });
@@ -865,56 +971,80 @@
         // ── State
         const state = { service: null, servicePrice: 0, addon: 'None', addonPrice: 0 };
 
-        // ── Step 1: service selection
-        document.querySelectorAll('#service-grid .r-card').forEach(card => {
-            card.addEventListener('click', () => {
-                document.querySelectorAll('#service-grid .r-card').forEach(c => c.classList.remove('selected'));
-                card.classList.add('selected');
-                state.service      = card.dataset.name;
-                state.servicePrice = parseInt(card.dataset.price);
+        // ── Photo switcher
+        function showPhoto(id, label) {
+            document.querySelectorAll('.panel-img').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById(id);
+            if (target) target.classList.add('active');
+            if (label) document.getElementById('photo-label').textContent = label;
+        }
+
+        // ── Step 1 rows
+        document.querySelectorAll('#step-1 .s-row').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                showPhoto(row.dataset.img, row.dataset.name);
+            });
+            row.addEventListener('click', () => {
+                document.querySelectorAll('#step-1 .s-row').forEach(r => r.classList.remove('selected'));
+                row.classList.add('selected');
+                state.service      = row.dataset.name;
+                state.servicePrice = parseInt(row.dataset.price);
+                showPhoto(row.dataset.img, row.dataset.name);
                 document.getElementById('next-1').disabled = false;
             });
         });
 
-        // ── Step 2: addon selection (None pre-selected)
-        document.querySelectorAll('#addon-grid .r-card').forEach(card => {
-            card.addEventListener('click', () => {
-                document.querySelectorAll('#addon-grid .r-card').forEach(c => c.classList.remove('selected'));
-                card.classList.add('selected');
-                state.addon      = card.dataset.name;
-                state.addonPrice = parseInt(card.dataset.price);
+        // Reset photo on mouse leave if nothing selected
+        document.getElementById('step-1').addEventListener('mouseleave', () => {
+            const sel = document.querySelector('#step-1 .s-row.selected');
+            if (!sel) showPhoto('img-default', 'Myōko Massage · Mykonos');
+        });
+
+        // ── Step 2 rows
+        document.querySelectorAll('#step-2 .s-row').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                showPhoto(row.dataset.img, row.dataset.name !== 'None' ? row.dataset.name : 'Myōko Massage · Mykonos');
+            });
+            row.addEventListener('click', () => {
+                document.querySelectorAll('#step-2 .s-row').forEach(r => r.classList.remove('selected'));
+                row.classList.add('selected');
+                state.addon      = row.dataset.name;
+                state.addonPrice = parseInt(row.dataset.price) || 0;
+                showPhoto(row.dataset.img, row.dataset.name !== 'None' ? row.dataset.name : 'Myōko Massage · Mykonos');
             });
         });
 
         // ── Progress updater
         function setStep(n) {
-            // Steps
             document.querySelectorAll('.step').forEach((s, i) => {
                 s.classList.toggle('active', i + 1 === n);
             });
-            // Progress circles
             [1, 2, 3].forEach(i => {
                 const prog = document.getElementById(`prog-${i}`);
                 prog.classList.remove('active', 'done');
                 if (i < n)  prog.classList.add('done');
                 if (i === n) prog.classList.add('active');
             });
-            // Progress lines
             [1, 2].forEach(i => {
                 document.getElementById(`line-${i}`).classList.toggle('done', i < n);
             });
-            // Scroll top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Reset photo to service image if going back/forward
+            if (n === 1) showPhoto('img-default', 'Myōko Massage · Mykonos');
+            if (n === 2) {
+                const sel = document.querySelector('#step-2 .s-row.selected');
+                showPhoto(sel ? sel.dataset.img : 'img-default', 'Myōko Massage · Mykonos');
+            }
+            if (n === 3) showPhoto('img-default', 'Myōko Massage · Mykonos');
+            document.querySelector('.content-panel').scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ── Summary builder
+        // ── Summary
         function buildSummary() {
             const total = state.servicePrice + state.addonPrice;
             document.getElementById('sum-service').textContent = state.service;
             document.getElementById('sum-addon').textContent   =
                 state.addonPrice > 0 ? ` + ${state.addon}` : '';
             document.getElementById('sum-total').textContent   = `€${total}`;
-            // Hidden inputs
             document.getElementById('f-service').value = state.service;
             document.getElementById('f-addon').value   = state.addonPrice > 0 ? state.addon : 'None';
             document.getElementById('f-total').value   = `€${total}`;
@@ -924,8 +1054,7 @@
         document.getElementById('next-1').addEventListener('click', () => setStep(2));
         document.getElementById('back-2').addEventListener('click', () => setStep(1));
         document.getElementById('next-2').addEventListener('click', () => {
-            // Capture addon state
-            const sel = document.querySelector('#addon-grid .r-card.selected');
+            const sel = document.querySelector('#step-2 .s-row.selected');
             if (sel) {
                 state.addon      = sel.dataset.name;
                 state.addonPrice = parseInt(sel.dataset.price) || 0;
@@ -935,7 +1064,7 @@
         });
         document.getElementById('back-3').addEventListener('click', () => setStep(2));
 
-        // ── Form submit → show success
+        // ── Form submit
         document.getElementById('reserveForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const data = new FormData(this);
@@ -944,16 +1073,13 @@
                 body: data,
                 headers: { 'Accept': 'application/json' }
             }).then(res => {
-                if (res.ok) {
-                    document.getElementById('step-3').classList.remove('active');
-                    document.getElementById('success-screen').classList.add('visible');
-                    document.querySelector('.progress-wrap').style.display = 'none';
-                }
-            }).catch(() => {
-                // Fallback: still show success so UX isn't broken
                 document.getElementById('step-3').classList.remove('active');
+                document.getElementById('progressWrap').style.display = 'none';
                 document.getElementById('success-screen').classList.add('visible');
-                document.querySelector('.progress-wrap').style.display = 'none';
+            }).catch(() => {
+                document.getElementById('step-3').classList.remove('active');
+                document.getElementById('progressWrap').style.display = 'none';
+                document.getElementById('success-screen').classList.add('visible');
             });
         });
     </script>
