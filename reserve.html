@@ -33,6 +33,7 @@
             box-shadow: 0 1px 0 rgba(75,77,57,0.08);
         }
 
+        /* Desktop/tablet: logo hidden by default, only shows when menu is open */
         .logo {
             display: flex;
             flex-direction: column;
@@ -69,6 +70,453 @@
             margin-top: 4px;
         }
 
+        /* ── HAMBURGER ── */
+        .hamburger {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 44px; height: 44px;
+            position: relative;
+            z-index: 101;
+        }
+
+        .hamburger .bar {
+            display: block;
+            width: 24px; height: 2px;
+            background: #4B4D39;
+            border-radius: 2px;
+            position: absolute;
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+        }
+
+        .hamburger .bar:nth-child(1) { transform: translateY(-5px); }
+        .hamburger .bar:nth-child(2) { transform: translateY(5px); }
+        .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
+        .hamburger.open .bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
+
+        /* ── MENU OVERLAY ── */
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: #EDE6D4;
+            z-index: 99;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1);
+        }
+
+        .menu-overlay.open { opacity: 1; pointer-events: all; }
+
+        .overlay-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 140px 60px 80px 80px;
+        }
+
+        .overlay-links {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            list-style: none;
+            margin-bottom: 60px;
+        }
+
+        .overlay-links li a {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 300;
+            color: #4B4D39;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            display: block;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1),
+                        transform 0.45s cubic-bezier(0.23,1,0.32,1),
+                        color 0.2s ease;
+        }
+
+        .menu-overlay.open .overlay-links li a { opacity: 1; transform: translateX(0); }
+        .overlay-links li:nth-child(1) a { transition-delay: 0.08s; }
+        .overlay-links li:nth-child(2) a { transition-delay: 0.14s; }
+        .overlay-links li:nth-child(3) a { transition-delay: 0.20s; }
+        .overlay-links li:nth-child(4) a { transition-delay: 0.26s; }
+        .overlay-links li a:hover { color: rgba(75,77,57,0.4); }
+
+        .overlay-ig {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(75,77,57,0.45);
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.45s ease 0.35s, color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+        }
+
+        .menu-overlay.open .overlay-ig { opacity: 1; }
+        .overlay-ig:hover { color: #4B4D39; }
+
+        .overlay-photo {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overlay-photo img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.04);
+            transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
+        }
+
+        .menu-overlay.open .overlay-photo img { opacity: 1; transform: scale(1); }
+
+        /* ── SPLIT LAYOUT ── */
+        .reserve-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100vh;
+            height: 100dvh;
+        }
+
+        /* ── LEFT PHOTO ── */
+        .photo-panel {
+            position: relative;
+            overflow: hidden;
+            background: #4B4D39;
+        }
+
+        .panel-img {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.7s ease;
+        }
+
+        .panel-img.active { opacity: 1; }
+
+        .panel-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(75,77,57,0.25), transparent);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .photo-label {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            z-index: 2;
+            color: rgba(237,230,212,0.8);
+            font-family: 'Lato', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* ── RIGHT CONTENT ── */
+        .content-panel {
+            background: #EDE6D4;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .progress-wrap {
+            display: flex;
+            align-items: center;
+            padding: 90px 60px 0;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-circle {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            border: 2px solid rgba(75,77,57,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: rgba(75,77,57,0.3);
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .step-label {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(75,77,57,0.3);
+            transition: all 0.4s ease;
+            white-space: nowrap;
+        }
+
+        .progress-line {
+            height: 1px; width: 40px;
+            background: rgba(75,77,57,0.15);
+            margin: 0 12px;
+            flex-shrink: 0;
+            transition: background 0.4s ease;
+        }
+
+        .progress-step.active .step-circle { border-color: #4B4D39; background: #4B4D39; color: #EDE6D4; }
+        .progress-step.active .step-label  { color: #4B4D39; font-weight: 700; }
+        .progress-step.done .step-circle   { border-color: #4B4D39; background: #4B4D39; color: #EDE6D4; }
+        .progress-step.done .step-label    { color: rgba(75,77,57,0.5); }
+        .progress-line.done                { background: #4B4D39; }
+
+        .steps-wrap {
+            flex: 1;
+            padding: 36px 60px 60px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step { display: none; }
+        .step.active {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            animation: stepIn 0.4s cubic-bezier(0.23,1,0.32,1) forwards;
+        }
+
+        @keyframes stepIn {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-heading {
+            font-family: 'Gowun Batang', serif;
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 400;
+            color: #4B4D39;
+            margin-bottom: 6px;
+            line-height: 1.15;
+        }
+
+        .step-sub {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.95rem;
+            color: rgba(75,77,57,0.55);
+            margin-bottom: 32px;
+            font-weight: 300;
+        }
+
+        /* ── SERVICE ROWS ── */
+        .service-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .s-row {
+            background: #fff;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 22px 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .s-row:hover {
+            border-color: rgba(75,77,57,0.25);
+            transform: translateX(6px);
+            box-shadow: 0 6px 20px rgba(75,77,57,0.08);
+        }
+
+        .s-row.selected {
+            background: #4B4D39;
+            border-color: #4B4D39;
+            transform: translateX(6px);
+            box-shadow: 0 8px 25px rgba(75,77,57,0.2);
+        }
+
+        .s-row-left { display: flex; flex-direction: column; gap: 3px; }
+
+        .s-row-badge {
+            display: inline-block;
+            align-self: flex-start;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(75,77,57,0.08);
+            color: #4B4D39;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 6px;
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+
+        .s-row.selected .s-row-badge {
+            background: rgba(237,230,212,0.2);
+            color: #EDE6D4;
+        }
+
+        .s-row-name {
+            font-family: 'Gowun Batang', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #4B4D39;
+            transition: color 0.3s ease;
+        }
+
+        .s-row-duration {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.82rem;
+            color: rgba(75,77,57,0.5);
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
+
+        .s-row-desc {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.88rem;
+            color: rgba(75,77,57,0.55);
+            line-height: 1.55;
+            margin-top: 6px;
+            max-width: 400px;
+            transition: color 0.3s ease;
+        }
+
+        .s-row-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-shrink: 0;
+        }
+
+        .s-row-price {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #4B4D39;
+            transition: color 0.3s ease;
+        }
+
+        .s-row-arrow {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(75,77,57,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: rgba(75,77,57,0.4);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .s-row.selected .s-row-name,
+        .s-row.selected .s-row-price  { color: #EDE6D4; }
+        .s-row.selected .s-row-duration,
+        .s-row.selected .s-row-desc   { color: rgba(237Here's the complete final `reserve.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Reserve – Myōko Massage</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #EDE6D4;
+            color: #4B4D39;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+        }
+
+        /* ── NAVBAR ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 22px 50px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 100;
+            background: transparent;
+        }
+
+        /* Desktop/tablet: logo hidden by default, only shown when menu opens */
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1;
+            text-decoration: none;
+            position: absolute;
+            left: 50px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        nav.menu-open .logo {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .logo-name {
+            font-family: 'Gowun Batang', serif;
+            font-size: 22px;
+            font-weight: 400;
+            color: #4B4D39;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-location {
+            font-family: 'Lato', sans-serif;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(75,77,57,0.6);
+            margin-top: 4px;
+        }
+
+        /* ── HAMBURGER ── */
         .hamburger {
             background: transparent;
             border: none;
@@ -466,7 +914,7 @@
         .s-row.none-row.selected { background: #4B4D39; border-style: solid; }
         .s-row.none-row.selected .s-row-name { color: #EDE6D4; }
 
-        /* ── SUMMARY BOX — identical on all screen sizes ── */
+        /* ── SUMMARY BOX — same on all screen sizes ── */
         .summary-box {
             background: #fff;
             border-radius: 12px;
@@ -511,8 +959,6 @@
             font-weight: 600;
             color: #4B4D39;
         }
-
-        /* addon row hidden by default via JS */
 
         /* ── FORM ── */
         .reserve-form { display: flex; flex-direction: column; gap: 14px; }
@@ -583,7 +1029,7 @@
             margin-top: -4px;
         }
 
-        /* ── STEP NAV BUTTONS ── */
+        /* ── BUTTONS ── */
         .step-nav {
             display: flex;
             justify-content: space-between;
@@ -697,14 +1143,6 @@
 
         .btn-home:hover { background: #3a3c2a; transform: translateY(-2px); }
 
-        /* ════════════ TABLET ════════════ */
-        @media (max-width: 1024px) {
-            nav { padding: 20px 35px; }
-            .logo { left: 35px; }
-            .progress-wrap { padding: 85px 40px 0; }
-            .steps-wrap { padding: 32px 40px 50px; }
-        }
-
         /* ════════════ MOBILE ════════════ */
         @media (max-width: 768px) {
             body { overflow: auto; height: auto; }
@@ -717,12 +1155,14 @@
 
             .photo-panel { display: none; }
 
+            /* Mobile nav: solid bg, logo always visible left, hamburger right */
             nav {
                 padding: 16px 20px;
                 justify-content: space-between;
+                background: #EDE6D4;
+                box-shadow: 0 1px 0 rgba(75,77,57,0.08);
             }
 
-            /* Logo always visible on mobile */
             .logo {
                 opacity: 1 !important;
                 pointer-events: all !important;
@@ -933,7 +1373,6 @@
                     <h2 class="step-heading">Your Details</h2>
                     <p class="step-sub">We'll confirm your reservation within 24 hours.</p>
 
-                    <!-- Itemised summary — same markup, same styles, all screen sizes -->
                     <div class="summary-box" id="summary-box">
                         <div class="summary-line" id="sum-service-line">
                             <span class="s-label" id="sum-service-label">—</span>
@@ -1105,13 +1544,13 @@
 
         function setStep(n) {
             document.querySelectorAll('.step').forEach((s, i) => s.classList.toggle('active', i + 1 === n));
-            [1,2,3].forEach(i => {
+           .forEach(i => {[1][2][3]
                 const p = document.getElementById(`prog-${i}`);
                 p.classList.remove('active','done');
                 if (i < n)  p.classList.add('done');
                 if (i === n) p.classList.add('active');
             });
-            [1,2].forEach(i => document.getElementById(`line-${i}`).classList.toggle('done', i < n));
+           .forEach(i => document.getElementById(`line-${i}`).classList.toggle('done', i < n));[2][1]
             if (n === 1 || n === 3) showPhoto('img-default', 'Myōko Massage · Mykonos');
             document.querySelector('.content-panel').scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -1119,11 +1558,9 @@
         function buildSummary() {
             const total = state.servicePrice + state.addonPrice;
 
-            // Service row
             document.getElementById('sum-service-label').textContent = state.service;
             document.getElementById('sum-service-val').textContent   = `€${state.servicePrice}`;
 
-            // Addon row — show or hide
             const addonLine = document.getElementById('sum-addon-line');
             if (state.addonPrice > 0) {
                 document.getElementById('sum-addon-label').textContent = state.addon;
@@ -1133,10 +1570,7 @@
                 addonLine.style.display = 'none';
             }
 
-            // Total
             document.getElementById('sum-total').textContent = `€${total}`;
-
-            // Hidden form fields
             document.getElementById('f-service').value = state.service;
             document.getElementById('f-addon').value   = state.addonPrice > 0 ? state.addon : 'None';
             document.getElementById('f-total').value   = `€${total}`;
