@@ -19,21 +19,20 @@
             overflow: hidden;
         }
 
-        /* ── NAVBAR — no logo visible by default ── */
+        /* ── NAVBAR ── */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
             padding: 25px 50px;
             display: flex;
-            justify-content: flex-end; /* hamburger right, no logo taking space */
+            justify-content: flex-end;
             align-items: center;
             z-index: 100;
             background: transparent;
-            transition: background 0.3s ease;
         }
 
-        /* Logo hidden by default, shown only when menu is open */
+        /* Logo: hidden on desktop/tablet, shown only when menu opens */
         .logo {
             display: flex;
             flex-direction: column;
@@ -239,12 +238,11 @@
             overflow-y: auto;
         }
 
-        /* Progress bar */
+        /* ── PROGRESS ── */
         .progress-wrap {
             display: flex;
             align-items: center;
             padding: 100px 60px 0;
-            gap: 0;
         }
 
         .progress-step {
@@ -293,7 +291,7 @@
         .progress-step.done .step-label    { color: rgba(75,77,57,0.5); }
         .progress-line.done                { background: #4B4D39; }
 
-        /* Steps */
+        /* ── STEPS ── */
         .steps-wrap {
             flex: 1;
             padding: 40px 60px 60px;
@@ -444,10 +442,10 @@
         }
 
         .s-row.selected .s-row-name,
-        .s-row.selected .s-row-price { color: #EDE6D4; }
+        .s-row.selected .s-row-price  { color: #EDE6D4; }
 
         .s-row.selected .s-row-duration,
-        .s-row.selected .s-row-desc  { color: rgba(237,230,212,0.65); }
+        .s-row.selected .s-row-desc   { color: rgba(237,230,212,0.65); }
 
         .s-row.selected .s-row-arrow {
             border-color: rgba(237,230,212,0.4);
@@ -469,14 +467,10 @@
             letter-spacing: 0.5px;
         }
 
-        .s-row.none-row.selected {
-            background: #4B4D39;
-            border-style: solid;
-        }
-
+        .s-row.none-row.selected { background: #4B4D39; border-style: solid; }
         .s-row.none-row.selected .s-row-name { color: #EDE6D4; }
 
-        /* ── SUMMARY PILL ── */
+        /* ── SUMMARY PILL — all Inter, no mixed fonts ── */
         .summary-pill {
             display: none;
             background: #fff;
@@ -492,21 +486,25 @@
         .summary-pill.visible { display: flex; }
 
         .summary-text {
-            font-family: 'Lato', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
+            font-weight: 300;
             color: #4B4D39;
             line-height: 1.5;
         }
 
+        /* override <strong> — keep same font, just slightly heavier */
         .summary-text strong {
-            font-family: 'Gowun Batang', serif;
-            font-size: 1.05rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #4B4D39;
         }
 
         .summary-total {
-            font-family: 'Lato', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
             color: #4B4D39;
             white-space: nowrap;
         }
@@ -533,7 +531,7 @@
             border: 1.5px solid rgba(75,77,57,0.15);
             border-radius: 8px;
             font-size: 14px;
-            font-family: 'Inter', sans-serif;   /* minimal font for inputs */
+            font-family: 'Inter', sans-serif;
             font-weight: 300;
             background: #fff;
             color: #4B4D39;
@@ -542,7 +540,6 @@
             appearance: none;
         }
 
-        /* Native time picker on mobile = clock wheel */
         input[type="time"] {
             font-family: 'Inter', sans-serif;
             font-weight: 300;
@@ -558,7 +555,6 @@
 
         .form-group textarea { min-height: 90px; resize: vertical; }
 
-        /* Custom select arrow */
         .select-wrap { position: relative; }
 
         .select-wrap::after {
@@ -574,7 +570,6 @@
 
         .select-wrap select { padding-right: 40px; width: 100%; }
 
-        /* Tax note */
         .tax-note {
             font-family: 'Inter', sans-serif;
             font-size: 0.75rem;
@@ -659,7 +654,6 @@
         }
 
         .success-screen.visible { display: flex; }
-
         .success-icon { font-size: 2.5rem; margin-bottom: 20px; }
 
         .success-screen h2 {
@@ -711,8 +705,18 @@
 
             .photo-panel { display: none; }
 
-            nav { padding: 16px 20px; }
-            .logo { left: 20px; }
+            nav {
+                padding: 16px 20px;
+                justify-content: space-between; /* logo left, hamburger right */
+            }
+
+            /* Logo always visible on mobile */
+            .logo {
+                opacity: 1 !important;
+                pointer-events: all !important;
+                position: relative;
+                left: 0;
+            }
 
             .content-panel { overflow-y: visible; }
 
@@ -724,7 +728,7 @@
             .step-heading { font-size: clamp(1.7rem, 7vw, 2.2rem); }
 
             .s-row { padding: 18px 20px; }
-            .s-row:hover  { transform: none; }
+            .s-row:hover   { transform: none; }
             .s-row.selected { transform: none; }
             .s-row-name  { font-size: 1.2rem; }
             .s-row-price { font-size: 1.1rem; }
@@ -732,7 +736,6 @@
 
             .form-row { grid-template-columns: 1fr; }
 
-            /* Native clock picker on mobile */
             input[type="time"] { font-size: 16px; }
 
             .form-group input,
@@ -755,7 +758,6 @@
 </head>
 <body>
 
-    <!-- Navbar — logo hidden until menu opens -->
     <nav id="mainNav">
         <a href="index.html" class="logo" id="navLogo">
             <span class="logo-name">Myōko Massage</span>
@@ -767,7 +769,6 @@
         </button>
     </nav>
 
-    <!-- Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay">
         <div class="overlay-left">
             <ul class="overlay-links">
@@ -783,11 +784,10 @@
         </div>
     </div>
 
-    <!-- Split Layout -->
     <div class="reserve-layout">
 
         <!-- LEFT: Photo -->
-        <div class="photo-panel" id="photoPanel">
+        <div class="photo-panel">
             <div class="panel-img active" id="img-default">
                 <img src="swedish-massage.jpg" alt="Myōko Massage">
             </div>
@@ -837,7 +837,7 @@
                     <h2 class="step-heading">Choose Your Experience</h2>
                     <p class="step-sub">Select the massage that suits you best.</p>
                     <div class="service-list">
-                        <div class="s-row" data-service="swedish" data-img="img-swedish" data-name="Swedish Massage" data-price="100">
+                        <div class="s-row" data-img="img-swedish" data-name="Swedish Massage" data-price="100">
                             <div class="s-row-left">
                                 <div class="s-row-name">Swedish Massage</div>
                                 <div class="s-row-duration">60 minutes</div>
@@ -848,7 +848,7 @@
                                 <div class="s-row-arrow">→</div>
                             </div>
                         </div>
-                        <div class="s-row" data-service="deep" data-img="img-deep" data-name="Deep Tissue Massage" data-price="120">
+                        <div class="s-row" data-img="img-deep" data-name="Deep Tissue Massage" data-price="120">
                             <div class="s-row-left">
                                 <div class="s-row-name">Deep Tissue Massage</div>
                                 <div class="s-row-duration">60 minutes</div>
@@ -859,7 +859,7 @@
                                 <div class="s-row-arrow">→</div>
                             </div>
                         </div>
-                        <div class="s-row" data-service="sports" data-img="img-sports" data-name="Sports Massage" data-price="90">
+                        <div class="s-row" data-img="img-sports" data-name="Sports Massage" data-price="90">
                             <div class="s-row-left">
                                 <div class="s-row-name">Sports Massage</div>
                                 <div class="s-row-duration">60 minutes</div>
@@ -882,7 +882,7 @@
                     <h2 class="step-heading">Enhance Your Session</h2>
                     <p class="step-sub">Add an optional treatment to your massage.</p>
                     <div class="service-list">
-                        <div class="s-row" data-addon="cupping" data-img="img-cupping" data-name="Cupping Therapy" data-price="20">
+                        <div class="s-row" data-img="img-cupping" data-name="Cupping Therapy" data-price="20">
                             <div class="s-row-left">
                                 <span class="s-row-badge">Add-on</span>
                                 <div class="s-row-name">Cupping Therapy</div>
@@ -894,7 +894,7 @@
                                 <div class="s-row-arrow">→</div>
                             </div>
                         </div>
-                        <div class="s-row" data-addon="aroma" data-img="img-aroma" data-name="Aromatherapy" data-price="15">
+                        <div class="s-row" data-img="img-aroma" data-name="Aromatherapy" data-price="15">
                             <div class="s-row-left">
                                 <span class="s-row-badge">Add-on</span>
                                 <div class="s-row-name">Aromatherapy</div>
@@ -906,7 +906,7 @@
                                 <div class="s-row-arrow">→</div>
                             </div>
                         </div>
-                        <div class="s-row none-row selected" data-addon="none" data-img="img-default" data-name="None" data-price="0">
+                        <div class="s-row none-row selected" data-img="img-default" data-name="None" data-price="0">
                             <div class="s-row-name">No add-on, thank you</div>
                         </div>
                     </div>
@@ -957,10 +957,9 @@
                             </div>
                         </div>
 
-                        <!-- Time: select on desktop, native time picker on mobile -->
-                        <div class="form-group" id="time-desktop">
+                        <div class="form-group" id="time-group">
                             <label>Preferred Time</label>
-                            <div class="select-wrap">
+                            <div class="select-wrap" id="time-select-wrap">
                                 <select name="time" id="time-select" required>
                                     <option value="" disabled selected>Select a time slot</option>
                                     <option value="08:00">08:00</option>
@@ -986,7 +985,6 @@
                             <textarea name="message" placeholder="Villa or hotel address, any special requests..."></textarea>
                         </div>
 
-                        <!-- Tax note -->
                         <p class="tax-note">All prices include VAT as required by Greek tax law (ΦΠΑ).</p>
 
                         <div class="step-nav">
@@ -1009,7 +1007,6 @@
     </div>
 
     <script>
-        // ── Menu — logo appears only when open
         const menuToggle  = document.getElementById('menuToggle');
         const menuOverlay = document.getElementById('menuOverlay');
         const mainNav     = document.getElementById('mainNav');
@@ -1030,31 +1027,19 @@
             }
         });
 
-        // ── On mobile: swap select for native time input (clock wheel)
-        function isMobile() { return window.innerWidth <= 768; }
-
+        // On mobile swap select → native time input (clock wheel)
         function setupTimePicker() {
-            const wrapper = document.getElementById('time-desktop');
-            const selectEl = document.getElementById('time-select');
+            const group   = document.getElementById('time-group');
+            const wrap    = document.getElementById('time-select-wrap');
+            const isMob   = window.innerWidth <= 768;
+            const hasTime = !!group.querySelector('input[type="time"]');
 
-            if (isMobile()) {
-                // Replace select with native time input
-                const existing = wrapper.querySelector('input[type="time"]');
-                if (existing) return; // already set up
-
-                const timeInput = document.createElement('input');
-                timeInput.type = 'time';
-                timeInput.name = 'time';
-                timeInput.required = true;
-                timeInput.min = '08:00';
-                timeInput.max = '21:00';
-                timeInput.step = '3600'; // 1-hour steps
-                timeInput.placeholder = 'Select time';
-
-                // Remove select, insert time input
-                const sw = wrapper.querySelector('.select-wrap');
-                if (sw) sw.remove();
-                wrapper.appendChild(timeInput);
+            if (isMob && !hasTime) {
+                if (wrap) wrap.remove();
+                const t = document.createElement('input');
+                t.type = 'time'; t.name = 'time'; t.required = true;
+                t.min = '08:00'; t.max = '21:00'; t.step = '3600';
+                group.appendChild(t);
             }
         }
 
@@ -1063,17 +1048,15 @@
     </script>
 
     <script>
-        // ── State
         const state = { service: null, servicePrice: 0, addon: 'None', addonPrice: 0 };
 
         function showPhoto(id, label) {
             document.querySelectorAll('.panel-img').forEach(p => p.classList.remove('active'));
-            const target = document.getElementById(id);
-            if (target) target.classList.add('active');
+            const t = document.getElementById(id);
+            if (t) t.classList.add('active');
             if (label) document.getElementById('photo-label').textContent = label;
         }
 
-        // Step 1
         document.querySelectorAll('#step-1 .s-row').forEach(row => {
             row.addEventListener('mouseenter', () => showPhoto(row.dataset.img, row.dataset.name));
             row.addEventListener('click', () => {
@@ -1087,11 +1070,10 @@
         });
 
         document.getElementById('step-1').addEventListener('mouseleave', () => {
-            const sel = document.querySelector('#step-1 .s-row.selected');
-            if (!sel) showPhoto('img-default', 'Myōko Massage · Mykonos');
+            if (!document.querySelector('#step-1 .s-row.selected'))
+                showPhoto('img-default', 'Myōko Massage · Mykonos');
         });
 
-        // Step 2
         document.querySelectorAll('#step-2 .s-row').forEach(row => {
             row.addEventListener('mouseenter', () => {
                 showPhoto(row.dataset.img, row.dataset.name !== 'None' ? row.dataset.name : 'Myōko Massage · Mykonos');
@@ -1107,13 +1089,13 @@
 
         function setStep(n) {
             document.querySelectorAll('.step').forEach((s, i) => s.classList.toggle('active', i + 1 === n));
-            [1, 2, 3].forEach(i => {
-                const prog = document.getElementById(`prog-${i}`);
-                prog.classList.remove('active', 'done');
-                if (i < n)  prog.classList.add('done');
-                if (i === n) prog.classList.add('active');
+            [1,2,3].forEach(i => {
+                const p = document.getElementById(`prog-${i}`);
+                p.classList.remove('active','done');
+                if (i < n)  p.classList.add('done');
+                if (i === n) p.classList.add('active');
             });
-            [1, 2].forEach(i => document.getElementById(`line-${i}`).classList.toggle('done', i < n));
+            [1,2].forEach(i => document.getElementById(`line-${i}`).classList.toggle('done', i < n));
             if (n === 1 || n === 3) showPhoto('img-default', 'Myōko Massage · Mykonos');
             document.querySelector('.content-panel').scrollTo({ top: 0, behavior: 'smooth' });
         }
