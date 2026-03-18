@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Inter:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <title>Reserve – Myōko Massage</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,7 +19,7 @@
             overflow: hidden;
         }
 
-        /* ── NAVBAR — always solid beige, never transparent ── */
+        /* ── NAVBAR ── */
         nav {
             position: fixed;
             top: 0;
@@ -33,7 +33,6 @@
             box-shadow: 0 1px 0 rgba(75,77,57,0.08);
         }
 
-        /* Logo: hidden on desktop/tablet, shown when menu opens */
         .logo {
             display: flex;
             flex-direction: column;
@@ -70,7 +69,6 @@
             margin-top: 4px;
         }
 
-        /* ── HAMBURGER ── */
         .hamburger {
             background: transparent;
             border: none;
@@ -182,7 +180,7 @@
 
         .menu-overlay.open .overlay-photo img { opacity: 1; transform: scale(1); }
 
-        /* ── MAIN SPLIT LAYOUT ── */
+        /* ── SPLIT LAYOUT ── */
         .reserve-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -190,7 +188,7 @@
             height: 100dvh;
         }
 
-        /* ── LEFT: PHOTO PANEL ── */
+        /* ── LEFT PHOTO ── */
         .photo-panel {
             position: relative;
             overflow: hidden;
@@ -231,7 +229,7 @@
             text-transform: uppercase;
         }
 
-        /* ── RIGHT: CONTENT PANEL ── */
+        /* ── RIGHT CONTENT ── */
         .content-panel {
             background: #EDE6D4;
             display: flex;
@@ -239,7 +237,6 @@
             overflow-y: auto;
         }
 
-        /* ── PROGRESS ── */
         .progress-wrap {
             display: flex;
             align-items: center;
@@ -278,8 +275,7 @@
         }
 
         .progress-line {
-            height: 1px;
-            width: 40px;
+            height: 1px; width: 40px;
             background: rgba(75,77,57,0.15);
             margin: 0 12px;
             flex-shrink: 0;
@@ -292,7 +288,6 @@
         .progress-step.done .step-label    { color: rgba(75,77,57,0.5); }
         .progress-line.done                { background: #4B4D39; }
 
-        /* ── STEPS ── */
         .steps-wrap {
             flex: 1;
             padding: 36px 60px 60px;
@@ -471,50 +466,56 @@
         .s-row.none-row.selected { background: #4B4D39; border-style: solid; }
         .s-row.none-row.selected .s-row-name { color: #EDE6D4; }
 
-        /* ── SUMMARY BOX — itemised breakdown, all Inter ── */
+        /* ── SUMMARY BOX — identical on all screen sizes ── */
         .summary-box {
-            display: none;
             background: #fff;
             border-radius: 12px;
-            padding: 20px 24px;
+            overflow: hidden;
             margin-bottom: 24px;
-            flex-direction: column;
-            gap: 0;
         }
-
-        .summary-box.visible { display: flex; }
 
         .summary-line {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 14px 24px;
+            border-bottom: 1px solid rgba(75,77,57,0.08);
+        }
+
+        .summary-line:last-child { border-bottom: none; }
+
+        .summary-line .s-label {
             font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
             font-weight: 300;
+            color: rgba(75,77,57,0.65);
+        }
+
+        .summary-line .s-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
             color: #4B4D39;
         }
 
-        /* Divider between rows */
-        .summary-line + .summary-line {
-            border-top: 1px solid rgba(75,77,57,0.08);
-        }
-
-        /* Total row — slightly bolder */
         .summary-line.total {
-            border-top: 1.5px solid rgba(75,77,57,0.15) !important;
-            margin-top: 2px;
-            font-weight: 500;
-            font-size: 1rem;
+            border-top: 1.5px solid rgba(75,77,57,0.12);
+            border-bottom: none;
+            background: rgba(75,77,57,0.03);
         }
 
-        .summary-line .s-label { color: rgba(75,77,57,0.6); }
-        .summary-line .s-value { font-weight: 400; color: #4B4D39; }
         .summary-line.total .s-label,
-        .summary-line.total .s-value { color: #4B4D39; font-weight: 600; }
+        .summary-line.total .s-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4B4D39;
+        }
+
+        /* addon row hidden by default via JS */
 
         /* ── FORM ── */
-        .reserve-form { display: flex; flex-direction: column; gap: 14px; flex: 1; }
+        .reserve-form { display: flex; flex-direction: column; gap: 14px; }
 
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
@@ -582,7 +583,7 @@
             margin-top: -4px;
         }
 
-        /* ── NAV BUTTONS ── */
+        /* ── STEP NAV BUTTONS ── */
         .step-nav {
             display: flex;
             justify-content: space-between;
@@ -696,6 +697,14 @@
 
         .btn-home:hover { background: #3a3c2a; transform: translateY(-2px); }
 
+        /* ════════════ TABLET ════════════ */
+        @media (max-width: 1024px) {
+            nav { padding: 20px 35px; }
+            .logo { left: 35px; }
+            .progress-wrap { padding: 85px 40px 0; }
+            .steps-wrap { padding: 32px 40px 50px; }
+        }
+
         /* ════════════ MOBILE ════════════ */
         @media (max-width: 768px) {
             body { overflow: auto; height: auto; }
@@ -708,12 +717,12 @@
 
             .photo-panel { display: none; }
 
-            /* Mobile nav: logo always visible left, hamburger right */
             nav {
                 padding: 16px 20px;
                 justify-content: space-between;
             }
 
+            /* Logo always visible on mobile */
             .logo {
                 opacity: 1 !important;
                 pointer-events: all !important;
@@ -924,13 +933,13 @@
                     <h2 class="step-heading">Your Details</h2>
                     <p class="step-sub">We'll confirm your reservation within 24 hours.</p>
 
-                    <!-- Itemised summary box -->
-                    <div class="summary-box visible" id="summary-box">
+                    <!-- Itemised summary — same markup, same styles, all screen sizes -->
+                    <div class="summary-box" id="summary-box">
                         <div class="summary-line" id="sum-service-line">
                             <span class="s-label" id="sum-service-label">—</span>
                             <span class="s-value" id="sum-service-val">—</span>
                         </div>
-                        <div class="summary-line" id="sum-addon-line" style="display:none;">
+                        <div class="summary-line" id="sum-addon-line">
                             <span class="s-label" id="sum-addon-label">—</span>
                             <span class="s-value" id="sum-addon-val">—</span>
                         </div>
@@ -1038,7 +1047,7 @@
             }
         });
 
-        // Mobile: swap select → native clock wheel
+        // Mobile: native clock wheel
         function setupTimePicker() {
             const group = document.getElementById('time-group');
             const wrap  = document.getElementById('time-select-wrap');
@@ -1050,7 +1059,6 @@
                 group.appendChild(t);
             }
         }
-
         setupTimePicker();
         window.addEventListener('resize', setupTimePicker);
     </script>
@@ -1111,11 +1119,11 @@
         function buildSummary() {
             const total = state.servicePrice + state.addonPrice;
 
-            // Service row — always shown
+            // Service row
             document.getElementById('sum-service-label').textContent = state.service;
             document.getElementById('sum-service-val').textContent   = `€${state.servicePrice}`;
 
-            // Addon row — only shown if an addon was chosen
+            // Addon row — show or hide
             const addonLine = document.getElementById('sum-addon-line');
             if (state.addonPrice > 0) {
                 document.getElementById('sum-addon-label').textContent = state.addon;
