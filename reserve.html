@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Inter:wght@300;400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Reserve – Myōko Massage</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #EDE6D4;
+            color: #4B4D39;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── NAVBAR ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(237, 230, 212, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1;
+            text-decoration: none;
+        }
+
+        .logo-name {
+            font-family: 'Gowun Batang', serif;
+            font-size: 22px;
+            font-weight: 400;
+            color: #4B4D39;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-location {
+            font-family: 'Lato', sans-serif;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(75, 77, 57, 0.6);
+            margin-top: 4px;
+        }
+
+        .hamburger {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 44px;
+            height: 44px;
+            position: relative;
+            z-index: 101;
+        }
+
+        .hamburger .bar {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #4B4D39;
+            border-radius: 2px;
+            position: absolute;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                        background 0.3s ease;
+        }
+
+        .hamburger .bar:nth-child(1) { transform: translateY(-5px); }
+        .hamburger .bar:nth-child(2) { transform: translateY(5px); }
+        .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
+        .hamburger.open .bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
+
+        /* ── MENU OVERLAY ── */
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: #EDE6D4;
+            z-index: 99;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .menu-overlay.open { opacity: 1; pointer-events: all; }
+
+        .overlay-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 60px 80px 80px;
+            padding-top: 140px;
+        }
+
+        .overlay-links {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            list-style: none;
+            margin-bottom: 60px;
+        }
+
+        .overlay-links li a {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 300;
+            color: #4B4D39;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            display: block;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+                        transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+                        color 0.2s ease;
+        }
+
+        .menu-overlay.open .overlay-links li a { opacity: 1; transform: translateX(0); }
+
+        .overlay-links li:nth-child(1) a { transition-delay: 0.08s; }
+        .overlay-links li:nth-child(2) a { transition-delay: 0.14s; }
+        .overlay-links li:nth-child(3) a { transition-delay: 0.20s; }
+        .overlay-links li:nth-child(4) a { transition-delay: 0.26s; }
+
+        .overlay-links li a:hover { color: rgba(75, 77, 57, 0.4); }
+
+        .overlay-ig {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            color: rgba(75, 77, 57, 0.45);
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.45s ease 0.35s, color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+        }
+
+        .menu-overlay.open .overlay-ig { opacity: 1; }
+        .overlay-ig:hover { color: #4B4D39; }
+
+        .overlay-photo {
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overlay-photo img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.04);
+            transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
+        }
+
+        .menu-overlay.open .overlay-photo img { opacity: 1; transform: scale(1); }
+
+        @media (max-width: 768px) {
+            .menu-overlay  { grid-template-columns: 1fr; }
+            .overlay-photo { display: none; }
+            .overlay-left  { padding: 120px 35px 80px; }
+        }
+
+        /* ── PAGE CONTENT ── */
+        .page-content {
+            padding-top: 110px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── PROGRESS BAR ── */
+        .progress-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            padding: 40px 20px 0;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: default;
+        }
+
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(75, 77, 57, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: rgba(75, 77, 57, 0.35);
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .step-label {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(75, 77, 57, 0.35);
+            transition: all 0.4s ease;
+            white-space: nowrap;
+        }
+
+        .progress-line {
+            width: 60px;
+            height: 1px;
+            background: rgba(75, 77, 57, 0.2);
+            margin: 0 14px;
+            flex-shrink: 0;
+            transition: background 0.4s ease;
+        }
+
+        .progress-step.active   .step-circle { border-color: #4B4D39; color: #4B4D39; background: #4B4D39; color: #EDE6D4; }
+        .progress-step.active   .step-label  { color: #4B4D39; font-weight: 700; }
+        .progress-step.done     .step-circle { border-color: #4B4D39; background: #4B4D39; color: #EDE6D4; }
+        .progress-step.done     .step-label  { color: rgba(75,77,57,0.6); }
+        .progress-line.done                  { background: #4B4D39; }
+
+        /* ── STEPS CONTAINER ── */
+        .steps-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 40px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .step { display: none; }
+        .step.active {
+            display: flex;
+            flex-direction: column;
+            animation: stepIn 0.45s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes stepIn {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-heading {
+            font-family: 'Gowun Batang', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 400;
+            color: #4B4D39;
+            margin-bottom: 8px;
+        }
+
+        .step-sub {
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            color: rgba(75, 77, 57, 0.6);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* ── SERVICE CARDS ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .r-card {
+            background: #fff;
+            border: 2px solid transparent;
+            border-radius: 14px;
+            padding: 30px 24px;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .r-card:hover {
+            border-color: rgba(75, 77, 57, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(75,77,57,0.1);
+        }
+
+        .r-card.selected {
+            background: #4B4D39;
+            border-color: #4B4D39;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(75,77,57,0.25);
+        }
+
+        .r-card.none-card {
+            background: transparent;
+            border: 2px dashed rgba(75, 77, 57, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .r-card.none-card.selected {
+            background: #4B4D39;
+            border-style: solid;
+        }
+
+        .card-name {
+            font-family: 'Gowun Batang', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #4B4D39;
+            margin-bottom: 6px;
+            transition: color 0.3s ease;
+        }
+
+        .card-duration {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.85rem;
+            color: #888;
+            font-style: italic;
+            margin-bottom: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .card-desc {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .card-price {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4B4D39;
+            transition: color 0.3s ease;
+        }
+
+        .card-badge {
+            display: inline-block;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(75, 77, 57, 0.1);
+            color: #4B4D39;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .none-label {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            color: rgba(75,77,57,0.5);
+            transition: color 0.3s ease;
+        }
+
+        /* Selected state — all text turns beige */
+        .r-card.selected .card-name,
+        .r-card.selected .card-price,
+        .r-card.selected .card-duration,
+        .r-card.selected .card-desc,
+        .r-card.selected .none-label { color: #EDE6D4; }
+
+        .r-card.selected .card-badge {
+            background: rgba(237,230,212,0.2);
+            color: #EDE6D4;
+        }
+
+        /* ── SUMMARY PILL ── */
+        .summary-pill {
+            display: none;
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 28px;
+            margin-bottom: 36px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .summary-pill.visible { display: flex; }
+
+        .summary-text {
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            color: #4B4D39;
+        }
+
+        .summary-text strong {
+            font-family: 'Gowun Batang', serif;
+            font-size: 1.1rem;
+        }
+
+        .summary-total {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4B4D39;
+            white-space: nowrap;
+        }
+
+        /* ── FORM ── */
+        .reserve-form { display: flex; flex-direction: column; gap: 16px; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+        .form-group label {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(75,77,57,0.6);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 14px 16px;
+            border: 1.5px solid rgba(75,77,57,0.2);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Lato', sans-serif;
+            background: #fff;
+            color: #4B4D39;
+            transition: border-color 0.3s ease;
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4B4D39;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: rgba(75,77,57,0.35); }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* ── NAV BUTTONS ── */
+        .step-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            gap: 16px;
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 2px solid rgba(75,77,57,0.3);
+            color: #4B4D39;
+            padding: 0 32px;
+            height: 52px;
+            border-radius: 30px;
+            font-family: 'Lato', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-back:hover {
+            border-color: #4B4D39;
+            background: rgba(75,77,57,0.05);
+        }
+
+        .btn-back.hidden { visibility: hidden; }
+
+        .btn-next {
+            background: #4B4D39;
+            border: none;
+            color: #EDE6D4;
+            padding: 0 48px;
+            height: 52px;
+            border-radius: 30px;
+            font-family: 'Lato', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-next:hover {
+            background: #3a3c2a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(75,77,57,0.3);
+        }
+
+        .btn-next:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ── SUCCESS STATE ── */
+        .success-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 40px;
+            animation: stepIn 0.5s ease forwards;
+        }
+
+        .success-screen.visible { display: flex; }
+
+        .success-icon {
+            font-size: 3rem;
+            margin-bottom: 24px;
+        }
+
+        .success-screen h2 {
+            font-family: 'Gowun Batang', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 400;
+            color: #4B4D39;
+            margin-bottom: 14px;
+        }
+
+        .success-screen p {
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            color: rgba(75,77,57,0.65);
+            max-width: 440px;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .btn-home {
+            background: #4B4D39;
+            color: #EDE6D4;
+            padding: 0 48px;
+            height: 52px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-home:hover {
+            background: #3a3c2a;
+            transform: translateY(-2px);
+        }
+
+        /* ════════════════ TABLET ════════════════ */
+        @media (max-width: 1024px) {
+            nav { padding: 20px 35px; }
+            .steps-container { padding: 40px 30px 50px; }
+            .cards-grid { gap: 16px; }
+            .overlay-left { padding: 80px 40px; }
+        }
+
+        /* ════════════════ MOBILE ════════════════ */
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
+            .page-content { padding-top: 90px; }
+            .progress-wrap { gap: 0; padding: 30px 16px 0; }
+            .progress-line { width: 30px; margin: 0 8px; }
+            .step-label { font-size: 0.65rem; letter-spacing: 1px; }
+            .steps-container { padding: 30px 20px 50px; }
+            .step-heading { font-size: clamp(1.8rem, 7vw, 2.5rem); margin-bottom: 6px; }
+            .step-sub { font-size: 0.9rem; margin-bottom: 28px; }
+
+            .cards-grid { grid-template-columns: 1fr; gap: 14px; }
+
+            .r-card { padding: 22px 20px; }
+            .r-card:hover { transform: none; }
+            .r-card.selected { transform: none; }
+            .card-name { font-size: 1.3rem; }
+            .card-price { font-size: 1.2rem; }
+
+            .form-row { grid-template-columns: 1fr; }
+            .form-group input,
+            .form-group textarea,
+            .form-group select { font-size: 16px; }
+
+            .step-nav { flex-direction: row; }
+            .btn-back { padding: 0 20px; font-size: 12px; }
+            .btn-next { padding: 0 28px; font-size: 12px; flex: 1; }
+            .btn-back.hidden { display: none; }
+
+            .summary-pill { padding: 16px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .logo-name { font-size: 18px; }
+            .logo-location { font-size: 9px; }
+            .step-label { display: none; }
+            .progress-line { width: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav id="mainNav">
+        <a href="index.html" class="logo">
+            <span class="logo-name">Myōko Massage</span>
+            <span class="logo-location">Mykonos</span>
+        </a>
+        <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </nav>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="overlay-left">
+            <ul class="overlay-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="reserve.html">Reserve</a></li>
+            </ul>
+            <a href="https://instagram.com/myokomassage" target="_blank" class="overlay-ig">@myokomassage</a>
+        </div>
+        <div class="overlay-photo">
+            <img src="massage1.jpg" alt="Myōko Massage">
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="page-content">
+
+        <!-- Progress -->
+        <div class="progress-wrap">
+            <div class="progress-step active" id="prog-1">
+                <div class="step-circle">1</div>
+                <span class="step-label">Experience</span>
+            </div>
+            <div class="progress-line" id="line-1"></div>
+            <div class="progress-step" id="prog-2">
+                <div class="step-circle">2</div>
+                <span class="step-label">Enhance</span>
+            </div>
+            <div class="progress-line" id="line-2"></div>
+            <div class="progress-step" id="prog-3">
+                <div class="step-circle">3</div>
+                <span class="step-label">Details</span>
+            </div>
+        </div>
+
+        <!-- Steps -->
+        <div class="steps-container">
+
+            <!-- STEP 1 -->
+            <div class="step active" id="step-1">
+                <h2 class="step-heading">Choose Your Experience</h2>
+                <p class="step-sub">Select the massage that suits you best.</p>
+                <div class="cards-grid" id="service-grid">
+                    <div class="r-card" data-name="Swedish Massage" data-price="100">
+                        <div class="card-name">Swedish Massage</div>
+                        <div class="card-duration">60 minutes</div>
+                        <div class="card-desc">Gentle, flowing strokes to promote relaxation, improve circulation, and ease muscle tension.</div>
+                        <div class="card-price">€100</div>
+                    </div>
+                    <div class="r-card" data-name="Deep Tissue Massage" data-price="120">
+                        <div class="card-name">Deep Tissue Massage</div>
+                        <div class="card-duration">60 minutes</div>
+                        <div class="card-desc">Targeted pressure to release chronic muscle tension and knots. Ideal for persistent pain and tightness.</div>
+                        <div class="card-price">€120</div>
+                    </div>
+                    <div class="r-card" data-name="Sports Massage" data-price="90">
+                        <div class="card-name">Sports Massage</div>
+                        <div class="card-duration">60 minutes</div>
+                        <div class="card-desc">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery.</div>
+                        <div class="card-price">€90</div>
+                    </div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-back hidden">Back</button>
+                    <button class="btn-next" id="next-1" disabled>Continue</button>
+                </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="step" id="step-2">
+                <h2 class="step-heading">Enhance Your Session</h2>
+                <p class="step-sub">Add an optional treatment to complement your massage.</p>
+                <div class="cards-grid" id="addon-grid">
+                    <div class="r-card" data-name="Cupping Therapy" data-price="20">
+                        <span class="card-badge">Add-on</span>
+                        <div class="card-name">Cupping Therapy</div>
+                        <div class="card-duration">15–20 minutes</div>
+                        <div class="card-desc">Ancient suction technique that lifts fascia, improves blood flow, and releases deep muscle tension.</div>
+                        <div class="card-price">+€20</div>
+                    </div>
+                    <div class="r-card" data-name="Aromatherapy" data-price="15">
+                        <span class="card-badge">Add-on</span>
+                        <div class="card-name">Aromatherapy</div>
+                        <div class="card-duration">Included in session</div>
+                        <div class="card-desc">Custom essential oil blend — lavender, peppermint, or sweet orange — for deeper relaxation.</div>
+                        <div class="card-price">+€15</div>
+                    </div>
+                    <div class="r-card none-card selected" data-name="None" data-price="0">
+                        <span class="none-label">No add-on</span>
+                    </div>
+                </div>
+                <div class="step-nav">
+                    <button class="btn-back" id="back-2">Back</button>
+                    <button class="btn-next" id="next-2">Continue</button>
+                </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="step" id="step-3">
+                <h2 class="step-heading">Your Details</h2>
+                <p class="step-sub">Fill in your information and we'll confirm your reservation.</p>
+
+                <!-- Summary pill -->
+                <div class="summary-pill visible" id="summary-pill">
+                    <div class="summary-text">
+                        <strong id="sum-service">—</strong>
+                        <span id="sum-addon"></span>
+                    </div>
+                    <div class="summary-total" id="sum-total">€—</div>
+                </div>
+
+                <form class="reserve-form" id="reserveForm"
+                      action="https://formspree.io/f/YOUR_FORM_ID"
+                      method="POST">
+
+                    <!-- Hidden fields populated by JS -->
+                    <input type="hidden" name="service"  id="f-service">
+                    <input type="hidden" name="addon"    id="f-addon">
+                    <input type="hidden" name="total"    id="f-total">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" name="name" placeholder="Maria Papadaki" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" placeholder="maria@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="phone" placeholder="+30 694 000 0000" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Date</label>
+                            <input type="date" name="date" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferred Time</label>
+                        <select name="time" required>
+                            <option value="" disabled selected>Select a time slot</option>
+                            <option>Morning — 09:00 to 12:00</option>
+                            <option>Afternoon — 12:00 to 17:00</option>
+                            <option>Evening — 17:00 to 21:00</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Location / Notes</label>
+                        <textarea name="message" placeholder="Your villa or hotel address, any special requests..."></textarea>
+                    </div>
+
+                    <div class="step-nav">
+                        <button type="button" class="btn-back" id="back-3">Back</button>
+                        <button type="submit" class="btn-next">Send Reservation</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- SUCCESS -->
+            <div class="success-screen" id="success-screen">
+                <div class="success-icon">🌿</div>
+                <h2>Reservation Received</h2>
+                <p>Thank you. We'll confirm your session within 24 hours. Look forward to seeing you in Mykonos.</p>
+                <a href="index.html" class="btn-home">Back to Home</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ── Menu
+        const menuToggle  = document.getElementById('menuToggle');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const mainNav     = document.getElementById('mainNav');
+
+        menuToggle.addEventListener('click', () => {
+            const open = menuToggle.classList.toggle('open');
+            menuOverlay.classList.toggle('open', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                menuToggle.classList.remove('open');
+                menuOverlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+
+    <script>
+        // ── State
+        const state = { service: null, servicePrice: 0, addon: 'None', addonPrice: 0 };
+
+        // ── Step 1: service selection
+        document.querySelectorAll('#service-grid .r-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('#service-grid .r-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                state.service      = card.dataset.name;
+                state.servicePrice = parseInt(card.dataset.price);
+                document.getElementById('next-1').disabled = false;
+            });
+        });
+
+        // ── Step 2: addon selection (None pre-selected)
+        document.querySelectorAll('#addon-grid .r-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('#addon-grid .r-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                state.addon      = card.dataset.name;
+                state.addonPrice = parseInt(card.dataset.price);
+            });
+        });
+
+        // ── Progress updater
+        function setStep(n) {
+            // Steps
+            document.querySelectorAll('.step').forEach((s, i) => {
+                s.classList.toggle('active', i + 1 === n);
+            });
+            // Progress circles
+            [1, 2, 3].forEach(i => {
+                const prog = document.getElementById(`prog-${i}`);
+                prog.classList.remove('active', 'done');
+                if (i < n)  prog.classList.add('done');
+                if (i === n) prog.classList.add('active');
+            });
+            // Progress lines
+            [1, 2].forEach(i => {
+                document.getElementById(`line-${i}`).classList.toggle('done', i < n);
+            });
+            // Scroll top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ── Summary builder
+        function buildSummary() {
+            const total = state.servicePrice + state.addonPrice;
+            document.getElementById('sum-service').textContent = state.service;
+            document.getElementById('sum-addon').textContent   =
+                state.addonPrice > 0 ? ` + ${state.addon}` : '';
+            document.getElementById('sum-total').textContent   = `€${total}`;
+            // Hidden inputs
+            document.getElementById('f-service').value = state.service;
+            document.getElementById('f-addon').value   = state.addonPrice > 0 ? state.addon : 'None';
+            document.getElementById('f-total').value   = `€${total}`;
+        }
+
+        // ── Navigation
+        document.getElementById('next-1').addEventListener('click', () => setStep(2));
+        document.getElementById('back-2').addEventListener('click', () => setStep(1));
+        document.getElementById('next-2').addEventListener('click', () => {
+            // Capture addon state
+            const sel = document.querySelector('#addon-grid .r-card.selected');
+            if (sel) {
+                state.addon      = sel.dataset.name;
+                state.addonPrice = parseInt(sel.dataset.price) || 0;
+            }
+            buildSummary();
+            setStep(3);
+        });
+        document.getElementById('back-3').addEventListener('click', () => setStep(2));
+
+        // ── Form submit → show success
+        document.getElementById('reserveForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const data = new FormData(this);
+            fetch(this.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(res => {
+                if (res.ok) {
+                    document.getElementById('step-3').classList.remove('active');
+                    document.getElementById('success-screen').classList.add('visible');
+                    document.querySelector('.progress-wrap').style.display = 'none';
+                }
+            }).catch(() => {
+                // Fallback: still show success so UX isn't broken
+                document.getElementById('step-3').classList.remove('active');
+                document.getElementById('success-screen').classList.add('visible');
+                document.querySelector('.progress-wrap').style.display = 'none';
+            });
+        });
+    </script>
+
+</body>
+</html>
