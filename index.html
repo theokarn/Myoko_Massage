@@ -72,20 +72,11 @@
             margin-top: 4px;
         }
 
-        /* Logo colors when scrolled (not on hero) */
         nav.scrolled .logo-name     { color: #4B4D39; }
         nav.scrolled .logo-location { color: rgba(75, 77, 57, 0.6); }
 
-        /* Logo colors when menu is open — always dark on beige overlay */
         nav.menu-open .logo-name     { color: #4B4D39; }
         nav.menu-open .logo-location { color: rgba(75, 77, 57, 0.6); }
-
-        /*
-         * SPECIAL CASE: hero + menu open but NOT scrolled
-         * The logo starts beige (on hero video). When menu opens from hero,
-         * the overlay is beige so we must darken the logo.
-         * We achieve this by the menu-open class on nav (set in JS).
-         */
 
         /* ── HAMBURGER — 2 bars → X ── */
         .hamburger {
@@ -116,17 +107,13 @@
         .hamburger .bar:nth-child(1) { transform: translateY(-5px); }
         .hamburger .bar:nth-child(2) { transform: translateY(5px); }
 
-        /* Animate to X */
         .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
         .hamburger.open .bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
 
-        /* Dark bars when scrolled */
         nav.scrolled .hamburger .bar { background: #4B4D39; }
+        .hamburger.open .bar         { background: #4B4D39 !important; }
 
-        /* Dark bars when overlay open (beige bg) */
-        .hamburger.open .bar { background: #4B4D39 !important; }
-
-        /* ── MENU OVERLAY — left-aligned, Inter font, photo panel ── */
+        /* ── MENU OVERLAY ── */
         .menu-overlay {
             position: fixed;
             inset: 0;
@@ -144,13 +131,12 @@
             pointer-events: all;
         }
 
-        /* Left panel — links */
         .overlay-left {
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 80px 60px 80px 80px;
-	    padding-top: 140px;
+            padding-top: 140px;
         }
 
         .overlay-links {
@@ -205,7 +191,6 @@
         .menu-overlay.open .overlay-ig { opacity: 1; }
         .overlay-ig:hover { color: #4B4D39; }
 
-        /* Right panel — photo (hidden on mobile) */
         .overlay-photo {
             display: block;
             position: relative;
@@ -226,11 +211,10 @@
             transform: scale(1);
         }
 
-        /* Hide photo panel on mobile */
         @media (max-width: 768px) {
-            .menu-overlay          { grid-template-columns: 1fr; }
-            .overlay-photo         { display: none; }
-            .overlay-left          { padding: 80px 35px; }
+            .menu-overlay  { grid-template-columns: 1fr; }
+            .overlay-photo { display: none; }
+            .overlay-left  { padding: 120px 35px 80px; }
         }
 
         /* ── HERO ── */
@@ -244,13 +228,18 @@
             align-items: center;
             text-align: center;
             overflow: hidden;
+            /* Prevents beige body colour from flashing at bottom */
+            background: #000;
         }
 
         #hero-video {
             position: absolute;
             inset: 0;
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            /* Scale up ever so slightly so no edge/gap is visible */
+            transform: scale(1.01);
             z-index: 0;
             filter: brightness(0.85);
         }
@@ -299,10 +288,12 @@
             animation-delay: 0.9s;
         }
 
+        /* ── CTA BUTTON — properly centred text ── */
         .cta-btn {
             background: #EDE6D4;
             color: #4B4D39;
-            padding: 16px 48px;
+            padding: 0 48px;
+            height: 52px;
             border-radius: 30px;
             text-decoration: none;
             font-size: 13px;
@@ -312,12 +303,13 @@
             transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             border: none;
             cursor: pointer;
-            display: inline-block;
+            /* Flexbox centres the text perfectly, no line-height hacks */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
             animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
             animation-delay: 1.2s;
-            min-height: 50px;
-            line-height: 1;
         }
 
         .cta-btn:hover {
@@ -872,8 +864,8 @@
                 line-height: 1.2;
             }
 
-            .hero p    { font-size: 1rem; margin-bottom: 40px; }
-            .cta-btn   { padding: 16px 40px; font-size: 12px; letter-spacing: 2px; }
+            .hero p  { font-size: 1rem; margin-bottom: 40px; }
+            .cta-btn { padding: 0 40px; height: 50px; font-size: 12px; letter-spacing: 2px; }
 
             .about-container { grid-template-columns: 1fr; min-height: auto; }
             .definition-side { padding: 70px 25px 50px; min-height: auto; }
@@ -943,7 +935,7 @@
 
             .overlay-links      { gap: 8px; }
             .overlay-links li a { font-size: clamp(1.8rem, 9vw, 2.6rem); }
-            .overlay-ig         { font-size: 0.85rem; margin-top: 40px; }
+            .overlay-ig         { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -963,17 +955,15 @@
 
     <!-- Fullscreen Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay">
-        <!-- Left: links -->
         <div class="overlay-left">
             <ul class="overlay-links">
                 <li><a href="#home"     class="overlay-nav-link">Home</a></li>
                 <li><a href="#about"    class="overlay-nav-link">About</a></li>
                 <li><a href="#services" class="overlay-nav-link">Services</a></li>
-                <li><a href="#contact"  class="overlay-nav-link">Book</a></li>
+                <li><a href="#contact"  class="overlay-nav-link">Reserve</a></li>
             </ul>
             <a href="https://instagram.com/myokomassage" target="_blank" class="overlay-ig">@myokomassage</a>
         </div>
-        <!-- Right: photo (hidden on mobile) -->
         <div class="overlay-photo">
             <img src="massage1.jpg" alt="Myōko Massage">
         </div>
@@ -988,7 +978,7 @@
         <div class="hero-content">
             <h1>Finessing the Art of Massage</h1>
             <p>Relaxation is a minute away</p>
-            <a href="#contact" class="cta-btn">Book Now</a>
+            <a href="#contact" class="cta-btn">Reserve</a>
         </div>
     </section>
 
@@ -1138,11 +1128,11 @@
 
     <!-- Contact -->
     <section id="contact" class="contact">
-        <h2>Book Your Session</h2>
+        <h2>Reserve Your Session</h2>
         <p class="contact-intro">Mobile massage service across Mykonos. We come to you.</p>
         <div class="contact-methods">
             <a href="https://wa.me/306947077567?text=Hi%20I%20would%20like%20to%20book%20a%20massage" class="whatsapp-btn" target="_blank">
-                Book on WhatsApp
+                Reserve on WhatsApp
             </a>
         </div>
         <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
@@ -1150,7 +1140,7 @@
             <input type="email" name="email"   placeholder="Your Email"    required>
             <input type="tel"   name="phone"   placeholder="Phone Number"  required>
             <textarea           name="message" placeholder="Preferred date, time, and service type..." required></textarea>
-            <button type="submit">Send Booking Request</button>
+            <button type="submit">Send Reservation Request</button>
         </form>
     </section>
 
@@ -1161,16 +1151,15 @@
     </footer>
 
     <script>
-        // ── Navbar scroll state
+        // Navbar scroll
         const mainNav = document.getElementById('mainNav');
-
         window.addEventListener('scroll', () => {
             mainNav.classList.toggle('scrolled', window.scrollY > 80);
         });
     </script>
 
     <script>
-        // ── Hamburger ↔ X + overlay + logo color fix
+        // Hamburger ↔ X + overlay + logo colour fix
         const menuToggle  = document.getElementById('menuToggle');
         const menuOverlay = document.getElementById('menuOverlay');
 
@@ -1202,7 +1191,7 @@
     </script>
 
     <script>
-        // ── Scroll animations
+        // Scroll animations
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('appear'); });
         }, { threshold: 0.2, rootMargin: '0px 0px -100px 0px' });
@@ -1219,7 +1208,7 @@
     </script>
 
     <script>
-        // ── Smooth scroll
+        // Smooth scroll
         function smoothScrollTo(targetY, duration) {
             const startY = window.pageYOffset;
             const diff   = targetY - startY;
@@ -1249,7 +1238,7 @@
     </script>
 
     <script>
-        // ── Service cards + pagination
+        // Service cards + pagination
         document.addEventListener('DOMContentLoaded', () => {
             const cards     = document.querySelectorAll('.service-card');
             const images    = document.querySelectorAll('.service-image');
