@@ -72,6 +72,7 @@
         nav.menu-open .logo-name     { color: #4B4D39; }
         nav.menu-open .logo-location { color: rgba(75,77,57,0.6); }
 
+        /* ── HAMBURGER — always olive/dark on this page ── */
         .hamburger {
             background: transparent;
             border: none;
@@ -88,7 +89,8 @@
         .hamburger .bar {
             display: block;
             width: 24px; height: 2px;
-            background: #EDE6D4;
+            /* Always olive — never beige on this beige page */
+            background: #4B4D39;
             border-radius: 2px;
             position: absolute;
             transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), background 0.3s ease;
@@ -99,8 +101,9 @@
         .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
         .hamburger.open .bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
 
-        nav.scrolled .hamburger .bar { background: #4B4D39; }
-        .hamburger.open .bar         { background: #4B4D39 !important; }
+        /* Logo also always dark on this page (beige bg) */
+        .logo-name     { color: #4B4D39 !important; }
+        .logo-location { color: rgba(75,77,57,0.6) !important; }
 
         /* ── MENU OVERLAY ── */
         .menu-overlay {
@@ -223,7 +226,6 @@
             z-index: 1;
         }
 
-        /* Step label on photo */
         .photo-label {
             position: absolute;
             bottom: 40px;
@@ -242,7 +244,6 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
-            padding: 0;
         }
 
         /* Progress bar */
@@ -293,18 +294,10 @@
             transition: background 0.4s ease;
         }
 
-        .progress-step.active .step-circle {
-            border-color: #4B4D39;
-            background: #4B4D39;
-            color: #EDE6D4;
-        }
-        .progress-step.active .step-label { color: #4B4D39; font-weight: 700; }
-        .progress-step.done .step-circle  {
-            border-color: #4B4D39;
-            background: #4B4D39;
-            color: #EDE6D4;
-        }
-        .progress-step.done .step-label   { color: rgba(75,77,57,0.5); }
+        .progress-step.active .step-circle { border-color: #4B4D39; background: #4B4D39; color: #EDE6D4; }
+        .progress-step.active .step-label  { color: #4B4D39; font-weight: 700; }
+        .progress-step.done .step-circle   { border-color: #4B4D39; background: #4B4D39; color: #EDE6D4; }
+        .progress-step.done .step-label    { color: rgba(75,77,57,0.5); }
         .progress-line.done                { background: #4B4D39; }
 
         /* Steps */
@@ -380,7 +373,29 @@
             box-shadow: 0 8px 25px rgba(75,77,57,0.2);
         }
 
-        .s-row-left { display: flex; flex-direction: column; gap: 4px; }
+        .s-row-left { display: flex; flex-direction: column; gap: 3px; }
+
+        /* ── ADD-ON BADGE — tight fit, not stretched ── */
+        .s-row-badge {
+            display: inline-block;
+            align-self: flex-start;        /* shrink to content width */
+            font-family: 'Lato', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(75,77,57,0.08);
+            color: #4B4D39;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 6px;
+            width: fit-content;            /* never stretch full width */
+            transition: all 0.3s ease;
+        }
+
+        .s-row.selected .s-row-badge {
+            background: rgba(237,230,212,0.2);
+            color: #EDE6D4;
+        }
 
         .s-row-name {
             font-family: 'Gowun Batang', serif;
@@ -398,7 +413,23 @@
             transition: color 0.3s ease;
         }
 
-        .s-row-right { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+        /* Description text on rows */
+        .s-row-desc {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.88rem;
+            color: rgba(75,77,57,0.55);
+            line-height: 1.55;
+            margin-top: 6px;
+            max-width: 400px;
+            transition: color 0.3s ease;
+        }
+
+        .s-row-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-shrink: 0;
+        }
 
         .s-row-price {
             font-family: 'Lato', sans-serif;
@@ -421,9 +452,14 @@
             flex-shrink: 0;
         }
 
+        /* Selected state */
         .s-row.selected .s-row-name,
         .s-row.selected .s-row-duration,
+        .s-row.selected .s-row-desc,
         .s-row.selected .s-row-price { color: #EDE6D4; }
+
+        .s-row.selected .s-row-duration,
+        .s-row.selected .s-row-desc  { color: rgba(237,230,212,0.65); }
 
         .s-row.selected .s-row-arrow {
             border-color: rgba(237,230,212,0.4);
@@ -431,7 +467,7 @@
             background: rgba(237,230,212,0.15);
         }
 
-        /* None option for addons */
+        /* None row */
         .s-row.none-row {
             background: transparent;
             border: 2px dashed rgba(75,77,57,0.2);
@@ -452,25 +488,6 @@
         }
 
         .s-row.none-row.selected .s-row-name { color: #EDE6D4; }
-
-        /* Addon badge */
-        .s-row-badge {
-            display: inline-block;
-            font-family: 'Lato', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: rgba(75,77,57,0.08);
-            color: #4B4D39;
-            padding: 3px 8px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .s-row.selected .s-row-badge {
-            background: rgba(237,230,212,0.2);
-            color: #EDE6D4;
-        }
 
         /* ── SUMMARY PILL ── */
         .summary-pill {
@@ -673,9 +690,6 @@
             .photo-panel { display: none; }
 
             nav { padding: 16px 20px; }
-            nav .logo-name     { color: #4B4D39; }
-            nav .logo-location { color: rgba(75,77,57,0.6); }
-            nav .hamburger .bar { background: #4B4D39; }
 
             .content-panel { overflow-y: visible; }
 
@@ -687,10 +701,11 @@
             .step-heading { font-size: clamp(1.7rem, 7vw, 2.2rem); }
 
             .s-row { padding: 18px 20px; }
-            .s-row:hover { transform: none; }
+            .s-row:hover  { transform: none; }
             .s-row.selected { transform: none; }
-            .s-row-name { font-size: 1.2rem; }
-            .s-row-price { font-size: 1.1rem; }
+            .s-row-name   { font-size: 1.2rem; }
+            .s-row-price  { font-size: 1.1rem; }
+            .s-row-desc   { display: none; } /* hide desc on mobile to save space */
 
             .form-row { grid-template-columns: 1fr; }
             .form-group input,
@@ -772,7 +787,6 @@
         <!-- RIGHT: Content -->
         <div class="content-panel">
 
-            <!-- Progress -->
             <div class="progress-wrap" id="progressWrap">
                 <div class="progress-step active" id="prog-1">
                     <div class="step-circle">1</div>
@@ -801,6 +815,7 @@
                             <div class="s-row-left">
                                 <div class="s-row-name">Swedish Massage</div>
                                 <div class="s-row-duration">60 minutes</div>
+                                <div class="s-row-desc">Gentle, flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</div>
                             </div>
                             <div class="s-row-right">
                                 <div class="s-row-price">€100</div>
@@ -811,6 +826,7 @@
                             <div class="s-row-left">
                                 <div class="s-row-name">Deep Tissue Massage</div>
                                 <div class="s-row-duration">60 minutes</div>
+                                <div class="s-row-desc">Targeted pressure to release chronic muscle tension and knots. Ideal for athletes or those with persistent pain and tightness.</div>
                             </div>
                             <div class="s-row-right">
                                 <div class="s-row-price">€120</div>
@@ -821,6 +837,7 @@
                             <div class="s-row-left">
                                 <div class="s-row-name">Sports Massage</div>
                                 <div class="s-row-duration">60 minutes</div>
+                                <div class="s-row-desc">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles and post-workout relief.</div>
                             </div>
                             <div class="s-row-right">
                                 <div class="s-row-price">€90</div>
@@ -844,6 +861,7 @@
                                 <span class="s-row-badge">Add-on</span>
                                 <div class="s-row-name">Cupping Therapy</div>
                                 <div class="s-row-duration">15–20 minutes</div>
+                                <div class="s-row-desc">Ancient suction cup technique that lifts fascia, improves blood flow, and releases deep-seated muscle tension.</div>
                             </div>
                             <div class="s-row-right">
                                 <div class="s-row-price">+€20</div>
@@ -855,6 +873,7 @@
                                 <span class="s-row-badge">Add-on</span>
                                 <div class="s-row-name">Aromatherapy</div>
                                 <div class="s-row-duration">Included in session</div>
+                                <div class="s-row-desc">Custom essential oil blend — lavender, peppermint, or sweet orange — for deeper relaxation and mood elevation.</div>
                             </div>
                             <div class="s-row-right">
                                 <div class="s-row-price">+€15</div>
@@ -862,7 +881,7 @@
                             </div>
                         </div>
                         <div class="s-row none-row selected" data-addon="none" data-img="img-default" data-name="None" data-price="0">
-                            <div class="s-row-name">No add-on</div>
+                            <div class="s-row-name">No add-on, thank you</div>
                         </div>
                     </div>
                     <div class="step-nav">
@@ -945,7 +964,6 @@
     </div>
 
     <script>
-        // ── Menu
         const menuToggle  = document.getElementById('menuToggle');
         const menuOverlay = document.getElementById('menuOverlay');
         const mainNav     = document.getElementById('mainNav');
@@ -968,10 +986,8 @@
     </script>
 
     <script>
-        // ── State
         const state = { service: null, servicePrice: 0, addon: 'None', addonPrice: 0 };
 
-        // ── Photo switcher
         function showPhoto(id, label) {
             document.querySelectorAll('.panel-img').forEach(p => p.classList.remove('active'));
             const target = document.getElementById(id);
@@ -979,11 +995,9 @@
             if (label) document.getElementById('photo-label').textContent = label;
         }
 
-        // ── Step 1 rows
+        // Step 1
         document.querySelectorAll('#step-1 .s-row').forEach(row => {
-            row.addEventListener('mouseenter', () => {
-                showPhoto(row.dataset.img, row.dataset.name);
-            });
+            row.addEventListener('mouseenter', () => showPhoto(row.dataset.img, row.dataset.name));
             row.addEventListener('click', () => {
                 document.querySelectorAll('#step-1 .s-row').forEach(r => r.classList.remove('selected'));
                 row.classList.add('selected');
@@ -994,13 +1008,12 @@
             });
         });
 
-        // Reset photo on mouse leave if nothing selected
         document.getElementById('step-1').addEventListener('mouseleave', () => {
             const sel = document.querySelector('#step-1 .s-row.selected');
             if (!sel) showPhoto('img-default', 'Myōko Massage · Mykonos');
         });
 
-        // ── Step 2 rows
+        // Step 2
         document.querySelectorAll('#step-2 .s-row').forEach(row => {
             row.addEventListener('mouseenter', () => {
                 showPhoto(row.dataset.img, row.dataset.name !== 'None' ? row.dataset.name : 'Myōko Massage · Mykonos');
@@ -1014,65 +1027,47 @@
             });
         });
 
-        // ── Progress updater
         function setStep(n) {
-            document.querySelectorAll('.step').forEach((s, i) => {
-                s.classList.toggle('active', i + 1 === n);
-            });
+            document.querySelectorAll('.step').forEach((s, i) => s.classList.toggle('active', i + 1 === n));
             [1, 2, 3].forEach(i => {
                 const prog = document.getElementById(`prog-${i}`);
                 prog.classList.remove('active', 'done');
                 if (i < n)  prog.classList.add('done');
                 if (i === n) prog.classList.add('active');
             });
-            [1, 2].forEach(i => {
-                document.getElementById(`line-${i}`).classList.toggle('done', i < n);
-            });
-            // Reset photo to service image if going back/forward
+            [1, 2].forEach(i => document.getElementById(`line-${i}`).classList.toggle('done', i < n));
             if (n === 1) showPhoto('img-default', 'Myōko Massage · Mykonos');
-            if (n === 2) {
-                const sel = document.querySelector('#step-2 .s-row.selected');
-                showPhoto(sel ? sel.dataset.img : 'img-default', 'Myōko Massage · Mykonos');
-            }
             if (n === 3) showPhoto('img-default', 'Myōko Massage · Mykonos');
             document.querySelector('.content-panel').scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ── Summary
         function buildSummary() {
             const total = state.servicePrice + state.addonPrice;
             document.getElementById('sum-service').textContent = state.service;
-            document.getElementById('sum-addon').textContent   =
-                state.addonPrice > 0 ? ` + ${state.addon}` : '';
+            document.getElementById('sum-addon').textContent   = state.addonPrice > 0 ? ` + ${state.addon}` : '';
             document.getElementById('sum-total').textContent   = `€${total}`;
             document.getElementById('f-service').value = state.service;
             document.getElementById('f-addon').value   = state.addonPrice > 0 ? state.addon : 'None';
             document.getElementById('f-total').value   = `€${total}`;
         }
 
-        // ── Navigation
         document.getElementById('next-1').addEventListener('click', () => setStep(2));
         document.getElementById('back-2').addEventListener('click', () => setStep(1));
         document.getElementById('next-2').addEventListener('click', () => {
             const sel = document.querySelector('#step-2 .s-row.selected');
-            if (sel) {
-                state.addon      = sel.dataset.name;
-                state.addonPrice = parseInt(sel.dataset.price) || 0;
-            }
+            if (sel) { state.addon = sel.dataset.name; state.addonPrice = parseInt(sel.dataset.price) || 0; }
             buildSummary();
             setStep(3);
         });
         document.getElementById('back-3').addEventListener('click', () => setStep(2));
 
-        // ── Form submit
         document.getElementById('reserveForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const data = new FormData(this);
             fetch(this.action, {
                 method: 'POST',
-                body: data,
+                body: new FormData(this),
                 headers: { 'Accept': 'application/json' }
-            }).then(res => {
+            }).then(() => {
                 document.getElementById('step-3').classList.remove('active');
                 document.getElementById('progressWrap').style.display = 'none';
                 document.getElementById('success-screen').classList.add('visible');
