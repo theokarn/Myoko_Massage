@@ -19,20 +19,21 @@
             overflow: hidden;
         }
 
-        /* ── NAVBAR ── */
+        /* ── NAVBAR — always solid beige, never transparent ── */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 25px 50px;
+            padding: 22px 50px;
             display: flex;
             justify-content: flex-end;
             align-items: center;
             z-index: 100;
-            background: transparent;
+            background: #EDE6D4;
+            box-shadow: 0 1px 0 rgba(75,77,57,0.08);
         }
 
-        /* Logo: hidden on desktop/tablet, shown only when menu opens */
+        /* Logo: hidden on desktop/tablet, shown when menu opens */
         .logo {
             display: flex;
             flex-direction: column;
@@ -89,7 +90,7 @@
             background: #4B4D39;
             border-radius: 2px;
             position: absolute;
-            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), background 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
         }
 
         .hamburger .bar:nth-child(1) { transform: translateY(-5px); }
@@ -242,7 +243,7 @@
         .progress-wrap {
             display: flex;
             align-items: center;
-            padding: 100px 60px 0;
+            padding: 90px 60px 0;
         }
 
         .progress-step {
@@ -294,7 +295,7 @@
         /* ── STEPS ── */
         .steps-wrap {
             flex: 1;
-            padding: 40px 60px 60px;
+            padding: 36px 60px 60px;
             display: flex;
             flex-direction: column;
         }
@@ -325,7 +326,7 @@
             font-family: 'Lato', sans-serif;
             font-size: 0.95rem;
             color: rgba(75,77,57,0.55);
-            margin-bottom: 35px;
+            margin-bottom: 32px;
             font-weight: 300;
         }
 
@@ -470,44 +471,47 @@
         .s-row.none-row.selected { background: #4B4D39; border-style: solid; }
         .s-row.none-row.selected .s-row-name { color: #EDE6D4; }
 
-        /* ── SUMMARY PILL — all Inter, no mixed fonts ── */
-        .summary-pill {
+        /* ── SUMMARY BOX — itemised breakdown, all Inter ── */
+        .summary-box {
             display: none;
             background: #fff;
             border-radius: 12px;
-            padding: 18px 24px;
+            padding: 20px 24px;
             margin-bottom: 24px;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0;
         }
 
-        .summary-pill.visible { display: flex; }
+        .summary-box.visible { display: flex; }
 
-        .summary-text {
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
             font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
             font-weight: 300;
             color: #4B4D39;
-            line-height: 1.5;
         }
 
-        /* override <strong> — keep same font, just slightly heavier */
-        .summary-text strong {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 400;
-            color: #4B4D39;
+        /* Divider between rows */
+        .summary-line + .summary-line {
+            border-top: 1px solid rgba(75,77,57,0.08);
         }
 
-        .summary-total {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.2rem;
+        /* Total row — slightly bolder */
+        .summary-line.total {
+            border-top: 1.5px solid rgba(75,77,57,0.15) !important;
+            margin-top: 2px;
             font-weight: 500;
-            color: #4B4D39;
-            white-space: nowrap;
+            font-size: 1rem;
         }
+
+        .summary-line .s-label { color: rgba(75,77,57,0.6); }
+        .summary-line .s-value { font-weight: 400; color: #4B4D39; }
+        .summary-line.total .s-label,
+        .summary-line.total .s-value { color: #4B4D39; font-weight: 600; }
 
         /* ── FORM ── */
         .reserve-form { display: flex; flex-direction: column; gap: 14px; flex: 1; }
@@ -575,8 +579,7 @@
             font-size: 0.75rem;
             font-weight: 300;
             color: rgba(75,77,57,0.45);
-            letter-spacing: 0.2px;
-            margin-top: -6px;
+            margin-top: -4px;
         }
 
         /* ── NAV BUTTONS ── */
@@ -584,7 +587,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 30px;
+            margin-top: 28px;
             gap: 14px;
         }
 
@@ -705,12 +708,12 @@
 
             .photo-panel { display: none; }
 
+            /* Mobile nav: logo always visible left, hamburger right */
             nav {
                 padding: 16px 20px;
-                justify-content: space-between; /* logo left, hamburger right */
+                justify-content: space-between;
             }
 
-            /* Logo always visible on mobile */
             .logo {
                 opacity: 1 !important;
                 pointer-events: all !important;
@@ -728,7 +731,7 @@
             .step-heading { font-size: clamp(1.7rem, 7vw, 2.2rem); }
 
             .s-row { padding: 18px 20px; }
-            .s-row:hover   { transform: none; }
+            .s-row:hover    { transform: none; }
             .s-row.selected { transform: none; }
             .s-row-name  { font-size: 1.2rem; }
             .s-row-price { font-size: 1.1rem; }
@@ -759,7 +762,7 @@
 <body>
 
     <nav id="mainNav">
-        <a href="index.html" class="logo" id="navLogo">
+        <a href="index.html" class="logo">
             <span class="logo-name">Myōko Massage</span>
             <span class="logo-location">Mykonos</span>
         </a>
@@ -921,12 +924,20 @@
                     <h2 class="step-heading">Your Details</h2>
                     <p class="step-sub">We'll confirm your reservation within 24 hours.</p>
 
-                    <div class="summary-pill visible" id="summary-pill">
-                        <div class="summary-text">
-                            <strong id="sum-service">—</strong>
-                            <span id="sum-addon"></span>
+                    <!-- Itemised summary box -->
+                    <div class="summary-box visible" id="summary-box">
+                        <div class="summary-line" id="sum-service-line">
+                            <span class="s-label" id="sum-service-label">—</span>
+                            <span class="s-value" id="sum-service-val">—</span>
                         </div>
-                        <div class="summary-total" id="sum-total">€—</div>
+                        <div class="summary-line" id="sum-addon-line" style="display:none;">
+                            <span class="s-label" id="sum-addon-label">—</span>
+                            <span class="s-value" id="sum-addon-val">—</span>
+                        </div>
+                        <div class="summary-line total">
+                            <span class="s-label">Total</span>
+                            <span class="s-value" id="sum-total">€—</span>
+                        </div>
                     </div>
 
                     <form class="reserve-form" id="reserveForm"
@@ -1027,14 +1038,11 @@
             }
         });
 
-        // On mobile swap select → native time input (clock wheel)
+        // Mobile: swap select → native clock wheel
         function setupTimePicker() {
-            const group   = document.getElementById('time-group');
-            const wrap    = document.getElementById('time-select-wrap');
-            const isMob   = window.innerWidth <= 768;
-            const hasTime = !!group.querySelector('input[type="time"]');
-
-            if (isMob && !hasTime) {
+            const group = document.getElementById('time-group');
+            const wrap  = document.getElementById('time-select-wrap');
+            if (window.innerWidth <= 768 && !group.querySelector('input[type="time"]')) {
                 if (wrap) wrap.remove();
                 const t = document.createElement('input');
                 t.type = 'time'; t.name = 'time'; t.required = true;
@@ -1102,9 +1110,25 @@
 
         function buildSummary() {
             const total = state.servicePrice + state.addonPrice;
-            document.getElementById('sum-service').textContent = state.service;
-            document.getElementById('sum-addon').textContent   = state.addonPrice > 0 ? ` + ${state.addon}` : '';
-            document.getElementById('sum-total').textContent   = `€${total}`;
+
+            // Service row — always shown
+            document.getElementById('sum-service-label').textContent = state.service;
+            document.getElementById('sum-service-val').textContent   = `€${state.servicePrice}`;
+
+            // Addon row — only shown if an addon was chosen
+            const addonLine = document.getElementById('sum-addon-line');
+            if (state.addonPrice > 0) {
+                document.getElementById('sum-addon-label').textContent = state.addon;
+                document.getElementById('sum-addon-val').textContent   = `+€${state.addonPrice}`;
+                addonLine.style.display = 'flex';
+            } else {
+                addonLine.style.display = 'none';
+            }
+
+            // Total
+            document.getElementById('sum-total').textContent = `€${total}`;
+
+            // Hidden form fields
             document.getElementById('f-service').value = state.service;
             document.getElementById('f-addon').value   = state.addonPrice > 0 ? state.addon : 'None';
             document.getElementById('f-total').value   = `€${total}`;
