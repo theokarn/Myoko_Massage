@@ -8,11 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Lato:wght@300;400;700&family=Gowun+Batang:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <title>Myōko Massage | Mykonos</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -74,11 +70,10 @@
 
         nav.scrolled .logo-name     { color: #4B4D39; }
         nav.scrolled .logo-location { color: rgba(75, 77, 57, 0.6); }
-
         nav.menu-open .logo-name     { color: #4B4D39; }
         nav.menu-open .logo-location { color: rgba(75, 77, 57, 0.6); }
 
-        /* ── HAMBURGER — 2 bars → X ── */
+        /* ── HAMBURGER ── */
         .hamburger {
             background: transparent;
             border: none;
@@ -100,16 +95,13 @@
             background: #EDE6D4;
             border-radius: 2px;
             position: absolute;
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-                        background 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), background 0.3s ease;
         }
 
         .hamburger .bar:nth-child(1) { transform: translateY(-5px); }
         .hamburger .bar:nth-child(2) { transform: translateY(5px); }
-
         .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
         .hamburger.open .bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
-
         nav.scrolled .hamburger .bar { background: #4B4D39; }
         .hamburger.open .bar         { background: #4B4D39 !important; }
 
@@ -163,16 +155,11 @@
                         color 0.2s ease;
         }
 
-        .menu-overlay.open .overlay-links li a {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
+        .menu-overlay.open .overlay-links li a { opacity: 1; transform: translateX(0); }
         .overlay-links li:nth-child(1) a { transition-delay: 0.08s; }
         .overlay-links li:nth-child(2) a { transition-delay: 0.14s; }
         .overlay-links li:nth-child(3) a { transition-delay: 0.20s; }
         .overlay-links li:nth-child(4) a { transition-delay: 0.26s; }
-
         .overlay-links li a:hover { color: rgba(75, 77, 57, 0.4); }
 
         .overlay-ig {
@@ -206,10 +193,7 @@
             transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
         }
 
-        .menu-overlay.open .overlay-photo img {
-            opacity: 1;
-            transform: scale(1);
-        }
+        .menu-overlay.open .overlay-photo img { opacity: 1; transform: scale(1); }
 
         @media (max-width: 768px) {
             .menu-overlay  { grid-template-columns: 1fr; }
@@ -228,7 +212,6 @@
             align-items: center;
             text-align: center;
             overflow: hidden;
-            /* Prevents beige body colour from flashing at bottom */
             background: #000;
         }
 
@@ -238,7 +221,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Scale up ever so slightly so no edge/gap is visible */
             transform: scale(1.01);
             z-index: 0;
             filter: brightness(0.85);
@@ -288,7 +270,6 @@
             animation-delay: 0.9s;
         }
 
-        /* ── CTA BUTTON — properly centred text ── */
         .cta-btn {
             background: #EDE6D4;
             color: #4B4D39;
@@ -303,7 +284,6 @@
             transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             border: none;
             cursor: pointer;
-            /* Flexbox centres the text perfectly, no line-height hacks */
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -326,220 +306,6 @@
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ── SERVICES ── */
-        .services {
-            background: #EDE6D4;
-            padding: 0;
-            min-height: 100vh;
-        }
-
-        .services-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 100vh;
-        }
-
-        .services-image-side {
-            position: relative;
-            overflow: hidden;
-            background: #4B4D39;
-        }
-
-        .service-image {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-        }
-
-        .service-image.active { opacity: 1; }
-
-        .service-image img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-        }
-
-        .image-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to right, rgba(75,77,57,0.3), transparent);
-            pointer-events: none;
-        }
-
-        .services-content-side {
-            background: #EDE6D4;
-            padding: 80px 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .services-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 50px;
-        }
-
-        .services-title {
-            font-family: 'Gowun Batang', serif;
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 400;
-            color: #4B4D39;
-            margin: 0;
-        }
-
-        .page-indicator {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 8px;
-        }
-
-        .page-label {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(75, 77, 57, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .page-label.active-label {
-            color: #4B4D39;
-            font-weight: 700;
-        }
-
-        .services-nav { display: flex; gap: 15px; }
-
-        .nav-arrow {
-            background: transparent;
-            border: 2px solid #4B4D39;
-            color: #4B4D39;
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: Arial, sans-serif;
-            line-height: 0;
-        }
-
-        .nav-arrow:hover:not(:disabled) {
-            background: #4B4D39;
-            color: #EDE6D4;
-            transform: scale(1.1);
-        }
-
-        .nav-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
-
-        .services-slider { position: relative; overflow: visible; }
-
-        .services-page {
-            display: none;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .services-page.active { display: flex; }
-
-        .addons-label {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(75, 77, 57, 0.55);
-            margin-bottom: -10px;
-        }
-
-        .service-card {
-            background: #FFFFFF;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            padding: 35px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            position: relative;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .service-card:hover {
-            border-color: #4B4D39;
-            transform: translateX(10px);
-            box-shadow: 0 8px 25px rgba(75,77,57,0.15);
-        }
-
-        .service-card.active {
-            background: #4B4D39;
-            border-color: #4B4D39;
-            transform: scale(1.02);
-            box-shadow: 0 10px 30px rgba(75,77,57,0.25);
-        }
-
-        .service-card.active h3,
-        .service-card.active .service-price,
-        .service-card.active .service-duration,
-        .service-card.active .service-description { color: #EDE6D4; }
-
-        .addon-badge {
-            display: inline-block;
-            font-family: 'Lato', sans-serif;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: rgba(75, 77, 57, 0.1);
-            color: #4B4D39;
-            padding: 4px 10px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-        }
-
-        .service-card.active .addon-badge {
-            background: rgba(237, 230, 212, 0.2);
-            color: #EDE6D4;
-        }
-
-        .service-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 8px;
-        }
-
-        .service-card h3 {
-            font-family: 'Gowun Batang', serif;
-            font-size: 1.8rem;
-            font-weight: 400;
-            color: #4B4D39;
-            margin: 0;
-        }
-
-        .service-price {
-            font-family: 'Lato', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #4B4D39;
-        }
-
-        .service-duration {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.95rem;
-            color: #666;
-            margin: 0 0 15px 0;
-            font-style: italic;
-        }
-
-        .service-description {
-            font-family: 'Lato', sans-serif;
-            font-size: 1rem;
-            color: #333;
-            line-height: 1.7;
-            margin: 0;
         }
 
         /* ── ABOUT ── */
@@ -697,6 +463,198 @@
 
         .photo-slider:hover .slider-track { animation-play-state: paused; }
 
+        /* ── SERVICES (NEW) ── */
+        .services {
+            background: #EDE6D4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 0 80px;
+            overflow: hidden;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 0 30px;
+        }
+
+        .services-title {
+            font-family: 'Gowun Batang', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            color: #4B4D39;
+            margin: 0 0 16px 0;
+        }
+
+        .services-subtitle {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.05rem;
+            color: rgba(75, 77, 57, 0.65);
+            letter-spacing: 0.5px;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Carousel wrapper */
+        .services-carousel {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Fade edges */
+        .services-carousel::before,
+        .services-carousel::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 120px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .services-carousel::before {
+            left: 0;
+            background: linear-gradient(to right, #EDE6D4, transparent);
+        }
+
+        .services-carousel::after {
+            right: 0;
+            background: linear-gradient(to left, #EDE6D4, transparent);
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 28px;
+            padding: 20px 80px;
+            width: max-content;
+            animation: scrollCards 45s linear infinite;
+        }
+
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollCards {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Individual card */
+        .svc-card {
+            flex: 0 0 340px;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                        box-shadow 0.5s ease;
+            box-shadow: 0 8px 30px rgba(75,77,57,0.12);
+        }
+
+        .svc-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(75,77,57,0.25);
+        }
+
+        .svc-card img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .svc-card:hover img {
+            transform: scale(1.07);
+        }
+
+        /* Dark gradient overlay */
+        .svc-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(30, 30, 20, 0.92) 0%,
+                rgba(30, 30, 20, 0.45) 50%,
+                rgba(30, 30, 20, 0.1) 100%
+            );
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            padding: 40px 30px;
+            color: #EDE6D4;
+            transition: background 0.4s ease;
+        }
+
+        .svc-card:hover .svc-card-overlay {
+            background: linear-gradient(
+                to top,
+                rgba(30, 30, 20, 0.97) 0%,
+                rgba(30, 30, 20, 0.6) 55%,
+                rgba(30, 30, 20, 0.15) 100%
+            );
+        }
+
+        /* Tag (e.g. Add-on) */
+        .svc-tag {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            background: rgba(237, 230, 212, 0.2);
+            color: #EDE6D4;
+            padding: 5px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(237,230,212,0.3);
+            margin-bottom: 14px;
+            display: inline-block;
+        }
+
+        .svc-name {
+            font-family: 'Gowun Batang', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: #EDE6D4;
+            margin: 0 0 10px 0;
+            line-height: 1.2;
+        }
+
+        .svc-duration {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: rgba(237,230,212,0.75);
+            letter-spacing: 1px;
+            margin: 0 0 16px 0;
+        }
+
+        .svc-desc {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.97rem;
+            color: rgba(237, 230, 212, 0.9);
+            line-height: 1.65;
+            margin: 0;
+            max-width: 280px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .svc-card:hover .svc-desc {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* ── CONTACT ── */
         .contact {
             background: #4B4D39;
@@ -827,43 +785,21 @@
         }
         .fade-in-up.appear { opacity: 1; transform: translateY(0); }
 
-        /* ════════════════════════════
-           TABLET  ≤ 1024px
-        ════════════════════════════ */
+        /* ════════════ TABLET ≤ 1024px ════════════ */
         @media (max-width: 1024px) {
             nav { padding: 20px 35px; }
-            .services-content-side { padding: 60px 40px; }
             .definition-side, .text-side { padding: 80px 40px; }
-            .service-card { padding: 28px; }
-            .service-card h3 { font-size: 1.6rem; }
-            .service-price   { font-size: 1.4rem; }
-            .overlay-left    { padding: 80px 40px; }
+            .overlay-left { padding: 80px 40px; }
+            .svc-card { flex: 0 0 300px; height: 450px; }
         }
 
-        /* ════════════════════════════
-           MOBILE  ≤ 768px
-        ════════════════════════════ */
+        /* ════════════ MOBILE ≤ 768px ════════════ */
         @media (max-width: 768px) {
-
             nav { padding: 16px 20px; }
 
-            .hero {
-                height: 100vh;
-                height: 100dvh;
-            }
-
+            .hero { height: 100vh; height: 100dvh; }
             .hero-content { padding: 0 24px 83px; }
-
-            @supports (-webkit-touch-callout: none) {
-                .hero-content { padding-bottom: 83px; }
-            }
-
-            .hero h1 {
-                font-size: clamp(1.9rem, 9vw, 2.8rem);
-                margin-bottom: 18px;
-                line-height: 1.2;
-            }
-
+            .hero h1 { font-size: clamp(1.9rem, 9vw, 2.8rem); margin-bottom: 18px; line-height: 1.2; }
             .hero p  { font-size: 1rem; margin-bottom: 40px; }
             .cta-btn { padding: 0 40px; height: 50px; font-size: 12px; letter-spacing: 2px; }
 
@@ -879,24 +815,16 @@
             .review-card            { padding: 22px; }
             .slider-img             { width: 240px; height: 170px; }
 
-            .services-container    { grid-template-columns: 1fr; min-height: auto; }
-            .services-image-side   { height: 35vh; order: 1; }
-            .services-content-side { padding: 45px 20px 60px; order: 2; }
-            .services-header       { flex-direction: row; align-items: center; margin-bottom: 30px; }
-            .services-title        { font-size: clamp(2rem, 8vw, 2.8rem); }
-            .page-indicator        { gap: 5px; }
-            .page-label            { font-size: 0.7rem; letter-spacing: 1.5px; }
-            .nav-arrow             { width: 42px; height: 42px; font-size: 1.6rem; }
-            .services-nav          { gap: 10px; }
-            .services-page         { gap: 15px; }
-
-            .service-card        { padding: 22px; }
-            .service-card:hover  { transform: none; box-shadow: none; border-color: transparent; }
-            .service-card.active { transform: none; box-shadow: 0 6px 20px rgba(75,77,57,0.2); }
-            .service-card h3     { font-size: 1.4rem; }
-            .service-price       { font-size: 1.3rem; }
-            .service-duration    { font-size: 0.85rem; }
-            .service-description { font-size: 0.95rem; }
+            .services { padding: 80px 0 60px; }
+            .services-header { margin-bottom: 40px; }
+            .services-title { font-size: clamp(2rem, 8vw, 2.8rem); }
+            .svc-card { flex: 0 0 270px; height: 420px; }
+            .svc-card:hover { transform: translateY(-6px); }
+            .services-carousel::before,
+            .services-carousel::after { width: 60px; }
+            .carousel-track { gap: 20px; padding: 15px 50px; }
+            .svc-name { font-size: 1.7rem; }
+            .svc-desc { opacity: 1; transform: translateY(0); }
 
             .contact        { padding: 70px 25px; }
             .contact h2     { font-size: clamp(2rem, 8vw, 3rem); }
@@ -908,34 +836,25 @@
             footer { padding: 25px 20px; font-size: 13px; }
         }
 
-        /* ════════════════════════════
-           SMALL PHONES  ≤ 480px
-        ════════════════════════════ */
+        /* ════════════ SMALL PHONES ≤ 480px ════════════ */
         @media (max-width: 480px) {
             .logo-name     { font-size: 18px; }
             .logo-location { font-size: 9px; letter-spacing: 2px; }
-
             .hero h1 { font-size: clamp(1.7rem, 10vw, 2.4rem); }
             .hero p  { font-size: 0.95rem; }
-
             .definition-side { padding: 60px 20px 40px; }
-            .text-side        { padding: 40px 20px 60px; }
-            .definition-word  { font-size: clamp(2.8rem, 18vw, 4rem); }
-
-            .services-image-side   { height: 30vh; }
-            .services-content-side { padding: 35px 15px 50px; }
-            .service-card          { padding: 18px; }
-            .service-card h3       { font-size: 1.25rem; }
-            .service-price         { font-size: 1.2rem; }
-
+            .text-side       { padding: 40px 20px 60px; }
+            .definition-word { font-size: clamp(2.8rem, 18vw, 4rem); }
             .reviews-photos-section { padding: 40px 15px 30px; }
             .slider-img             { width: 200px; height: 140px; }
-
+            .svc-card { flex: 0 0 240px; height: 380px; }
+            .svc-name { font-size: 1.5rem; }
             .contact { padding: 60px 20px; }
-
             .overlay-links      { gap: 8px; }
             .overlay-links li a { font-size: clamp(1.8rem, 9vw, 2.6rem); }
             .overlay-ig         { font-size: 0.85rem; }
+            .services-carousel::before,
+            .services-carousel::after { width: 40px; }
         }
     </style>
 </head>
@@ -1036,92 +955,111 @@
     </section>
 
     <!-- Services -->
-    <section class="services" id="services">
-        <div class="services-container">
-            <div class="services-image-side">
-                <div class="service-image active" data-service="swedish">
+    <section class="services fade-in-up" id="services">
+        <div class="services-header">
+            <h2 class="services-title">Our Services</h2>
+            <p class="services-subtitle">Mobile massage therapy delivered to your villa, hotel, or beach retreat across Mykonos</p>
+        </div>
+
+        <div class="services-carousel">
+            <div class="carousel-track">
+
+                <!-- Swedish -->
+                <div class="svc-card">
                     <img src="swedish-massage.jpg" alt="Swedish Massage">
+                    <div class="svc-card-overlay">
+                        <h3 class="svc-name">Swedish Massage</h3>
+                        <p class="svc-duration">60 minutes</p>
+                        <p class="svc-desc">Gentle flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
+                    </div>
                 </div>
-                <div class="service-image" data-service="deep-tissue">
+
+                <!-- Deep Tissue -->
+                <div class="svc-card">
                     <img src="deep-tissue-massage.jpg" alt="Deep Tissue Massage">
+                    <div class="svc-card-overlay">
+                        <h3 class="svc-name">Deep Tissue</h3>
+                        <p class="svc-duration">60 minutes</p>
+                        <p class="svc-desc">Targeted pressure releases chronic muscle tension and knots. Ideal for athletes or those with persistent pain and tightness.</p>
+                    </div>
                 </div>
-                <div class="service-image" data-service="sports">
+
+                <!-- Sports -->
+                <div class="svc-card">
                     <img src="sports-massage.jpg" alt="Sports Massage">
+                    <div class="svc-card-overlay">
+                        <h3 class="svc-name">Sports Massage</h3>
+                        <p class="svc-duration">60 minutes</p>
+                        <p class="svc-desc">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles.</p>
+                    </div>
                 </div>
-                <div class="service-image" data-service="cupping">
+
+                <!-- Cupping -->
+                <div class="svc-card">
                     <img src="cupping-therapy.jpg" alt="Cupping Therapy">
+                    <div class="svc-card-overlay">
+                        <span class="svc-tag">Add-on</span>
+                        <h3 class="svc-name">Cupping Therapy</h3>
+                        <p class="svc-duration">15–20 minutes</p>
+                        <p class="svc-desc">Ancient suction technique that lifts fascia, improves blood flow, and releases deep-seated tension. Pair with any massage.</p>
+                    </div>
                 </div>
-                <div class="service-image" data-service="aromatherapy">
+
+                <!-- Aromatherapy -->
+                <div class="svc-card">
                     <img src="aromatherapy-massage.jpg" alt="Aromatherapy">
-                </div>
-                <div class="image-overlay"></div>
-            </div>
-
-            <div class="services-content-side">
-                <div class="services-header">
-                    <h2 class="services-title">Our Services</h2>
-                    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:12px;">
-                        <div class="page-indicator">
-                            <span class="page-label active-label" id="label-1">Massages</span>
-                            <span class="page-label" id="label-2">Add-ons</span>
-                        </div>
-                        <div class="services-nav">
-                            <button class="nav-arrow prev-arrow" aria-label="Previous">‹</button>
-                            <button class="nav-arrow next-arrow" aria-label="Next">›</button>
-                        </div>
+                    <div class="svc-card-overlay">
+                        <span class="svc-tag">Add-on</span>
+                        <h3 class="svc-name">Aromatherapy</h3>
+                        <p class="svc-duration">Full session</p>
+                        <p class="svc-desc">Custom essential oil blend — lavender, peppermint, or sweet orange — for deeper relaxation and mood elevation.</p>
                     </div>
                 </div>
 
-                <div class="services-slider">
-                    <div class="services-page active">
-                        <div class="service-card active" data-service="swedish">
-                            <div class="service-header">
-                                <h3>Swedish Massage</h3>
-                                <span class="service-price">€100</span>
-                            </div>
-                            <p class="service-duration">60 minutes</p>
-                            <p class="service-description">Gentle, flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
-                        </div>
-                        <div class="service-card" data-service="deep-tissue">
-                            <div class="service-header">
-                                <h3>Deep Tissue Massage</h3>
-                                <span class="service-price">€120</span>
-                            </div>
-                            <p class="service-duration">60 minutes</p>
-                            <p class="service-description">Targeted pressure to release chronic muscle tension and knots. Ideal for athletes or those with persistent pain and tightness.</p>
-                        </div>
-                        <div class="service-card" data-service="sports">
-                            <div class="service-header">
-                                <h3>Sports Massage</h3>
-                                <span class="service-price">€90</span>
-                            </div>
-                            <p class="service-duration">60 minutes</p>
-                            <p class="service-description">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles and post-workout relief.</p>
-                        </div>
-                    </div>
-
-                    <div class="services-page">
-                        <p class="addons-label">Enhance Your Session</p>
-                        <div class="service-card" data-service="cupping">
-                            <span class="addon-badge">Add-on</span>
-                            <div class="service-header">
-                                <h3>Cupping Therapy</h3>
-                                <span class="service-price">+€20</span>
-                            </div>
-                            <p class="service-duration">15–20 minutes</p>
-                            <p class="service-description">Ancient suction cup technique that lifts fascia, improves blood flow, and releases deep-seated muscle tension. Pair with any massage for enhanced recovery.</p>
-                        </div>
-                        <div class="service-card" data-service="aromatherapy">
-                            <span class="addon-badge">Add-on</span>
-                            <div class="service-header">
-                                <h3>Aromatherapy</h3>
-                                <span class="service-price">+€15</span>
-                            </div>
-                            <p class="service-duration">Included in session</p>
-                            <p class="service-description">Custom essential oil blend — lavender, peppermint, or sweet orange — incorporated into your massage for deeper relaxation and mood elevation.</p>
-                        </div>
+                <!-- DUPLICATES for seamless infinite loop -->
+                <div class="svc-card">
+                    <img src="swedish-massage.jpg" alt="Swedish Massage">
+                    <div class="svc-card-overlay">
+                        <h3 class="svc-name">Swedish Massage</h3>
+                        <p class="svc-duration">60 minutes</p>
+                        <p class="svc-desc">Gentle flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
                     </div>
                 </div>
+                <div class="svc-card">
+                    <img src="deep-tissue-massage.jpg" alt="Deep Tissue Massage">
+                    <div class="svc-card-overlay">
+                        <h3 class="svc-name">Deep Tissue</h3>
+                        <p class="svc-duration">60 minutes</p>
+                        <p class="svc-desc">Targeted pressure releases chronic muscle tension and knots. Ideal for athletes or those with persistent pain and tightness.</p>
+                    </div>
+                </div>
+                <div class="svc-card">
+                    <img src="sports-massage.jpg" alt="Sports Massage">
+                    <div class="svc-card-overlay">
+                        <h3 class="svc-name">Sports Massage</h3>
+                        <p class="svc-duration">60 minutes</p>
+                        <p class="svc-desc">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles.</p>
+                    </div>
+                </div>
+                <div class="svc-card">
+                    <img src="cupping-therapy.jpg" alt="Cupping Therapy">
+                    <div class="svc-card-overlay">
+                        <span class="svc-tag">Add-on</span>
+                        <h3 class="svc-name">Cupping Therapy</h3>
+                        <p class="svc-duration">15–20 minutes</p>
+                        <p class="svc-desc">Ancient suction technique that lifts fascia, improves blood flow, and releases deep-seated tension. Pair with any massage.</p>
+                    </div>
+                </div>
+                <div class="svc-card">
+                    <img src="aromatherapy-massage.jpg" alt="Aromatherapy">
+                    <div class="svc-card-overlay">
+                        <span class="svc-tag">Add-on</span>
+                        <h3 class="svc-name">Aromatherapy</h3>
+                        <p class="svc-duration">Full session</p>
+                        <p class="svc-desc">Custom essential oil blend — lavender, peppermint, or sweet orange — for deeper relaxation and mood elevation.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1140,156 +1078,52 @@
             <input type="email" name="email"   placeholder="Your Email"    required>
             <input type="tel"   name="phone"   placeholder="Phone Number"  required>
             <textarea           name="message" placeholder="Preferred date, time, and service type..." required></textarea>
-            <button type="submit">Send Reservation Request</button>
+            <button type="submit">Send Message</button>
         </form>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <p>© 2026 Myōko Massage. All rights reserved.</p>
-        <p style="margin-top:15px;">Follow us on Instagram: <a href="https://instagram.com/myokomassage" target="_blank" style="color:#4B4D39; text-decoration:underline;">@myokomassage</a></p>
+        <p>© 2025 Myōko Massage · Mykonos, Greece · All rights reserved</p>
     </footer>
 
     <script>
-        // Navbar scroll
-        const mainNav = document.getElementById('mainNav');
+        // ── Navbar scroll effect
+        const nav = document.getElementById('mainNav');
         window.addEventListener('scroll', () => {
-            mainNav.classList.toggle('scrolled', window.scrollY > 80);
+            nav.classList.toggle('scrolled', window.scrollY > 50);
         });
-    </script>
 
-    <script>
-        // Hamburger ↔ X + overlay + logo colour fix
+        // ── Hamburger / menu overlay
         const menuToggle  = document.getElementById('menuToggle');
         const menuOverlay = document.getElementById('menuOverlay');
 
-        function openMenu() {
-            menuOverlay.classList.add('open');
-            menuToggle.classList.add('open');
-            mainNav.classList.add('menu-open');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMenu() {
-            menuOverlay.classList.remove('open');
-            menuToggle.classList.remove('open');
-            mainNav.classList.remove('menu-open');
-            document.body.style.overflow = '';
-        }
-
         menuToggle.addEventListener('click', () => {
-            menuToggle.classList.contains('open') ? closeMenu() : openMenu();
+            const isOpen = menuOverlay.classList.toggle('open');
+            menuToggle.classList.toggle('open', isOpen);
+            nav.classList.toggle('menu-open', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
         });
 
         document.querySelectorAll('.overlay-nav-link').forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') closeMenu();
-        });
-    </script>
-
-    <script>
-        // Scroll animations
-        const scrollObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('appear'); });
-        }, { threshold: 0.2, rootMargin: '0px 0px -100px 0px' });
-
-        const greenObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('appear'); });
-        }, { threshold: 0.05 });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => scrollObserver.observe(el));
-            const green = document.querySelector('.reviews-photos-section.fade-in-up');
-            if (green) greenObserver.observe(green);
-        });
-    </script>
-
-    <script>
-        // Smooth scroll
-        function smoothScrollTo(targetY, duration) {
-            const startY = window.pageYOffset;
-            const diff   = targetY - startY;
-            let startTime = null;
-            const easeOutQuart = t => 1 - Math.pow(1 - t, 4);
-            function step(timestamp) {
-                if (!startTime) startTime = timestamp;
-                const elapsed  = timestamp - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                window.scrollTo(0, startY + diff * easeOutQuart(progress));
-                if (progress < 1) requestAnimationFrame(step);
-            }
-            requestAnimationFrame(step);
-        }
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (!target) return;
-                const targetY  = target.getBoundingClientRect().top + window.pageYOffset - 70;
-                const distance = Math.abs(targetY - window.pageYOffset);
-                const duration = Math.min(Math.max(distance * 0.5, 400), 900);
-                smoothScrollTo(targetY, duration);
+            link.addEventListener('click', () => {
+                menuOverlay.classList.remove('open');
+                menuToggle.classList.remove('open');
+                nav.classList.remove('menu-open');
+                document.body.style.overflow = '';
             });
         });
-    </script>
 
-    <script>
-        // Service cards + pagination
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards     = document.querySelectorAll('.service-card');
-            const images    = document.querySelectorAll('.service-image');
-            const pages     = document.querySelectorAll('.services-page');
-            const prevBtn   = document.querySelector('.prev-arrow');
-            const nextBtn   = document.querySelector('.next-arrow');
-            const label1    = document.getElementById('label-1');
-            const label2    = document.getElementById('label-2');
-            let currentPage = 0;
-
-            const isTouchDevice = window.matchMedia('(hover: none)').matches;
-
-            function setImage(serviceName) {
-                images.forEach(img => img.classList.remove('active'));
-                const target = document.querySelector(`.service-image[data-service="${serviceName}"]`);
-                if (target) target.classList.add('active');
-            }
-
-            function showPage(index) {
-                pages.forEach((p, i) => p.classList.toggle('active', i === index));
-                label1.classList.toggle('active-label', index === 0);
-                label2.classList.toggle('active-label', index === 1);
-                prevBtn.disabled = index === 0;
-                nextBtn.disabled = index === pages.length - 1;
-                const firstCard = pages[index].querySelector('.service-card');
-                if (firstCard) {
-                    cards.forEach(c => c.classList.remove('active'));
-                    firstCard.classList.add('active');
-                    setImage(firstCard.getAttribute('data-service'));
-                }
-            }
-
-            prevBtn.addEventListener('click', () => { if (currentPage > 0) showPage(--currentPage); });
-            nextBtn.addEventListener('click', () => { if (currentPage < pages.length - 1) showPage(++currentPage); });
-
-            cards.forEach(card => {
-                card.addEventListener('click', function() {
-                    cards.forEach(c => c.classList.remove('active'));
-                    this.classList.add('active');
-                    setImage(this.getAttribute('data-service'));
-                });
-                if (!isTouchDevice) {
-                    card.addEventListener('mouseenter', function() {
-                        setImage(this.getAttribute('data-service'));
-                    });
+        // ── Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
                 }
             });
+        }, { threshold: 0.15 });
 
-            showPage(0);
-        });
+        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-up')
+                .forEach(el => observer.observe(el));
     </script>
-
 </body>
 </html>
