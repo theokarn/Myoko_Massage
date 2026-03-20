@@ -23,8 +23,7 @@
         /* ── NAVBAR ── */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
+            top: 0; width: 100%;
             padding: 25px 50px;
             display: flex;
             justify-content: space-between;
@@ -33,71 +32,44 @@
             background: transparent;
             transition: background 0.3s ease, box-shadow 0.3s ease;
         }
-
         nav.scrolled {
-            background: rgba(237, 230, 212, 0.95);
+            background: rgba(237,230,212,0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
         .logo {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            line-height: 1;
+            display: flex; flex-direction: column;
+            align-items: flex-start; line-height: 1;
             text-decoration: none;
         }
-
         .logo-name {
             font-family: 'Gowun Batang', serif;
-            font-size: 22px;
-            font-weight: 400;
-            color: #EDE6D4;
-            transition: color 0.3s ease;
-            letter-spacing: 0.5px;
+            font-size: 22px; font-weight: 400;
+            color: #EDE6D4; transition: color 0.3s ease; letter-spacing: 0.5px;
         }
-
         .logo-location {
             font-family: 'Lato', sans-serif;
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(237, 230, 212, 0.75);
-            transition: color 0.3s ease;
-            margin-top: 4px;
+            font-size: 10px; font-weight: 400;
+            letter-spacing: 3px; text-transform: uppercase;
+            color: rgba(237,230,212,0.75); transition: color 0.3s ease; margin-top: 4px;
         }
-
         nav.scrolled .logo-name     { color: #4B4D39; }
-        nav.scrolled .logo-location { color: rgba(75, 77, 57, 0.6); }
+        nav.scrolled .logo-location { color: rgba(75,77,57,0.6); }
         nav.menu-open .logo-name     { color: #4B4D39; }
-        nav.menu-open .logo-location { color: rgba(75, 77, 57, 0.6); }
+        nav.menu-open .logo-location { color: rgba(75,77,57,0.6); }
 
         /* ── HAMBURGER ── */
         .hamburger {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 44px;
-            height: 44px;
-            position: relative;
-            z-index: 101;
+            background: transparent; border: none; cursor: pointer;
+            padding: 8px; display: flex; justify-content: center;
+            align-items: center; width: 44px; height: 44px;
+            position: relative; z-index: 101;
         }
-
         .hamburger .bar {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: #EDE6D4;
-            border-radius: 2px;
-            position: absolute;
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), background 0.3s ease;
+            display: block; width: 24px; height: 2px;
+            background: #EDE6D4; border-radius: 2px; position: absolute;
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), background 0.3s ease;
         }
-
         .hamburger .bar:nth-child(1) { transform: translateY(-5px); }
         .hamburger .bar:nth-child(2) { transform: translateY(5px); }
         .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
@@ -107,83 +79,50 @@
 
         /* ── MENU OVERLAY ── */
         .menu-overlay {
-            position: fixed;
-            inset: 0;
-            background: #EDE6D4;
-            z-index: 99;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+            position: fixed; inset: 0; background: #EDE6D4;
+            z-index: 99; display: grid; grid-template-columns: 1fr 1fr;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1);
         }
-
         .menu-overlay.open { opacity: 1; pointer-events: all; }
-
         .overlay-left {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            display: flex; flex-direction: column; justify-content: center;
             padding: 140px 60px 80px 80px;
         }
-
         .overlay-links {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
-            list-style: none;
-            margin-bottom: 60px;
+            display: flex; flex-direction: column;
+            align-items: flex-start; gap: 12px;
+            list-style: none; margin-bottom: 60px;
         }
-
         .overlay-links li a {
             font-family: 'Inter', sans-serif;
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 300;
-            color: #4B4D39;
-            text-decoration: none;
-            letter-spacing: -0.02em;
-            display: block;
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1),
-                        transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
-                        color 0.2s ease;
+            font-size: clamp(2rem,4vw,3.2rem); font-weight: 300;
+            color: #4B4D39; text-decoration: none; letter-spacing: -0.02em;
+            display: block; opacity: 0; transform: translateX(-20px);
+            transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1),
+                        transform 0.45s cubic-bezier(0.23,1,0.32,1), color 0.2s ease;
         }
-
         .menu-overlay.open .overlay-links li a { opacity: 1; transform: translateX(0); }
         .overlay-links li:nth-child(1) a { transition-delay: 0.08s; }
         .overlay-links li:nth-child(2) a { transition-delay: 0.14s; }
         .overlay-links li:nth-child(3) a { transition-delay: 0.20s; }
         .overlay-links li:nth-child(4) a { transition-delay: 0.26s; }
-        .overlay-links li a:hover { color: rgba(75, 77, 57, 0.4); }
-
+        .overlay-links li a:hover { color: rgba(75,77,57,0.4); }
         .overlay-ig {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.9rem;
-            color: rgba(75, 77, 57, 0.45);
-            letter-spacing: 1.5px;
-            text-decoration: none;
-            opacity: 0;
+            font-family: 'Lato', sans-serif; font-size: 0.9rem;
+            color: rgba(75,77,57,0.45); letter-spacing: 1.5px;
+            text-decoration: none; opacity: 0;
             transition: opacity 0.45s ease 0.35s, color 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            min-height: 44px;
+            display: inline-flex; align-items: center; min-height: 44px;
         }
-
         .menu-overlay.open .overlay-ig { opacity: 1; }
         .overlay-ig:hover { color: #4B4D39; }
-
         .overlay-photo { display: block; position: relative; overflow: hidden; }
-
         .overlay-photo img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transform: scale(1.04);
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0; transform: scale(1.04);
             transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
         }
-
         .menu-overlay.open .overlay-photo img { opacity: 1; transform: scale(1); }
 
         @media (max-width: 768px) {
@@ -194,97 +133,54 @@
 
         /* ── HERO ── */
         .hero {
-            width: 100%;
-            height: 100vh;
-            height: 100dvh;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
-            background: #000;
+            width: 100%; height: 100vh; height: 100dvh;
+            position: relative; display: flex;
+            justify-content: center; align-items: center;
+            text-align: center; overflow: hidden; background: #000;
         }
-
         #hero-video {
-            position: absolute;
-            inset: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transform: scale(1.01);
-            z-index: 0;
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; transform: scale(1.01); z-index: 0;
             filter: brightness(0.85);
         }
-
         .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.22);
-            z-index: 1;
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,0.22); z-index: 1;
         }
-
         .hero-content {
-            position: relative;
-            z-index: 2;
-            color: #EDE6D4;
-            padding: 0 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
+            position: relative; z-index: 2; color: #EDE6D4;
+            padding: 0 30px; display: flex; flex-direction: column;
+            align-items: center; width: 100%;
         }
-
         .hero h1 {
             font-family: 'Gowun Batang', serif;
-            font-size: clamp(2.2rem, 8vw, 5.5rem);
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            margin-bottom: 20px;
-            line-height: 1.15;
-            color: #EDE6D4;
-            opacity: 0;
-            animation: fadeInDown 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.6s;
+            font-size: clamp(2.2rem,8vw,5.5rem); font-weight: 400;
+            letter-spacing: -0.01em; margin-bottom: 20px;
+            line-height: 1.15; color: #EDE6D4; opacity: 0;
+            animation: fadeInDown 1.2s cubic-bezier(0.23,1,0.32,1) forwards 0.6s;
         }
-
         .hero p {
             font-family: 'Lato', sans-serif;
-            font-size: clamp(0.95rem, 2vw, 1.3rem);
-            font-weight: 300;
-            margin-bottom: 45px;
-            max-width: 520px;
-            color: #EDE6D4;
-            letter-spacing: 0.5px;
-            opacity: 0;
-            animation: fadeInDown 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.9s;
+            font-size: clamp(0.95rem,2vw,1.3rem); font-weight: 300;
+            margin-bottom: 45px; max-width: 520px; color: #EDE6D4;
+            letter-spacing: 0.5px; opacity: 0;
+            animation: fadeInDown 1.2s cubic-bezier(0.23,1,0.32,1) forwards 0.9s;
         }
-
         .cta-btn {
-            background: #EDE6D4;
-            color: #4B4D39;
-            padding: 0 48px;
-            height: 52px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            background: #EDE6D4; color: #4B4D39;
+            padding: 0 48px; height: 52px; border-radius: 30px;
+            text-decoration: none; font-size: 13px; font-weight: 500;
+            letter-spacing: 2px; text-transform: uppercase;
             transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            border: none; cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center;
             opacity: 0;
-            animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards 1.2s;
+            animation: fadeInUp 1.2s cubic-bezier(0.23,1,0.32,1) forwards 1.2s;
         }
-
         .cta-btn:hover {
-            background: #d9d1b8;
-            transform: translateY(-2px);
+            background: #d9d1b8; transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(237,230,212,0.35);
         }
-
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-25px); }
             to   { opacity: 1; transform: translateY(0); }
@@ -296,578 +192,363 @@
 
         /* ── ABOUT ── */
         .about { background: #EDE6D4; padding: 0; }
-
-        .about-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 100vh;
-        }
-
+        .about-container { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
         .definition-side {
-            background: #FFFFFF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 100px 60px;
+            background: #fff; display: flex;
+            align-items: center; justify-content: center; padding: 100px 60px;
         }
-
         .definition-card { max-width: 500px; }
-
         .definition-word {
             font-family: 'Gowun Batang', serif;
-            font-size: clamp(4rem, 8vw, 6rem);
-            font-weight: 400;
-            color: #000;
-            margin: 0 0 15px 0;
-            line-height: 1;
+            font-size: clamp(4rem,8vw,6rem); font-weight: 400;
+            color: #000; margin: 0 0 15px 0; line-height: 1;
         }
-
         .definition-pronunciation {
-            font-family: 'Lato', sans-serif;
-            font-size: 1.1rem;
-            color: #666;
-            margin: 0 0 30px 0;
+            font-family: 'Lato', sans-serif; font-size: 1.1rem;
+            color: #666; margin: 0 0 30px 0;
         }
-
         .definition-text {
-            font-family: 'Lato', sans-serif;
-            font-size: 1.15rem;
-            color: #333;
-            line-height: 1.7;
-            margin: 0;
+            font-family: 'Lato', sans-serif; font-size: 1.15rem;
+            color: #333; line-height: 1.7; margin: 0;
         }
-
         .text-side {
-            background: #EDE6D4;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 100px 60px;
+            background: #EDE6D4; display: flex;
+            flex-direction: column; justify-content: center; padding: 100px 60px;
         }
-
         .text-side h2 {
             font-family: 'Lato', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 400;
-            color: #4B4D39;
-            margin: 0 0 30px 0;
+            font-size: clamp(2.5rem,5vw,3.5rem); font-weight: 400;
+            color: #4B4D39; margin: 0 0 30px 0;
         }
-
         .text-side p {
-            font-family: 'Lato', sans-serif;
-            font-size: 1.1rem;
-            color: #4B4D39;
-            line-height: 1.8;
-            margin: 0 0 20px 0;
-            max-width: 550px;
+            font-family: 'Lato', sans-serif; font-size: 1.1rem;
+            color: #4B4D39; line-height: 1.8; margin: 0 0 20px 0; max-width: 550px;
         }
 
         /* ── REVIEWS / PHOTO STRIP ── */
-        .reviews-photos-section {
-            background: #4B4D39;
-            padding: 80px 40px 60px;
-        }
-
-        .reviews-container {
-            max-width: 1200px;
-            margin: 0 auto 60px;
-        }
-
+        .reviews-photos-section { background: #4B4D39; padding: 80px 40px 60px; }
+        .reviews-container { max-width: 1200px; margin: 0 auto 60px; }
         .reviews-container h3 {
             font-family: 'Gowun Batang', serif;
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: 400;
-            color: #EDE6D4;
-            text-align: center;
-            margin: 0 0 50px 0;
+            font-size: clamp(2rem,4vw,2.8rem); font-weight: 400;
+            color: #EDE6D4; text-align: center; margin: 0 0 50px 0;
         }
-
         .review-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 30px;
         }
-
         .review-card {
-            background: rgba(237,230,212,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(237,230,212,0.2);
-            border-radius: 12px;
-            padding: 30px;
-            transition: transform 0.3s ease, background 0.3s ease;
+            background: rgba(237,230,212,0.1); backdrop-filter: blur(10px);
+            border: 1px solid rgba(237,230,212,0.2); border-radius: 12px;
+            padding: 30px; transition: transform 0.3s ease, background 0.3s ease;
         }
-
-        .review-card:hover {
-            transform: translateY(-5px);
-            background: rgba(237,230,212,0.15);
-        }
-
+        .review-card:hover { transform: translateY(-5px); background: rgba(237,230,212,0.15); }
         .stars { font-size: 1.2rem; margin-bottom: 15px; }
-
         .review-text {
-            font-family: 'Lato', sans-serif;
-            font-size: 1rem;
-            color: #EDE6D4;
-            line-height: 1.7;
-            margin: 0 0 15px 0;
-            font-style: italic;
+            font-family: 'Lato', sans-serif; font-size: 1rem;
+            color: #EDE6D4; line-height: 1.7; margin: 0 0 15px 0; font-style: italic;
         }
-
         .review-author {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.9rem;
-            color: rgba(237,230,212,0.7);
-            margin: 0;
-            font-weight: 500;
+            font-family: 'Lato', sans-serif; font-size: 0.9rem;
+            color: rgba(237,230,212,0.7); margin: 0; font-weight: 500;
         }
-
         .photo-slider { width: 100%; overflow: hidden; margin-top: 40px; border-radius: 8px; }
-
-        .slider-track {
-            display: flex;
-            animation: autoScroll 30s linear infinite;
-            width: fit-content;
-        }
-
+        .slider-track { display: flex; animation: autoScroll 30s linear infinite; width: fit-content; }
         .slider-img {
-            width: 350px; height: 250px;
-            object-fit: cover;
-            margin-right: 20px;
-            border-radius: 8px;
-            flex-shrink: 0;
+            width: 350px; height: 250px; object-fit: cover;
+            margin-right: 20px; border-radius: 8px; flex-shrink: 0;
         }
-
         @keyframes autoScroll {
             0%   { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-
         .photo-slider:hover .slider-track { animation-play-state: paused; }
 
-        /* ══════════════════════════════════
-           ── SERVICES — CINEMATIC SHOWCASE
-        ══════════════════════════════════ */
+        /* ══════════════════════════════════════
+           ── SERVICES
+        ══════════════════════════════════════ */
         .services {
             position: relative;
             width: 100%;
-            height: 100vh;
-            height: 100dvh;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
+        }
+
+        /* White top band */
+        .svc-top {
+            position: relative;
+            z-index: 2;
+            background: #ffffff;
+            text-align: center;
+            padding: 80px 30px 60px;
+            flex-shrink: 0;
+        }
+        .services-title {
+            font-family: 'Gowun Batang', serif;
+            font-size: clamp(2.4rem,5vw,4rem);
+            font-weight: 400; color: #4B4D39; margin: 0 0 14px 0;
+        }
+        .services-subtitle {
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem; font-weight: 300;
+            color: rgba(75,77,57,0.6); letter-spacing: 0.3px;
+            max-width: 400px; margin: 0 auto; line-height: 1.6;
+        }
+
+        /* Photo + cards bottom */
+        .svc-bottom {
+            position: relative;
+            flex: 1;
+            min-height: 560px;
+            background: #000;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            /* Pure black base — photos layer on top */
-            background: #000;
+            overflow: hidden;
         }
 
-        /* Background photo layers */
+        /* BG layers */
         .svc-bg-layer {
-            position: absolute;
-            inset: 0;
+            position: absolute; inset: 0;
             width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            z-index: 0;
-            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: brightness(0.45);
+            object-fit: cover; opacity: 0; z-index: 0;
+            transition: opacity 1.4s cubic-bezier(0.4,0,0.2,1);
+            filter: brightness(0.42);
         }
+        .svc-bg-layer.active { opacity: 1; }
 
-        .svc-bg-layer.active {
-            opacity: 1;
-        }
-
-        /* No vignette — just a very subtle bottom fade so dots stay readable */
-        .svc-bottom-fade {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 120px;
-            background: linear-gradient(to top, rgba(0,0,0,0.45), transparent);
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* Header */
-        .services-header {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            margin-bottom: 48px;
-            padding: 0 20px;
-        }
-
-        .services-title {
-            font-family: 'Gowun Batang', serif;
-            font-size: clamp(2.2rem, 5vw, 3.8rem);
-            font-weight: 400;
-            color: #EDE6D4;
-            margin: 0 0 12px 0;
-        }
-
-        .services-subtitle {
-            font-family: 'Lato', sans-serif;
-            font-size: 1rem;
-            font-weight: 300;
-            color: rgba(237, 230, 212, 0.7);
-            letter-spacing: 0.3px;
-            max-width: 420px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        /* Stage — side cards overflow screen edges */
+        /* Stage */
         .svc-stage {
             position: relative;
-            z-index: 3;
+            z-index: 2;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Allow overflow so side cards pop out */
-            overflow: visible;
+            padding: 50px 0 30px;
+            perspective: 1200px;
         }
 
-        /* ── Base card ── */
+        /* Slots */
+        .svc-slot { position: absolute; display: flex; align-items: center; justify-content: center; }
+        .svc-slot.slot-left  { left: 0;  transform: translateX(calc(-100% + 100px)); }
+        .svc-slot.slot-right { right: 0; transform: translateX(calc(100% - 100px)); }
+        .svc-slot.slot-center { position: relative; }
+
+        /* Cards — all same width */
         .svc-card {
-            border-radius: 16px;
-            padding: 44px 40px;
+            width: 500px;
+            background: #fff;
+            border-radius: 18px;
+            padding: 46px 44px;
             text-align: center;
-            transition: all 0.85s cubic-bezier(0.4, 0, 0.2, 1);
-            flex-shrink: 0;
-            position: absolute;
+            transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1),
+                        transform 0.65s cubic-bezier(0.4,0,0.2,1),
+                        box-shadow 0.65s ease;
         }
 
-        /* CENTER — white, wide */
-        .svc-card.center {
-            background: #ffffff;
-            width: min(580px, 88vw);
+        /* Center */
+        .svc-slot.slot-center .svc-card {
             opacity: 1;
-            transform: translateX(0) scale(1) rotateY(0deg);
-            z-index: 3;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.55);
-            position: relative; /* keeps stage height */
+            transform: scale(1) rotateY(0deg);
+            box-shadow: 0 32px 80px rgba(0,0,0,0.65);
         }
 
-        /* SIDE cards — partially off-screen */
-        .svc-card.side-left {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
-            width: 260px;
-            opacity: 0.6;
-            transform: translateX(calc(-50vw + 60px)) scale(0.85) rotateY(12deg);
-            z-index: 2;
+        /* Sides — scaled back for depth illusion */
+        .svc-slot.slot-left .svc-card {
+            opacity: 0.5;
+            transform: scale(0.8) rotateY(16deg) translateX(20px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            transform-origin: right center;
+            cursor: pointer;
+        }
+        .svc-slot.slot-right .svc-card {
+            opacity: 0.5;
+            transform: scale(0.8) rotateY(-16deg) translateX(-20px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            transform-origin: left center;
+            cursor: pointer;
+        }
+        .svc-slot.slot-left .svc-card:hover,
+        .svc-slot.slot-right .svc-card:hover { opacity: 0.72; }
+
+        /* Swap animations */
+        .svc-card.is-entering {
+            opacity: 0 !important;
+            transform: scale(0.95) translateY(24px) !important;
+        }
+        .svc-card.is-leaving {
+            opacity: 0 !important;
+            transform: scale(1.03) translateY(-20px) !important;
         }
 
-        .svc-card.side-right {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
-            width: 260px;
-            opacity: 0.6;
-            transform: translateX(calc(50vw - 60px)) scale(0.85) rotateY(-12deg);
-            z-index: 2;
-        }
-
-        /* Side card click targets */
-        .svc-card.side-left,
-        .svc-card.side-right { cursor: pointer; }
-
-        .svc-card.side-left:hover  { opacity: 0.85; }
-        .svc-card.side-right:hover { opacity: 0.85; }
-
-        /* ── Card content ── */
+        /* Card content */
         .svc-tag {
             display: inline-block;
             font-family: 'Lato', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            background: rgba(75,77,57,0.08);
-            border: 1px solid rgba(75,77,57,0.2);
-            color: #4B4D39;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 18px;
+            font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+            background: rgba(75,77,57,0.07);
+            border: 1px solid rgba(75,77,57,0.18);
+            color: #4B4D39; padding: 4px 12px; border-radius: 20px; margin-bottom: 18px;
         }
-
-        /* Side card tag */
-        .svc-card.side-left .svc-tag,
-        .svc-card.side-right .svc-tag {
-            background: rgba(237,230,212,0.15);
-            border-color: rgba(237,230,212,0.25);
-            color: #EDE6D4;
-        }
-
         .svc-name {
             font-family: 'Gowun Batang', serif;
-            font-weight: 400;
-            margin: 0 0 8px 0;
-            line-height: 1.2;
+            font-size: clamp(1.8rem,3vw,2.4rem); font-weight: 400;
+            color: #4B4D39; margin: 0 0 8px 0; line-height: 1.2;
         }
-
-        /* Center card — dark text */
-        .svc-card.center .svc-name {
-            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-            color: #4B4D39;
-        }
-
-        /* Side cards — light text */
-        .svc-card.side-left .svc-name,
-        .svc-card.side-right .svc-name {
-            font-size: 1.3rem;
-            color: #EDE6D4;
-        }
-
         .svc-duration {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.88rem;
-            font-weight: 300;
-            letter-spacing: 0.8px;
-            margin: 0 0 22px 0;
+            font-family: 'Lato', sans-serif; font-size: 0.88rem;
+            font-weight: 300; letter-spacing: 0.8px;
+            color: rgba(75,77,57,0.55); margin: 0 0 22px 0;
         }
-
-        .svc-card.center .svc-duration { color: rgba(75,77,57,0.6); }
-        .svc-card.side-left .svc-duration,
-        .svc-card.side-right .svc-duration { color: rgba(237,230,212,0.55); }
-
         .svc-divider {
-            width: 36px;
-            height: 1px;
-            background: rgba(75,77,57,0.2);
-            margin: 0 auto 22px;
+            width: 36px; height: 1px;
+            background: rgba(75,77,57,0.18); margin: 0 auto 22px;
         }
-
         .svc-desc {
-            font-family: 'Lato', sans-serif;
-            font-size: 1rem;
-            line-height: 1.75;
-            color: rgba(75,77,57,0.85);
-            margin: 0;
+            font-family: 'Lato', sans-serif; font-size: 1rem;
+            line-height: 1.75; color: rgba(75,77,57,0.8); margin: 0;
         }
 
-        /* Hide desc & divider on side cards */
-        .svc-card.side-left .svc-desc,
-        .svc-card.side-right .svc-desc,
-        .svc-card.side-left .svc-divider,
-        .svc-card.side-right .svc-divider { display: none; }
+        /* Hide desc/divider on side cards */
+        .svc-slot.slot-left  .svc-desc,
+        .svc-slot.slot-right .svc-desc,
+        .svc-slot.slot-left  .svc-divider,
+        .svc-slot.slot-right .svc-divider { display: none; }
 
-        /* ── Dots — bottom of section, minimal ── */
+        /* Dots */
         .svc-dots {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 4;
-            display: flex;
-            gap: 8px;
-            align-items: center;
+            position: relative; z-index: 3;
+            display: flex; gap: 8px; margin: 0 0 40px 0;
         }
-
         .svc-dot {
-            width: 32px;
-            height: 2px;
-            border-radius: 2px;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: background 0.3s ease;
+            width: 32px; height: 2px; border-radius: 2px;
+            background: rgba(255,255,255,0.18);
+            border: none; padding: 0; cursor: pointer;
+            position: relative; overflow: hidden;
         }
-
-        /* The fill — a child span animated via JS width */
+        .svc-dot.done { background: rgba(237,230,212,0.7); }
         .svc-dot-fill {
-            position: absolute;
-            top: 0; left: 0;
-            height: 100%;
-            width: 0%;
-            background: rgba(237,230,212,0.9);
-            border-radius: 2px;
+            position: absolute; top: 0; left: 0;
+            height: 100%; width: 0%;
+            background: #EDE6D4; border-radius: 2px;
+            pointer-events: none;
         }
 
         /* ── CONTACT ── */
-        .contact {
-            background: #4B4D39;
-            padding: 100px 50px;
-            color: #EDE6D4;
-        }
-
+        .contact { background: #4B4D39; padding: 100px 50px; color: #EDE6D4; }
         .contact h2 {
             font-family: 'Gowun Batang', serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 400;
-            text-align: center;
-            margin-bottom: 20px;
+            font-size: clamp(2.5rem,6vw,4rem); font-weight: 400;
+            text-align: center; margin-bottom: 20px;
         }
-
         .contact-intro {
-            text-align: center;
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 50px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            text-align: center; font-size: 1.1rem; opacity: 0.9;
+            margin-bottom: 50px; max-width: 600px;
+            margin-left: auto; margin-right: auto;
         }
-
         .contact-methods {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
+            display: flex; justify-content: center;
+            gap: 30px; margin-bottom: 50px; flex-wrap: wrap;
         }
-
         .whatsapp-btn {
-            background: #25D366;
-            color: #fff;
-            padding: 16px 40px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            min-height: 50px;
+            background: #25D366; color: #fff;
+            padding: 16px 40px; border-radius: 30px;
+            text-decoration: none; font-size: 15px; font-weight: 500;
+            transition: all 0.3s; display: inline-flex;
+            align-items: center; gap: 10px; min-height: 50px;
         }
-
         .whatsapp-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(37,211,102,0.4);
+            transform: translateY(-2px); box-shadow: 0 5px 20px rgba(37,211,102,0.4);
         }
-
         form { max-width: 600px; margin: 0 auto; }
-
         input, textarea {
-            width: 100%;
-            padding: 16px;
-            margin-bottom: 18px;
-            border: 1px solid rgba(237,230,212,0.3);
-            border-radius: 6px;
-            font-size: 15px;
-            font-family: inherit;
-            background: rgba(237,230,212,0.1);
-            color: #EDE6D4;
+            width: 100%; padding: 16px; margin-bottom: 18px;
+            border: 1px solid rgba(237,230,212,0.3); border-radius: 6px;
+            font-size: 15px; font-family: inherit;
+            background: rgba(237,230,212,0.1); color: #EDE6D4;
         }
-
         input::placeholder, textarea::placeholder { color: rgba(237,230,212,0.6); }
-
         input:focus, textarea:focus {
-            outline: none;
-            border-color: #EDE6D4;
+            outline: none; border-color: #EDE6D4;
             background: rgba(237,230,212,0.15);
         }
-
         textarea { min-height: 140px; resize: vertical; }
-
         button[type="submit"] {
-            width: 100%;
-            background: #EDE6D4;
-            color: #4B4D39;
-            padding: 16px;
-            border: none;
-            border-radius: 6px;
-            font-size: 15px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s;
-            min-height: 50px;
+            width: 100%; background: #EDE6D4; color: #4B4D39;
+            padding: 16px; border: none; border-radius: 6px;
+            font-size: 15px; font-weight: 500; letter-spacing: 1px;
+            cursor: pointer; transition: all 0.3s; min-height: 50px;
         }
-
         button[type="submit"]:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(237,230,212,0.3);
+            transform: translateY(-2px); box-shadow: 0 5px 15px rgba(237,230,212,0.3);
         }
 
         footer {
-            background: #EDE6D4;
-            color: #4B4D39;
-            text-align: center;
-            padding: 35px;
-            font-size: 14px;
+            background: #EDE6D4; color: #4B4D39;
+            text-align: center; padding: 35px; font-size: 14px;
         }
 
         /* ── SCROLL ANIMATIONS ── */
-        .fade-in {
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in.appear { opacity: 1; transform: translateY(0); }
-
-        .fade-in-left {
-            opacity: 0; transform: translateX(-40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+        .fade-in-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in-left.appear { opacity: 1; transform: translateX(0); }
-
-        .fade-in-right {
-            opacity: 0; transform: translateX(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+        .fade-in-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in-right.appear { opacity: 1; transform: translateX(0); }
-
-        .fade-in-up {
-            opacity: 0; transform: translateY(50px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
+        .fade-in-up { opacity: 0; transform: translateY(50px); transition: opacity 1s ease-out, transform 1s ease-out; }
         .fade-in-up.appear { opacity: 1; transform: translateY(0); }
 
-        /* ════════════ TABLET ≤ 1024px ════════════ */
+        /* ════════ TABLET ≤ 1024px ════════ */
         @media (max-width: 1024px) {
             nav { padding: 20px 35px; }
             .definition-side, .text-side { padding: 80px 40px; }
-            .svc-card.side-left  { transform: translateX(calc(-50vw + 40px)) scale(0.85) rotateY(12deg); }
-            .svc-card.side-right { transform: translateX(calc(50vw - 40px))  scale(0.85) rotateY(-12deg); }
+            .svc-card { width: 400px; }
+            .svc-slot.slot-left  { transform: translateX(calc(-100% + 80px)); }
+            .svc-slot.slot-right { transform: translateX(calc(100% - 80px)); }
         }
 
-        /* ════════════ MOBILE ≤ 768px ════════════ */
+        /* ════════ MOBILE ≤ 768px ════════ */
         @media (max-width: 768px) {
             nav { padding: 16px 20px; }
             .hero-content { padding: 0 24px 83px; }
-            .hero h1 { font-size: clamp(1.9rem, 9vw, 2.8rem); margin-bottom: 18px; }
+            .hero h1 { font-size: clamp(1.9rem,9vw,2.8rem); margin-bottom: 18px; }
             .hero p  { font-size: 1rem; margin-bottom: 40px; }
             .cta-btn { padding: 0 40px; height: 50px; font-size: 12px; }
-
             .about-container { grid-template-columns: 1fr; min-height: auto; }
             .definition-side { padding: 70px 25px 50px; }
-            .definition-word { font-size: clamp(3rem, 15vw, 5rem); }
-            .text-side       { padding: 50px 25px 70px; }
-            .text-side h2    { font-size: clamp(2rem, 8vw, 2.8rem); }
-            .text-side p     { font-size: 1rem; }
-
+            .definition-word { font-size: clamp(3rem,15vw,5rem); }
+            .text-side { padding: 50px 25px 70px; }
+            .text-side h2 { font-size: clamp(2rem,8vw,2.8rem); }
+            .text-side p  { font-size: 1rem; }
             .reviews-photos-section { padding: 50px 20px 40px; }
-            .review-cards           { grid-template-columns: 1fr; gap: 20px; }
-            .slider-img             { width: 240px; height: 170px; }
-
-            /* Mobile: hide side cards */
-            .svc-card.side-left,
-            .svc-card.side-right { display: none; }
-            .svc-card.center { width: calc(100vw - 48px); padding: 36px 28px; }
-            .services-header { margin-bottom: 32px; }
-
-            .contact        { padding: 70px 25px; }
-            .contact-intro  { font-size: 1rem; margin-bottom: 35px; }
-            .whatsapp-btn   { width: 100%; justify-content: center; padding: 16px 20px; font-size: 16px; }
+            .review-cards { grid-template-columns: 1fr; gap: 20px; }
+            .slider-img { width: 240px; height: 170px; }
+            .svc-top { padding: 60px 20px 40px; }
+            .svc-slot.slot-left,
+            .svc-slot.slot-right { display: none; }
+            .svc-card { width: calc(100vw - 48px); padding: 36px 28px; }
+            .svc-bottom { min-height: 500px; }
+            .contact { padding: 70px 25px; }
+            .contact-intro { font-size: 1rem; margin-bottom: 35px; }
+            .whatsapp-btn { width: 100%; justify-content: center; padding: 16px 20px; font-size: 16px; }
             input, textarea { font-size: 16px; padding: 14px; }
             button[type="submit"] { font-size: 16px; padding: 18px; }
-
             footer { padding: 25px 20px; font-size: 13px; }
         }
 
-        /* ════════════ SMALL PHONES ≤ 480px ════════════ */
+        /* ════════ SMALL PHONES ≤ 480px ════════ */
         @media (max-width: 480px) {
             .logo-name     { font-size: 18px; }
             .logo-location { font-size: 9px; letter-spacing: 2px; }
-            .hero h1 { font-size: clamp(1.7rem, 10vw, 2.4rem); }
-            .definition-word { font-size: clamp(2.8rem, 18vw, 4rem); }
-            .overlay-links li a { font-size: clamp(1.8rem, 9vw, 2.6rem); }
-            .svc-card.center { padding: 30px 22px; }
-            .svc-card.center .svc-name { font-size: 1.6rem; }
+            .hero h1 { font-size: clamp(1.7rem,10vw,2.4rem); }
+            .definition-word { font-size: clamp(2.8rem,18vw,4rem); }
+            .overlay-links li a { font-size: clamp(1.8rem,9vw,2.6rem); }
+            .svc-card { padding: 30px 22px; }
+            .svc-name { font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -885,7 +566,7 @@
         </button>
     </nav>
 
-    <!-- Fullscreen Menu Overlay -->
+    <!-- Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay">
         <div class="overlay-left">
             <ul class="overlay-links">
@@ -930,7 +611,6 @@
                 <p>Trained in Swedish, deep tissue, and sports massage techniques, we combine ancient wellness wisdom with modern therapeutic practice.</p>
             </div>
         </div>
-
         <div class="reviews-photos-section fade-in-up">
             <div class="reviews-container">
                 <h3>What Our Clients Say</h3>
@@ -954,43 +634,42 @@
             </div>
             <div class="photo-slider">
                 <div class="slider-track">
-                    <img src="massage1.jpg" alt="Massage therapy" class="slider-img">
-                    <img src="massage2.jpg" alt="Relaxation treatment" class="slider-img">
-                    <img src="massage3.jpg" alt="Therapeutic session" class="slider-img">
-                    <img src="massage4.jpg" alt="Wellness experience" class="slider-img">
-                    <img src="massage1.jpg" alt="Massage therapy" class="slider-img">
-                    <img src="massage2.jpg" alt="Relaxation treatment" class="slider-img">
-                    <img src="massage3.jpg" alt="Therapeutic session" class="slider-img">
-                    <img src="massage4.jpg" alt="Wellness experience" class="slider-img">
+                    <img src="massage1.jpg"  alt="Massage therapy"      class="slider-img">
+                    <img src="massage2.jpg"  alt="Relaxation treatment" class="slider-img">
+                    <img src="massage3.jpg"  alt="Therapeutic session"  class="slider-img">
+                    <img src="massage4.jpg"  alt="Wellness experience"  class="slider-img">
+                    <img src="massage1.jpg"  alt="Massage therapy"      class="slider-img">
+                    <img src="massage2.jpg"  alt="Relaxation treatment" class="slider-img">
+                    <img src="massage3.jpg"  alt="Therapeutic session"  class="slider-img">
+                    <img src="massage4.jpg"  alt="Wellness experience"  class="slider-img">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ── SERVICES ── -->
+    <!-- Services -->
     <section class="services" id="services">
 
-        <!-- BG photos -->
-        <img src="swedish-massage.jpg"      class="svc-bg-layer active" alt="">
-        <img src="deep-tissue-massage.jpg"  class="svc-bg-layer" alt="">
-        <img src="sports-massage.jpg"       class="svc-bg-layer" alt="">
-        <img src="cupping-therapy.jpg"      class="svc-bg-layer" alt="">
-        <img src="aromatherapy-massage.jpg" class="svc-bg-layer" alt="">
-
-        <!-- Subtle bottom fade for dot legibility -->
-        <div class="svc-bottom-fade"></div>
-
-        <!-- Headline -->
-        <div class="services-header">
+        <div class="svc-top">
             <h2 class="services-title">Services</h2>
             <p class="services-subtitle">Explore the experiences available — or customise yours via WhatsApp</p>
         </div>
 
-        <!-- Card stage (populated by JS) -->
-        <div class="svc-stage" id="svcStage"></div>
+        <div class="svc-bottom">
+            <img src="swedish-massage.jpg"      class="svc-bg-layer active" alt="">
+            <img src="deep-tissue-massage.jpg"  class="svc-bg-layer" alt="">
+            <img src="sports-massage.jpg"       class="svc-bg-layer" alt="">
+            <img src="cupping-therapy.jpg"      class="svc-bg-layer" alt="">
+            <img src="aromatherapy-massage.jpg" class="svc-bg-layer" alt="">
 
-        <!-- Dots (populated by JS) -->
-        <div class="svc-dots" id="svcDots"></div>
+            <div class="svc-stage">
+                <div class="svc-slot slot-left"   id="slotLeft"></div>
+                <div class="svc-slot slot-center" id="slotCenter"></div>
+                <div class="svc-slot slot-right"  id="slotRight"></div>
+            </div>
+
+            <div class="svc-dots" id="svcDots"></div>
+        </div>
 
     </section>
 
@@ -1000,9 +679,7 @@
         <p class="contact-intro">Mobile massage service across Mykonos. We come to you.</p>
         <div class="contact-methods">
             <a href="https://wa.me/306947077567?text=Hi%20I%20would%20like%20to%20book%20a%20massage"
-               class="whatsapp-btn" target="_blank">
-                Reserve on WhatsApp
-            </a>
+               class="whatsapp-btn" target="_blank">Reserve on WhatsApp</a>
         </div>
         <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
             <input type="text"  name="name"    placeholder="Your Name"    required>
@@ -1020,107 +697,85 @@
     <script>
         /* ── Navbar ── */
         const nav = document.getElementById('mainNav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-        });
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
 
-        /* ── Menu overlay ── */
+        /* ── Menu ── */
         const menuToggle  = document.getElementById('menuToggle');
         const menuOverlay = document.getElementById('menuOverlay');
-
         menuToggle.addEventListener('click', () => {
-            const isOpen = menuOverlay.classList.toggle('open');
-            menuToggle.classList.toggle('open', isOpen);
-            nav.classList.toggle('menu-open', isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
+            const open = menuOverlay.classList.toggle('open');
+            menuToggle.classList.toggle('open', open);
+            nav.classList.toggle('menu-open', open);
+            document.body.style.overflow = open ? 'hidden' : '';
         });
+        document.querySelectorAll('.overlay-nav-link').forEach(l => l.addEventListener('click', () => {
+            menuOverlay.classList.remove('open');
+            menuToggle.classList.remove('open');
+            nav.classList.remove('menu-open');
+            document.body.style.overflow = '';
+        }));
 
-        document.querySelectorAll('.overlay-nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                menuOverlay.classList.remove('open');
-                menuToggle.classList.remove('open');
-                nav.classList.remove('menu-open');
-                document.body.style.overflow = '';
-            });
-        });
-
-        /* ── Scroll animations ── */
-        const scrollObserver = new IntersectionObserver(entries => {
+        /* ── Scroll fade-ins ── */
+        const obs = new IntersectionObserver(entries => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('appear'); });
         }, { threshold: 0.15 });
+        document.querySelectorAll('.fade-in,.fade-in-left,.fade-in-right,.fade-in-up')
+                .forEach(el => obs.observe(el));
 
-        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-up')
-                .forEach(el => scrollObserver.observe(el));
-
-        /* ══════════════════════════
+        /* ══════════════════════════════
            SERVICES SHOWCASE
-        ══════════════════════════ */
-        const services = [
+        ══════════════════════════════ */
+        const SERVICES = [
             {
-                name: 'Swedish Massage',
-                duration: '60 minutes',
-                desc: 'Gentle, flowing strokes that promote deep relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a sun-drenched day on the island.',
-                tag: null
+                name: 'Swedish Massage', duration: '60 minutes', tag: null,
+                desc: 'Gentle, flowing strokes that promote deep relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a sun-drenched day on the island.'
             },
             {
-                name: 'Deep Tissue',
-                duration: '60 minutes',
-                desc: 'Targeted pressure that reaches deeper layers of muscle and connective tissue. Ideal for chronic tension, stubborn knots, and those who need something more restorative.',
-                tag: null
+                name: 'Deep Tissue', duration: '60 minutes', tag: null,
+                desc: 'Targeted pressure that reaches deeper layers of muscle and connective tissue. Ideal for chronic tension, stubborn knots, and those who need something truly restorative.'
             },
             {
-                name: 'Sports Massage',
-                duration: '60 minutes',
-                desc: 'Dynamic techniques designed to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles and post-activity relief.',
-                tag: null
+                name: 'Sports Massage', duration: '60 minutes', tag: null,
+                desc: 'Dynamic techniques designed to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles and post-activity relief.'
             },
             {
-                name: 'Cupping Therapy',
-                duration: '15 – 20 minutes',
-                desc: 'Ancient suction cup technique that lifts fascia, boosts blood flow, and releases deep-seated tension. A powerful enhancement to any massage session.',
-                tag: 'Add-on'
+                name: 'Cupping Therapy', duration: '15 – 20 minutes', tag: 'Add-on',
+                desc: 'Ancient suction cup technique that lifts fascia, boosts blood flow, and releases deep-seated tension. A powerful enhancement to any massage session.'
             },
             {
-                name: 'Aromatherapy',
-                duration: 'Full session',
-                desc: 'A bespoke essential oil blend — lavender, peppermint, or sweet orange — woven into your massage for heightened relaxation and mood elevation.',
-                tag: 'Add-on'
+                name: 'Aromatherapy', duration: 'Full session', tag: 'Add-on',
+                desc: 'A bespoke essential oil blend — lavender, peppermint, or sweet orange — woven into your massage for heightened relaxation and mood elevation.'
             }
         ];
 
-        const INTERVAL = 8000;
-        let current = 0;
-        let autoTimer = null;
-        let fillRAF = null;
-        let fillStart = null;
+        const INTERVAL      = 8000;  // ms per slide
+        const HALF_ANIM     = 350;   // half of swap animation (ms)
 
-        const stage    = document.getElementById('svcStage');
-        const dotsEl   = document.getElementById('svcDots');
-        const bgLayers = document.querySelectorAll('.svc-bg-layer');
+        let current     = 0;
+        let autoTimer   = null;
+        let isAnimating = false;
 
-        /* ── Build dots ── */
-        services.forEach((_, i) => {
+        const slotLeft   = document.getElementById('slotLeft');
+        const slotCenter = document.getElementById('slotCenter');
+        const slotRight  = document.getElementById('slotRight');
+        const dotsEl     = document.getElementById('svcDots');
+        const bgLayers   = document.querySelectorAll('.svc-bg-layer');
+
+        /* ── Build dots once ── */
+        SERVICES.forEach((s, i) => {
             const btn = document.createElement('button');
             btn.className = 'svc-dot';
-            btn.setAttribute('aria-label', `Go to ${services[i].name}`);
+            btn.setAttribute('aria-label', `Go to ${s.name}`);
             btn.innerHTML = '<span class="svc-dot-fill"></span>';
             btn.addEventListener('click', () => goTo(i));
             dotsEl.appendChild(btn);
         });
 
-        /* ── Build a card ── */
-        function buildCard(index, role) {
-            const s = services[index];
+        /* ── Build a single card ── */
+        function buildCard(idx) {
+            const s = SERVICES[idx];
             const card = document.createElement('div');
-            card.className = `svc-card ${role}`;
-
-            if (role !== 'center') {
-                card.addEventListener('click', () => {
-                    if (role === 'side-left')  goTo((current - 1 + services.length) % services.length);
-                    if (role === 'side-right') goTo((current + 1) % services.length);
-                });
-            }
-
+            card.className = 'svc-card';
             card.innerHTML = `
                 ${s.tag ? `<div class="svc-tag">${s.tag}</div>` : ''}
                 <h3 class="svc-name">${s.name}</h3>
@@ -1131,54 +786,105 @@
             return card;
         }
 
-        /* ── Render stage ── */
-        function render(idx) {
-            stage.innerHTML = '';
-            const left  = (idx - 1 + services.length) % services.length;
-            const right = (idx + 1) % services.length;
+        /* ── Fill all three slots (no animation) ── */
+        function populateSlots(idx) {
+            const L = (idx - 1 + SERVICES.length) % SERVICES.length;
+            const R = (idx + 1) % SERVICES.length;
 
-            stage.appendChild(buildCard(left,  'side-left'));
-            stage.appendChild(buildCard(idx,   'center'));
-            stage.appendChild(buildCard(right, 'side-right'));
+            slotLeft.innerHTML = slotCenter.innerHTML = slotRight.innerHTML = '';
 
-            /* BG crossfade */
+            const lCard = buildCard(L);
+            const cCard = buildCard(idx);
+            const rCard = buildCard(R);
+
+            lCard.addEventListener('click', () => goTo(L));
+            rCard.addEventListener('click', () => goTo(R));
+
+            slotLeft.appendChild(lCard);
+            slotCenter.appendChild(cCard);
+            slotRight.appendChild(rCard);
+        }
+
+        /* ── Crossfade background ── */
+        function setBg(idx) {
             bgLayers.forEach((l, i) => l.classList.toggle('active', i === idx));
+        }
 
-            /* Dots — reset all fills, start active fill */
+        /* ── Dots: past = solid, active = animating fill, future = empty ── */
+        function updateDots(idx) {
             dotsEl.querySelectorAll('.svc-dot').forEach((d, i) => {
                 const fill = d.querySelector('.svc-dot-fill');
+
+                /* Hard-reset transition so width jump is instant */
                 fill.style.transition = 'none';
                 fill.style.width = '0%';
-                if (i === idx) {
-                    /* Small frame delay so transition kicks in after reset */
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            fill.style.transition = `width ${INTERVAL}ms linear`;
-                            fill.style.width = '100%';
-                        });
-                    });
+                d.classList.remove('done');
+
+                if (i < idx) {
+                    /* Completed — parent dot goes solid, fill hidden underneath */
+                    d.classList.add('done');
+                } else if (i === idx) {
+                    /* Active — animate fill over INTERVAL */
+                    requestAnimationFrame(() => requestAnimationFrame(() => {
+                        fill.style.transition = `width ${INTERVAL}ms linear`;
+                        fill.style.width = '100%';
+                    }));
                 }
+                /* Future dots: remain at width 0%, no class */
             });
         }
 
-        /* ── Navigate ── */
-        function goTo(idx) {
-            clearTimeout(autoTimer);
-            current = idx;
-            render(current);
-            scheduleNext();
+        /* ── Animated slide swap ── */
+        function animateTo(nextIdx, onComplete) {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            /* Step 1: fade out current center card */
+            const oldCard = slotCenter.querySelector('.svc-card');
+            if (oldCard) oldCard.classList.add('is-leaving');
+
+            /* Step 2: at midpoint, swap content + bg + dots */
+            setTimeout(() => {
+                current = nextIdx;
+                populateSlots(current);
+                setBg(current);
+                updateDots(current);
+
+                /* Step 3: start new center card in entering state, then remove to trigger transition */
+                const newCard = slotCenter.querySelector('.svc-card');
+                if (newCard) {
+                    newCard.classList.add('is-entering');
+                    requestAnimationFrame(() => requestAnimationFrame(() => {
+                        newCard.classList.remove('is-entering');
+                    }));
+                }
+
+                isAnimating = false;
+                if (typeof onComplete === 'function') onComplete();
+
+            }, HALF_ANIM);
         }
 
+        /* ── Manual navigation (dot click or side card click) ── */
+        function goTo(idx) {
+            if (idx === current || isAnimating) return;
+            clearTimeout(autoTimer);
+            animateTo(idx, scheduleNext);
+        }
+
+        /* ── Auto-advance — always reschedules via callback after animation ── */
         function scheduleNext() {
+            clearTimeout(autoTimer);
             autoTimer = setTimeout(() => {
-                current = (current + 1) % services.length;
-                render(current);
-                scheduleNext();
+                const next = (current + 1) % SERVICES.length;
+                animateTo(next, scheduleNext);   /* recursive: keeps looping forever */
             }, INTERVAL);
         }
 
-        /* ── Init ── */
-        render(0);
+        /* ── Initialise ── */
+        populateSlots(0);
+        setBg(0);
+        updateDots(0);
         scheduleNext();
     </script>
 </body>
