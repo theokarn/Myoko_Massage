@@ -269,26 +269,24 @@
         .services {
             position: relative;
             width: 100%;
-            min-height: 100vh;
-            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
 
-        /* White top band */
+        /* ── White top band — compact ── */
         .svc-top {
             position: relative;
             z-index: 2;
             background: #ffffff;
             text-align: center;
-            padding: 80px 30px 60px;
+            padding: 52px 30px 44px;
             flex-shrink: 0;
         }
         .services-title {
             font-family: 'Gowun Batang', serif;
             font-size: clamp(2.4rem,5vw,4rem);
-            font-weight: 400; color: #4B4D39; margin: 0 0 14px 0;
+            font-weight: 400; color: #4B4D39; margin: 0 0 12px 0;
         }
         .services-subtitle {
             font-family: 'Lato', sans-serif;
@@ -297,11 +295,11 @@
             max-width: 400px; margin: 0 auto; line-height: 1.6;
         }
 
-        /* Photo + cards bottom */
+        /* ── Photo + cards — fills remaining viewport ── */
         .svc-bottom {
             position: relative;
-            flex: 1;
-            min-height: 560px;
+            height: 100vh;
+            height: 100dvh;
             background: #000;
             display: flex;
             flex-direction: column;
@@ -310,17 +308,36 @@
             overflow: hidden;
         }
 
-        /* BG layers */
+        /* ── BG layers with blur transition ── */
         .svc-bg-layer {
             position: absolute; inset: 0;
             width: 100%; height: 100%;
-            object-fit: cover; opacity: 0; z-index: 0;
-            transition: opacity 1.4s cubic-bezier(0.4,0,0.2,1);
-            filter: brightness(0.42);
+            object-fit: cover;
+            opacity: 0;
+            z-index: 0;
+            filter: brightness(0.42) blur(0px);
+            transition: opacity 0s, filter 0.7s ease;
         }
-        .svc-bg-layer.active { opacity: 1; }
+        /* Active = visible, sharp */
+        .svc-bg-layer.active {
+            opacity: 1;
+            filter: brightness(0.42) blur(0px);
+            transition: opacity 0.5s ease, filter 0.7s ease;
+        }
+        /* Blurring out = still visible but blurred before fade */
+        .svc-bg-layer.blurring {
+            opacity: 1;
+            filter: brightness(0.42) blur(14px);
+            transition: opacity 0.5s ease 0.3s, filter 0.4s ease;
+        }
+        /* Blurring in = arriving already blurred, then sharpens */
+        .svc-bg-layer.blurring-in {
+            opacity: 1;
+            filter: brightness(0.42) blur(14px);
+            transition: none;
+        }
 
-        /* Stage */
+        /* ── Card stage ── */
         .svc-stage {
             position: relative;
             z-index: 2;
@@ -328,64 +345,99 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 50px 0 30px;
-            perspective: 1200px;
+            padding: 0 0 30px;
+            perspective: 1400px;
+            /* clip so sliding cards don't overflow page horizontally */
+            overflow: hidden;
         }
 
-        /* Slots */
-        .svc-slot { position: absolute; display: flex; align-items: center; justify-content: center; }
-        .svc-slot.slot-left  { left: 0;  transform: translateX(calc(-100% + 100px)); }
-        .svc-slot.slot-right { right: 0; transform: translateX(calc(100% - 100px)); }
+        /* ── Slots ── */
+        .svc-slot {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .svc-slot.slot-left  {
+            left: 0;
+            transform: translateX(calc(-100% + 110px));
+        }
+        .svc-slot.slot-right {
+            right: 0;
+            transform: translateX(calc(100% - 110px));
+        }
         .svc-slot.slot-center { position: relative; }
 
-        /* Cards — all same width */
+        /* ── Cards — all same width ── */
         .svc-card {
-            width: 500px;
+            width: 580px;
             background: #fff;
-            border-radius: 18px;
-            padding: 46px 44px;
+            border-radius: 20px;
+            padding: 52px 50px;
             text-align: center;
+            will-change: transform, opacity;
+            /* Base transition for depth/opacity on side cards */
             transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1),
                         transform 0.65s cubic-bezier(0.4,0,0.2,1),
                         box-shadow 0.65s ease;
         }
 
-        /* Center */
+        /* Center card */
         .svc-slot.slot-center .svc-card {
             opacity: 1;
             transform: scale(1) rotateY(0deg);
-            box-shadow: 0 32px 80px rgba(0,0,0,0.65);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.7);
         }
 
-        /* Sides — scaled back for depth illusion */
+        /* Side cards — same size, pushed back */
         .svc-slot.slot-left .svc-card {
-            opacity: 0.5;
-            transform: scale(0.8) rotateY(16deg) translateX(20px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            opacity: 0.45;
+            transform: scale(0.78) rotateY(18deg) translateX(30px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
             transform-origin: right center;
             cursor: pointer;
         }
         .svc-slot.slot-right .svc-card {
-            opacity: 0.5;
-            transform: scale(0.8) rotateY(-16deg) translateX(-20px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            opacity: 0.45;
+            transform: scale(0.78) rotateY(-18deg) translateX(-30px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
             transform-origin: left center;
             cursor: pointer;
         }
         .svc-slot.slot-left .svc-card:hover,
-        .svc-slot.slot-right .svc-card:hover { opacity: 0.72; }
+        .svc-slot.slot-right .svc-card:hover { opacity: 0.7; }
 
-        /* Swap animations */
-        .svc-card.is-entering {
+        /* ── Slide-in / slide-out animation classes ── */
+        /* Direction set by JS via data-dir on .svc-stage: "forward" or "backward" */
+
+        /* Leaving: exits to the LEFT (forward) or RIGHT (backward) */
+        .svc-card.is-leaving-forward {
             opacity: 0 !important;
-            transform: scale(0.95) translateY(24px) !important;
+            transform: translateX(-110px) scale(0.94) !important;
+            transition: opacity 0.38s cubic-bezier(0.4,0,0.2,1),
+                        transform 0.38s cubic-bezier(0.4,0,0.2,1) !important;
         }
-        .svc-card.is-leaving {
+        .svc-card.is-leaving-backward {
             opacity: 0 !important;
-            transform: scale(1.03) translateY(-20px) !important;
+            transform: translateX(110px) scale(0.94) !important;
+            transition: opacity 0.38s cubic-bezier(0.4,0,0.2,1),
+                        transform 0.38s cubic-bezier(0.4,0,0.2,1) !important;
         }
 
-        /* Card content */
+        /* Entering: arrives from RIGHT (forward) or LEFT (backward) — starts here... */
+        .svc-card.is-entering-forward {
+            opacity: 0 !important;
+            transform: translateX(110px) scale(0.94) !important;
+            transition: none !important;
+        }
+        .svc-card.is-entering-backward {
+            opacity: 0 !important;
+            transform: translateX(-110px) scale(0.94) !important;
+            transition: none !important;
+        }
+        /* ...then CSS transition kicks in when class is removed */
+
+        /* ── Card content ── */
         .svc-tag {
             display: inline-block;
             font-family: 'Lato', sans-serif;
@@ -396,21 +448,21 @@
         }
         .svc-name {
             font-family: 'Gowun Batang', serif;
-            font-size: clamp(1.8rem,3vw,2.4rem); font-weight: 400;
+            font-size: clamp(1.9rem,3vw,2.6rem); font-weight: 400;
             color: #4B4D39; margin: 0 0 8px 0; line-height: 1.2;
         }
         .svc-duration {
-            font-family: 'Lato', sans-serif; font-size: 0.88rem;
+            font-family: 'Lato', sans-serif; font-size: 0.9rem;
             font-weight: 300; letter-spacing: 0.8px;
-            color: rgba(75,77,57,0.55); margin: 0 0 22px 0;
+            color: rgba(75,77,57,0.55); margin: 0 0 24px 0;
         }
         .svc-divider {
             width: 36px; height: 1px;
-            background: rgba(75,77,57,0.18); margin: 0 auto 22px;
+            background: rgba(75,77,57,0.18); margin: 0 auto 24px;
         }
         .svc-desc {
-            font-family: 'Lato', sans-serif; font-size: 1rem;
-            line-height: 1.75; color: rgba(75,77,57,0.8); margin: 0;
+            font-family: 'Lato', sans-serif; font-size: 1.02rem;
+            line-height: 1.78; color: rgba(75,77,57,0.8); margin: 0;
         }
 
         /* Hide desc/divider on side cards */
@@ -419,10 +471,10 @@
         .svc-slot.slot-left  .svc-divider,
         .svc-slot.slot-right .svc-divider { display: none; }
 
-        /* Dots */
+        /* ── Dots ── */
         .svc-dots {
             position: relative; z-index: 3;
-            display: flex; gap: 8px; margin: 0 0 40px 0;
+            display: flex; gap: 8px; margin: 0 0 44px 0;
         }
         .svc-dot {
             width: 32px; height: 2px; border-radius: 2px;
@@ -506,9 +558,9 @@
         @media (max-width: 1024px) {
             nav { padding: 20px 35px; }
             .definition-side, .text-side { padding: 80px 40px; }
-            .svc-card { width: 400px; }
-            .svc-slot.slot-left  { transform: translateX(calc(-100% + 80px)); }
-            .svc-slot.slot-right { transform: translateX(calc(100% - 80px)); }
+            .svc-card { width: 460px; padding: 44px 38px; }
+            .svc-slot.slot-left  { transform: translateX(calc(-100% + 85px)); }
+            .svc-slot.slot-right { transform: translateX(calc(100% - 85px)); }
         }
 
         /* ════════ MOBILE ≤ 768px ════════ */
@@ -527,11 +579,10 @@
             .reviews-photos-section { padding: 50px 20px 40px; }
             .review-cards { grid-template-columns: 1fr; gap: 20px; }
             .slider-img { width: 240px; height: 170px; }
-            .svc-top { padding: 60px 20px 40px; }
+            .svc-top { padding: 44px 20px 36px; }
             .svc-slot.slot-left,
             .svc-slot.slot-right { display: none; }
             .svc-card { width: calc(100vw - 48px); padding: 36px 28px; }
-            .svc-bottom { min-height: 500px; }
             .contact { padding: 70px 25px; }
             .contact-intro { font-size: 1rem; margin-bottom: 35px; }
             .whatsapp-btn { width: 100%; justify-content: center; padding: 16px 20px; font-size: 16px; }
@@ -656,13 +707,14 @@
         </div>
 
         <div class="svc-bottom">
-            <img src="swedish-massage.jpg"      class="svc-bg-layer active" alt="">
-            <img src="deep-tissue-massage.jpg"  class="svc-bg-layer" alt="">
-            <img src="sports-massage.jpg"       class="svc-bg-layer" alt="">
-            <img src="cupping-therapy.jpg"      class="svc-bg-layer" alt="">
-            <img src="aromatherapy-massage.jpg" class="svc-bg-layer" alt="">
+            <!-- ↓ swed_1 and deep_2 now wired in ↓ -->
+            <img src="swed_1.jpg"           class="svc-bg-layer active" alt="">
+            <img src="deep_2.jpg"           class="svc-bg-layer" alt="">
+            <img src="sports-massage.jpg"   class="svc-bg-layer" alt="">
+            <img src="cupping-therapy.jpg"  class="svc-bg-layer" alt="">
+            <img src="aromatherapy.jpg"     class="svc-bg-layer" alt="">
 
-            <div class="svc-stage">
+            <div class="svc-stage" id="svcStage">
                 <div class="svc-slot slot-left"   id="slotLeft"></div>
                 <div class="svc-slot slot-center" id="slotCenter"></div>
                 <div class="svc-slot slot-right"  id="slotRight"></div>
@@ -748,12 +800,13 @@
             }
         ];
 
-        const INTERVAL      = 8000;  // ms per slide
-        const HALF_ANIM     = 350;   // half of swap animation (ms)
+        const INTERVAL  = 8000;   /* ms per slide            */
+        const HALF_ANIM = 380;    /* ms — half swap duration */
 
         let current     = 0;
         let autoTimer   = null;
         let isAnimating = false;
+        let direction   = 'forward'; /* 'forward' or 'backward' */
 
         const slotLeft   = document.getElementById('slotLeft');
         const slotCenter = document.getElementById('slotCenter');
@@ -771,7 +824,7 @@
             dotsEl.appendChild(btn);
         });
 
-        /* ── Build a single card ── */
+        /* ── Build a card ── */
         function buildCard(idx) {
             const s = SERVICES[idx];
             const card = document.createElement('div');
@@ -786,7 +839,7 @@
             return card;
         }
 
-        /* ── Fill all three slots (no animation) ── */
+        /* ── Populate slots ── */
         function populateSlots(idx) {
             const L = (idx - 1 + SERVICES.length) % SERVICES.length;
             const R = (idx + 1) % SERVICES.length;
@@ -805,57 +858,77 @@
             slotRight.appendChild(rCard);
         }
 
-        /* ── Crossfade background ── */
-        function setBg(idx) {
-            bgLayers.forEach((l, i) => l.classList.toggle('active', i === idx));
+        /* ── Background: blur out → swap → blur in ── */
+        function setBg(nextIdx) {
+            const oldLayer = Array.from(bgLayers).find(l => l.classList.contains('active'));
+            const newLayer = bgLayers[nextIdx];
+
+            if (oldLayer === newLayer) return;
+
+            /* 1. Blur out old layer */
+            if (oldLayer) {
+                oldLayer.classList.remove('active');
+                oldLayer.classList.add('blurring');
+                /* 2. After blur + fade, clean up */
+                setTimeout(() => oldLayer.classList.remove('blurring'), 900);
+            }
+
+            /* 3. New layer: start blurred, then sharpen */
+            newLayer.classList.add('blurring-in');
+            /* force a paint before adding active so transition fires */
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    newLayer.classList.remove('blurring-in');
+                    newLayer.classList.add('active');
+                });
+            });
         }
 
-        /* ── Dots: past = solid, active = animating fill, future = empty ── */
+        /* ── Dots ── */
         function updateDots(idx) {
             dotsEl.querySelectorAll('.svc-dot').forEach((d, i) => {
                 const fill = d.querySelector('.svc-dot-fill');
-
-                /* Hard-reset transition so width jump is instant */
                 fill.style.transition = 'none';
                 fill.style.width = '0%';
                 d.classList.remove('done');
 
                 if (i < idx) {
-                    /* Completed — parent dot goes solid, fill hidden underneath */
                     d.classList.add('done');
                 } else if (i === idx) {
-                    /* Active — animate fill over INTERVAL */
                     requestAnimationFrame(() => requestAnimationFrame(() => {
                         fill.style.transition = `width ${INTERVAL}ms linear`;
                         fill.style.width = '100%';
                     }));
                 }
-                /* Future dots: remain at width 0%, no class */
             });
         }
 
-        /* ── Animated slide swap ── */
+        /* ── Animated swap with directional slide ── */
         function animateTo(nextIdx, onComplete) {
             if (isAnimating) return;
             isAnimating = true;
 
-            /* Step 1: fade out current center card */
-            const oldCard = slotCenter.querySelector('.svc-card');
-            if (oldCard) oldCard.classList.add('is-leaving');
+            const isForward = direction === 'forward';
+            const leaveClass = isForward ? 'is-leaving-forward' : 'is-leaving-backward';
+            const enterClass = isForward ? 'is-entering-forward' : 'is-entering-backward';
 
-            /* Step 2: at midpoint, swap content + bg + dots */
+            /* Step 1 — slide out old center card */
+            const oldCard = slotCenter.querySelector('.svc-card');
+            if (oldCard) oldCard.classList.add(leaveClass);
+
+            /* Step 2 — at midpoint swap everything */
             setTimeout(() => {
                 current = nextIdx;
                 populateSlots(current);
                 setBg(current);
                 updateDots(current);
 
-                /* Step 3: start new center card in entering state, then remove to trigger transition */
+                /* Step 3 — place new card in off-screen start position, then slide in */
                 const newCard = slotCenter.querySelector('.svc-card');
                 if (newCard) {
-                    newCard.classList.add('is-entering');
+                    newCard.classList.add(enterClass);
                     requestAnimationFrame(() => requestAnimationFrame(() => {
-                        newCard.classList.remove('is-entering');
+                        newCard.classList.remove(enterClass);
                     }));
                 }
 
@@ -865,23 +938,28 @@
             }, HALF_ANIM);
         }
 
-        /* ── Manual navigation (dot click or side card click) ── */
+        /* ── Manual navigation ── */
         function goTo(idx) {
             if (idx === current || isAnimating) return;
             clearTimeout(autoTimer);
+            /* Determine slide direction */
+            const totalForward  = (idx - current + SERVICES.length) % SERVICES.length;
+            const totalBackward = (current - idx + SERVICES.length) % SERVICES.length;
+            direction = totalForward <= totalBackward ? 'forward' : 'backward';
             animateTo(idx, scheduleNext);
         }
 
-        /* ── Auto-advance — always reschedules via callback after animation ── */
+        /* ── Auto-advance ── */
         function scheduleNext() {
             clearTimeout(autoTimer);
             autoTimer = setTimeout(() => {
+                direction = 'forward';
                 const next = (current + 1) % SERVICES.length;
-                animateTo(next, scheduleNext);   /* recursive: keeps looping forever */
+                animateTo(next, scheduleNext);
             }, INTERVAL);
         }
 
-        /* ── Initialise ── */
+        /* ── Init ── */
         populateSlots(0);
         setBg(0);
         updateDots(0);
