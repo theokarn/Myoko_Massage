@@ -118,17 +118,13 @@
             transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .menu-overlay.open {
-            opacity: 1;
-            pointer-events: all;
-        }
+        .menu-overlay.open { opacity: 1; pointer-events: all; }
 
         .overlay-left {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 80px 60px 80px 80px;
-            padding-top: 140px;
+            padding: 140px 60px 80px 80px;
         }
 
         .overlay-links {
@@ -178,15 +174,10 @@
         .menu-overlay.open .overlay-ig { opacity: 1; }
         .overlay-ig:hover { color: #4B4D39; }
 
-        .overlay-photo {
-            display: block;
-            position: relative;
-            overflow: hidden;
-        }
+        .overlay-photo { display: block; position: relative; overflow: hidden; }
 
         .overlay-photo img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             opacity: 0;
             transform: scale(1.04);
@@ -218,8 +209,7 @@
         #hero-video {
             position: absolute;
             inset: 0;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             transform: scale(1.01);
             z-index: 0;
@@ -229,7 +219,7 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.22);
+            background: rgba(0,0,0,0.22);
             z-index: 1;
         }
 
@@ -253,8 +243,7 @@
             line-height: 1.15;
             color: #EDE6D4;
             opacity: 0;
-            animation: fadeInDown 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-            animation-delay: 0.6s;
+            animation: fadeInDown 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.6s;
         }
 
         .hero p {
@@ -266,8 +255,7 @@
             color: #EDE6D4;
             letter-spacing: 0.5px;
             opacity: 0;
-            animation: fadeInDown 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-            animation-delay: 0.9s;
+            animation: fadeInDown 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.9s;
         }
 
         .cta-btn {
@@ -288,21 +276,19 @@
             align-items: center;
             justify-content: center;
             opacity: 0;
-            animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-            animation-delay: 1.2s;
+            animation: fadeInUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards 1.2s;
         }
 
         .cta-btn:hover {
             background: #d9d1b8;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(237, 230, 212, 0.35);
+            box-shadow: 0 8px 25px rgba(237,230,212,0.35);
         }
 
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-25px); }
             to   { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to   { opacity: 1; transform: translateY(0); }
@@ -376,7 +362,7 @@
             max-width: 550px;
         }
 
-        /* ── REVIEWS ── */
+        /* ── REVIEWS / PHOTO STRIP ── */
         .reviews-photos-section {
             background: #4B4D39;
             padding: 80px 40px 60px;
@@ -435,12 +421,7 @@
             font-weight: 500;
         }
 
-        .photo-slider {
-            width: 100%;
-            overflow: hidden;
-            margin-top: 40px;
-            border-radius: 8px;
-        }
+        .photo-slider { width: 100%; overflow: hidden; margin-top: 40px; border-radius: 8px; }
 
         .slider-track {
             display: flex;
@@ -463,166 +444,150 @@
 
         .photo-slider:hover .slider-track { animation-play-state: paused; }
 
-        /* ── SERVICES (NEW) ── */
+        /* ══════════════════════════════════
+           ── SERVICES — CINEMATIC SHOWCASE
+        ══════════════════════════════════ */
         .services {
-            background: #EDE6D4;
-            min-height: 100vh;
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            padding: 100px 0 80px;
-            overflow: hidden;
+            justify-content: center;
         }
 
+        /* Background photo layers — stacked, crossfade */
+        .svc-bg-layer {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+            transform: scale(1.04);
+            filter: brightness(0.55);
+        }
+
+        .svc-bg-layer.active {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 9s ease-out;
+        }
+
+        /* Dark vignette over background */
+        .svc-scene-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center,
+                rgba(0,0,0,0.05) 0%,
+                rgba(0,0,0,0.55) 100%);
+            z-index: 1;
+        }
+
+        /* Header text above cards */
         .services-header {
+            position: relative;
+            z-index: 3;
             text-align: center;
-            margin-bottom: 60px;
-            padding: 0 30px;
+            margin-bottom: 50px;
+            padding: 0 20px;
         }
 
         .services-title {
             font-family: 'Gowun Batang', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
             font-weight: 400;
-            color: #4B4D39;
-            margin: 0 0 16px 0;
+            color: #EDE6D4;
+            margin: 0 0 12px 0;
         }
 
         .services-subtitle {
             font-family: 'Lato', sans-serif;
-            font-size: 1.05rem;
-            color: rgba(75, 77, 57, 0.65);
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(237, 230, 212, 0.75);
             letter-spacing: 0.5px;
-            max-width: 500px;
+            max-width: 460px;
             margin: 0 auto;
             line-height: 1.6;
         }
 
-        /* Carousel wrapper */
-        .services-carousel {
-            width: 100%;
-            overflow: hidden;
+        /* Card stage — 3 cards visible: prev (left), active (center), next (right) */
+        .svc-stage {
             position: relative;
-        }
-
-        /* Fade edges */
-        .services-carousel::before,
-        .services-carousel::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 120px;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .services-carousel::before {
-            left: 0;
-            background: linear-gradient(to right, #EDE6D4, transparent);
-        }
-
-        .services-carousel::after {
-            right: 0;
-            background: linear-gradient(to left, #EDE6D4, transparent);
-        }
-
-        .carousel-track {
-            display: flex;
-            gap: 28px;
-            padding: 20px 80px;
-            width: max-content;
-            animation: scrollCards 45s linear infinite;
-        }
-
-        .carousel-track:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes scrollCards {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* Individual card */
-        .svc-card {
-            flex: 0 0 340px;
-            height: 500px;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-                        box-shadow 0.5s ease;
-            box-shadow: 0 8px 30px rgba(75,77,57,0.12);
-        }
-
-        .svc-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(75,77,57,0.25);
-        }
-
-        .svc-card img {
-            position: absolute;
-            inset: 0;
+            z-index: 3;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .svc-card:hover img {
-            transform: scale(1.07);
-        }
-
-        /* Dark gradient overlay */
-        .svc-card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to top,
-                rgba(30, 30, 20, 0.92) 0%,
-                rgba(30, 30, 20, 0.45) 50%,
-                rgba(30, 30, 20, 0.1) 100%
-            );
             display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
             align-items: center;
-            text-align: center;
-            padding: 40px 30px;
+            justify-content: center;
+            gap: 0;
+            perspective: 1200px;
+        }
+
+        /* Base card */
+        .svc-card {
+            background: rgba(237, 230, 212, 0.10);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(237, 230, 212, 0.22);
+            border-radius: 20px;
+            padding: 40px 36px;
             color: #EDE6D4;
-            transition: background 0.4s ease;
+            text-align: center;
+            transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+            cursor: pointer;
         }
 
-        .svc-card:hover .svc-card-overlay {
-            background: linear-gradient(
-                to top,
-                rgba(30, 30, 20, 0.97) 0%,
-                rgba(30, 30, 20, 0.6) 55%,
-                rgba(30, 30, 20, 0.15) 100%
-            );
+        /* CENTER card */
+        .svc-card.center {
+            width: 400px;
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            z-index: 2;
+            background: rgba(237, 230, 212, 0.14);
+            border-color: rgba(237, 230, 212, 0.35);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
         }
 
-        /* Tag (e.g. Add-on) */
+        /* SIDE cards */
+        .svc-card.side-left {
+            width: 260px;
+            opacity: 0.45;
+            transform: translateX(40px) scale(0.88) rotateY(8deg);
+            z-index: 1;
+        }
+
+        .svc-card.side-right {
+            width: 260px;
+            opacity: 0.45;
+            transform: translateX(-40px) scale(0.88) rotateY(-8deg);
+            z-index: 1;
+        }
+
+        /* Card internals */
         .svc-tag {
+            display: inline-block;
             font-family: 'Lato', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 2.5px;
             text-transform: uppercase;
-            background: rgba(237, 230, 212, 0.2);
-            color: #EDE6D4;
-            padding: 5px 14px;
-            border-radius: 20px;
+            background: rgba(237,230,212,0.18);
             border: 1px solid rgba(237,230,212,0.3);
-            margin-bottom: 14px;
-            display: inline-block;
+            color: #EDE6D4;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 16px;
         }
 
         .svc-name {
             font-family: 'Gowun Batang', serif;
-            font-size: 2rem;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
             font-weight: 400;
             color: #EDE6D4;
             margin: 0 0 10px 0;
@@ -631,28 +596,76 @@
 
         .svc-duration {
             font-family: 'Lato', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 300;
-            color: rgba(237,230,212,0.75);
+            color: rgba(237,230,212,0.65);
             letter-spacing: 1px;
-            margin: 0 0 16px 0;
+            margin: 0 0 20px 0;
+        }
+
+        .svc-divider {
+            width: 40px;
+            height: 1px;
+            background: rgba(237,230,212,0.35);
+            margin: 0 auto 20px;
         }
 
         .svc-desc {
             font-family: 'Lato', sans-serif;
             font-size: 0.97rem;
-            color: rgba(237, 230, 212, 0.9);
-            line-height: 1.65;
+            line-height: 1.7;
+            color: rgba(237,230,212,0.88);
             margin: 0;
-            max-width: 280px;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
-        .svc-card:hover .svc-desc {
-            opacity: 1;
-            transform: translateY(0);
+        /* Hide description & divider on side cards */
+        .svc-card.side-left .svc-desc,
+        .svc-card.side-right .svc-desc,
+        .svc-card.side-left .svc-divider,
+        .svc-card.side-right .svc-divider {
+            display: none;
+        }
+
+        /* Progress dots */
+        .svc-dots {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .svc-dot {
+            width: 28px;
+            height: 2px;
+            background: rgba(237,230,212,0.35);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background 0.4s ease, width 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .svc-dot.active {
+            background: rgba(237,230,212,0.3);
+            width: 28px;
+        }
+
+        /* Timer fill bar inside active dot */
+        .svc-dot.active::after {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            height: 100%;
+            width: 0%;
+            background: #EDE6D4;
+            border-radius: 2px;
+            animation: dotFill 8s linear forwards;
+        }
+
+        @keyframes dotFill {
+            from { width: 0%; }
+            to   { width: 100%; }
         }
 
         /* ── CONTACT ── */
@@ -789,45 +802,37 @@
         @media (max-width: 1024px) {
             nav { padding: 20px 35px; }
             .definition-side, .text-side { padding: 80px 40px; }
-            .overlay-left { padding: 80px 40px; }
-            .svc-card { flex: 0 0 300px; height: 450px; }
+            .svc-card.center    { width: 340px; }
+            .svc-card.side-left,
+            .svc-card.side-right { width: 200px; }
         }
 
         /* ════════════ MOBILE ≤ 768px ════════════ */
         @media (max-width: 768px) {
             nav { padding: 16px 20px; }
-
-            .hero { height: 100vh; height: 100dvh; }
             .hero-content { padding: 0 24px 83px; }
-            .hero h1 { font-size: clamp(1.9rem, 9vw, 2.8rem); margin-bottom: 18px; line-height: 1.2; }
+            .hero h1 { font-size: clamp(1.9rem, 9vw, 2.8rem); margin-bottom: 18px; }
             .hero p  { font-size: 1rem; margin-bottom: 40px; }
-            .cta-btn { padding: 0 40px; height: 50px; font-size: 12px; letter-spacing: 2px; }
+            .cta-btn { padding: 0 40px; height: 50px; font-size: 12px; }
 
             .about-container { grid-template-columns: 1fr; min-height: auto; }
-            .definition-side { padding: 70px 25px 50px; min-height: auto; }
+            .definition-side { padding: 70px 25px 50px; }
             .definition-word { font-size: clamp(3rem, 15vw, 5rem); }
-            .text-side       { padding: 50px 25px 70px; min-height: auto; }
+            .text-side       { padding: 50px 25px 70px; }
             .text-side h2    { font-size: clamp(2rem, 8vw, 2.8rem); }
             .text-side p     { font-size: 1rem; }
 
             .reviews-photos-section { padding: 50px 20px 40px; }
             .review-cards           { grid-template-columns: 1fr; gap: 20px; }
-            .review-card            { padding: 22px; }
             .slider-img             { width: 240px; height: 170px; }
 
-            .services { padding: 80px 0 60px; }
-            .services-header { margin-bottom: 40px; }
-            .services-title { font-size: clamp(2rem, 8vw, 2.8rem); }
-            .svc-card { flex: 0 0 270px; height: 420px; }
-            .svc-card:hover { transform: translateY(-6px); }
-            .services-carousel::before,
-            .services-carousel::after { width: 60px; }
-            .carousel-track { gap: 20px; padding: 15px 50px; }
-            .svc-name { font-size: 1.7rem; }
-            .svc-desc { opacity: 1; transform: translateY(0); }
+            /* Mobile: only center card, hide sides */
+            .svc-card.side-left,
+            .svc-card.side-right { display: none; }
+            .svc-card.center { width: calc(100vw - 60px); max-width: 380px; }
+            .services-header { margin-bottom: 35px; }
 
             .contact        { padding: 70px 25px; }
-            .contact h2     { font-size: clamp(2rem, 8vw, 3rem); }
             .contact-intro  { font-size: 1rem; margin-bottom: 35px; }
             .whatsapp-btn   { width: 100%; justify-content: center; padding: 16px 20px; font-size: 16px; }
             input, textarea { font-size: 16px; padding: 14px; }
@@ -841,20 +846,10 @@
             .logo-name     { font-size: 18px; }
             .logo-location { font-size: 9px; letter-spacing: 2px; }
             .hero h1 { font-size: clamp(1.7rem, 10vw, 2.4rem); }
-            .hero p  { font-size: 0.95rem; }
-            .definition-side { padding: 60px 20px 40px; }
-            .text-side       { padding: 40px 20px 60px; }
             .definition-word { font-size: clamp(2.8rem, 18vw, 4rem); }
-            .reviews-photos-section { padding: 40px 15px 30px; }
-            .slider-img             { width: 200px; height: 140px; }
-            .svc-card { flex: 0 0 240px; height: 380px; }
-            .svc-name { font-size: 1.5rem; }
-            .contact { padding: 60px 20px; }
-            .overlay-links      { gap: 8px; }
             .overlay-links li a { font-size: clamp(1.8rem, 9vw, 2.6rem); }
-            .overlay-ig         { font-size: 0.85rem; }
-            .services-carousel::before,
-            .services-carousel::after { width: 40px; }
+            .svc-card.center { padding: 30px 24px; }
+            .svc-name { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -876,9 +871,9 @@
     <div class="menu-overlay" id="menuOverlay">
         <div class="overlay-left">
             <ul class="overlay-links">
-                <li><a href="#home"     class="overlay-nav-link">Home</a></li>
-                <li><a href="#about"    class="overlay-nav-link">About</a></li>
-                <li><a href="#services" class="overlay-nav-link">Services</a></li>
+                <li><a href="#home"        class="overlay-nav-link">Home</a></li>
+                <li><a href="#about"       class="overlay-nav-link">About</a></li>
+                <li><a href="#services"    class="overlay-nav-link">Services</a></li>
                 <li><a href="reserve.html" class="overlay-nav-link">Reserve</a></li>
             </ul>
             <a href="https://instagram.com/myokomassage" target="_blank" class="overlay-ig">@myokomassage</a>
@@ -954,114 +949,32 @@
         </div>
     </section>
 
-    <!-- Services -->
-    <section class="services fade-in-up" id="services">
+    <!-- ── SERVICES ── -->
+    <section class="services" id="services">
+
+        <!-- Background photo layers -->
+        <img src="swedish-massage.jpg"     class="svc-bg-layer active" alt="">
+        <img src="deep-tissue-massage.jpg" class="svc-bg-layer" alt="">
+        <img src="sports-massage.jpg"      class="svc-bg-layer" alt="">
+        <img src="cupping-therapy.jpg"     class="svc-bg-layer" alt="">
+        <img src="aromatherapy-massage.jpg" class="svc-bg-layer" alt="">
+
+        <div class="svc-scene-overlay"></div>
+
+        <!-- Headline -->
         <div class="services-header">
-            <h2 class="services-title">Our Services</h2>
-            <p class="services-subtitle">Mobile massage therapy delivered to your villa, hotel, or beach retreat across Mykonos</p>
+            <h2 class="services-title">Services</h2>
+            <p class="services-subtitle">Explore the experiences available — or customise yours via WhatsApp</p>
         </div>
 
-        <div class="services-carousel">
-            <div class="carousel-track">
-
-                <!-- Swedish -->
-                <div class="svc-card">
-                    <img src="swedish-massage.jpg" alt="Swedish Massage">
-                    <div class="svc-card-overlay">
-                        <h3 class="svc-name">Swedish Massage</h3>
-                        <p class="svc-duration">60 minutes</p>
-                        <p class="svc-desc">Gentle flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
-                    </div>
-                </div>
-
-                <!-- Deep Tissue -->
-                <div class="svc-card">
-                    <img src="deep-tissue-massage.jpg" alt="Deep Tissue Massage">
-                    <div class="svc-card-overlay">
-                        <h3 class="svc-name">Deep Tissue</h3>
-                        <p class="svc-duration">60 minutes</p>
-                        <p class="svc-desc">Targeted pressure releases chronic muscle tension and knots. Ideal for athletes or those with persistent pain and tightness.</p>
-                    </div>
-                </div>
-
-                <!-- Sports -->
-                <div class="svc-card">
-                    <img src="sports-massage.jpg" alt="Sports Massage">
-                    <div class="svc-card-overlay">
-                        <h3 class="svc-name">Sports Massage</h3>
-                        <p class="svc-duration">60 minutes</p>
-                        <p class="svc-desc">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles.</p>
-                    </div>
-                </div>
-
-                <!-- Cupping -->
-                <div class="svc-card">
-                    <img src="cupping-therapy.jpg" alt="Cupping Therapy">
-                    <div class="svc-card-overlay">
-                        <span class="svc-tag">Add-on</span>
-                        <h3 class="svc-name">Cupping Therapy</h3>
-                        <p class="svc-duration">15–20 minutes</p>
-                        <p class="svc-desc">Ancient suction technique that lifts fascia, improves blood flow, and releases deep-seated tension. Pair with any massage.</p>
-                    </div>
-                </div>
-
-                <!-- Aromatherapy -->
-                <div class="svc-card">
-                    <img src="aromatherapy-massage.jpg" alt="Aromatherapy">
-                    <div class="svc-card-overlay">
-                        <span class="svc-tag">Add-on</span>
-                        <h3 class="svc-name">Aromatherapy</h3>
-                        <p class="svc-duration">Full session</p>
-                        <p class="svc-desc">Custom essential oil blend — lavender, peppermint, or sweet orange — for deeper relaxation and mood elevation.</p>
-                    </div>
-                </div>
-
-                <!-- DUPLICATES for seamless infinite loop -->
-                <div class="svc-card">
-                    <img src="swedish-massage.jpg" alt="Swedish Massage">
-                    <div class="svc-card-overlay">
-                        <h3 class="svc-name">Swedish Massage</h3>
-                        <p class="svc-duration">60 minutes</p>
-                        <p class="svc-desc">Gentle flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
-                    </div>
-                </div>
-                <div class="svc-card">
-                    <img src="deep-tissue-massage.jpg" alt="Deep Tissue Massage">
-                    <div class="svc-card-overlay">
-                        <h3 class="svc-name">Deep Tissue</h3>
-                        <p class="svc-duration">60 minutes</p>
-                        <p class="svc-desc">Targeted pressure releases chronic muscle tension and knots. Ideal for athletes or those with persistent pain and tightness.</p>
-                    </div>
-                </div>
-                <div class="svc-card">
-                    <img src="sports-massage.jpg" alt="Sports Massage">
-                    <div class="svc-card-overlay">
-                        <h3 class="svc-name">Sports Massage</h3>
-                        <p class="svc-duration">60 minutes</p>
-                        <p class="svc-desc">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles.</p>
-                    </div>
-                </div>
-                <div class="svc-card">
-                    <img src="cupping-therapy.jpg" alt="Cupping Therapy">
-                    <div class="svc-card-overlay">
-                        <span class="svc-tag">Add-on</span>
-                        <h3 class="svc-name">Cupping Therapy</h3>
-                        <p class="svc-duration">15–20 minutes</p>
-                        <p class="svc-desc">Ancient suction technique that lifts fascia, improves blood flow, and releases deep-seated tension. Pair with any massage.</p>
-                    </div>
-                </div>
-                <div class="svc-card">
-                    <img src="aromatherapy-massage.jpg" alt="Aromatherapy">
-                    <div class="svc-card-overlay">
-                        <span class="svc-tag">Add-on</span>
-                        <h3 class="svc-name">Aromatherapy</h3>
-                        <p class="svc-duration">Full session</p>
-                        <p class="svc-desc">Custom essential oil blend — lavender, peppermint, or sweet orange — for deeper relaxation and mood elevation.</p>
-                    </div>
-                </div>
-
-            </div>
+        <!-- Card stage -->
+        <div class="svc-stage" id="svcStage">
+            <!-- Rendered by JS -->
         </div>
+
+        <!-- Progress dots -->
+        <div class="svc-dots" id="svcDots"></div>
+
     </section>
 
     <!-- Contact -->
@@ -1069,7 +982,8 @@
         <h2>Reserve Your Session</h2>
         <p class="contact-intro">Mobile massage service across Mykonos. We come to you.</p>
         <div class="contact-methods">
-            <a href="https://wa.me/306947077567?text=Hi%20I%20would%20like%20to%20book%20a%20massage" class="whatsapp-btn" target="_blank">
+            <a href="https://wa.me/306947077567?text=Hi%20I%20would%20like%20to%20book%20a%20massage"
+               class="whatsapp-btn" target="_blank">
                 Reserve on WhatsApp
             </a>
         </div>
@@ -1087,13 +1001,13 @@
     </footer>
 
     <script>
-        // ── Navbar scroll effect
+        /* ── Navbar ── */
         const nav = document.getElementById('mainNav');
         window.addEventListener('scroll', () => {
             nav.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // ── Hamburger / menu overlay
+        /* ── Menu overlay ── */
         const menuToggle  = document.getElementById('menuToggle');
         const menuOverlay = document.getElementById('menuOverlay');
 
@@ -1113,17 +1027,126 @@
             });
         });
 
-        // ── Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('appear');
-                }
-            });
+        /* ── Scroll animations ── */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('appear'); });
         }, { threshold: 0.15 });
 
         document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-up')
                 .forEach(el => observer.observe(el));
+
+        /* ══════════════════════════════
+           SERVICES SHOWCASE LOGIC
+        ══════════════════════════════ */
+        const services = [
+            {
+                name: 'Swedish Massage',
+                duration: '60 minutes',
+                desc: 'Gentle, flowing strokes to promote deep relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a sun-drenched day on the island.',
+                tag: null
+            },
+            {
+                name: 'Deep Tissue',
+                duration: '60 minutes',
+                desc: 'Targeted pressure that reaches the deeper layers of muscle and connective tissue. Ideal for chronic tension, knots, and those who need something more restorative.',
+                tag: null
+            },
+            {
+                name: 'Sports Massage',
+                duration: '60 minutes',
+                desc: 'Dynamic techniques designed to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles and post-activity relief.',
+                tag: null
+            },
+            {
+                name: 'Cupping Therapy',
+                duration: '15 – 20 minutes',
+                desc: 'Ancient suction cup technique that lifts fascia, boosts blood flow, and releases deep-seated tension. A powerful enhancement to any massage session.',
+                tag: 'Add-on'
+            },
+            {
+                name: 'Aromatherapy',
+                duration: 'Full session',
+                desc: 'A bespoke essential oil blend — lavender, peppermint, or sweet orange — woven into your massage for heightened relaxation and mood elevation.',
+                tag: 'Add-on'
+            }
+        ];
+
+        const INTERVAL   = 8000;  // 8 seconds
+        const TRANSITION = 900;   // ms — must match CSS transition
+
+        let current = 0;
+        let timer   = null;
+        let dotAnimTimeout = null;
+
+        const stage   = document.getElementById('svcStage');
+        const dotsEl  = document.getElementById('svcDots');
+        const bgLayers = document.querySelectorAll('.svc-bg-layer');
+
+        /* Build dot indicators */
+        services.forEach((_, i) => {
+            const d = document.createElement('button');
+            d.className = 'svc-dot' + (i === 0 ? ' active' : '');
+            d.setAttribute('aria-label', `Go to ${services[i].name}`);
+            d.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(d);
+        });
+
+        function buildCard(index, role) {
+            const s = services[index];
+            const card = document.createElement('div');
+            card.className = `svc-card ${role}`;
+            card.addEventListener('click', () => {
+                if (role === 'side-left') goTo((current - 1 + services.length) % services.length);
+                if (role === 'side-right') goTo((current + 1) % services.length);
+            });
+
+            card.innerHTML = `
+                ${s.tag ? `<div class="svc-tag">${s.tag}</div>` : ''}
+                <h3 class="svc-name">${s.name}</h3>
+                <p class="svc-duration">${s.duration}</p>
+                <div class="svc-divider"></div>
+                <p class="svc-desc">${s.desc}</p>
+            `;
+            return card;
+        }
+
+        function render(idx) {
+            stage.innerHTML = '';
+
+            const leftIdx  = (idx - 1 + services.length) % services.length;
+            const rightIdx = (idx + 1) % services.length;
+
+            stage.appendChild(buildCard(leftIdx,  'side-left'));
+            stage.appendChild(buildCard(idx,       'center'));
+            stage.appendChild(buildCard(rightIdx,  'side-right'));
+
+            /* Background crossfade */
+            bgLayers.forEach((l, i) => l.classList.toggle('active', i === idx));
+
+            /* Dots */
+            dotsEl.querySelectorAll('.svc-dot').forEach((d, i) => {
+                d.classList.toggle('active', i === idx);
+            });
+        }
+
+        function goTo(idx) {
+            clearTimeout(timer);
+            current = idx;
+            render(current);
+            scheduleNext();
+        }
+
+        function scheduleNext() {
+            timer = setTimeout(() => {
+                current = (current + 1) % services.length;
+                render(current);
+                scheduleNext();
+            }, INTERVAL);
+        }
+
+        /* Init */
+        render(0);
+        scheduleNext();
     </script>
 </body>
 </html>
