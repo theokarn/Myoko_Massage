@@ -457,44 +457,44 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            /* Pure black base — photos layer on top */
+            background: #000;
         }
 
-        /* Background photo layers — stacked, crossfade */
+        /* Background photo layers */
         .svc-bg-layer {
             position: absolute;
             inset: 0;
             width: 100%; height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 0;
-            transform: scale(1.04);
-            filter: brightness(0.55);
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0.45);
         }
 
         .svc-bg-layer.active {
             opacity: 1;
-            transform: scale(1);
-            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-                        transform 9s ease-out;
         }
 
-        /* Dark vignette over background */
-        .svc-scene-overlay {
+        /* No vignette — just a very subtle bottom fade so dots stay readable */
+        .svc-bottom-fade {
             position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at center,
-                rgba(0,0,0,0.05) 0%,
-                rgba(0,0,0,0.55) 100%);
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to top, rgba(0,0,0,0.45), transparent);
             z-index: 1;
+            pointer-events: none;
         }
 
-        /* Header text above cards */
+        /* Header */
         .services-header {
             position: relative;
             z-index: 3;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 48px;
             padding: 0 20px;
         }
 
@@ -510,14 +510,14 @@
             font-family: 'Lato', sans-serif;
             font-size: 1rem;
             font-weight: 300;
-            color: rgba(237, 230, 212, 0.75);
-            letter-spacing: 0.5px;
-            max-width: 460px;
+            color: rgba(237, 230, 212, 0.7);
+            letter-spacing: 0.3px;
+            max-width: 420px;
             margin: 0 auto;
             line-height: 1.6;
         }
 
-        /* Card stage — 3 cards visible: prev (left), active (center), next (right) */
+        /* Stage — side cards overflow screen edges */
         .svc-stage {
             position: relative;
             z-index: 3;
@@ -525,147 +525,166 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0;
-            perspective: 1200px;
+            /* Allow overflow so side cards pop out */
+            overflow: visible;
         }
 
-        /* Base card */
+        /* ── Base card ── */
         .svc-card {
-            background: rgba(237, 230, 212, 0.10);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(237, 230, 212, 0.22);
-            border-radius: 20px;
-            padding: 40px 36px;
-            color: #EDE6D4;
+            border-radius: 16px;
+            padding: 44px 40px;
             text-align: center;
-            transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.85s cubic-bezier(0.4, 0, 0.2, 1);
             flex-shrink: 0;
-            cursor: pointer;
+            position: absolute;
         }
 
-        /* CENTER card */
+        /* CENTER — white, wide */
         .svc-card.center {
-            width: 400px;
+            background: #ffffff;
+            width: min(580px, 88vw);
             opacity: 1;
-            transform: translateX(0) scale(1);
-            z-index: 2;
-            background: rgba(237, 230, 212, 0.14);
-            border-color: rgba(237, 230, 212, 0.35);
-            box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+            transform: translateX(0) scale(1) rotateY(0deg);
+            z-index: 3;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+            position: relative; /* keeps stage height */
         }
 
-        /* SIDE cards */
+        /* SIDE cards — partially off-screen */
         .svc-card.side-left {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
             width: 260px;
-            opacity: 0.45;
-            transform: translateX(40px) scale(0.88) rotateY(8deg);
-            z-index: 1;
+            opacity: 0.6;
+            transform: translateX(calc(-50vw + 60px)) scale(0.85) rotateY(12deg);
+            z-index: 2;
         }
 
         .svc-card.side-right {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
             width: 260px;
-            opacity: 0.45;
-            transform: translateX(-40px) scale(0.88) rotateY(-8deg);
-            z-index: 1;
+            opacity: 0.6;
+            transform: translateX(calc(50vw - 60px)) scale(0.85) rotateY(-12deg);
+            z-index: 2;
         }
 
-        /* Card internals */
+        /* Side card click targets */
+        .svc-card.side-left,
+        .svc-card.side-right { cursor: pointer; }
+
+        .svc-card.side-left:hover  { opacity: 0.85; }
+        .svc-card.side-right:hover { opacity: 0.85; }
+
+        /* ── Card content ── */
         .svc-tag {
             display: inline-block;
             font-family: 'Lato', sans-serif;
             font-size: 0.65rem;
             letter-spacing: 2.5px;
             text-transform: uppercase;
-            background: rgba(237,230,212,0.18);
-            border: 1px solid rgba(237,230,212,0.3);
-            color: #EDE6D4;
+            background: rgba(75,77,57,0.08);
+            border: 1px solid rgba(75,77,57,0.2);
+            color: #4B4D39;
             padding: 4px 12px;
             border-radius: 20px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
+        }
+
+        /* Side card tag */
+        .svc-card.side-left .svc-tag,
+        .svc-card.side-right .svc-tag {
+            background: rgba(237,230,212,0.15);
+            border-color: rgba(237,230,212,0.25);
+            color: #EDE6D4;
         }
 
         .svc-name {
             font-family: 'Gowun Batang', serif;
-            font-size: clamp(1.6rem, 3vw, 2.2rem);
             font-weight: 400;
-            color: #EDE6D4;
-            margin: 0 0 10px 0;
+            margin: 0 0 8px 0;
             line-height: 1.2;
+        }
+
+        /* Center card — dark text */
+        .svc-card.center .svc-name {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            color: #4B4D39;
+        }
+
+        /* Side cards — light text */
+        .svc-card.side-left .svc-name,
+        .svc-card.side-right .svc-name {
+            font-size: 1.3rem;
+            color: #EDE6D4;
         }
 
         .svc-duration {
             font-family: 'Lato', sans-serif;
             font-size: 0.88rem;
             font-weight: 300;
-            color: rgba(237,230,212,0.65);
-            letter-spacing: 1px;
-            margin: 0 0 20px 0;
+            letter-spacing: 0.8px;
+            margin: 0 0 22px 0;
         }
 
+        .svc-card.center .svc-duration { color: rgba(75,77,57,0.6); }
+        .svc-card.side-left .svc-duration,
+        .svc-card.side-right .svc-duration { color: rgba(237,230,212,0.55); }
+
         .svc-divider {
-            width: 40px;
+            width: 36px;
             height: 1px;
-            background: rgba(237,230,212,0.35);
-            margin: 0 auto 20px;
+            background: rgba(75,77,57,0.2);
+            margin: 0 auto 22px;
         }
 
         .svc-desc {
             font-family: 'Lato', sans-serif;
-            font-size: 0.97rem;
-            line-height: 1.7;
-            color: rgba(237,230,212,0.88);
+            font-size: 1rem;
+            line-height: 1.75;
+            color: rgba(75,77,57,0.85);
             margin: 0;
         }
 
-        /* Hide description & divider on side cards */
+        /* Hide desc & divider on side cards */
         .svc-card.side-left .svc-desc,
         .svc-card.side-right .svc-desc,
         .svc-card.side-left .svc-divider,
-        .svc-card.side-right .svc-divider {
-            display: none;
-        }
+        .svc-card.side-right .svc-divider { display: none; }
 
-        /* Progress dots */
+        /* ── Dots — bottom of section, minimal ── */
         .svc-dots {
-            position: relative;
-            z-index: 3;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
             display: flex;
-            gap: 10px;
-            margin-top: 40px;
+            gap: 8px;
+            align-items: center;
         }
 
         .svc-dot {
-            width: 28px;
+            width: 32px;
             height: 2px;
-            background: rgba(237,230,212,0.35);
             border-radius: 2px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            padding: 0;
             cursor: pointer;
-            transition: background 0.4s ease, width 0.4s ease;
             position: relative;
             overflow: hidden;
+            transition: background 0.3s ease;
         }
 
-        .svc-dot.active {
-            background: rgba(237,230,212,0.3);
-            width: 28px;
-        }
-
-        /* Timer fill bar inside active dot */
-        .svc-dot.active::after {
-            content: '';
+        /* The fill — a child span animated via JS width */
+        .svc-dot-fill {
             position: absolute;
-            left: 0; top: 0;
+            top: 0; left: 0;
             height: 100%;
             width: 0%;
-            background: #EDE6D4;
+            background: rgba(237,230,212,0.9);
             border-radius: 2px;
-            animation: dotFill 8s linear forwards;
-        }
-
-        @keyframes dotFill {
-            from { width: 0%; }
-            to   { width: 100%; }
         }
 
         /* ── CONTACT ── */
@@ -802,9 +821,8 @@
         @media (max-width: 1024px) {
             nav { padding: 20px 35px; }
             .definition-side, .text-side { padding: 80px 40px; }
-            .svc-card.center    { width: 340px; }
-            .svc-card.side-left,
-            .svc-card.side-right { width: 200px; }
+            .svc-card.side-left  { transform: translateX(calc(-50vw + 40px)) scale(0.85) rotateY(12deg); }
+            .svc-card.side-right { transform: translateX(calc(50vw - 40px))  scale(0.85) rotateY(-12deg); }
         }
 
         /* ════════════ MOBILE ≤ 768px ════════════ */
@@ -826,11 +844,11 @@
             .review-cards           { grid-template-columns: 1fr; gap: 20px; }
             .slider-img             { width: 240px; height: 170px; }
 
-            /* Mobile: only center card, hide sides */
+            /* Mobile: hide side cards */
             .svc-card.side-left,
             .svc-card.side-right { display: none; }
-            .svc-card.center { width: calc(100vw - 60px); max-width: 380px; }
-            .services-header { margin-bottom: 35px; }
+            .svc-card.center { width: calc(100vw - 48px); padding: 36px 28px; }
+            .services-header { margin-bottom: 32px; }
 
             .contact        { padding: 70px 25px; }
             .contact-intro  { font-size: 1rem; margin-bottom: 35px; }
@@ -848,8 +866,8 @@
             .hero h1 { font-size: clamp(1.7rem, 10vw, 2.4rem); }
             .definition-word { font-size: clamp(2.8rem, 18vw, 4rem); }
             .overlay-links li a { font-size: clamp(1.8rem, 9vw, 2.6rem); }
-            .svc-card.center { padding: 30px 24px; }
-            .svc-name { font-size: 1.5rem; }
+            .svc-card.center { padding: 30px 22px; }
+            .svc-card.center .svc-name { font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -952,14 +970,15 @@
     <!-- ── SERVICES ── -->
     <section class="services" id="services">
 
-        <!-- Background photo layers -->
-        <img src="swedish-massage.jpg"     class="svc-bg-layer active" alt="">
-        <img src="deep-tissue-massage.jpg" class="svc-bg-layer" alt="">
-        <img src="sports-massage.jpg"      class="svc-bg-layer" alt="">
-        <img src="cupping-therapy.jpg"     class="svc-bg-layer" alt="">
+        <!-- BG photos -->
+        <img src="swedish-massage.jpg"      class="svc-bg-layer active" alt="">
+        <img src="deep-tissue-massage.jpg"  class="svc-bg-layer" alt="">
+        <img src="sports-massage.jpg"       class="svc-bg-layer" alt="">
+        <img src="cupping-therapy.jpg"      class="svc-bg-layer" alt="">
         <img src="aromatherapy-massage.jpg" class="svc-bg-layer" alt="">
 
-        <div class="svc-scene-overlay"></div>
+        <!-- Subtle bottom fade for dot legibility -->
+        <div class="svc-bottom-fade"></div>
 
         <!-- Headline -->
         <div class="services-header">
@@ -967,12 +986,10 @@
             <p class="services-subtitle">Explore the experiences available — or customise yours via WhatsApp</p>
         </div>
 
-        <!-- Card stage -->
-        <div class="svc-stage" id="svcStage">
-            <!-- Rendered by JS -->
-        </div>
+        <!-- Card stage (populated by JS) -->
+        <div class="svc-stage" id="svcStage"></div>
 
-        <!-- Progress dots -->
+        <!-- Dots (populated by JS) -->
         <div class="svc-dots" id="svcDots"></div>
 
     </section>
@@ -988,9 +1005,9 @@
             </a>
         </div>
         <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-            <input type="text"  name="name"    placeholder="Your Name"     required>
-            <input type="email" name="email"   placeholder="Your Email"    required>
-            <input type="tel"   name="phone"   placeholder="Phone Number"  required>
+            <input type="text"  name="name"    placeholder="Your Name"    required>
+            <input type="email" name="email"   placeholder="Your Email"   required>
+            <input type="tel"   name="phone"   placeholder="Phone Number" required>
             <textarea           name="message" placeholder="Preferred date, time, and service type..." required></textarea>
             <button type="submit">Send Message</button>
         </form>
@@ -1028,27 +1045,27 @@
         });
 
         /* ── Scroll animations ── */
-        const observer = new IntersectionObserver(entries => {
+        const scrollObserver = new IntersectionObserver(entries => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('appear'); });
         }, { threshold: 0.15 });
 
         document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-up')
-                .forEach(el => observer.observe(el));
+                .forEach(el => scrollObserver.observe(el));
 
-        /* ══════════════════════════════
-           SERVICES SHOWCASE LOGIC
-        ══════════════════════════════ */
+        /* ══════════════════════════
+           SERVICES SHOWCASE
+        ══════════════════════════ */
         const services = [
             {
                 name: 'Swedish Massage',
                 duration: '60 minutes',
-                desc: 'Gentle, flowing strokes to promote deep relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a sun-drenched day on the island.',
+                desc: 'Gentle, flowing strokes that promote deep relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a sun-drenched day on the island.',
                 tag: null
             },
             {
                 name: 'Deep Tissue',
                 duration: '60 minutes',
-                desc: 'Targeted pressure that reaches the deeper layers of muscle and connective tissue. Ideal for chronic tension, knots, and those who need something more restorative.',
+                desc: 'Targeted pressure that reaches deeper layers of muscle and connective tissue. Ideal for chronic tension, stubborn knots, and those who need something more restorative.',
                 tag: null
             },
             {
@@ -1071,34 +1088,38 @@
             }
         ];
 
-        const INTERVAL   = 8000;  // 8 seconds
-        const TRANSITION = 900;   // ms — must match CSS transition
-
+        const INTERVAL = 8000;
         let current = 0;
-        let timer   = null;
-        let dotAnimTimeout = null;
+        let autoTimer = null;
+        let fillRAF = null;
+        let fillStart = null;
 
-        const stage   = document.getElementById('svcStage');
-        const dotsEl  = document.getElementById('svcDots');
+        const stage    = document.getElementById('svcStage');
+        const dotsEl   = document.getElementById('svcDots');
         const bgLayers = document.querySelectorAll('.svc-bg-layer');
 
-        /* Build dot indicators */
+        /* ── Build dots ── */
         services.forEach((_, i) => {
-            const d = document.createElement('button');
-            d.className = 'svc-dot' + (i === 0 ? ' active' : '');
-            d.setAttribute('aria-label', `Go to ${services[i].name}`);
-            d.addEventListener('click', () => goTo(i));
-            dotsEl.appendChild(d);
+            const btn = document.createElement('button');
+            btn.className = 'svc-dot';
+            btn.setAttribute('aria-label', `Go to ${services[i].name}`);
+            btn.innerHTML = '<span class="svc-dot-fill"></span>';
+            btn.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(btn);
         });
 
+        /* ── Build a card ── */
         function buildCard(index, role) {
             const s = services[index];
             const card = document.createElement('div');
             card.className = `svc-card ${role}`;
-            card.addEventListener('click', () => {
-                if (role === 'side-left') goTo((current - 1 + services.length) % services.length);
-                if (role === 'side-right') goTo((current + 1) % services.length);
-            });
+
+            if (role !== 'center') {
+                card.addEventListener('click', () => {
+                    if (role === 'side-left')  goTo((current - 1 + services.length) % services.length);
+                    if (role === 'side-right') goTo((current + 1) % services.length);
+                });
+            }
 
             card.innerHTML = `
                 ${s.tag ? `<div class="svc-tag">${s.tag}</div>` : ''}
@@ -1110,41 +1131,53 @@
             return card;
         }
 
+        /* ── Render stage ── */
         function render(idx) {
             stage.innerHTML = '';
+            const left  = (idx - 1 + services.length) % services.length;
+            const right = (idx + 1) % services.length;
 
-            const leftIdx  = (idx - 1 + services.length) % services.length;
-            const rightIdx = (idx + 1) % services.length;
+            stage.appendChild(buildCard(left,  'side-left'));
+            stage.appendChild(buildCard(idx,   'center'));
+            stage.appendChild(buildCard(right, 'side-right'));
 
-            stage.appendChild(buildCard(leftIdx,  'side-left'));
-            stage.appendChild(buildCard(idx,       'center'));
-            stage.appendChild(buildCard(rightIdx,  'side-right'));
-
-            /* Background crossfade */
+            /* BG crossfade */
             bgLayers.forEach((l, i) => l.classList.toggle('active', i === idx));
 
-            /* Dots */
+            /* Dots — reset all fills, start active fill */
             dotsEl.querySelectorAll('.svc-dot').forEach((d, i) => {
-                d.classList.toggle('active', i === idx);
+                const fill = d.querySelector('.svc-dot-fill');
+                fill.style.transition = 'none';
+                fill.style.width = '0%';
+                if (i === idx) {
+                    /* Small frame delay so transition kicks in after reset */
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            fill.style.transition = `width ${INTERVAL}ms linear`;
+                            fill.style.width = '100%';
+                        });
+                    });
+                }
             });
         }
 
+        /* ── Navigate ── */
         function goTo(idx) {
-            clearTimeout(timer);
+            clearTimeout(autoTimer);
             current = idx;
             render(current);
             scheduleNext();
         }
 
         function scheduleNext() {
-            timer = setTimeout(() => {
+            autoTimer = setTimeout(() => {
                 current = (current + 1) % services.length;
                 render(current);
                 scheduleNext();
             }, INTERVAL);
         }
 
-        /* Init */
+        /* ── Init ── */
         render(0);
         scheduleNext();
     </script>
