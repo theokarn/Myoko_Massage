@@ -264,7 +264,7 @@
         }
 
         /* ── REVIEWS / PHOTO STRIP ── */
-        .reviews-photos-section { background: #EDE6D4; padding: 80px 40px 60px; }
+        .reviews-photos-section { background: #EDE6D4; padding: 110px 40px 110px; }
         .reviews-container { max-width: 1200px; margin: 0 auto 60px; }
         .reviews-container h3 {
             font-family: 'Gowun Batang', serif;
@@ -278,20 +278,32 @@
             background: #ffffff;
             border: 1px solid rgba(75,77,57,0.1);
             border-radius: 12px;
-            padding: 30px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .review-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(75,77,57,0.1); }
-        .stars { font-size: 1.2rem; margin-bottom: 15px; }
+        
+        .review-author {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.95rem; font-weight: 700;
+            color: #4B4D39; margin: 0;
+        }
         .review-text {
             font-family: 'Lato', sans-serif; font-size: 1rem;
-            color: #4B4D39; line-height: 1.7; margin: 0 0 15px 0; font-style: italic;
+            color: rgba(75,77,57,0.75); line-height: 1.7;
+            margin: 0; font-style: italic; flex: 1;
         }
-        .review-author {
-            font-family: 'Lato', sans-serif; font-size: 0.9rem;
-            color: rgba(75,77,57,0.5); margin: 0; font-weight: 500;
+        .stars {
+            font-size: 1rem;
+            margin: 0;
+            letter-spacing: 2px;
+	color: #C9A84C;
         }
-        
+
         /* ══════════════════════════════════════
            ── SERVICES
         ══════════════════════════════════════ */
@@ -668,19 +680,19 @@
                 <h3>What Our Clients <strong>Say</strong></h3>
                 <div class="review-cards">
                     <div class="review-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-author">Maria K.</p>
                         <p class="review-text">"Absolutely incredible experience. The massage was exactly what I needed after a long day exploring the island."</p>
-                        <p class="review-author">— Maria K.</p>
+                        <div class="stars">★★★★★</div>
                     </div>
                     <div class="review-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-author">James R.</p>
                         <p class="review-text">"Professional, relaxing, and so convenient. Highly recommend for anyone visiting Mykonos."</p>
-                        <p class="review-author">— James R.</p>
+                        <div class="stars">★★★★★</div>
                     </div>
                     <div class="review-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-author">Sophia L.</p>
                         <p class="review-text">"Best massage I've ever had. The therapist was skilled and attentive to my needs."</p>
-                        <p class="review-author">— Sophia L.</p>
+                        <div class="stars">★★★★★</div>
                     </div>
                 </div>
             </div>
