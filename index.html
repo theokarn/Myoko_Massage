@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Lato:wght@300;400;700&family=Gowun+Batang:wght@400;700&family=Inter:wght@200;300;400;500&family=Manrope:wght@200;300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Lato:wght@300;400;700&family=Gowun+Batang:wght@400;700&family=Inter:wght@200;300;400;500&family=Manrope:wght@200;300&display=swap" rel="stylesheet">
     <title>Myōko Massage | Mykonos</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -263,14 +263,14 @@
             color: #4B4D39; line-height: 1.8; margin: 0 0 20px 0; max-width: 550px;
         }
 
-        /* ── REVIEWS / PHOTO STRIP ── */
-        .reviews-photos-section { background: #EDE6D4; padding: 110px 40px 110px; }
-        .reviews-container { max-width: 1200px; margin: 0 auto 60px; }
+        /* ── REVIEWS ── */
+        .reviews-photos-section { background: #EDE6D4; padding: 130px 40px; }
+        .reviews-container { max-width: 1200px; margin: 0 auto; }
         .reviews-container h3 {
             font-family: 'Gowun Batang', serif;
             font-size: clamp(2rem,4vw,2.8rem); font-weight: 400;
             color: #4B4D39; text-align: center; margin: 0 0 50px 0;
-    }
+        }
         .review-cards {
             display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 30px;
         }
@@ -278,30 +278,56 @@
             background: #ffffff;
             border: 1px solid rgba(75,77,57,0.1);
             border-radius: 12px;
-            padding: 32px;
+            padding: 36px 32px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            gap: 16px;
+            gap: 18px;
+            min-height: 220px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .review-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(75,77,57,0.1); }
-        
         .review-author {
-            font-family: 'Lato', sans-serif;
+            font-family: 'Roboto', 'Lato', sans-serif;
             font-size: 0.95rem; font-weight: 700;
             color: #4B4D39; margin: 0;
         }
         .review-text {
-            font-family: 'Lato', sans-serif; font-size: 1rem;
-            color: rgba(75,77,57,0.75); line-height: 1.7;
-            margin: 0; font-style: italic; flex: 1;
+            font-family: 'Roboto', 'Lato', sans-serif;
+            font-size: 0.97rem;
+            color: rgba(75,77,57,0.75);
+            line-height: 1.7; margin: 0;
+            font-style: normal;
+            flex: 1;
         }
         .stars {
             font-size: 1rem;
             margin: 0;
             letter-spacing: 2px;
-	color: #C9A84C;
+            color: #C9A84C;
+        }
+
+        /* ── Google badge ── */
+        .google-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: #fff;
+            border: 1px solid rgba(75,77,57,0.12);
+            border-radius: 20px;
+            padding: 6px 16px;
+            margin: 0 auto 28px;
+            font-size: 0.78rem;
+            font-family: 'Lato', sans-serif;
+            letter-spacing: 0.5px;
+            color: rgba(75,77,57,0.5);
+        }
+        .google-badge .g-dot {
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .google-badge-wrap {
+            text-align: center;
         }
 
         /* ══════════════════════════════════════
@@ -349,7 +375,7 @@
             overflow: hidden;
         }
 
-        /* ── BG layers — pure dissolve ── */
+        /* ── BG layers ── */
         .svc-bg-layer {
             position: absolute; inset: 0;
             width: 100%; height: 100%;
@@ -397,15 +423,11 @@
                         transform 0.65s cubic-bezier(0.4,0,0.2,1),
                         box-shadow 0.65s ease;
         }
-
-        /* Center card */
         .svc-slot.slot-center .svc-card {
             opacity: 1;
             transform: scale(1) rotateY(0deg);
             box-shadow: 0 40px 100px rgba(0,0,0,0.7);
         }
-
-        /* Side cards */
         .svc-slot.slot-left .svc-card {
             opacity: 0.85;
             transform: scale(0.88) rotateY(12deg) translateX(20px);
@@ -474,8 +496,6 @@
             font-family: 'Lato', sans-serif; font-size: 1.02rem;
             line-height: 1.78; color: rgba(75,77,57,0.8); margin: 0;
         }
-
-        /* Hide desc/divider on side cards */
         .svc-slot.slot-left  .svc-desc,
         .svc-slot.slot-right .svc-desc,
         .svc-slot.slot-left  .svc-divider,
@@ -586,9 +606,8 @@
             .text-side { padding: 50px 25px 70px; }
             .text-side h2 { font-size: clamp(2rem,8vw,2.8rem); }
             .text-side p  { font-size: 1rem; }
-            .reviews-photos-section { padding: 50px 20px 40px; }
+            .reviews-photos-section { padding: 70px 20px; }
             .review-cards { grid-template-columns: 1fr; gap: 20px; }
-            .slider-img { width: 240px; height: 170px; }
             .svc-top { padding: 44px 20px 36px; }
             .svc-slot.slot-left,
             .svc-slot.slot-right { display: none; }
@@ -675,8 +694,15 @@
                 <p>Trained in Swedish, deep tissue, and sports massage techniques, we combine ancient wellness wisdom with modern therapeutic practice.</p>
             </div>
         </div>
+
         <div class="reviews-photos-section fade-in-up">
             <div class="reviews-container">
+                <div class="google-badge-wrap">
+                    <div class="google-badge">
+                        <span class="g-dot" style="color:#4285F4">G</span><span class="g-dot" style="color:#EA4335">o</span><span class="g-dot" style="color:#FBBC05">o</span><span class="g-dot" style="color:#4285F4">g</span><span class="g-dot" style="color:#34A853">l</span><span class="g-dot" style="color:#EA4335">e</span>
+                        <span>Reviews</span>
+                    </div>
+                </div>
                 <h3>What Our Clients <strong>Say</strong></h3>
                 <div class="review-cards">
                     <div class="review-card">
@@ -692,7 +718,7 @@
                     <div class="review-card">
                         <p class="review-author">Sophia L.</p>
                         <p class="review-text">"Best massage I've ever had. The therapist was skilled and attentive to my needs."</p>
-                        <div class="stars">★★★★</div>
+                        <div class="stars">★★★★★</div>
                     </div>
                 </div>
             </div>
