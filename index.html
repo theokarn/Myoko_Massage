@@ -238,45 +238,35 @@
 
         /* ── SERVICES ── */
         .services {
-            position: relative;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            position: relative; width: 100%;
+            display: flex; flex-direction: column; overflow: hidden;
         }
         .svc-top {
-            position: relative; z-index: 2;
-            background: #EDE6D4;
+            position: relative; z-index: 2; background: #EDE6D4;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            text-align: center;
-            min-height: 70vh; min-height: 70dvh;
+            text-align: center; min-height: 70vh; min-height: 70dvh;
             padding: 80px 30px; flex-shrink: 0;
         }
         .services-label {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.75rem; font-weight: 400;
+            font-family: 'Lato', sans-serif; font-size: 0.75rem; font-weight: 400;
             letter-spacing: 3px; text-transform: uppercase;
             color: rgba(75,77,57,0.45); margin-bottom: 24px;
         }
         .services-title {
             font-family: 'Gowun Batang', serif;
-            font-size: clamp(3rem,7vw,5.5rem);
-            font-weight: 400; color: #4B4D39;
-            margin: 0 0 20px 0; line-height: 1.1;
+            font-size: clamp(3rem,7vw,5.5rem); font-weight: 400;
+            color: #4B4D39; margin: 0 0 20px 0; line-height: 1.1;
         }
         .services-subtitle {
-            font-family: 'Lato', sans-serif;
-            font-size: 1rem; font-weight: 300;
+            font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 300;
             color: rgba(75,77,57,0.55); letter-spacing: 0.3px;
             max-width: 420px; margin: 0 auto 48px; line-height: 1.7;
         }
         .svc-scroll-hint {
-            display: flex; flex-direction: column;
-            align-items: center; gap: 8px;
-            font-family: 'Lato', sans-serif;
-            font-size: 0.7rem; letter-spacing: 2.5px;
-            text-transform: uppercase; color: rgba(75,77,57,0.35);
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            font-family: 'Lato', sans-serif; font-size: 0.7rem;
+            letter-spacing: 2.5px; text-transform: uppercase; color: rgba(75,77,57,0.35);
         }
         .svc-scroll-hint span {
             display: block; width: 1px; height: 40px;
@@ -290,25 +280,19 @@
             100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
         }
         .svc-bottom {
-            position: relative;
-            height: 100vh; height: 100dvh;
-            background: #000;
+            position: relative; height: 100vh; height: 100dvh; background: #000;
             display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            overflow: hidden;
+            align-items: center; justify-content: center; overflow: hidden;
         }
         .svc-bg-layer {
-            position: absolute; inset: 0;
-            width: 100%; height: 100%;
+            position: absolute; inset: 0; width: 100%; height: 100%;
             object-fit: cover; opacity: 0; z-index: 0;
-            filter: brightness(0.42);
-            transition: opacity 1.1s ease;
+            filter: brightness(0.42); transition: opacity 1.1s ease;
         }
         .svc-bg-layer.active { opacity: 1; }
         .svc-stage {
-            position: relative; z-index: 2;
-            width: 100%; display: flex;
-            align-items: center; justify-content: center;
+            position: relative; z-index: 2; width: 100%;
+            display: flex; align-items: center; justify-content: center;
             padding: 0 0 30px; perspective: 1400px; overflow: hidden;
         }
         .svc-slot {
@@ -319,59 +303,49 @@
         .svc-slot.slot-right { right: 0; transform: translateX(calc(100% - 110px)); }
         .svc-slot.slot-center { position: relative; }
         .svc-card {
-            width: 580px; background: #fff;
-            border-radius: 20px; padding: 52px 50px;
+            width: 580px; background: #fff; border-radius: 20px; padding: 52px 50px;
             text-align: center; will-change: transform, opacity;
             transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1),
-                        transform 0.65s cubic-bezier(0.4,0,0.2,1),
-                        box-shadow 0.65s ease;
+                        transform 0.65s cubic-bezier(0.4,0,0.2,1), box-shadow 0.65s ease;
         }
         .svc-slot.slot-center .svc-card {
             opacity: 1; transform: scale(1) rotateY(0deg);
             box-shadow: 0 40px 100px rgba(0,0,0,0.7);
         }
         .svc-slot.slot-left .svc-card {
-            opacity: 0.85;
-            transform: scale(0.88) rotateY(12deg) translateX(20px);
+            opacity: 0.85; transform: scale(0.88) rotateY(12deg) translateX(20px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.25);
             transform-origin: right center; cursor: pointer;
         }
         .svc-slot.slot-right .svc-card {
-            opacity: 0.85;
-            transform: scale(0.88) rotateY(-12deg) translateX(-20px);
+            opacity: 0.85; transform: scale(0.88) rotateY(-12deg) translateX(-20px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.25);
             transform-origin: left center; cursor: pointer;
         }
         .svc-slot.slot-left .svc-card:hover,
         .svc-slot.slot-right .svc-card:hover { opacity: 1; }
         .svc-card.is-leaving-forward {
-            opacity: 0 !important;
-            transform: translateX(-110px) scale(0.94) !important;
+            opacity: 0 !important; transform: translateX(-110px) scale(0.94) !important;
             transition: opacity 0.38s cubic-bezier(0.4,0,0.2,1),
                         transform 0.38s cubic-bezier(0.4,0,0.2,1) !important;
         }
         .svc-card.is-leaving-backward {
-            opacity: 0 !important;
-            transform: translateX(110px) scale(0.94) !important;
+            opacity: 0 !important; transform: translateX(110px) scale(0.94) !important;
             transition: opacity 0.38s cubic-bezier(0.4,0,0.2,1),
                         transform 0.38s cubic-bezier(0.4,0,0.2,1) !important;
         }
         .svc-card.is-entering-forward {
-            opacity: 0 !important;
-            transform: translateX(110px) scale(0.94) !important;
+            opacity: 0 !important; transform: translateX(110px) scale(0.94) !important;
             transition: none !important;
         }
         .svc-card.is-entering-backward {
-            opacity: 0 !important;
-            transform: translateX(-110px) scale(0.94) !important;
+            opacity: 0 !important; transform: translateX(-110px) scale(0.94) !important;
             transition: none !important;
         }
         .svc-tag {
-            display: inline-block;
-            font-family: 'Lato', sans-serif;
+            display: inline-block; font-family: 'Lato', sans-serif;
             font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
-            background: rgba(75,77,57,0.07);
-            border: 1px solid rgba(75,77,57,0.18);
+            background: rgba(75,77,57,0.07); border: 1px solid rgba(75,77,57,0.18);
             color: #4B4D39; padding: 4px 12px; border-radius: 20px; margin-bottom: 18px;
         }
         .svc-name {
@@ -408,132 +382,97 @@
         }
         .svc-dot.done { background: rgba(237,230,212,0.7); }
         .svc-dot-fill {
-            position: absolute; top: 0; left: 0;
-            height: 100%; width: 0%;
-            background: #EDE6D4; border-radius: 2px;
-            pointer-events: none;
+            position: absolute; top: 0; left: 0; height: 100%; width: 0%;
+            background: #EDE6D4; border-radius: 2px; pointer-events: none;
         }
 
-        /* ── REVIEWS — Option A: single pull-quote ── */
-.reviews-section {
-    background: #EDE6D4;
-    padding: 120px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.reviews-inner {
-    max-width: 780px;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-}
-.reviews-eyebrow {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(75,77,57,0.4);
-}
-.reviews-quote-wrap {
-    position: relative;
-    min-height: 160px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.reviews-quote {
-    font-family: 'Gowun Batang', serif;
-    font-size: clamp(1.4rem, 2.8vw, 2rem);
-    font-weight: 400;
-    color: #4B4D39;
-    line-height: 1.65;
-    font-style: italic;
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-    pointer-events: none;
-    padding: 0 1.5rem;
-}
-.reviews-quote.active {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    position: relative;
-}
-.reviews-quote::before {
-    content: '\201C';
-    font-size: 8rem;
-    line-height: 0;
-    position: absolute;
-    top: 0.6em;
-    left: -0.1em;
-    color: rgba(75,77,57,0.07);
-    font-family: 'Gowun Batang', serif;
-    pointer-events: none;
-}
-.reviews-meta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-}
-.reviews-stars {
-    font-size: 1rem;
-    letter-spacing: 3px;
-    color: #C9A84C;
-}
-.reviews-author {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.82rem;
-    letter-spacing: 2px;
-    color: rgba(75,77,57,0.45);
-    text-transform: uppercase;
-    transition: opacity 0.4s ease;
-}
-.reviews-dots {
-    display: flex;
-    gap: 8px;
-}
-.reviews-dot {
-    width: 28px; height: 2px;
-    border-radius: 2px;
-    background: rgba(75,77,57,0.15);
-    border: none; padding: 0; cursor: pointer;
-    position: relative; overflow: hidden;
-}
-.reviews-dot-fill {
-    position: absolute; top: 0; left: 0;
-    height: 100%; width: 0%;
-    background: #4B4D39; border-radius: 2px;
-    pointer-events: none;
-}
-.reviews-cta {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(75,77,57,0.4);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(75,77,57,0.2);
-    padding-bottom: 2px;
-    transition: color 0.3s ease, border-color 0.3s ease;
-}
-.reviews-cta:hover { color: #4B4D39; border-color: #4B4D39; }
-
-@media (max-width: 768px) {
-    .reviews-section { padding: 80px 28px; }
-    .reviews-quote { padding: 0; }
-    .reviews-quote::before { display: none; }
-    .reviews-quote-wrap { min-height: 200px; }
-}
-
+        /* ── REVIEWS ── */
+        .reviews-section {
+            background: #EDE6D4; padding: 120px 40px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .reviews-inner {
+            max-width: 780px; width: 100%; text-align: center;
+            display: flex; flex-direction: column; align-items: center; gap: 28px;
+        }
+        .reviews-pill {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #fff; border: 1px solid rgba(75,77,57,0.12);
+            border-radius: 30px; padding: 7px 18px;
+            font-family: 'Lato', sans-serif; font-size: 0.72rem;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: rgba(75,77,57,0.45);
+        }
+        .reviews-pill svg { width: 14px; height: 14px; flex-shrink: 0; }
+        .reviews-heading {
+            font-family: 'Gowun Batang', serif;
+            font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400;
+            color: #4B4D39; margin: 0; line-height: 1.3;
+        }
+        .reviews-heading em { font-style: normal; font-weight: 700; }
+        .reviews-stars { display: flex; gap: 5px; justify-content: center; }
+        .reviews-stars svg { width: 20px; height: 20px; }
+        .reviews-quote-wrap {
+            position: relative; width: 100%; min-height: 150px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .reviews-quote-wrap::before {
+            content: '\201C';
+            font-family: 'Gowun Batang', serif;
+            font-size: 9rem; line-height: 1;
+            color: rgba(75,77,57,0.06);
+            position: absolute; top: -20px; left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none; z-index: 0;
+        }
+        .reviews-quote {
+            font-family: 'Gowun Batang', serif;
+            font-size: clamp(1.15rem, 2.4vw, 1.6rem); font-weight: 400;
+            color: #4B4D39; line-height: 1.7; font-style: italic;
+            position: absolute; top: 0; left: 0; right: 0;
+            opacity: 0; transform: translateY(14px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+            pointer-events: none; z-index: 1; padding: 0;
+        }
+        .reviews-quote.active {
+            opacity: 1; transform: translateY(0);
+            pointer-events: auto; position: relative;
+        }
+        .reviews-author {
+            font-family: 'Lato', sans-serif; font-size: 0.78rem;
+            letter-spacing: 2.5px; color: rgba(75,77,57,0.4);
+            text-transform: uppercase; transition: opacity 0.35s ease;
+        }
+        .reviews-controls {
+            display: flex; align-items: center; gap: 14px;
+        }
+        .reviews-arrow {
+            width: 42px; height: 42px; border-radius: 50%;
+            border: 1px solid rgba(75,77,57,0.2); background: transparent;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: background 0.25s ease, border-color 0.25s ease;
+            color: #4B4D39; flex-shrink: 0;
+        }
+        .reviews-arrow:hover { background: #4B4D39; border-color: #4B4D39; }
+        .reviews-arrow:hover svg { color: #EDE6D4; }
+        .reviews-arrow svg {
+            width: 16px; height: 16px; stroke: currentColor; fill: none;
+            stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+            transition: color 0.25s ease;
+        }
+        .reviews-counter {
+            font-family: 'Lato', sans-serif; font-size: 0.75rem;
+            letter-spacing: 2px; color: rgba(75,77,57,0.35);
+            min-width: 36px; text-align: center;
+        }
+        .reviews-cta {
+            font-family: 'Lato', sans-serif; font-size: 0.72rem;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: rgba(75,77,57,0.4); text-decoration: none;
+            border-bottom: 1px solid rgba(75,77,57,0.18); padding-bottom: 2px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .reviews-cta:hover { color: #4B4D39; border-color: #4B4D39; }
 
         /* ── CONTACT ── */
         .contact { background: #4B4D39; padding: 100px 50px; color: #EDE6D4; }
@@ -552,8 +491,7 @@
             gap: 30px; margin-bottom: 50px; flex-wrap: wrap;
         }
         .whatsapp-btn {
-            background: #25D366; color: #fff;
-            padding: 16px 40px; border-radius: 30px;
+            background: #25D366; color: #fff; padding: 16px 40px; border-radius: 30px;
             text-decoration: none; font-size: 15px; font-weight: 500;
             transition: all 0.3s; display: inline-flex;
             align-items: center; gap: 10px; min-height: 50px;
@@ -623,8 +561,8 @@
             .svc-slot.slot-right { display: none; }
             .svc-card { width: calc(100vw - 48px); padding: 36px 28px; }
             .reviews-section { padding: 80px 28px; }
-            .reviews-quote { padding: 0; }
-            .reviews-quote::before { display: none; }
+            .reviews-quote-wrap { min-height: 200px; }
+            .reviews-quote-wrap::before { font-size: 6rem; top: -10px; }
             .contact { padding: 70px 25px; }
             .contact-intro { font-size: 1rem; margin-bottom: 35px; }
             .whatsapp-btn { width: 100%; justify-content: center; padding: 16px 20px; font-size: 16px; }
@@ -736,37 +674,52 @@
     </section>
 
     <!-- Reviews -->
-<section class="reviews-section fade-in-up">
-    <div class="reviews-inner">
-        <p class="reviews-eyebrow">Client Experience</p>
-        <div class="reviews-quote-wrap">
-            <blockquote class="reviews-quote active">
-                Absolutely the best massage I've had. The therapist arrived at our villa perfectly on time, and within minutes it felt like the whole island had slowed down.
-            </blockquote>
-            <blockquote class="reviews-quote">
-                An experience unlike anything else in Mykonos. Deeply therapeutic, incredibly professional. I booked again the very next day.
-            </blockquote>
-            <blockquote class="reviews-quote">
-                We had a group session at our villa — every single person left glowing. The attention to detail was remarkable.
-            </blockquote>
-            <blockquote class="reviews-quote">
-                The deep tissue work was exactly what my body needed after a week of non-stop activity. I felt brand new.
-            </blockquote>
-            <blockquote class="reviews-quote">
-                Seamless booking, punctual arrival, exceptional hands. This is the standard every massage service should aspire to.
-            </blockquote>
-        </div>
-        <div class="reviews-meta">
-            <span class="reviews-stars">★★★★★</span>
-            <span class="reviews-author" id="reviewAuthor">Maribel M. — Mykonos, 2024</span>
-        </div>
-        <div class="reviews-dots" id="reviewDots"></div>
-        <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK" target="_blank" class="reviews-cta">
-            Read reviews on Google
-        </a>
-    </div>
-</section>
+    <section class="reviews-section fade-in-up">
+        <div class="reviews-inner">
 
+            <div class="reviews-pill">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21.8055 10.0415H21V10H12V14H17.6515C16.827 16.3285 14.6115 18 12 18C8.6865 18 6 15.3135 6 12C6 8.6865 8.6865 6 12 6C13.5295 6 14.921 6.577 15.9805 7.5195L18.809 4.691C17.023 3.0265 14.634 2 12 2C6.4775 2 2 6.4775 2 12C2 17.5225 6.4775 22 12 22C17.5225 22 22 17.5225 22 12C22 11.3295 21.931 10.675 21.8055 10.0415Z" fill="#FFC107"/>
+                    <path d="M3.15302 7.3455L6.43852 9.755C7.32752 7.554 9.48052 6 12 6C13.5295 6 14.921 6.577 15.9805 7.5195L18.809 4.691C17.023 3.0265 14.634 2 12 2C8.15902 2 4.82802 4.1685 3.15302 7.3455Z" fill="#FF3D00"/>
+                    <path d="M12 22C14.583 22 16.93 21.0115 18.7045 19.404L15.6095 16.785C14.5718 17.5742 13.3038 18.001 12 18C9.39903 18 7.19053 16.3415 6.35853 14.027L3.09753 16.5395C4.75253 19.778 8.11353 22 12 22Z" fill="#4CAF50"/>
+                    <path d="M21.8055 10.0415H21V10H12V14H17.6515C17.2571 15.1082 16.5467 16.0766 15.608 16.7855L15.6095 16.7845L18.7045 19.4035C18.4855 19.6025 22 17 22 12C22 11.3295 21.931 10.675 21.8055 10.0415Z" fill="#1976D2"/>
+                </svg>
+                Google Reviews
+            </div>
+
+            <h3 class="reviews-heading">What Our Clients <em>Say</em></h3>
+
+            <div class="reviews-stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="#C9A84C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="#C9A84C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="#C9A84C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="#C9A84C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="#C9A84C"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+
+            <div class="reviews-quote-wrap">
+                <blockquote class="reviews-quote active">Absolutely the best massage I've had. The therapist arrived at our villa perfectly on time, and within minutes it felt like the whole island had slowed down.</blockquote>
+                <blockquote class="reviews-quote">An experience unlike anything else in Mykonos. Deeply therapeutic, incredibly professional. I booked again the very next day.</blockquote>
+                <blockquote class="reviews-quote">We had a group session at our villa — every single person left glowing. The attention to detail was remarkable.</blockquote>
+                <blockquote class="reviews-quote">The deep tissue work was exactly what my body needed after a week of non-stop activity. I felt brand new.</blockquote>
+                <blockquote class="reviews-quote">Seamless booking, punctual arrival, exceptional hands. This is the standard every massage service should aspire to.</blockquote>
+            </div>
+
+            <p class="reviews-author" id="reviewAuthor">Maribel M. — Mykonos, 2024</p>
+
+            <div class="reviews-controls">
+                <button class="reviews-arrow" id="reviewPrev" aria-label="Previous review">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <span class="reviews-counter" id="reviewCounter">1 / 5</span>
+                <button class="reviews-arrow" id="reviewNext" aria-label="Next review">
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+            </div>
+
+            <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK" target="_blank" class="reviews-cta">Read reviews on Google</a>
+        </div>
+    </section>
 
     <!-- Contact -->
     <section id="contact" class="contact">
@@ -960,67 +913,46 @@
         setBg(0);
         updateDots(0);
         scheduleNext();
+
         /* ── Reviews rotator ── */
-const REVIEW_INTERVAL = 10000;
-const reviewAuthors = [
-    'Maria K. — Mykonos, 2025',
-    'James R. — Mykonos, 2025',
-    'Sophia L. — Mykonos, 2025',
-    'Andreas P. — Mykonos, 2025',
-    'Claire M. — Mykonos, 2025'
-];
-const reviewQuotes  = document.querySelectorAll('.reviews-quote');
-const reviewAuthorEl = document.getElementById('reviewAuthor');
-const reviewDotsEl   = document.getElementById('reviewDots');
-let reviewCurrent = 0;
-let reviewTimer   = null;
+        const REVIEW_INTERVAL = 10000;
+        const reviewAuthors = [
+            'Maribel M. — Mykonos, 2024',
+            'James R. — Mykonos, 2025',
+            'Sophia L. — Mykonos, 2025',
+            'Andreas P. — Mykonos, 2025',
+            'Claire M. — Mykonos, 2025'
+        ];
+        const reviewQuotes   = document.querySelectorAll('.reviews-quote');
+        const reviewAuthorEl = document.getElementById('reviewAuthor');
+        const reviewCountEl  = document.getElementById('reviewCounter');
+        const reviewPrevBtn  = document.getElementById('reviewPrev');
+        const reviewNextBtn  = document.getElementById('reviewNext');
+        let reviewCurrent = 0;
+        let reviewTimer   = null;
 
-reviewQuotes.forEach((_, i) => {
-    const btn  = document.createElement('button');
-    btn.className = 'reviews-dot';
-    btn.setAttribute('aria-label', `Review ${i + 1}`);
-    btn.innerHTML = '<span class="reviews-dot-fill"></span>';
-    btn.addEventListener('click', () => goToReview(i));
-    reviewDotsEl.appendChild(btn);
-});
-
-function goToReview(idx) {
-    clearTimeout(reviewTimer);
-    reviewQuotes[reviewCurrent].classList.remove('active');
-    reviewCurrent = idx;
-    reviewQuotes[reviewCurrent].classList.add('active');
-    reviewAuthorEl.style.opacity = '0';
-    setTimeout(() => {
-        reviewAuthorEl.textContent = reviewAuthors[reviewCurrent];
-        reviewAuthorEl.style.opacity = '1';
-    }, 350);
-    updateReviewDots(reviewCurrent);
-    scheduleNextReview();
-}
-
-function updateReviewDots(idx) {
-    reviewDotsEl.querySelectorAll('.reviews-dot').forEach((d, i) => {
-        const fill = d.querySelector('.reviews-dot-fill');
-        fill.style.transition = 'none';
-        fill.style.width = i < idx ? '100%' : '0%';
-        if (i === idx) {
-            requestAnimationFrame(() => requestAnimationFrame(() => {
-                fill.style.transition = `width ${REVIEW_INTERVAL}ms linear`;
-                fill.style.width = '100%';
-            }));
+        function goToReview(idx) {
+            clearTimeout(reviewTimer);
+            reviewQuotes[reviewCurrent].classList.remove('active');
+            reviewCurrent = (idx + reviewQuotes.length) % reviewQuotes.length;
+            reviewQuotes[reviewCurrent].classList.add('active');
+            reviewAuthorEl.style.opacity = '0';
+            setTimeout(() => {
+                reviewAuthorEl.textContent = reviewAuthors[reviewCurrent];
+                reviewAuthorEl.style.opacity = '1';
+            }, 300);
+            reviewCountEl.textContent = `${reviewCurrent + 1} / ${reviewQuotes.length}`;
+            scheduleNextReview();
         }
-    });
-}
 
-function scheduleNextReview() {
-    reviewTimer = setTimeout(() => {
-        goToReview((reviewCurrent + 1) % reviewQuotes.length);
-    }, REVIEW_INTERVAL);
-}
+        function scheduleNextReview() {
+            reviewTimer = setTimeout(() => goToReview(reviewCurrent + 1), REVIEW_INTERVAL);
+        }
 
-updateReviewDots(0);
-scheduleNextReview();
+        reviewPrevBtn.addEventListener('click', () => goToReview(reviewCurrent - 1));
+        reviewNextBtn.addEventListener('click', () => goToReview(reviewCurrent + 1));
 
+        scheduleNextReview();
     </script>
 </body>
 </html>
