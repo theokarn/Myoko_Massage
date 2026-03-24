@@ -236,9 +236,7 @@
             color: #4B4D39; line-height: 1.8; margin: 0 0 20px 0; max-width: 550px;
         }
 
-        /* ══════════════════════════════════════
-           ── SERVICES (now second)
-        ══════════════════════════════════════ */
+        /* ── SERVICES ── */
         .services {
             position: relative;
             width: 100%;
@@ -246,20 +244,14 @@
             flex-direction: column;
             overflow: hidden;
         }
-
         .svc-top {
-            position: relative;
-            z-index: 2;
+            position: relative; z-index: 2;
             background: #EDE6D4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
             text-align: center;
-            min-height: 70vh;
-            min-height: 70dvh;
-            padding: 80px 30px;
-            flex-shrink: 0;
+            min-height: 70vh; min-height: 70dvh;
+            padding: 80px 30px; flex-shrink: 0;
         }
         .services-label {
             font-family: 'Lato', sans-serif;
@@ -297,7 +289,6 @@
             60%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
             100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
         }
-
         .svc-bottom {
             position: relative;
             height: 100vh; height: 100dvh;
@@ -314,7 +305,6 @@
             transition: opacity 1.1s ease;
         }
         .svc-bg-layer.active { opacity: 1; }
-
         .svc-stage {
             position: relative; z-index: 2;
             width: 100%; display: flex;
@@ -328,7 +318,6 @@
         .svc-slot.slot-left  { left: 0;  transform: translateX(calc(-100% + 110px)); }
         .svc-slot.slot-right { right: 0; transform: translateX(calc(100% - 110px)); }
         .svc-slot.slot-center { position: relative; }
-
         .svc-card {
             width: 580px; background: #fff;
             border-radius: 20px; padding: 52px 50px;
@@ -355,7 +344,6 @@
         }
         .svc-slot.slot-left .svc-card:hover,
         .svc-slot.slot-right .svc-card:hover { opacity: 1; }
-
         .svc-card.is-leaving-forward {
             opacity: 0 !important;
             transform: translateX(-110px) scale(0.94) !important;
@@ -378,7 +366,6 @@
             transform: translateX(-110px) scale(0.94) !important;
             transition: none !important;
         }
-
         .svc-tag {
             display: inline-block;
             font-family: 'Lato', sans-serif;
@@ -409,7 +396,6 @@
         .svc-slot.slot-right .svc-desc,
         .svc-slot.slot-left  .svc-divider,
         .svc-slot.slot-right .svc-divider { display: none; }
-
         .svc-dots {
             position: relative; z-index: 3;
             display: flex; gap: 8px; margin: 0 0 44px 0;
@@ -428,57 +414,84 @@
             pointer-events: none;
         }
 
-        /* ── REVIEWS (now third) ── */
+        /* ── REVIEWS — Option A: single pull-quote ── */
         .reviews-section {
             background: #EDE6D4;
-            padding: 80px 40px;
+            padding: 120px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .reviews-container { max-width: 1200px; margin: 0 auto; }
-        .reviews-container h3 {
+        .reviews-inner {
+            max-width: 780px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+        .reviews-eyebrow {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(75,77,57,0.4);
+        }
+        .reviews-quote {
             font-family: 'Gowun Batang', serif;
-            font-size: clamp(2rem,4vw,2.8rem); font-weight: 400;
-            color: #4B4D39; text-align: center; margin: 0 0 50px 0;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 400;
+            color: #4B4D39;
+            line-height: 1.65;
+            font-style: italic;
+            position: relative;
+            padding: 0 2rem;
         }
-        .review-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-            gap: 30px;
+        .reviews-quote::before {
+            content: '\201C';
+            font-size: 8rem;
+            line-height: 0;
+            position: absolute;
+            top: 0.6em;
+            left: -0.15em;
+            color: rgba(75,77,57,0.08);
+            font-family: 'Gowun Batang', serif;
+            pointer-events: none;
         }
-        .review-card {
-            background: #ffffff;
-            border: 1px solid rgba(75,77,57,0.1);
-            border-radius: 12px; padding: 36px 32px;
-            display: flex; flex-direction: column;
-            justify-content: space-between; gap: 18px;
-            min-height: 220px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .reviews-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
-        .review-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(75,77,57,0.1); }
-        .review-author {
+        .reviews-stars {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            color: #C9A84C;
+        }
+        .reviews-author {
             font-family: 'Lato', sans-serif;
-            font-size: 0.95rem; font-weight: 700;
-            color: #4B4D39; margin: 0;
-        }
-        .review-text {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.97rem; color: rgba(75,77,57,0.75);
-            line-height: 1.7; margin: 0; flex: 1;
-        }
-        .stars {
-            font-size: 1rem; margin: 0;
-            letter-spacing: 2px; color: #C9A84C;
-        }
-        .google-badge {
-            display: inline-flex; align-items: center;
-            background: #fff;
-            border: 1px solid rgba(75,77,57,0.15);
-            border-radius: 20px; padding: 6px 18px;
-            margin: 0 auto 28px;
-            font-size: 0.75rem; font-family: 'Lato', sans-serif;
-            letter-spacing: 2px; text-transform: uppercase;
+            font-size: 0.82rem;
+            letter-spacing: 2px;
             color: rgba(75,77,57,0.45);
+            text-transform: uppercase;
         }
-        .google-badge-wrap { text-align: center; }
+        .reviews-cta {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(75,77,57,0.4);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(75,77,57,0.2);
+            padding-bottom: 2px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .reviews-cta:hover {
+            color: #4B4D39;
+            border-color: #4B4D39;
+        }
 
         /* ── CONTACT ── */
         .contact { background: #4B4D39; padding: 100px 50px; color: #EDE6D4; }
@@ -567,8 +580,9 @@
             .svc-slot.slot-left,
             .svc-slot.slot-right { display: none; }
             .svc-card { width: calc(100vw - 48px); padding: 36px 28px; }
-            .reviews-section { padding: 60px 20px; }
-            .review-cards { grid-template-columns: 1fr; gap: 20px; }
+            .reviews-section { padding: 80px 28px; }
+            .reviews-quote { padding: 0; }
+            .reviews-quote::before { display: none; }
             .contact { padding: 70px 25px; }
             .contact-intro { font-size: 1rem; margin-bottom: 35px; }
             .whatsapp-btn { width: 100%; justify-content: center; padding: 16px 20px; font-size: 16px; }
@@ -681,28 +695,18 @@
 
     <!-- Reviews -->
     <section class="reviews-section fade-in-up">
-        <div class="reviews-container">
-            <div class="google-badge-wrap">
-                <div class="google-badge">Google Reviews</div>
+        <div class="reviews-inner">
+            <p class="reviews-eyebrow">Client Experience</p>
+            <blockquote class="reviews-quote">
+                "Absolutely the best massage I've had. The therapist arrived at our villa perfectly on time, and within minutes it felt like the whole island had slowed down."
+            </blockquote>
+            <div class="reviews-meta">
+                <span class="reviews-stars">★★★★★</span>
+                <span class="reviews-author">Maria K. — Mykonos, 2025</span>
             </div>
-            <h3>What Our Clients <strong>Say</strong></h3>
-            <div class="review-cards">
-                <div class="review-card">
-                    <p class="review-author">Maria K.</p>
-                    <p class="review-text">"Absolutely incredible experience. The massage was exactly what I needed after a long day exploring the island."</p>
-                    <div class="stars">★★★★★</div>
-                </div>
-                <div class="review-card">
-                    <p class="review-author">James R.</p>
-                    <p class="review-text">"Professional, relaxing, and so convenient. Highly recommend for anyone visiting Mykonos."</p>
-                    <div class="stars">★★★★★</div>
-                </div>
-                <div class="review-card">
-                    <p class="review-author">Sophia L.</p>
-                    <p class="review-text">"Best massage I've ever had. The therapist was skilled and attentive to my needs."</p>
-                    <div class="stars">★★★★★</div>
-                </div>
-            </div>
+            <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK" target="_blank" class="reviews-cta">
+                Read reviews on Google
+            </a>
         </div>
     </section>
 
@@ -755,9 +759,7 @@
         document.querySelectorAll('.fade-in,.fade-in-left,.fade-in-right,.fade-in-up')
                 .forEach(el => obs.observe(el));
 
-        /* ══════════════════════════════
-           SERVICES SHOWCASE
-        ══════════════════════════════ */
+        /* ── Services ── */
         const SERVICES = [
             {
                 name: 'Swedish Massage', duration: '60 minutes', tag: null,
