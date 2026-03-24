@@ -415,83 +415,125 @@
         }
 
         /* ── REVIEWS — Option A: single pull-quote ── */
-        .reviews-section {
-            background: #EDE6D4;
-            padding: 120px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .reviews-inner {
-            max-width: 780px;
-            width: 100%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 32px;
-        }
-        .reviews-eyebrow {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.72rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(75,77,57,0.4);
-        }
-        .reviews-quote {
-            font-family: 'Gowun Batang', serif;
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
-            font-weight: 400;
-            color: #4B4D39;
-            line-height: 1.65;
-            font-style: italic;
-            position: relative;
-            padding: 0 2rem;
-        }
-        .reviews-quote::before {
-            content: '\201C';
-            font-size: 8rem;
-            line-height: 0;
-            position: absolute;
-            top: 0.6em;
-            left: -0.15em;
-            color: rgba(75,77,57,0.08);
-            font-family: 'Gowun Batang', serif;
-            pointer-events: none;
-        }
-        .reviews-meta {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-        .reviews-stars {
-            font-size: 1rem;
-            letter-spacing: 3px;
-            color: #C9A84C;
-        }
-        .reviews-author {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.82rem;
-            letter-spacing: 2px;
-            color: rgba(75,77,57,0.45);
-            text-transform: uppercase;
-        }
-        .reviews-cta {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(75,77,57,0.4);
-            text-decoration: none;
-            border-bottom: 1px solid rgba(75,77,57,0.2);
-            padding-bottom: 2px;
-            transition: color 0.3s ease, border-color 0.3s ease;
-        }
-        .reviews-cta:hover {
-            color: #4B4D39;
-            border-color: #4B4D39;
-        }
+.reviews-section {
+    background: #EDE6D4;
+    padding: 120px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.reviews-inner {
+    max-width: 780px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+.reviews-eyebrow {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(75,77,57,0.4);
+}
+.reviews-quote-wrap {
+    position: relative;
+    min-height: 160px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.reviews-quote {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    font-weight: 400;
+    color: #4B4D39;
+    line-height: 1.65;
+    font-style: italic;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    pointer-events: none;
+    padding: 0 1.5rem;
+}
+.reviews-quote.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative;
+}
+.reviews-quote::before {
+    content: '\201C';
+    font-size: 8rem;
+    line-height: 0;
+    position: absolute;
+    top: 0.6em;
+    left: -0.1em;
+    color: rgba(75,77,57,0.07);
+    font-family: 'Gowun Batang', serif;
+    pointer-events: none;
+}
+.reviews-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.reviews-stars {
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: #C9A84C;
+}
+.reviews-author {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 2px;
+    color: rgba(75,77,57,0.45);
+    text-transform: uppercase;
+    transition: opacity 0.4s ease;
+}
+.reviews-dots {
+    display: flex;
+    gap: 8px;
+}
+.reviews-dot {
+    width: 28px; height: 2px;
+    border-radius: 2px;
+    background: rgba(75,77,57,0.15);
+    border: none; padding: 0; cursor: pointer;
+    position: relative; overflow: hidden;
+}
+.reviews-dot-fill {
+    position: absolute; top: 0; left: 0;
+    height: 100%; width: 0%;
+    background: #4B4D39; border-radius: 2px;
+    pointer-events: none;
+}
+.reviews-cta {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(75,77,57,0.4);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(75,77,57,0.2);
+    padding-bottom: 2px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+.reviews-cta:hover { color: #4B4D39; border-color: #4B4D39; }
+
+@media (max-width: 768px) {
+    .reviews-section { padding: 80px 28px; }
+    .reviews-quote { padding: 0; }
+    .reviews-quote::before { display: none; }
+    .reviews-quote-wrap { min-height: 200px; }
+}
+
 
         /* ── CONTACT ── */
         .contact { background: #4B4D39; padding: 100px 50px; color: #EDE6D4; }
@@ -694,21 +736,37 @@
     </section>
 
     <!-- Reviews -->
-    <section class="reviews-section fade-in-up">
-        <div class="reviews-inner">
-            <p class="reviews-eyebrow">Client Experience</p>
-            <blockquote class="reviews-quote">
-                "Absolutely the best massage I've had. The therapist arrived at our villa perfectly on time, and within minutes it felt like the whole island had slowed down."
+<section class="reviews-section fade-in-up">
+    <div class="reviews-inner">
+        <p class="reviews-eyebrow">Client Experience</p>
+        <div class="reviews-quote-wrap">
+            <blockquote class="reviews-quote active">
+                Absolutely the best massage I've had. The therapist arrived at our villa perfectly on time, and within minutes it felt like the whole island had slowed down.
             </blockquote>
-            <div class="reviews-meta">
-                <span class="reviews-stars">★★★★★</span>
-                <span class="reviews-author">Maria K. — Mykonos, 2025</span>
-            </div>
-            <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK" target="_blank" class="reviews-cta">
-                Read reviews on Google
-            </a>
+            <blockquote class="reviews-quote">
+                An experience unlike anything else in Mykonos. Deeply therapeutic, incredibly professional. I booked again the very next day.
+            </blockquote>
+            <blockquote class="reviews-quote">
+                We had a group session at our villa — every single person left glowing. The attention to detail was remarkable.
+            </blockquote>
+            <blockquote class="reviews-quote">
+                The deep tissue work was exactly what my body needed after a week of non-stop activity. I felt brand new.
+            </blockquote>
+            <blockquote class="reviews-quote">
+                Seamless booking, punctual arrival, exceptional hands. This is the standard every massage service should aspire to.
+            </blockquote>
         </div>
-    </section>
+        <div class="reviews-meta">
+            <span class="reviews-stars">★★★★★</span>
+            <span class="reviews-author" id="reviewAuthor">Maribel M. — Mykonos, 2024</span>
+        </div>
+        <div class="reviews-dots" id="reviewDots"></div>
+        <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK" target="_blank" class="reviews-cta">
+            Read reviews on Google
+        </a>
+    </div>
+</section>
+
 
     <!-- Contact -->
     <section id="contact" class="contact">
@@ -902,6 +960,67 @@
         setBg(0);
         updateDots(0);
         scheduleNext();
+        /* ── Reviews rotator ── */
+const REVIEW_INTERVAL = 10000;
+const reviewAuthors = [
+    'Maria K. — Mykonos, 2025',
+    'James R. — Mykonos, 2025',
+    'Sophia L. — Mykonos, 2025',
+    'Andreas P. — Mykonos, 2025',
+    'Claire M. — Mykonos, 2025'
+];
+const reviewQuotes  = document.querySelectorAll('.reviews-quote');
+const reviewAuthorEl = document.getElementById('reviewAuthor');
+const reviewDotsEl   = document.getElementById('reviewDots');
+let reviewCurrent = 0;
+let reviewTimer   = null;
+
+reviewQuotes.forEach((_, i) => {
+    const btn  = document.createElement('button');
+    btn.className = 'reviews-dot';
+    btn.setAttribute('aria-label', `Review ${i + 1}`);
+    btn.innerHTML = '<span class="reviews-dot-fill"></span>';
+    btn.addEventListener('click', () => goToReview(i));
+    reviewDotsEl.appendChild(btn);
+});
+
+function goToReview(idx) {
+    clearTimeout(reviewTimer);
+    reviewQuotes[reviewCurrent].classList.remove('active');
+    reviewCurrent = idx;
+    reviewQuotes[reviewCurrent].classList.add('active');
+    reviewAuthorEl.style.opacity = '0';
+    setTimeout(() => {
+        reviewAuthorEl.textContent = reviewAuthors[reviewCurrent];
+        reviewAuthorEl.style.opacity = '1';
+    }, 350);
+    updateReviewDots(reviewCurrent);
+    scheduleNextReview();
+}
+
+function updateReviewDots(idx) {
+    reviewDotsEl.querySelectorAll('.reviews-dot').forEach((d, i) => {
+        const fill = d.querySelector('.reviews-dot-fill');
+        fill.style.transition = 'none';
+        fill.style.width = i < idx ? '100%' : '0%';
+        if (i === idx) {
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                fill.style.transition = `width ${REVIEW_INTERVAL}ms linear`;
+                fill.style.width = '100%';
+            }));
+        }
+    });
+}
+
+function scheduleNextReview() {
+    reviewTimer = setTimeout(() => {
+        goToReview((reviewCurrent + 1) % reviewQuotes.length);
+    }, REVIEW_INTERVAL);
+}
+
+updateReviewDots(0);
+scheduleNextReview();
+
     </script>
 </body>
 </html>
