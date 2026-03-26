@@ -290,11 +290,11 @@
             color: #EDE6D4; margin: 0 0 14px 0; line-height: 1.1;
         }
 
-        /* ── SUBTITLE — desktop: single line; mobile: wraps cleanly ── */
+        /* ── SUBTITLE: Lato, minimal, single line desktop ── */
         .services-subtitle {
-            font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 300;
-            color: rgba(237,230,212,0.65); letter-spacing: 0.5px;
-            line-height: 1.7; white-space: nowrap;
+            font-family: 'Lato', sans-serif; font-size: 1.1rem; font-weight: 300;
+            color: rgba(237,230,212,0.65); letter-spacing: 2px;
+            line-height: 1.7; white-space: nowrap; text-transform: uppercase;
         }
 
         /* Card carousel */
@@ -389,12 +389,13 @@
         }
         .svc-book:hover { color: #000; border-color: #000; }
 
+        /* visibility:hidden keeps layout/height identical — no jump on transition */
         .svc-slot.slot-left  .svc-desc,
         .svc-slot.slot-right .svc-desc,
         .svc-slot.slot-left  .svc-divider,
         .svc-slot.slot-right .svc-divider,
         .svc-slot.slot-left  .svc-book,
-        .svc-slot.slot-right .svc-book { display: none; }
+        .svc-slot.slot-right .svc-book { visibility: hidden; }
 
         /* Progress dots */
         .svc-dots {
@@ -582,13 +583,13 @@
             .text-side p  { font-size: 1rem; }
             .svc-header { padding: 50px 24px 30px; }
             .services-title { font-size: clamp(2.2rem,9vw,3.2rem); }
-            /* Fix 1: allow natural wrap on mobile, boost visibility */
             .services-subtitle {
                 white-space: normal;
-                font-size: 0.88rem;
+                font-size: 0.72rem;
                 color: rgba(237,230,212,0.75);
                 max-width: 90vw;
                 text-align: center;
+                letter-spacing: 1.5px;
             }
             .svc-slot.slot-left,
             .svc-slot.slot-right { display: none; }
@@ -614,8 +615,7 @@
             .svc-card { padding: 28px 20px; }
             .svc-name { font-size: 1.6rem; }
             .nav-reserve-btn { display: none; }
-            /* Extra small: subtitle slightly smaller */
-            .services-subtitle { font-size: 0.82rem; }
+            .services-subtitle { font-size: 0.65rem; letter-spacing: 1px; }
         }
     </style>
 </head>
