@@ -264,7 +264,6 @@
             );
         }
 
-        /* Header — title + subtitle only, no label */
         .svc-header {
             position: absolute;
             top: 0; left: 0; right: 0;
@@ -290,10 +289,12 @@
             font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 400;
             color: #EDE6D4; margin: 0 0 14px 0; line-height: 1.1;
         }
+
+        /* ── SUBTITLE: single line, no wrap ── */
         .services-subtitle {
-            font-family: ‘Cormorant Garamond’, serif; font-size: 1.05rem; font-weight: 300;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 300;
             color: rgba(237,230,212,0.55); letter-spacing: 0.5px;
-            max-width: 400px; line-height: 1.7;
+            line-height: 1.7; white-space: nowrap;
         }
 
         /* Card carousel */
@@ -582,7 +583,8 @@
             .text-side p  { font-size: 1rem; }
             .svc-header { padding: 50px 24px 0; }
             .services-title { font-size: clamp(2.2rem,9vw,3.2rem); }
-            .services-subtitle { font-size: 0.8rem; }
+            /* Allow wrap on small screens so it doesn't overflow */
+            .services-subtitle { white-space: normal; font-size: 0.82rem; }
             .svc-slot.slot-left,
             .svc-slot.slot-right { display: none; }
             .svc-card { width: calc(100vw - 48px); padding: 32px 26px; }
@@ -683,7 +685,6 @@
 
         <div class="svc-gradient"></div>
 
-        <!-- No label; title + new subtitle only -->
         <div class="svc-header">
             <h2 class="services-title">Services</h2>
             <p class="services-subtitle">Explore our experiences available — tailored to your needs.</p>
@@ -822,6 +823,7 @@
         const RESERVE_URL = 'reserve.html';
         const INTERVAL    = 8000;
         const HALF_ANIM   = 380;
+        const SWIPE_THRESHOLD = 50; /* px — minimum swipe distance to trigger card change */
 
         let current     = 0;
         let autoTimer   = null;
@@ -833,6 +835,7 @@
         const slotRight  = document.getElementById('slotRight');
         const dotsEl     = document.getElementById('svcDots');
         const bgLayers   = document.querySelectorAll('.svc-bg-layer');
+        const stage      = document.getElementById('svcStage');
 
         SERVICES.forEach((s, i) => {
             const btn = document.createElement('button');
@@ -935,6 +938,38 @@
                 animateTo(next, scheduleNext);
             }, INTERVAL);
         }
+
+        /* ── Touch / Swipe support ── */
+        let touchStartX = null;
+        let touchStartY = null;
+
+        stage.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        stage.addEventListener('touchend', e => {
+            if (touchStartX === null) return;
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+
+            /* Only trigger if horizontal swipe is dominant */
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) {
+                if (dx < 0) {
+                    /* swipe left → next */
+                    direction = 'forward';
+                    clearTimeout(autoTimer);
+                    animateTo((current + 1) % SERVICES.length, scheduleNext);
+                } else {
+                    /* swipe right → previous */
+                    direction = 'backward';
+                    clearTimeout(autoTimer);
+                    animateTo((current - 1 + SERVICES.length) % SERVICES.length, scheduleNext);
+                }
+            }
+            touchStartX = null;
+            touchStartY = null;
+        }, { passive: true });
 
         populateSlots(0);
         setBg(0);
