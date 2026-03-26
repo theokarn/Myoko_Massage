@@ -264,6 +264,7 @@
             );
         }
 
+        /* Header — title + subtitle only, no label */
         .svc-header {
             position: absolute;
             top: 0; left: 0; right: 0;
@@ -284,15 +285,15 @@
             mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
         }
 
-        .services-label {
-            font-family: 'Lato', sans-serif; font-size: 0.72rem; font-weight: 400;
-            letter-spacing: 3px; text-transform: uppercase;
-            color: rgba(237,230,212,0.55); margin-bottom: 14px;
-        }
         .services-title {
             font-family: 'Gowun Batang', serif;
             font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 400;
-            color: #EDE6D4; margin: 0; line-height: 1.1;
+            color: #EDE6D4; margin: 0 0 14px 0; line-height: 1.1;
+        }
+        .services-subtitle {
+            font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300;
+            color: rgba(237,230,212,0.55); letter-spacing: 0.5px;
+            max-width: 400px; line-height: 1.7; font-style: italic;
         }
 
         /* Card carousel */
@@ -581,6 +582,7 @@
             .text-side p  { font-size: 1rem; }
             .svc-header { padding: 50px 24px 0; }
             .services-title { font-size: clamp(2.2rem,9vw,3.2rem); }
+            .services-subtitle { font-size: 0.8rem; }
             .svc-slot.slot-left,
             .svc-slot.slot-right { display: none; }
             .svc-card { width: calc(100vw - 48px); padding: 32px 26px; }
@@ -681,10 +683,10 @@
 
         <div class="svc-gradient"></div>
 
-        <!-- subtitle removed; only label + title remain -->
+        <!-- No label; title + new subtitle only -->
         <div class="svc-header">
-            <p class="services-label">Mykonos · Mobile Service</p>
             <h2 class="services-title">Services</h2>
+            <p class="services-subtitle">Explore our experiences available — tailored to your needs.</p>
         </div>
 
         <div class="svc-stage" id="svcStage">
@@ -817,9 +819,9 @@
             }
         ];
 
-        const WA_LINK   = 'https://wa.me/306947077567?text=Hi%20I%20would%20like%20to%20book%20a%20massage';
-        const INTERVAL  = 8000;
-        const HALF_ANIM = 380;
+        const RESERVE_URL = 'reserve.html';
+        const INTERVAL    = 8000;
+        const HALF_ANIM   = 380;
 
         let current     = 0;
         let autoTimer   = null;
@@ -851,7 +853,7 @@
                 <p class="svc-duration">${s.duration}</p>
                 <div class="svc-divider"></div>
                 <p class="svc-desc">${s.desc}</p>
-                <a href="${WA_LINK}" target="_blank" class="svc-book">Book this service</a>
+                <a href="${RESERVE_URL}" class="svc-book">Book this service</a>
             `;
             return card;
         }
