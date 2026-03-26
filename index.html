@@ -236,9 +236,7 @@
             color: #4B4D39; line-height: 1.8; margin: 0 0 20px 0; max-width: 550px;
         }
 
-        /* ══════════════════════════════════════
-           ── SERVICES  (fullscreen, no top bar)
-        ══════════════════════════════════════ */
+        /* ── SERVICES ── */
         .services {
             position: relative; width: 100%;
             height: 100vh; height: 100dvh;
@@ -248,7 +246,6 @@
             overflow: hidden;
         }
 
-        /* Background photo layers */
         .svc-bg-layer {
             position: absolute; inset: 0; width: 100%; height: 100%;
             object-fit: cover; opacity: 0; z-index: 0;
@@ -256,7 +253,6 @@
         }
         .svc-bg-layer.active { opacity: 1; }
 
-        /* Gradient overlay — darkens top so the header reads clearly */
         .svc-gradient {
             position: absolute; inset: 0; z-index: 1; pointer-events: none;
             background: linear-gradient(
@@ -268,29 +264,25 @@
             );
         }
 
-        /* Header — label + title + subtitle pinned to top of section */
         .svc-header {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    z-index: 3;
-    display: flex; flex-direction: column;
-    align-items: center; text-align: center;
-    padding: 50px 30px 36px;
-    pointer-events: none;
-
-    /* frosted glass panel behind just the header */
-    background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.62) 0%,
-        rgba(0,0,0,0.38) 70%,
-        rgba(0,0,0,0.00) 100%
-    );
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    /* fade the blur mask so it doesn't cut hard */
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-}
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            z-index: 3;
+            display: flex; flex-direction: column;
+            align-items: center; text-align: center;
+            padding: 50px 30px 36px;
+            pointer-events: none;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.62) 0%,
+                rgba(0,0,0,0.38) 70%,
+                rgba(0,0,0,0.00) 100%
+            );
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+        }
 
         .services-label {
             font-family: 'Lato', sans-serif; font-size: 0.72rem; font-weight: 400;
@@ -300,12 +292,7 @@
         .services-title {
             font-family: 'Gowun Batang', serif;
             font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 400;
-            color: #EDE6D4; margin: 0 0 12px 0; line-height: 1.1;
-        }
-        .services-subtitle {
-            font-family: 'Lato', sans-serif; font-size: 0.9rem; font-weight: 300;
-            color: rgba(237,230,212,0.5); letter-spacing: 0.3px;
-            max-width: 380px; line-height: 1.7;
+            color: #EDE6D4; margin: 0; line-height: 1.1;
         }
 
         /* Card carousel */
@@ -389,12 +376,26 @@
             font-family: 'Lato', sans-serif; font-size: 0.98rem;
             line-height: 1.75; color: rgba(75,77,57,0.8); margin: 0;
         }
+
+        /* Book link — only visible on center card */
+        .svc-book {
+            display: inline-block; margin-top: 28px;
+            font-family: 'Lato', sans-serif; font-size: 0.72rem;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: #4B4D39; text-decoration: none;
+            border-bottom: 1px solid rgba(75,77,57,0.3); padding-bottom: 2px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .svc-book:hover { color: #000; border-color: #000; }
+
         .svc-slot.slot-left  .svc-desc,
         .svc-slot.slot-right .svc-desc,
         .svc-slot.slot-left  .svc-divider,
-        .svc-slot.slot-right .svc-divider { display: none; }
+        .svc-slot.slot-right .svc-divider,
+        .svc-slot.slot-left  .svc-book,
+        .svc-slot.slot-right .svc-book { display: none; }
 
-        /* Progress dots — pinned to bottom */
+        /* Progress dots */
         .svc-dots {
             position: absolute; bottom: 36px; z-index: 3;
             display: flex; gap: 8px;
@@ -670,36 +671,29 @@
         </div>
     </section>
 
-    <!-- Services — fullscreen, no separate top bar -->
+    <!-- Services -->
     <section class="services" id="services">
-
-        <!-- Background photo layers -->
         <img src="swed_1.jpg"          class="svc-bg-layer active" alt="">
         <img src="deep_2.jpg"          class="svc-bg-layer" alt="">
         <img src="sports-massage.jpg"  class="svc-bg-layer" alt="">
         <img src="cupping-therapy.jpg" class="svc-bg-layer" alt="">
         <img src="aromatherapy.jpg"    class="svc-bg-layer" alt="">
 
-        <!-- Gradient overlay -->
         <div class="svc-gradient"></div>
 
-        <!-- Header overlaid on photo -->
+        <!-- subtitle removed; only label + title remain -->
         <div class="svc-header">
             <p class="services-label">Mykonos · Mobile Service</p>
             <h2 class="services-title">Services</h2>
-            <p class="services-subtitle">Explore the experiences available — or customise yours via WhatsApp</p>
         </div>
 
-        <!-- Card carousel -->
         <div class="svc-stage" id="svcStage">
             <div class="svc-slot slot-left"   id="slotLeft"></div>
             <div class="svc-slot slot-center" id="slotCenter"></div>
             <div class="svc-slot slot-right"  id="slotRight"></div>
         </div>
 
-        <!-- Progress dots -->
         <div class="svc-dots" id="svcDots"></div>
-
     </section>
 
     <!-- Reviews -->
@@ -823,6 +817,7 @@
             }
         ];
 
+        const WA_LINK   = 'https://wa.me/306947077567?text=Hi%20I%20would%20like%20to%20book%20a%20massage';
         const INTERVAL  = 8000;
         const HALF_ANIM = 380;
 
@@ -856,6 +851,7 @@
                 <p class="svc-duration">${s.duration}</p>
                 <div class="svc-divider"></div>
                 <p class="svc-desc">${s.desc}</p>
+                <a href="${WA_LINK}" target="_blank" class="svc-book">Book this service</a>
             `;
             return card;
         }
