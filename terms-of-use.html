@@ -110,26 +110,66 @@
         a { color: #4B4D39; text-decoration: underline; transition: opacity 0.25s ease; }
         a:hover { opacity: 0.7; }
 
-        .site-footer { background: #1a1a18; color: #EDE6D4; margin-top: 100px; }
+        .site-footer { background: #1a1a18; color: #EDE6D4; }
         .footer-inner {
             display: grid; grid-template-columns: 1.4fr 1fr;
             gap: 60px; padding: 80px 60px 60px;
             max-width: 1200px; margin: 0 auto;
         }
         .footer-brand { display: flex; flex-direction: column; gap: 20px; }
-        .footer-logo { display: flex; flex-direction: column; align-items: flex-start; text-decoration: none; line-height: 1; }
-        .footer-logo-name { font-family: 'Gowun Batang', serif; font-size: 20px; font-weight: 400; color: #EDE6D4; letter-spacing: 0.5px; }
-        .footer-logo-location { font-family: 'Lato', sans-serif; font-size: 9px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: rgba(237,230,212,0.45); margin-top: 5px; }
-        .footer-about { font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300; color: rgba(237,230,212,0.45); line-height: 1.8; max-width: 380px; }
-        .footer-nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        .footer-logo {
+            display: flex; flex-direction: column;
+            align-items: flex-start; text-decoration: none; line-height: 1;
+        }
+        .footer-logo-name {
+            font-family: 'Gowun Batang', serif;
+            font-size: 20px; font-weight: 400; color: #EDE6D4; letter-spacing: 0.5px;
+        }
+        .footer-logo-location {
+            font-family: 'Lato', sans-serif; font-size: 9px; font-weight: 400;
+            letter-spacing: 3px; text-transform: uppercase;
+            color: rgba(237,230,212,0.45); margin-top: 5px;
+        }
+        .footer-about {
+            font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300;
+            color: rgba(237,230,212,0.45); line-height: 1.8; max-width: 380px;
+        }
+        .footer-ig {
+            font-family: 'Lato', sans-serif; font-size: 0.72rem; letter-spacing: 2px;
+            color: rgba(237,230,212,0.35); text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-ig:hover { color: #EDE6D4; }
+        .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .footer-col { display: flex; flex-direction: column; gap: 10px; }
-        .footer-col-title { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 400; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(237,230,212,0.35); margin-bottom: 8px; }
-        .footer-col a { font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300; color: rgba(237,230,212,0.55); text-decoration: none; transition: color 0.25s ease; }
+        .footer-col-title {
+            font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 400;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: rgba(237,230,212,0.35); margin-bottom: 8px;
+        }
+        .footer-col a {
+            font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300;
+            color: rgba(237,230,212,0.55); text-decoration: none;
+            transition: color 0.25s ease; line-height: 1.5;
+        }
         .footer-col a:hover { color: #EDE6D4; }
-        .footer-bar { border-top: 1px solid rgba(237,230,212,0.08); padding: 22px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-        .footer-bar span { font-family: 'Lato', sans-serif; font-size: 0.72rem; font-weight: 300; color: rgba(237,230,212,0.3); }
+        .footer-bar {
+            border-top: 1px solid rgba(237,230,212,0.08);
+            padding: 22px 60px;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 12px;
+        }
+        .footer-bar span {
+            font-family: 'Lato', sans-serif; font-size: 0.72rem; font-weight: 300;
+            letter-spacing: 0.5px; color: rgba(237,230,212,0.3);
+        }
         .footer-bar-links { display: flex; gap: 28px; }
-        .footer-bar-links a { font-family: 'Lato', sans-serif; font-size: 0.68rem; font-weight: 400; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(237,230,212,0.3); text-decoration: none; transition: color 0.25s ease; }
+        .footer-bar-links a {
+            font-family: 'Lato', sans-serif; font-size: 0.68rem; font-weight: 400;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            color: rgba(237,230,212,0.3); text-decoration: none;
+            transition: color 0.25s ease;
+        }
         .footer-bar-links a:hover { color: rgba(237,230,212,0.75); }
 
         @media (max-width: 768px) {
