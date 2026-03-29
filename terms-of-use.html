@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Lato:wght@300;400;700&family=Gowun+Batang:wght@400;700&family=Inter:wght@200;300;400;500&family=Manrope:wght@200;300&display=swap" rel="stylesheet">
+    <title>Myōko Massage | Terms of Use</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #4B4D39; line-height: 1.6;
+            overflow-x: hidden; background: #ffffff;
+        }
+        html { scroll-behavior: smooth; }
+
+        nav {
+            position: fixed; top: 0; width: 100%;
+            padding: 25px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100; background: transparent;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        nav.scrolled {
+            background: rgba(237,230,212,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo {
+            display: flex; flex-direction: column;
+            align-items: flex-start; line-height: 1; text-decoration: none;
+        }
+        .logo-name {
+            font-family: 'Gowun Batang', serif;
+            font-size: 22px; font-weight: 400;
+            color: #EDE6D4; transition: color 0.3s ease; letter-spacing: 0.5px;
+        }
+        .logo-location {
+            font-family: 'Lato', sans-serif;
+            font-size: 10px; font-weight: 400;
+            letter-spacing: 3px; text-transform: uppercase;
+            color: rgba(237,230,212,0.75); transition: color 0.3s ease; margin-top: 4px;
+        }
+        nav.scrolled .logo-name { color: #4B4D39; }
+        nav.scrolled .logo-location { color: rgba(75,77,57,0.6); }
+
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-reserve-btn {
+            font-family: 'Lato', sans-serif;
+            font-size: 11px; font-weight: 500;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: #EDE6D4; text-decoration: none;
+            border: 1px solid rgba(237,230,212,0.55);
+            padding: 8px 20px; border-radius: 20px;
+            transition: background 0.3s ease, color 0.3s ease;
+            white-space: nowrap;
+        }
+        .nav-reserve-btn:hover { background: #EDE6D4; color: #4B4D39; }
+        nav.scrolled .nav-reserve-btn { color: #4B4D39; border-color: rgba(75,77,57,0.4); }
+        nav.scrolled .nav-reserve-btn:hover { background: #4B4D39; color: #EDE6D4; }
+
+        .hamburger {
+            background: transparent; border: none; cursor: pointer;
+            padding: 8px; display: flex; justify-content: center; align-items: center;
+            width: 44px; height: 44px; position: relative; z-index: 101;
+        }
+        .hamburger .bar {
+            display: block; width: 24px; height: 2px;
+            background: #EDE6D4; border-radius: 2px; position: absolute;
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+        }
+        .hamburger .bar:nth-child(1) { transform: translateY(-5px); }
+        .hamburger .bar:nth-child(2) { transform: translateY(5px); }
+        nav.scrolled .hamburger .bar { background: #4B4D39; }
+
+        main {
+            padding: 160px 60px 80px;
+            max-width: 900px; margin: 0 auto;
+        }
+        h1 {
+            font-family: 'Gowun Batang', serif;
+            font-size: 3.2rem; font-weight: 400;
+            color: #4B4D39; margin: 0 0 20px 0; line-height: 1.2;
+        }
+        .updated {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem; color: rgba(75,77,57,0.5);
+            margin-bottom: 60px; font-style: italic;
+        }
+        h2 {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.4rem; font-weight: 600;
+            color: #4B4D39; margin: 50px 0 20px 0;
+        }
+        p {
+            margin-bottom: 16px; line-height: 1.8;
+            color: rgba(75,77,57,0.85);
+        }
+        ul {
+            margin: 20px 0 20px 30px;
+            line-height: 1.9;
+        }
+        li {
+            margin-bottom: 12px;
+            color: rgba(75,77,57,0.85);
+        }
+        strong { color: #4B4D39; font-weight: 600; }
+        a { color: #4B4D39; text-decoration: underline; transition: opacity 0.25s ease; }
+        a:hover { opacity: 0.7; }
+
+        .site-footer { background: #1a1a18; color: #EDE6D4; margin-top: 100px; }
+        .footer-inner {
+            display: grid; grid-template-columns: 1.4fr 1fr;
+            gap: 60px; padding: 80px 60px 60px;
+            max-width: 1200px; margin: 0 auto;
+        }
+        .footer-brand { display: flex; flex-direction: column; gap: 20px; }
+        .footer-logo { display: flex; flex-direction: column; align-items: flex-start; text-decoration: none; line-height: 1; }
+        .footer-logo-name { font-family: 'Gowun Batang', serif; font-size: 20px; font-weight: 400; color: #EDE6D4; letter-spacing: 0.5px; }
+        .footer-logo-location { font-family: 'Lato', sans-serif; font-size: 9px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: rgba(237,230,212,0.45); margin-top: 5px; }
+        .footer-about { font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300; color: rgba(237,230,212,0.45); line-height: 1.8; max-width: 380px; }
+        .footer-nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        .footer-col { display: flex; flex-direction: column; gap: 10px; }
+        .footer-col-title { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 400; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(237,230,212,0.35); margin-bottom: 8px; }
+        .footer-col a { font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300; color: rgba(237,230,212,0.55); text-decoration: none; transition: color 0.25s ease; }
+        .footer-col a:hover { color: #EDE6D4; }
+        .footer-bar { border-top: 1px solid rgba(237,230,212,0.08); padding: 22px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .footer-bar span { font-family: 'Lato', sans-serif; font-size: 0.72rem; font-weight: 300; color: rgba(237,230,212,0.3); }
+        .footer-bar-links { display: flex; gap: 28px; }
+        .footer-bar-links a { font-family: 'Lato', sans-serif; font-size: 0.68rem; font-weight: 400; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(237,230,212,0.3); text-decoration: none; transition: color 0.25s ease; }
+        .footer-bar-links a:hover { color: rgba(237,230,212,0.75); }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
+            main { padding: 140px 25px 60px; }
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.2rem; }
+            .footer-inner { grid-template-columns: 1fr; gap: 50px; padding: 50px 25px 40px; }
+            .footer-nav { grid-template-columns: repeat(2, 1fr); }
+            .footer-bar { padding: 20px 25px; flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="mainNav">
+        <a href="index.html" class="logo">
+            <span class="logo-name">Myōko Massage</span>
+            <span class="logo-location">Mykonos</span>
+        </a>
+        <div class="nav-right">
+            <a href="reserve.html" class="nav-reserve-btn">Reserve</a>
+            <button class="hamburger" id="menuToggle" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <h1>Terms of Use</h1>
+        <p class="updated">Last updated: March 29, 2026</p>
+
+        <h2>1. Agreement to Terms</h2>
+        <p>By accessing and using the Myōko Massage website (the "Website"), you agree to be bound by these Terms of Use ("Terms"). If you do not agree to any part of these Terms, you may not use this Website.</p>
+
+        <h2>2. Use License</h2>
+        <p>Permission is granted to temporarily view and download one copy of the materials on the Myōko Massage Website for personal, non-commercial use only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+        <ul>
+            <li>Modify or copy the materials</li>
+            <li>Use the materials for any commercial purpose or public display</li>
+            <li>Attempt to decompile or reverse engineer any software on the Website</li>
+            <li>Remove any copyright or other proprietary notations from the materials</li>
+            <li>Transfer the materials to another person or mirror them on any other server</li>
+            <li>Use the Website in a way that infringes intellectual property rights or violates applicable law</li>
+        </ul>
+
+        <h2>3. Disclaimer of Warranties & Massage Services</h2>
+        <p><strong>Medical Disclaimer:</strong> Myōko Massage provides massage services for relaxation and therapeutic purposes only. Our therapists are not doctors or medical professionals. Our services:</p>
+        <ul>
+            <li>Are not intended to diagnose, treat, cure, or prevent any disease or medical condition</li>
+            <li>Do not replace medical advice, diagnosis, or treatment by a licensed healthcare provider</li>
+            <li>Should not be used as a substitute for professional medical consultation</li>
+        </ul>
+        <p><strong>Risk Acknowledgment:</strong> Clients acknowledge that massage therapy carries inherent risks, including but not limited to:</p>
+        <ul>
+            <li>Temporary soreness or mild discomfort following treatment</li>
+            <li>Allergic reactions to massage oils, lotions, or aromatherapy products</li>
+            <li>Bruising or sensitivity in treated areas</li>
+            <li>Aggravation of existing medical conditions</li>
+        </ul>
+        <p>All materials on this Website are provided "as is" without any representations or warranties, express or implied.</p>
+
+        <h2>4. Limitations of Liability</h2>
+        <p>In no event shall Myōko Massage, its directors, officers, employees, or agents be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of, or inability to use, the Website or the services provided — including damages for loss of profits, goodwill, use, data, or other intangible losses — even if advised of the possibility of such damages.</p>
+        <p>The maximum liability of Myōko Massage for any claim shall not exceed the amount paid for the services in question.</p>
+
+        <h2>5. Booking and Cancellation Policy</h2>
+        <p><strong>Booking:</strong> All bookings are subject to availability and confirmation via email or phone.</p>
+        <p><strong>Cancellation:</strong> Clients may cancel or reschedule with at least 24 hours notice. Cancellations with less than 24 hours notice may incur a fee equivalent to the full service cost.</p>
+        <p><strong>No-Show:</strong> Clients who do not attend their scheduled appointment without notice will be charged the full service fee.</p>
+        <p><strong>Service Modifications:</strong> Myōko Massage reserves the right to reschedule services due to illness of the therapist, severe weather, or other emergencies beyond reasonable control.</p>
+
+        <h2>6. Client Health Declaration</h2>
+        <p>Clients must disclose all relevant medical conditions, injuries, pregnancies, allergies, and current medications prior to receiving services. Myōko Massage reserves the right to refuse service to clients who, in the sole judgment of the therapist, may not be suitable candidates due to medical contraindications.</p>
+
+        <h2>7. Intellectual Property Rights</h2>
+        <p>All content on the Myōko Massage Website — including text, graphics, logos, images, audio clips, and software — is the property of Myōko Massage or its content suppliers and is protected by international copyright laws. Unauthorized use of any content is prohibited and may result in legal action.</p>
+
+        <h2>8. Third-Party Links</h2>
+        <p>The Website may contain links to third-party websites. Myōko Massage is not responsible for the content, accuracy, or privacy practices of external sites. Your use of third-party websites is governed by their own terms and conditions.</p>
+
+        <h2>9. Indemnification</h2>
+        <p>You agree to defend, indemnify, and hold harmless Myōko Massage, its owners, officers, employees, and agents from any claims, damages, losses, liabilities, and expenses (including attorney fees) arising from:</p>
+        <ul>
+            <li>Your use of the Website or services</li>
+            <li>Your violation of these Terms</li>
+            <li>Your violation of any applicable law or third-party rights</li>
+            <li>Your misrepresentation of medical history or health information</li>
+        </ul>
+
+        <h2>10. Modifications to Terms</h2>
+        <p>Myōko Massage reserves the right to modify these Terms at any time. Changes are effective immediately upon posting. Continued use of the Website constitutes acceptance of the updated Terms.</p>
+
+        <h2>11. Governing Law and Dispute Resolution</h2>
+        <p>These Terms shall be governed by and construed in accordance with the laws of Greece. You agree to submit to the exclusive jurisdiction of the courts located in Greece.</p>
+        <p>In the event of a dispute, the parties shall first attempt resolution through good faith negotiation. If unresolved within 30 days, either party may pursue legal action in accordance with Greek law.</p>
+
+        <h2>12. Severability</h2>
+        <p>If any provision of these Terms is found invalid, illegal, or unenforceable, the remaining provisions shall continue in full force and effect.</p>
+
+        <h2>13. Entire Agreement</h2>
+        <p>These Terms, together with our Privacy Policy and Cookie Policy, constitute the entire agreement between you and Myōko Massage regarding your use of the Website and supersede all prior agreements, whether written or oral.</p>
+
+        <h2>14. Contact Information</h2>
+        <p>
+            <strong>Myōko Massage</strong><br>
+            Mykonos, Greece<br>
+            Email: <a href="mailto:hello@myokomassage.com">hello@myokomassage.com</a><br>
+            WhatsApp: <a href="https://wa.me/306947077567">+30 694 707 7567</a>
+        </p>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">
+                    <span class="footer-logo-name">Myōko Massage</span>
+                    <span class="footer-logo-location">Mykonos</span>
+                </a>
+                <p class="footer-about">Myōko is a premium mobile massage service operating across Mykonos. We bring skill, intuition, and island serenity to your doorstep.</p>
+            </div>
+            <div class="footer-nav">
+                <div class="footer-col">
+                    <span class="footer-col-title">Navigation</span>
+                    <a href="index.html">Home</a>
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#services">Services</a>
+                    <a href="reserve.html">Reserve</a>
+                </div>
+                <div class="footer-col">
+                    <span class="footer-col-title">Legal</span>
+                    <a href="terms-of-use.html">Terms of Use</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="cookie-policy.html">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bar">
+            <span>&copy; 2026 Myōko Massage. All rights reserved.</span>
+            <div class="footer-bar-links">
+                <a href="terms-of-use.html">Terms</a>
+                <a href="privacy-policy.html">Privacy</a>
+                <a href="cookie-policy.html">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        });
+        nav.classList.add('scrolled');
+    </script>
+
+</body>
+</html>
