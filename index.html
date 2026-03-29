@@ -139,6 +139,92 @@
             .overlay-left  { padding: 120px 35px 80px; }
         }
 
+       /* ── COOKIE BANNER ── */
+.cookie-banner {
+    position: fixed; bottom: 30px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    background: #1a1a18;
+    color: #EDE6D4;
+    padding: 22px 32px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    max-width: 780px;
+    width: calc(100% - 48px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateX(-50%) translateY(20px);
+}
+.cookie-banner.visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(-50%) translateY(0);
+}
+.cookie-banner-text {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(237,230,212,0.75);
+    line-height: 1.7;
+    flex: 1;
+}
+.cookie-banner-text a {
+    color: rgba(237,230,212,0.75);
+    text-decoration: underline;
+    transition: color 0.25s ease;
+}
+.cookie-banner-text a:hover { color: #EDE6D4; }
+.cookie-banner-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+.cookie-btn {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    padding: 9px 22px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    white-space: nowrap;
+}
+.cookie-btn:hover { transform: translateY(-1px); }
+.cookie-btn--accept {
+    background: #EDE6D4;
+    color: #1a1a18;
+}
+.cookie-btn--accept:hover { background: #d9d1b8; }
+.cookie-btn--decline {
+    background: transparent;
+    color: rgba(237,230,212,0.5);
+    border: 1px solid rgba(237,230,212,0.2);
+}
+.cookie-btn--decline:hover {
+    color: #EDE6D4;
+    border-color: rgba(237,230,212,0.5);
+}
+
+@media (max-width: 768px) {
+    .cookie-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        bottom: 20px;
+        padding: 20px 22px;
+    }
+    .cookie-banner-actions { width: 100%; }
+    .cookie-btn { flex: 1; text-align: center; }
+}
+
+        
         /* ── HERO ── */
         .hero {
             width: 100%; height: 100vh; height: 100dvh;
@@ -795,6 +881,36 @@
             <img src="massage1.jpg" alt="Myōko Massage">
         </div>
     </div>
+
+    <!-- Cookie Banner -->
+<div class="cookie-banner" id="cookieBanner">
+    <p class="cookie-banner-text">
+        We use essential cookies to keep this site running. By clicking "Accept," you consent to our use of cookies as described in our <a href="cookie-policy.html">Cookie Policy</a>.
+    </p>
+    <div class="cookie-banner-actions">
+        <button class="cookie-btn cookie-btn--decline" id="cookieDecline">Decline</button>
+        <button class="cookie-btn cookie-btn--accept" id="cookieAccept">Accept</button>
+    </div>
+</div>
+
+    <script>
+    // Cookie Banner
+    (function() {
+        const banner = document.getElementById('cookieBanner');
+        const accepted = localStorage.getItem('cookieConsent');
+        if (!accepted) {
+            setTimeout(() => banner.classList.add('visible'), 1200);
+        }
+        document.getElementById('cookieAccept').addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'accepted');
+            banner.classList.remove('visible');
+        });
+        document.getElementById('cookieDecline').addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'declined');
+            banner.classList.remove('visible');
+        });
+    })();
+</script>
 
     <!-- Hero -->
     <section id="home" class="hero">
