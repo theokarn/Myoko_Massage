@@ -460,5 +460,34 @@
         nav.classList.add('scrolled');
     </script>
 
+    <script>
+    // Navbar scroll
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+    nav.classList.add('scrolled');
+
+    // Hamburger + overlay
+    const hamburger = document.getElementById('menuToggle');
+    const overlay = document.getElementById('menuOverlay');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        overlay.classList.toggle('open');
+        document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+    });
+
+    // Close menu when a link is clicked
+    document.querySelectorAll('.overlay-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+</script>
+
+
 </body>
 </html>
