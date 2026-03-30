@@ -43,8 +43,6 @@
             letter-spacing: 3px; text-transform: uppercase;
             color: rgba(75,77,57,0.6); transition: color 0.3s ease; margin-top: 4px;
         }
-        nav.scrolled .logo-name { color: #4B4D39; }
-        nav.scrolled .logo-location { color: rgba(75,77,57,0.6); }
 
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .nav-reserve-btn {
@@ -59,7 +57,7 @@
         }
         .nav-reserve-btn:hover { background: #4B4D39; color: #EDE6D4; }
 
-           /* ── HAMBURGER ── */
+        /* ── HAMBURGER ── */
         .hamburger {
             background: transparent; border: none; cursor: pointer;
             padding: 8px; display: flex; justify-content: center; align-items: center;
@@ -67,15 +65,13 @@
         }
         .hamburger .bar {
             display: block; width: 24px; height: 2px;
-            background: #EDE6D4; border-radius: 2px; position: absolute;
+            background: #4B4D39; border-radius: 2px; position: absolute;
             transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), background 0.3s ease;
         }
         .hamburger .bar:nth-child(1) { transform: translateY(-5px); }
         .hamburger .bar:nth-child(2) { transform: translateY(5px); }
         .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
         .hamburger.open .bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
-        nav.scrolled .hamburger .bar { background: #4B4D39; }
-        .hamburger.open .bar { background: #4B4D39 !important; }
 
         /* ── MENU OVERLAY ── */
         .menu-overlay {
@@ -126,11 +122,11 @@
         .menu-overlay.open .overlay-photo img { opacity: 1; transform: scale(1); }
 
         @media (max-width: 768px) {
-            .menu-overlay  { grid-template-columns: 1fr; }
+            .menu-overlay { grid-template-columns: 1fr; }
             .overlay-photo { display: none; }
-            .overlay-left  { padding: 120px 35px 80px; }
+            .overlay-left { padding: 120px 35px 80px; }
         }
-        
+
         main {
             padding: 160px 60px 80px;
             max-width: 900px; margin: 0 auto;
@@ -155,88 +151,37 @@
             font-size: 1.1rem; font-weight: 600;
             color: #4B4D39; margin: 30px 0 12px 0;
         }
-        p {
-            margin-bottom: 16px; line-height: 1.8;
-            color: rgba(75,77,57,0.85);
-        }
-        ul {
-            margin: 20px 0 20px 30px;
-            line-height: 1.9;
-        }
-        li {
-            margin-bottom: 12px;
-            color: rgba(75,77,57,0.85);
-        }
+        p { margin-bottom: 16px; line-height: 1.8; color: rgba(75,77,57,0.85); }
+        ul { margin: 20px 0 20px 30px; line-height: 1.9; }
+        li { margin-bottom: 12px; color: rgba(75,77,57,0.85); }
         strong { color: #4B4D39; font-weight: 600; }
         a { color: #4B4D39; text-decoration: underline; transition: opacity 0.25s ease; }
         a:hover { opacity: 0.7; }
 
-        /* ── FOOTER (match index.html exactly) ── */
-       .site-footer { background: #1a1a18; color: #EDE6D4; }
+        /* ── FOOTER ── */
+        .site-footer { background: #1a1a18; color: #EDE6D4; margin-top: 100px; }
         .footer-inner {
             display: grid; grid-template-columns: 1.4fr 1fr;
             gap: 60px; padding: 80px 60px 60px;
             max-width: 1200px; margin: 0 auto;
         }
         .footer-brand { display: flex; flex-direction: column; gap: 20px; }
-        .footer-logo {
-            display: flex; flex-direction: column;
-            align-items: flex-start; text-decoration: none; line-height: 1;
-        }
-        .footer-logo-name {
-            font-family: 'Gowun Batang', serif;
-            font-size: 20px; font-weight: 400; color: #EDE6D4; letter-spacing: 0.5px;
-        }
-        .footer-logo-location {
-            font-family: 'Lato', sans-serif; font-size: 9px; font-weight: 400;
-            letter-spacing: 3px; text-transform: uppercase;
-            color: rgba(237,230,212,0.45); margin-top: 5px;
-        }
-        .footer-about {
-            font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300;
-            color: rgba(237,230,212,0.45); line-height: 1.8; max-width: 380px;
-        }
-        .footer-ig {
-            font-family: 'Lato', sans-serif; font-size: 0.72rem; letter-spacing: 2px;
-            color: rgba(237,230,212,0.35); text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .footer-ig:hover { color: #EDE6D4; }
-        .footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .footer-logo { display: flex; flex-direction: column; align-items: flex-start; text-decoration: none; line-height: 1; }
+        .footer-logo-name { font-family: 'Gowun Batang', serif; font-size: 20px; font-weight: 400; color: #EDE6D4; letter-spacing: 0.5px; }
+        .footer-logo-location { font-family: 'Lato', sans-serif; font-size: 9px; font-weight: 400; letter-spacing: 3px; text-transform: uppercase; color: rgba(237,230,212,0.45); margin-top: 5px; }
+        .footer-about { font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300; color: rgba(237,230,212,0.45); line-height: 1.8; max-width: 380px; }
+        .footer-nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
         .footer-col { display: flex; flex-direction: column; gap: 10px; }
-        .footer-col-title {
-            font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 400;
-            letter-spacing: 2.5px; text-transform: uppercase;
-            color: rgba(237,230,212,0.35); margin-bottom: 8px;
-        }
-        .footer-col a {
-            font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300;
-            color: rgba(237,230,212,0.55); text-decoration: none;
-            transition: color 0.25s ease; line-height: 1.5;
-}
+        .footer-col-title { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 400; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(237,230,212,0.35); margin-bottom: 8px; }
+        .footer-col a { font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300; color: rgba(237,230,212,0.55); text-decoration: none; transition: color 0.25s ease; line-height: 1.5; }
         .footer-col a:hover { color: #EDE6D4; }
-        .footer-bar {
-            border-top: 1px solid rgba(237,230,212,0.08);
-            padding: 22px 60px;
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 12px;
-        }
-        .footer-bar span {
-            font-family: 'Lato', sans-serif; font-size: 0.72rem; font-weight: 300;
-            letter-spacing: 0.5px; color: rgba(237,230,212,0.3);
-        }
+        .footer-bar { border-top: 1px solid rgba(237,230,212,0.08); padding: 22px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .footer-bar span { font-family: 'Lato', sans-serif; font-size: 0.72rem; font-weight: 300; color: rgba(237,230,212,0.3); }
         .footer-bar-links { display: flex; gap: 28px; }
-        .footer-bar-links a {
-            font-family: 'Lato', sans-serif; font-size: 0.68rem; font-weight: 400;
-            letter-spacing: 1.5px; text-transform: uppercase;
-            color: rgba(237,230,212,0.3); text-decoration: none;
-            transition: color 0.25s ease;
-        }
+        .footer-bar-links a { font-family: 'Lato', sans-serif; font-size: 0.68rem; font-weight: 400; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(237,230,212,0.3); text-decoration: none; transition: color 0.25s ease; }
         .footer-bar-links a:hover { color: rgba(237,230,212,0.75); }
 
-        @media (max-width: 900px) {
-            .footer-inner { grid-template-columns: 1fr; gap: 50px; }
-        }
+        @media (max-width: 900px) { .footer-inner { grid-template-columns: 1fr; gap: 50px; } }
         @media (max-width: 768px) {
             nav { padding: 16px 20px; }
             main { padding: 140px 25px 60px; }
@@ -251,7 +196,7 @@
 
     <!-- Navigation -->
     <nav id="mainNav">
-        <a href="#home" class="logo">
+        <a href="index.html" class="logo">
             <span class="logo-name">Myōko Massage</span>
             <span class="logo-location">Mykonos</span>
         </a>
@@ -268,10 +213,10 @@
     <div class="menu-overlay" id="menuOverlay">
         <div class="overlay-left">
             <ul class="overlay-links">
-                <li><a href="#home"        class="overlay-nav-link">Home</a></li>
-                <li><a href="#about"       class="overlay-nav-link">About</a></li>
-                <li><a href="#services"    class="overlay-nav-link">Services</a></li>
-                <li><a href="reserve.html" class="overlay-nav-link">Reserve</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="reserve.html">Reserve</a></li>
             </ul>
             <a href="https://instagram.com/myokomassage" target="_blank" class="overlay-ig">@myokomassage</a>
         </div>
@@ -330,7 +275,6 @@
         </ul>
 
         <h2>4. Purpose of Data Processing</h2>
-        <p>We process your data exclusively for the following purposes:</p>
         <ul>
             <li>Responding to service inquiries and booking requests</li>
             <li>Confirming and scheduling appointments</li>
@@ -338,7 +282,6 @@
             <li>Complying with legal obligations under Greek and EU law</li>
             <li>Preventing fraud and ensuring Website security</li>
         </ul>
-        <p>We will not use your data for purposes other than those listed above without obtaining your prior written consent.</p>
 
         <h2>5. Data Retention Period</h2>
         <ul>
@@ -363,7 +306,6 @@
         <p>Your personal data is not transferred outside the European Economic Area (EEA) without explicit consent and appropriate legal safeguards in place.</p>
 
         <h2>7. Data Security</h2>
-        <p>We implement the following technical and organizational security measures:</p>
         <ul>
             <li>HTTPS/TLS encryption for all Website connections</li>
             <li>Secure SMTP/TLS encryption for email communications</li>
@@ -373,7 +315,6 @@
         </ul>
 
         <h2>8. Your Data Subject Rights (GDPR Articles 15–22)</h2>
-        <p>Under GDPR, you have the following rights regarding your personal </p>
         <ul>
             <li><strong>Right of Access (Article 15):</strong> Request a copy of all personal data we hold about you</li>
             <li><strong>Right to Rectification (Article 16):</strong> Request correction of inaccurate or incomplete data</li>
@@ -383,10 +324,10 @@
             <li><strong>Right to Object (Article 21):</strong> Object to processing based on legitimate interests</li>
             <li><strong>Right Against Automated Decision-Making (Article 22):</strong> Not to be subject to decisions based solely on automated processing</li>
         </ul>
-        <p>To exercise any of these rights, email us at <a href="mailto:hello@myokomassage.com">hello@myokomassage.com</a> with the subject line "Data Subject Request." We will verify your identity and respond within 30 days.</p>
+        <p>To exercise any of these rights, email us at <a href="mailto:hello@myokomassage.com">hello@myokomassage.com</a> with the subject line "Data Subject Request." We will respond within 30 days.</p>
 
         <h2>9. Children's Privacy</h2>
-        <p>Our Website and services are not directed to children under 16. We do not knowingly collect personal data from children. If we become aware that a child under 16 has submitted personal data, we will delete it immediately. Parents or guardians should contact us if concerned.</p>
+        <p>Our Website and services are not directed to children under 16. We do not knowingly collect personal data from children. If we become aware that a child under 16 has submitted personal data, we will delete it immediately.</p>
 
         <h2>10. Cookie Policy</h2>
         <p>For full information about the cookies used on our Website, please refer to our <a href="cookie-policy.html">Cookie Policy</a>. We use only essential cookies by default. Non-essential cookies require your prior explicit consent.</p>
@@ -395,7 +336,6 @@
         <p>Our Website may contain links to third-party websites (e.g., Instagram). We are not responsible for their privacy practices. We recommend reviewing their privacy policies before providing any personal information.</p>
 
         <h2>12. Data Protection Authority</h2>
-        <p>If you believe we have violated your data protection rights or are unsatisfied with our response, you have the right to lodge a complaint with:</p>
         <p>
             <strong>Hellenic Data Protection Authority (HDPA)</strong><br>
             Kifisias Avenue 1-3, 11523 Athens, Greece<br>
@@ -404,7 +344,7 @@
         </p>
 
         <h2>13. Policy Updates</h2>
-        <p>We may update this Privacy Policy to reflect changes in our practices or applicable law. The "Last updated" date at the top indicates the most recent revision. Continued use of the Website constitutes acceptance of any updates.</p>
+        <p>We may update this Privacy Policy to reflect changes in our practices or applicable law. Continued use of the Website constitutes acceptance of any updates.</p>
 
         <h2>14. Contact Us</h2>
         <p>
@@ -416,70 +356,58 @@
     </main>
 
     <!-- Footer -->
-   <footer class="site-footer">
-    <div class="footer-inner">
-        <div class="footer-brand">
-            <a href="#home" class="footer-logo">
-                <span class="footer-logo-name">Myōko Massage</span>
-                <span class="footer-logo-location">Mykonos</span>
-            </a>
-            <p class="footer-about">Myōko is a premium mobile massage service operating across Mykonos. We bring skilled therapeutic hands to your villa, hotel, or retreat — blending Eastern wellness tradition with the unhurried spirit of the Greek islands.</p>
-        </div>
-        <div class="footer-nav">
-            <div class="footer-col">
-                <p class="footer-col-title">Navigate</p>
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="reserve.html">Reserve</a>
-                <a href="#contact">Contact</a>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">
+                    <span class="footer-logo-name">Myōko Massage</span>
+                    <span class="footer-logo-location">Mykonos</span>
+                </a>
+                <p class="footer-about">Myōko is a premium mobile massage service operating across Mykonos. We bring skilled therapeutic hands to your villa, hotel, or retreat — blending Eastern wellness tradition with the unhurried spirit of the Greek islands.</p>
             </div>
-            <div class="footer-col">
-                <p class="footer-col-title">Contact</p>
-                <a href="mailto:hello@myokomassage.com">hello@myokomassage.com</a>
-                <a href="https://wa.me/306947077567" target="_blank">WhatsApp</a>
-                <a href="https://instagram.com/myokomassage" target="_blank">Instagram</a>
+            <div class="footer-nav">
+                <div class="footer-col">
+                    <p class="footer-col-title">Navigate</p>
+                    <a href="index.html">Home</a>
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#services">Services</a>
+                    <a href="reserve.html">Reserve</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <p class="footer-col-title">Contact</p>
+                    <a href="mailto:hello@myokomassage.com">hello@myokomassage.com</a>
+                    <a href="https://wa.me/306947077567" target="_blank">WhatsApp</a>
+                    <a href="https://instagram.com/myokomassage" target="_blank">Instagram</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="footer-bar">
-        <span>© 2026 Myōko Massage · All rights reserved.</span>
-        <div class="footer-bar-links">
-            <a href="privacy-policy.html">Privacy Policy</a>
-            <a href="terms-of-use.html">Terms of Use</a>
-            <a href="cookies.html">Cookie Policy</a>
+        <div class="footer-bar">
+            <span>© 2026 Myōko Massage · All rights reserved.</span>
+            <div class="footer-bar-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-use.html">Terms of Use</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
+            </div>
         </div>
-    </div>
-</footer>
-    
+    </footer>
+
     <script>
-    // Navbar scroll
-    const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 40);
-    });
-    nav.classList.add('scrolled');
+        const nav = document.getElementById('mainNav');
+        const hamburger = document.getElementById('menuToggle');
+        const overlay = document.getElementById('menuOverlay');
 
-    // Hamburger + overlay
-    const hamburger = document.getElementById('menuToggle');
-    const overlay = document.getElementById('menuOverlay');
-
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('open');
-        overlay.classList.toggle('open');
-        document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
-    });
-
-    // Close menu when a link is clicked
-    document.querySelectorAll('.overlay-nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('open');
-            overlay.classList.remove('open');
-            document.body.style.overflow = '';
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
         });
-    });
-</script>
+        nav.classList.add('scrolled');
 
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            overlay.classList.toggle('open');
+            document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+        });
+    </script>
 
 </body>
 </html>
