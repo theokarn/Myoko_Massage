@@ -61,6 +61,7 @@
         nav.scrolled .nav-reserve-btn { color: #4B4D39; border-color: rgba(75,77,57,0.4); }
         nav.scrolled .nav-reserve-btn:hover { background: #4B4D39; color: #EDE6D4; }
 
+       /* ── HAMBURGER ── */
         .hamburger {
             background: transparent; border: none; cursor: pointer;
             padding: 8px; display: flex; justify-content: center; align-items: center;
@@ -68,13 +69,70 @@
         }
         .hamburger .bar {
             display: block; width: 24px; height: 2px;
-            background: #EDE6D4; border-radius: 2px; position: absolute;
-            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+            background: #4B4D39; border-radius: 2px; position: absolute;
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), background 0.3s ease;
         }
         .hamburger .bar:nth-child(1) { transform: translateY(-5px); }
         .hamburger .bar:nth-child(2) { transform: translateY(5px); }
-        nav.scrolled .hamburger .bar { background: #4B4D39; }
+        .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
+        .hamburger.open .bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
 
+        /* ── MENU OVERLAY ── */
+        .menu-overlay {
+            position: fixed; inset: 0; background: #EDE6D4;
+            z-index: 99; display: grid; grid-template-columns: 1fr 1fr;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1);
+        }
+        .menu-overlay.open { opacity: 1; pointer-events: all; }
+        .overlay-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 140px 60px 80px 80px;
+}
+       .overlay-links {
+    display: flex; flex-direction: column;
+    align-items: flex-start; gap: 12px;
+    list-style: none; margin-bottom: 60px;
+    margin-left: 0;
+    padding-left: 0;
+}
+        .overlay-links li a {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.8rem; font-weight: 300;
+            color: #4B4D39; text-decoration: none; letter-spacing: -0.02em;
+            line-height: 1;
+            display: block; opacity: 0; transform: translateX(-20px);
+            transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1),
+                        transform 0.45s cubic-bezier(0.23,1,0.32,1), color 0.2s ease;
+        }
+        .menu-overlay.open .overlay-links li a { opacity: 1; transform: translateX(0); }
+        .overlay-links li:nth-child(1) a { transition-delay: 0.08s; }
+        .overlay-links li:nth-child(2) a { transition-delay: 0.14s; }
+        .overlay-links li:nth-child(3) a { transition-delay: 0.20s; }
+        .overlay-links li:nth-child(4) a { transition-delay: 0.26s; }
+        .overlay-links li a:hover { color: rgba(75,77,57,0.4); }
+        .overlay-ig {
+            font-family: 'Lato', sans-serif; font-size: 0.9rem;
+            color: rgba(75,77,57,0.45); letter-spacing: 1.5px;
+            text-decoration: none; opacity: 0;
+            transition: opacity 0.45s ease 0.35s, color 0.3s ease;
+            display: inline-flex; align-items: center; min-height: 44px;
+        }
+        .menu-overlay.open .overlay-ig { opacity: 1; }
+        .overlay-ig:hover { color: #4B4D39; }
+        .overlay-photo { display: block; position: relative; overflow: hidden; }
+        .overlay-photo img {
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0; transform: scale(1.04);
+            transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
+        }
+        .menu-overlay.open .overlay-photo img { opacity: 1; transform: scale(1); }
+
+        @media (max-width: 768px) {
+            .menu-overlay { grid-template-columns: 1fr; }
+            .overlay-photo { display: none; }
+            .overlay-left { padding: 120px 35px 80px; }
+        }
         main {
             padding: 160px 60px 80px;
             max-width: 900px; margin: 0 auto;
@@ -198,6 +256,22 @@
             </button>
         </div>
     </nav>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="overlay-left">
+            <ul class="overlay-links">
+                <li><a href="#home"        class="overlay-nav-link">Home</a></li>
+                <li><a href="#about"       class="overlay-nav-link">About</a></li>
+                <li><a href="#services"    class="overlay-nav-link">Services</a></li>
+                <li><a href="reserve.html" class="overlay-nav-link">Reserve</a></li>
+            </ul>
+            <a href="https://instagram.com/myokomassage" target="_blank" class="overlay-ig">@myokomassage</a>
+        </div>
+        <div class="overlay-photo">
+            <img src="massage1.jpg" alt="Myōko Massage">
+        </div>
+    </div>
 
     <main>
         <h1>Terms of Use</h1>
