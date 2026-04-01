@@ -309,7 +309,7 @@
             color: #4B4D39; line-height: 1.8; margin: 0 0 20px 0; max-width: 550px;
         }
 
-        /* ── Services Section ─────────────────────────────────────────── */
+       /* ── Services Section ─────────────────────────────────── */
 .services {
   padding-top: calc(72px + 5rem);
   padding-bottom: 6rem;
@@ -346,121 +346,161 @@
   opacity: 0.5;
 }
 
-/* Grid */
-.services-grid {
+/* ── Split layout ─────────────────────────────────────── */
+.services-layout {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
   max-width: 1100px;
   margin-inline: auto;
   padding-inline: 2rem;
+  align-items: start;
 }
 
-/* Card */
-.service-card {
-  background: #ffffff;
-  border: 1px solid rgba(40, 30, 10, 0.10);
+/* LEFT: sticky photo panel */
+.services-photo-panel {
+  position: sticky;
+  top: calc(72px + 2rem);
+  padding-right: 2.5rem;
+}
+.services-photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   border-radius: 0.75rem;
-  padding: 2.5rem 2rem;
+  overflow: hidden;
+  background: #1a1916;
+}
+.service-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.04);
+}
+.service-photo.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* RIGHT: card list */
+.services-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  box-shadow: 0 1px 3px rgba(20,15,5,0.06), 0 1px 2px rgba(20,15,5,0.04);
-  transition: transform 220ms cubic-bezier(0.16,1,0.3,1),
-              box-shadow 220ms cubic-bezier(0.16,1,0.3,1);
-  position: relative;
-  overflow: hidden;
-}
-/* Animated emerald underline on hover */
-.service-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  width: 60%;
-  height: 1.5px;
-  background: #2d6b52;
-  transition: transform 220ms cubic-bezier(0.16,1,0.3,1);
-  transform-origin: center;
-  border-radius: 2px;
-}
-.service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 48px rgba(20,15,5,0.12), 0 4px 12px rgba(20,15,5,0.06);
-}
-.service-card:hover::after {
-  transform: translateX(-50%) scaleX(1);
-}
-/* Subtle accent border on featured card */
-.service-card.featured {
-  border-color: rgba(45, 107, 82, 0.20);
-}
-.service-card.featured .service-number {
-  color: #2d6b52;
+  gap: 0;
 }
 
-/* Card internals */
+/* Cards */
+.service-card {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(40, 30, 10, 0.10);
+  padding: 2rem 0;
+  cursor: pointer;
+  transition: background 220ms ease;
+  border-radius: 0;
+  box-shadow: none;
+}
+.service-card:first-child {
+  border-top: 1px solid rgba(40, 30, 10, 0.10);
+}
+.service-card.active {
+  /* slight background tint when selected */
+}
+.service-card:focus-visible {
+  outline: 2px solid #2d6b52;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.service-card-inner {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  margin-bottom: 1.25rem;
+}
+.service-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
 .service-number {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #b0a898;
-  margin-bottom: 1.25rem;
   font-weight: 400;
+}
+.service-card.active .service-number {
+  color: #2d6b52;
 }
 .service-card h2 {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
   font-weight: 400;
   letter-spacing: 0.01em;
-  line-height: 1.1;
-  margin-bottom: 0.5rem;
+  line-height: 1.05;
+  color: #1c1a14;
+  transition: color 220ms ease;
+}
+.service-card.active h2 {
+  color: #2d6b52;
 }
 .service-duration {
   font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #2d6b52;
-  font-weight: 400;
-  margin-bottom: 1.5rem;
+  color: #b0a898;
+  font-weight: 300;
 }
 .service-desc {
   font-size: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
   color: #6b6456;
   line-height: 1.75;
   font-weight: 300;
-  max-width: 30ch;
-  flex: 1;
-  margin-bottom: 2rem;
+  max-width: 38ch;
+  margin-bottom: 0.75rem;
 }
 .service-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-  margin-bottom: 1.5rem;
+  gap: 0.4rem;
 }
 .service-tag {
   font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   font-weight: 300;
   color: #6b6456;
   background: #ede9e1;
-  padding: 3px 0.75rem;
+  padding: 2px 0.65rem;
   border-radius: 999px;
+}
+
+/* Card footer */
+.service-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(40, 30, 10, 0.07);
 }
 .service-price {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
   font-weight: 300;
   letter-spacing: 0.02em;
-  margin-bottom: 1.5rem;
+  color: #1c1a14;
 }
 .service-price sup {
   font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
   vertical-align: super;
   color: #6b6456;
   font-weight: 400;
@@ -475,7 +515,7 @@
   color: #1c1a14;
   text-decoration: none;
   padding-bottom: 2px;
-  border-bottom: 1px solid rgba(40,30,10,0.15);
+  border-bottom: 1px solid rgba(40, 30, 10, 0.15);
   transition: color 220ms ease, border-color 220ms ease;
 }
 .service-btn:hover {
@@ -483,7 +523,87 @@
   border-color: #2d6b52;
 }
 
-/* Footer note */
+/* ── Add-ons ──────────────────────────────────────────── */
+.addons-strip {
+  max-width: 1100px;
+  margin: 4rem auto 0;
+  padding-inline: 2rem;
+}
+.addons-label {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #b0a898;
+  font-weight: 400;
+  margin-bottom: 1.25rem;
+}
+.addons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.addon-card {
+  background: #ffffff;
+  border: 1px solid rgba(40, 30, 10, 0.10);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0 1px 3px rgba(20,15,5,0.06);
+  transition: transform 220ms cubic-bezier(0.16,1,0.3,1),
+              box-shadow 220ms cubic-bezier(0.16,1,0.3,1);
+}
+.addon-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(20,15,5,0.10);
+}
+.addon-img-wrap {
+  width: 160px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.addon-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 400ms cubic-bezier(0.16,1,0.3,1);
+}
+.addon-card:hover .addon-img-wrap img {
+  transform: scale(1.05);
+}
+.addon-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.addon-body h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+.addon-body p {
+  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  color: #6b6456;
+  line-height: 1.7;
+  font-weight: 300;
+  max-width: 32ch;
+}
+.addon-price {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  color: #2d6b52;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin-top: 0.2rem;
+}
+
+/* ── Footer note ──────────────────────────────────────── */
 .services-note {
   text-align: center;
   margin-top: 3rem;
@@ -503,151 +623,21 @@
 }
 .services-note a:hover { border-color: #2d6b52; }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .services-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 600px) {
-  .services-grid {
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .services-layout {
     grid-template-columns: 1fr;
-    padding-inline: 1rem;
+    gap: 2rem;
   }
-  .services-intro { padding-inline: 1rem; }
-  .service-card { padding: 2rem 1.5rem; }
-}
-        /* ── Image wrapper: forces 16:9 crop ─────────────────────────── */
-.service-img-wrap {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border-radius: 0.5rem 0.5rem 0 0; /* only top corners rounded */
-  flex-shrink: 0;
-}
-.service-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
-  display: block;
-}
-.service-card:hover .service-img-wrap img {
-  transform: scale(1.04);
-}
-
-/* ── Card layout adjustment (now vertical with photo on top) ─── */
-.service-card {
-  padding: 0; /* remove padding — body handles it now */
-  align-items: stretch;
-  text-align: center;
-}
-.service-body {
-  padding: 2rem 1.75rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-}
-.service-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(40,30,10,0.07);
-}
-.service-price { margin-bottom: 0; }
-
-/* ── Add-ons Strip ───────────────────────────────────────────── */
-.addons-strip {
-  max-width: 1100px;
-  margin: 3.5rem auto 0;
-  padding-inline: 2rem;
-}
-.addons-label {
-  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #b0a898;
-  font-weight: 400;
-  margin-bottom: 1.25rem;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-}
-.addons-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-.addon-card {
-  background: #ffffff;
-  border: 1px solid rgba(40,30,10,0.10);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;    /* photo left, text right */
-  box-shadow: 0 1px 3px rgba(20,15,5,0.06);
-  transition: transform 220ms cubic-bezier(0.16,1,0.3,1),
-              box-shadow 220ms cubic-bezier(0.16,1,0.3,1);
-}
-.addon-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(20,15,5,0.10);
-}
-.addon-img-wrap {
-  width: 180px;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-.addon-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform 400ms cubic-bezier(0.16,1,0.3,1);
-  display: block;
-}
-.addon-card:hover .addon-img-wrap img {
-  transform: scale(1.05);
-}
-.addon-body {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.5rem;
-}
-.addon-body h3 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  line-height: 1.1;
-}
-.addon-body p {
-  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  color: #6b6456;
-  line-height: 1.7;
-  font-weight: 300;
-  max-width: 38ch;
-}
-.addon-price {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  color: #2d6b52;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  margin-top: 0.25rem;
-}
-
-/* ── Responsive updates ──────────────────────────────────────── */
-@media (max-width: 900px) {
+  .services-photo-panel {
+    position: relative;
+    top: auto;
+    padding-right: 0;
+  }
   .addons-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 600px) {
   .addon-card { flex-direction: column; }
   .addon-img-wrap { width: 100%; aspect-ratio: 16/9; height: auto; }
-  .service-footer { flex-direction: column; gap: 1rem; align-items: center; }
+  .service-card-inner { grid-template-columns: 100px 1fr; gap: 1rem; }
 }
 
 
@@ -1160,94 +1150,105 @@
     <!-- Services -->
     <section class="services" id="services" aria-labelledby="services-heading">
 
-  <!-- Intro -->
   <div class="services-intro">
     <h1 id="services-heading">Services</h1>
     <p>Explore our experiences available — tailored to your needs.</p>
     <div class="services-divider" aria-hidden="true"></div>
   </div>
 
-  <!-- Main Service Cards -->
-  <div class="services-grid">
+  <div class="services-layout">
 
-    <!-- Swedish -->
-    <article class="service-card">
-      <div class="service-img-wrap">
-        <img
+    <!-- LEFT: Photo Panel -->
+    <div class="services-photo-panel" aria-hidden="true">
+      <div class="services-photo-wrap">
+        <img id="service-photo-swedish"
           src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/d7b3fa813ad0a3eb432a3186c0370084801f7dc1.jpg"
-          alt="Swedish massage — therapist working on a client's back in a calm spa setting"
-          width="800" height="450" loading="lazy"
-        />
-      </div>
-      <div class="service-body">
-        <p class="service-number">01</p>
-        <h2>Swedish</h2>
-        <p class="service-duration">60 minutes</p>
-        <p class="service-desc">Long, gliding strokes that ease tension and restore a sense of calm throughout the entire body.</p>
-        <div class="service-tags">
-          <span class="service-tag">Relaxation</span>
-          <span class="service-tag">Circulation</span>
-          <span class="service-tag">Stress Relief</span>
-        </div>
-        <div class="service-footer">
-          <p class="service-price"><sup>from </sup>€90</p>
-          <a href="#reserve" class="service-btn">Book this service</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Deep Tissue -->
-    <article class="service-card featured">
-      <div class="service-img-wrap">
-        <img
+          alt="Swedish massage" width="800" height="450" loading="eager"
+          class="service-photo active" />
+        <img id="service-photo-deep-tissue"
           src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/10df90310878f57f184b982107a3df40af3956fb.jpg"
-          alt="Deep tissue massage — therapist applying firm pressure to client's back"
-          width="800" height="450" loading="lazy"
-        />
-      </div>
-      <div class="service-body">
-        <p class="service-number">02</p>
-        <h2>Deep Tissue</h2>
-        <p class="service-duration">60 minutes</p>
-        <p class="service-desc">Targeted pressure that reaches deeper layers of muscle and connective tissue. Ideal for chronic tension and stubborn knots.</p>
-        <div class="service-tags">
-          <span class="service-tag">Chronic Tension</span>
-          <span class="service-tag">Knots</span>
-          <span class="service-tag">Recovery</span>
-        </div>
-        <div class="service-footer">
-          <p class="service-price"><sup>from </sup>€100</p>
-          <a href="#reserve" class="service-btn">Book this service</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- Sports -->
-    <article class="service-card">
-      <div class="service-img-wrap">
-        <img
+          alt="Deep tissue massage" width="800" height="450" loading="lazy"
+          class="service-photo" />
+        <img id="service-photo-sports"
           src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/67a14545626ffa2d0d36df17bf3ac8878b90575b.jpg"
-          alt="Sports massage — therapist working on athlete's back on a massage table"
-          width="800" height="450" loading="lazy"
-        />
+          alt="Sports massage" width="800" height="450" loading="lazy"
+          class="service-photo" />
       </div>
-      <div class="service-body">
-        <p class="service-number">03</p>
-        <h2>Sports</h2>
-        <p class="service-duration">60 minutes</p>
-        <p class="service-desc">Designed for active bodies — combining techniques that prepare muscles for performance and accelerate recovery.</p>
-        <div class="service-tags">
-          <span class="service-tag">Performance</span>
-          <span class="service-tag">Recovery</span>
-          <span class="service-tag">Mobility</span>
+    </div>
+
+    <!-- RIGHT: Service Cards -->
+    <div class="services-list" role="list">
+
+      <article class="service-card active" role="listitem"
+               data-photo="service-photo-swedish" tabindex="0">
+        <div class="service-card-inner">
+          <div class="service-card-left">
+            <p class="service-number">01</p>
+            <h2>Swedish</h2>
+            <p class="service-duration">60 min</p>
+          </div>
+          <div class="service-card-right">
+            <p class="service-desc">Long, gliding strokes that ease tension and restore a sense of calm throughout the entire body.</p>
+            <div class="service-tags">
+              <span class="service-tag">Relaxation</span>
+              <span class="service-tag">Circulation</span>
+              <span class="service-tag">Stress Relief</span>
+            </div>
+          </div>
         </div>
-        <div class="service-footer">
-          <p class="service-price"><sup>from </sup>€100</p>
+        <div class="service-card-footer">
+          <span class="service-price"><sup>from </sup>€90</span>
           <a href="#reserve" class="service-btn">Book this service</a>
         </div>
-      </div>
-    </article>
+      </article>
 
+      <article class="service-card" role="listitem"
+               data-photo="service-photo-deep-tissue" tabindex="0">
+        <div class="service-card-inner">
+          <div class="service-card-left">
+            <p class="service-number">02</p>
+            <h2>Deep Tissue</h2>
+            <p class="service-duration">60 min</p>
+          </div>
+          <div class="service-card-right">
+            <p class="service-desc">Targeted pressure reaching deeper layers of muscle and connective tissue. Ideal for chronic tension and stubborn knots.</p>
+            <div class="service-tags">
+              <span class="service-tag">Chronic Tension</span>
+              <span class="service-tag">Knots</span>
+              <span class="service-tag">Recovery</span>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <span class="service-price"><sup>from </sup>€100</span>
+          <a href="#reserve" class="service-btn">Book this service</a>
+        </div>
+      </article>
+
+      <article class="service-card" role="listitem"
+               data-photo="service-photo-sports" tabindex="0">
+        <div class="service-card-inner">
+          <div class="service-card-left">
+            <p class="service-number">03</p>
+            <h2>Sports</h2>
+            <p class="service-duration">60 min</p>
+          </div>
+          <div class="service-card-right">
+            <p class="service-desc">Designed for active bodies — techniques that prepare muscles for performance and accelerate recovery after exertion.</p>
+            <div class="service-tags">
+              <span class="service-tag">Performance</span>
+              <span class="service-tag">Recovery</span>
+              <span class="service-tag">Mobility</span>
+            </div>
+          </div>
+        </div>
+        <div class="service-card-footer">
+          <span class="service-price"><sup>from </sup>€100</span>
+          <a href="#reserve" class="service-btn">Book this service</a>
+        </div>
+      </article>
+
+    </div>
   </div>
 
   <!-- Add-ons Strip -->
@@ -1257,36 +1258,36 @@
 
       <div class="addon-card">
         <div class="addon-img-wrap">
-          <img
-            src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/948d4f45e55154328dc84a4840bcd4364641f076.jpg"
-            alt="Aromatherapy — essential oil bottles with a frangipani flower"
-            width="400" height="225" loading="lazy"
-          />
+          <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/948d4f45e55154328dc84a4840bcd4364641f076.jpg"
+            alt="Aromatherapy essential oils" width="400" height="225" loading="lazy" />
         </div>
         <div class="addon-body">
           <h3>Aromatherapy</h3>
-          <p>Enhance any session with therapeutic-grade essential oils — lavender, eucalyptus, or a custom blend to suit your mood.</p>
+          <p>Therapeutic-grade essential oils — lavender, eucalyptus, or a custom blend to suit your mood.</p>
           <span class="addon-price">+€15</span>
         </div>
       </div>
 
       <div class="addon-card">
         <div class="addon-img-wrap">
-          <img
-            src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/11c6b8c2c069e686a41adfdc537d39828097f2bd.jpg"
-            alt="Cupping therapy — silicone cups applied along a client's back"
-            width="400" height="225" loading="lazy"
-          />
+          <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/11c6b8c2c069e686a41adfdc537d39828097f2bd.jpg"
+            alt="Cupping therapy on back" width="400" height="225" loading="lazy" />
         </div>
         <div class="addon-body">
           <h3>Cupping Therapy</h3>
-          <p>Ancient suction technique to release deep fascial tension, improve circulation, and accelerate muscle recovery.</p>
+          <p>Ancient suction technique to release deep fascial tension, improve circulation and accelerate muscle recovery.</p>
           <span class="addon-price">+€20</span>
         </div>
       </div>
 
     </div>
   </div>
+
+  <div class="services-note">
+    <p>All sessions take place at your villa or hotel. <a href="#reserve">Contact us</a> for custom durations or combinations.</p>
+  </div>
+
+</section>
 
   <!-- Footer note -->
   <div class="services-note">
@@ -1681,5 +1682,32 @@
 
         scheduleNextReview();
     </script>
+
+    <script>
+  const cards = document.querySelectorAll('.service-card');
+  const photos = document.querySelectorAll('.service-photo');
+
+  cards.forEach(card => {
+    const activate = () => {
+      // Deactivate all
+      cards.forEach(c => c.classList.remove('active'));
+      photos.forEach(p => p.classList.remove('active'));
+      // Activate selected
+      card.classList.add('active');
+      const targetPhoto = document.getElementById(card.dataset.photo);
+      if (targetPhoto) targetPhoto.classList.add('active');
+    };
+
+    card.addEventListener('click', activate);
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activate();
+      }
+    });
+  });
+</script>
+
+    
 </body>
 </html>
