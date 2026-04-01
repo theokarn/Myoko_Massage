@@ -515,6 +515,141 @@
   .services-intro { padding-inline: 1rem; }
   .service-card { padding: 2rem 1.5rem; }
 }
+        /* ── Image wrapper: forces 16:9 crop ─────────────────────────── */
+.service-img-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 0.5rem 0.5rem 0 0; /* only top corners rounded */
+  flex-shrink: 0;
+}
+.service-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+.service-card:hover .service-img-wrap img {
+  transform: scale(1.04);
+}
+
+/* ── Card layout adjustment (now vertical with photo on top) ─── */
+.service-card {
+  padding: 0; /* remove padding — body handles it now */
+  align-items: stretch;
+  text-align: center;
+}
+.service-body {
+  padding: 2rem 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.service-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(40,30,10,0.07);
+}
+.service-price { margin-bottom: 0; }
+
+/* ── Add-ons Strip ───────────────────────────────────────────── */
+.addons-strip {
+  max-width: 1100px;
+  margin: 3.5rem auto 0;
+  padding-inline: 2rem;
+}
+.addons-label {
+  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #b0a898;
+  font-weight: 400;
+  margin-bottom: 1.25rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+.addons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.addon-card {
+  background: #ffffff;
+  border: 1px solid rgba(40,30,10,0.10);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;    /* photo left, text right */
+  box-shadow: 0 1px 3px rgba(20,15,5,0.06);
+  transition: transform 220ms cubic-bezier(0.16,1,0.3,1),
+              box-shadow 220ms cubic-bezier(0.16,1,0.3,1);
+}
+.addon-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(20,15,5,0.10);
+}
+.addon-img-wrap {
+  width: 180px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.addon-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 400ms cubic-bezier(0.16,1,0.3,1);
+  display: block;
+}
+.addon-card:hover .addon-img-wrap img {
+  transform: scale(1.05);
+}
+.addon-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.addon-body h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+.addon-body p {
+  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  color: #6b6456;
+  line-height: 1.7;
+  font-weight: 300;
+  max-width: 38ch;
+}
+.addon-price {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  color: #2d6b52;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin-top: 0.25rem;
+}
+
+/* ── Responsive updates ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .addons-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .addon-card { flex-direction: column; }
+  .addon-img-wrap { width: 100%; aspect-ratio: 16/9; height: auto; }
+  .service-footer { flex-direction: column; gap: 1rem; align-items: center; }
+}
+
 
 
         /* ── REVIEWS ── */
@@ -1032,58 +1167,134 @@
     <div class="services-divider" aria-hidden="true"></div>
   </div>
 
-  <!-- Card Grid -->
+  <!-- Main Service Cards -->
   <div class="services-grid">
 
+    <!-- Swedish -->
     <article class="service-card">
-      <p class="service-number">01</p>
-      <h2>Swedish</h2>
-      <p class="service-duration">60 minutes</p>
-      <p class="service-desc">Long, gliding strokes that ease tension and restore a sense of calm throughout the entire body.</p>
-      <div class="service-tags">
-        <span class="service-tag">Relaxation</span>
-        <span class="service-tag">Circulation</span>
-        <span class="service-tag">Stress Relief</span>
+      <div class="service-img-wrap">
+        <img
+          src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/d7b3fa813ad0a3eb432a3186c0370084801f7dc1.jpg"
+          alt="Swedish massage — therapist working on a client's back in a calm spa setting"
+          width="800" height="450" loading="lazy"
+        />
       </div>
-      <p class="service-price"><sup>from </sup>€90</p>
-      <a href="#reserve" class="service-btn">Book this service</a>
+      <div class="service-body">
+        <p class="service-number">01</p>
+        <h2>Swedish</h2>
+        <p class="service-duration">60 minutes</p>
+        <p class="service-desc">Long, gliding strokes that ease tension and restore a sense of calm throughout the entire body.</p>
+        <div class="service-tags">
+          <span class="service-tag">Relaxation</span>
+          <span class="service-tag">Circulation</span>
+          <span class="service-tag">Stress Relief</span>
+        </div>
+        <div class="service-footer">
+          <p class="service-price"><sup>from </sup>€90</p>
+          <a href="#reserve" class="service-btn">Book this service</a>
+        </div>
+      </div>
     </article>
 
+    <!-- Deep Tissue -->
     <article class="service-card featured">
-      <p class="service-number">02</p>
-      <h2>Deep Tissue</h2>
-      <p class="service-duration">60 minutes</p>
-      <p class="service-desc">Targeted pressure that reaches deeper layers of muscle and connective tissue. Ideal for chronic tension, stubborn knots, and those who need something truly restorative.</p>
-      <div class="service-tags">
-        <span class="service-tag">Chronic Tension</span>
-        <span class="service-tag">Knots</span>
-        <span class="service-tag">Recovery</span>
+      <div class="service-img-wrap">
+        <img
+          src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/10df90310878f57f184b982107a3df40af3956fb.jpg"
+          alt="Deep tissue massage — therapist applying firm pressure to client's back"
+          width="800" height="450" loading="lazy"
+        />
       </div>
-      <p class="service-price"><sup>from </sup>€100</p>
-      <a href="#reserve" class="service-btn">Book this service</a>
+      <div class="service-body">
+        <p class="service-number">02</p>
+        <h2>Deep Tissue</h2>
+        <p class="service-duration">60 minutes</p>
+        <p class="service-desc">Targeted pressure that reaches deeper layers of muscle and connective tissue. Ideal for chronic tension and stubborn knots.</p>
+        <div class="service-tags">
+          <span class="service-tag">Chronic Tension</span>
+          <span class="service-tag">Knots</span>
+          <span class="service-tag">Recovery</span>
+        </div>
+        <div class="service-footer">
+          <p class="service-price"><sup>from </sup>€100</p>
+          <a href="#reserve" class="service-btn">Book this service</a>
+        </div>
+      </div>
     </article>
 
+    <!-- Sports -->
     <article class="service-card">
-      <p class="service-number">03</p>
-      <h2>Sports</h2>
-      <p class="service-duration">60 minutes</p>
-      <p class="service-desc">Designed for active bodies — combining techniques that prepare muscles for performance and accelerate recovery after exertion.</p>
-      <div class="service-tags">
-        <span class="service-tag">Performance</span>
-        <span class="service-tag">Recovery</span>
-        <span class="service-tag">Mobility</span>
+      <div class="service-img-wrap">
+        <img
+          src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/67a14545626ffa2d0d36df17bf3ac8878b90575b.jpg"
+          alt="Sports massage — therapist working on athlete's back on a massage table"
+          width="800" height="450" loading="lazy"
+        />
       </div>
-      <p class="service-price"><sup>from </sup>€100</p>
-      <a href="#reserve" class="service-btn">Book this service</a>
+      <div class="service-body">
+        <p class="service-number">03</p>
+        <h2>Sports</h2>
+        <p class="service-duration">60 minutes</p>
+        <p class="service-desc">Designed for active bodies — combining techniques that prepare muscles for performance and accelerate recovery.</p>
+        <div class="service-tags">
+          <span class="service-tag">Performance</span>
+          <span class="service-tag">Recovery</span>
+          <span class="service-tag">Mobility</span>
+        </div>
+        <div class="service-footer">
+          <p class="service-price"><sup>from </sup>€100</p>
+          <a href="#reserve" class="service-btn">Book this service</a>
+        </div>
+      </div>
     </article>
 
   </div>
 
+  <!-- Add-ons Strip -->
+  <div class="addons-strip">
+    <p class="addons-label">Add-ons</p>
+    <div class="addons-grid">
+
+      <div class="addon-card">
+        <div class="addon-img-wrap">
+          <img
+            src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/948d4f45e55154328dc84a4840bcd4364641f076.jpg"
+            alt="Aromatherapy — essential oil bottles with a frangipani flower"
+            width="400" height="225" loading="lazy"
+          />
+        </div>
+        <div class="addon-body">
+          <h3>Aromatherapy</h3>
+          <p>Enhance any session with therapeutic-grade essential oils — lavender, eucalyptus, or a custom blend to suit your mood.</p>
+          <span class="addon-price">+€15</span>
+        </div>
+      </div>
+
+      <div class="addon-card">
+        <div class="addon-img-wrap">
+          <img
+            src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/11c6b8c2c069e686a41adfdc537d39828097f2bd.jpg"
+            alt="Cupping therapy — silicone cups applied along a client's back"
+            width="400" height="225" loading="lazy"
+          />
+        </div>
+        <div class="addon-body">
+          <h3>Cupping Therapy</h3>
+          <p>Ancient suction technique to release deep fascial tension, improve circulation, and accelerate muscle recovery.</p>
+          <span class="addon-price">+€20</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer note -->
   <div class="services-note">
     <p>All sessions take place at your villa or hotel. <a href="#reserve">Contact us</a> for custom durations or add-ons.</p>
   </div>
 
 </section>
+
 
     <!-- Reviews -->
     <section class="reviews-section fade-in-up">
