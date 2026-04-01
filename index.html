@@ -309,69 +309,36 @@
             color: #4B4D39; line-height: 1.8; margin: 0 0 20px 0; max-width: 550px;
         }
 
-       /* ── Services Section ─────────────────────────────────── */
-.services {
-  padding-top: calc(72px + 5rem);
-  padding-bottom: 6rem;
-  background: #f5f2ec;
+       /* ══ SERVICES v2 ══════════════════════════════════════════════════ */
+.svc2 {
+  background: #EDE6D4;
+  padding: 100px 0 100px;
 }
-
-/* Intro */
-.services-intro {
-  text-align: center;
-  padding-inline: 2rem;
-  margin-bottom: 4rem;
-}
-.services-intro h1 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-  margin-bottom: 0.75rem;
-}
-.services-intro p {
-  font-size: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
-  color: #6b6456;
-  letter-spacing: 0.04em;
-  font-weight: 300;
-  max-width: 48ch;
+.svc2-inner {
+  max-width: 1200px;
   margin-inline: auto;
-}
-.services-divider {
-  width: 40px;
-  height: 1px;
-  background: #2d6b52;
-  margin: 1.25rem auto 0;
-  opacity: 0.5;
-}
-
-/* ── Split layout ─────────────────────────────────────── */
-.services-layout {
+  padding-inline: 50px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
-  max-width: 1100px;
-  margin-inline: auto;
-  padding-inline: 2rem;
+  gap: 60px;
   align-items: start;
 }
 
-/* LEFT: sticky photo panel */
-.services-photo-panel {
+/* ── Photo panel ── */
+.svc2-photo-panel {
   position: sticky;
-  top: calc(72px + 2rem);
-  padding-right: 2.5rem;
+  top: 100px;
+  align-self: start;
 }
-.services-photo-wrap {
+.svc2-photo-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 0.75rem;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
   overflow: hidden;
-  background: #1a1916;
+  background: #2a2a26;
 }
-.service-photo {
+.svc2-photo {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -379,266 +346,210 @@
   object-fit: cover;
   object-position: center;
   opacity: 0;
-  transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
-  transform: scale(1.04);
+  transform: scale(1.03);
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.service-photo.active {
+.svc2-photo.active {
   opacity: 1;
   transform: scale(1);
 }
 
-/* RIGHT: card list */
-.services-list {
+/* ── Right menu ── */
+.svc2-menu {
   display: flex;
   flex-direction: column;
   gap: 0;
+  padding-top: 4px;
 }
 
-/* Cards */
-.service-card {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(40, 30, 10, 0.10);
-  padding: 2rem 0;
-  cursor: pointer;
-  transition: background 220ms ease;
-  border-radius: 0;
-  box-shadow: none;
+/* Header row */
+.svc2-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 36px;
 }
-.service-card:first-child {
-  border-top: 1px solid rgba(40, 30, 10, 0.10);
+.svc2-title {
+  font-family: 'Gowun Batang', serif;
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  font-weight: 400;
+  color: #4B4D39;
+  line-height: 1.05;
+  margin-bottom: 8px;
 }
-.service-card.active {
-  /* slight background tint when selected */
+.svc2-subtitle {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: rgba(75, 77, 57, 0.55);
+  letter-spacing: 0.02em;
 }
-.service-card:focus-visible {
-  outline: 2px solid #2d6b52;
-  outline-offset: 4px;
-  border-radius: 4px;
+.svc2-reserve-btn {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #4B4D39;
+  text-decoration: none;
+  border: 1px solid rgba(75, 77, 57, 0.3);
+  padding: 9px 22px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 4px;
+  transition: background 250ms ease, color 250ms ease, border-color 250ms ease;
+}
+.svc2-reserve-btn:hover {
+  background: #4B4D39;
+  color: #EDE6D4;
+  border-color: #4B4D39;
 }
 
-.service-card-inner {
-  display: grid;
-  grid-template-columns: 130px 1fr;
-  gap: 1.5rem;
-  align-items: start;
-  margin-bottom: 1.25rem;
-}
-.service-card-left {
+/* Service rows */
+.svc2-list {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 10px;
+  margin-bottom: 40px;
 }
-.service-number {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #b0a898;
-  font-weight: 400;
-}
-.service-card.active .service-number {
-  color: #2d6b52;
-}
-.service-card h2 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  line-height: 1.05;
-  color: #1c1a14;
-  transition: color 220ms ease;
-}
-.service-card.active h2 {
-  color: #2d6b52;
-}
-.service-duration {
-  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #b0a898;
-  font-weight: 300;
-}
-.service-desc {
-  font-size: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
-  color: #6b6456;
-  line-height: 1.75;
-  font-weight: 300;
-  max-width: 38ch;
-  margin-bottom: 0.75rem;
-}
-.service-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-.service-tag {
-  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  letter-spacing: 0.07em;
-  font-weight: 300;
-  color: #6b6456;
-  background: #ede9e1;
-  padding: 2px 0.65rem;
-  border-radius: 999px;
-}
-
-/* Card footer */
-.service-card-footer {
+.svc2-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(40, 30, 10, 0.07);
-}
-.service-price {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  color: #1c1a14;
-}
-.service-price sup {
-  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  font-family: 'Lato', sans-serif;
-  vertical-align: super;
-  color: #6b6456;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-}
-.service-btn {
-  display: inline-block;
-  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-weight: 400;
-  color: #1c1a14;
-  text-decoration: none;
-  padding-bottom: 2px;
-  border-bottom: 1px solid rgba(40, 30, 10, 0.15);
-  transition: color 220ms ease, border-color 220ms ease;
-}
-.service-btn:hover {
-  color: #2d6b52;
-  border-color: #2d6b52;
-}
-
-/* ── Add-ons ──────────────────────────────────────────── */
-.addons-strip {
-  max-width: 1100px;
-  margin: 4rem auto 0;
-  padding-inline: 2rem;
-}
-.addons-label {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #b0a898;
-  font-weight: 400;
-  margin-bottom: 1.25rem;
-}
-.addons-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-.addon-card {
-  background: #ffffff;
-  border: 1px solid rgba(40, 30, 10, 0.10);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  box-shadow: 0 1px 3px rgba(20,15,5,0.06);
-  transition: transform 220ms cubic-bezier(0.16,1,0.3,1),
-              box-shadow 220ms cubic-bezier(0.16,1,0.3,1);
-}
-.addon-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(20,15,5,0.10);
-}
-.addon-img-wrap {
-  width: 160px;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-.addon-img-wrap img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 400ms cubic-bezier(0.16,1,0.3,1);
+  padding: 20px 26px;
+  border-radius: 50px;
+  border: 1px solid rgba(75, 77, 57, 0.18);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background 250ms ease,
+              border-color 250ms ease,
+              box-shadow 250ms ease;
 }
-.addon-card:hover .addon-img-wrap img {
-  transform: scale(1.05);
+.svc2-row:hover {
+  background: rgba(75, 77, 57, 0.05);
+  border-color: rgba(75, 77, 57, 0.3);
 }
-.addon-body {
-  padding: 1.5rem;
+.svc2-row.active {
+  background: #4B4D39;
+  border-color: #4B4D39;
+  box-shadow: 0 8px 24px rgba(75, 77, 57, 0.18);
+}
+.svc2-row-left {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 0.4rem;
+  gap: 3px;
 }
-.addon-body h3 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+.svc2-row-name {
+  font-family: 'Gowun Batang', serif;
+  font-size: clamp(1.1rem, 0.9rem + 0.8vw, 1.4rem);
   font-weight: 400;
+  color: #4B4D39;
   letter-spacing: 0.01em;
   line-height: 1.1;
+  transition: color 250ms ease;
 }
-.addon-body p {
-  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  color: #6b6456;
-  line-height: 1.7;
+.svc2-row.active .svc2-row-name {
+  color: #EDE6D4;
+}
+.svc2-row-meta {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.72rem;
   font-weight: 300;
-  max-width: 32ch;
+  letter-spacing: 0.05em;
+  color: rgba(75, 77, 57, 0.5);
+  transition: color 250ms ease;
 }
-.addon-price {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  color: #2d6b52;
+.svc2-row.active .svc2-row-meta {
+  color: rgba(237, 230, 212, 0.6);
+}
+.svc2-row-price {
+  font-family: 'Gowun Batang', serif;
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
   font-weight: 400;
-  letter-spacing: 0.04em;
-  margin-top: 0.2rem;
+  color: rgba(75, 77, 57, 0.6);
+  flex-shrink: 0;
+  margin-left: 16px;
+  transition: color 250ms ease;
+}
+.svc2-row.active .svc2-row-price {
+  color: rgba(237, 230, 212, 0.85);
 }
 
-/* ── Footer note ──────────────────────────────────────── */
-.services-note {
-  text-align: center;
-  margin-top: 3rem;
-  padding-inline: 2rem;
+/* Add-ons */
+.svc2-addons-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(75, 77, 57, 0.4);
+  margin-bottom: 12px;
 }
-.services-note p {
-  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-  color: #b0a898;
-  letter-spacing: 0.06em;
+.svc2-addons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.svc2-addon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 22px;
+  border-radius: 50px;
+  border: 1px solid rgba(75, 77, 57, 0.15);
+  background: transparent;
+  transition: background 250ms ease, border-color 250ms ease;
+}
+.svc2-addon:hover {
+  background: rgba(75, 77, 57, 0.04);
+  border-color: rgba(75, 77, 57, 0.25);
+}
+.svc2-addon-name {
+  font-family: 'Gowun Batang', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #4B4D39;
+}
+.svc2-addon-desc {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.72rem;
   font-weight: 300;
+  color: rgba(75, 77, 57, 0.5);
+  letter-spacing: 0.02em;
 }
-.services-note a {
-  color: #2d6b52;
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 220ms ease;
+.svc2-addon-price {
+  font-family: 'Gowun Batang', serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(75, 77, 57, 0.55);
+  margin-top: 4px;
 }
-.services-note a:hover { border-color: #2d6b52; }
 
-/* ── Responsive ───────────────────────────────────────── */
-@media (max-width: 768px) {
-  .services-layout {
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .svc2-inner {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 40px;
+    padding-inline: 25px;
   }
-  .services-photo-panel {
+  .svc2-photo-panel {
     position: relative;
     top: auto;
-    padding-right: 0;
   }
-  .addons-grid { grid-template-columns: 1fr; }
-  .addon-card { flex-direction: column; }
-  .addon-img-wrap { width: 100%; aspect-ratio: 16/9; height: auto; }
-  .service-card-inner { grid-template-columns: 100px 1fr; gap: 1rem; }
+  .svc2-photo-wrap {
+    aspect-ratio: 16 / 9;
+  }
 }
+@media (max-width: 480px) {
+  .svc2-addons-grid { grid-template-columns: 1fr; }
+  .svc2-row { padding: 18px 20px; border-radius: 40px; }
+  .svc2-addon { border-radius: 20px; }
+}
+
 
 
 
@@ -1147,154 +1058,90 @@
         </div>
     </section>
 
-    <!-- Services -->
-    <section class="services" id="services" aria-labelledby="services-heading">
+    <!-- ══ SERVICES ══════════════════════════════════════════════════ -->
+<section class="svc2" id="services">
+  <div class="svc2-inner">
 
-  <div class="services-intro">
-    <h1 id="services-heading">Services</h1>
-    <p>Explore our experiences available — tailored to your needs.</p>
-    <div class="services-divider" aria-hidden="true"></div>
-  </div>
-
-  <div class="services-layout">
-
-    <!-- LEFT: Photo Panel -->
-    <div class="services-photo-panel" aria-hidden="true">
-      <div class="services-photo-wrap">
-        <img id="service-photo-swedish"
+    <!-- LEFT: Photo panel -->
+    <div class="svc2-photo-panel">
+      <div class="svc2-photo-wrap">
+        <img class="svc2-photo active" id="svc2-photo-swedish"
           src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/d7b3fa813ad0a3eb432a3186c0370084801f7dc1.jpg"
-          alt="Swedish massage" width="800" height="450" loading="eager"
-          class="service-photo active" />
-        <img id="service-photo-deep-tissue"
+          alt="Swedish massage" width="800" height="450" loading="eager" />
+        <img class="svc2-photo" id="svc2-photo-deep-tissue"
           src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/10df90310878f57f184b982107a3df40af3956fb.jpg"
-          alt="Deep tissue massage" width="800" height="450" loading="lazy"
-          class="service-photo" />
-        <img id="service-photo-sports"
+          alt="Deep tissue massage" width="800" height="450" loading="lazy" />
+        <img class="svc2-photo" id="svc2-photo-sports"
           src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/67a14545626ffa2d0d36df17bf3ac8878b90575b.jpg"
-          alt="Sports massage" width="800" height="450" loading="lazy"
-          class="service-photo" />
+          alt="Sports massage" width="800" height="450" loading="lazy" />
       </div>
     </div>
 
-    <!-- RIGHT: Service Cards -->
-    <div class="services-list" role="list">
+    <!-- RIGHT: Menu -->
+    <div class="svc2-menu">
 
-      <article class="service-card active" role="listitem"
-               data-photo="service-photo-swedish" tabindex="0">
-        <div class="service-card-inner">
-          <div class="service-card-left">
-            <p class="service-number">01</p>
-            <h2>Swedish</h2>
-            <p class="service-duration">60 min</p>
-          </div>
-          <div class="service-card-right">
-            <p class="service-desc">Long, gliding strokes that ease tension and restore a sense of calm throughout the entire body.</p>
-            <div class="service-tags">
-              <span class="service-tag">Relaxation</span>
-              <span class="service-tag">Circulation</span>
-              <span class="service-tag">Stress Relief</span>
-            </div>
-          </div>
+      <!-- Header -->
+      <div class="svc2-header">
+        <div>
+          <h2 class="svc2-title">Services</h2>
+          <p class="svc2-subtitle">Explore our experiences — tailored to your request.</p>
         </div>
-        <div class="service-card-footer">
-          <span class="service-price"><sup>from </sup>€90</span>
-          <a href="#reserve" class="service-btn">Book this service</a>
-        </div>
-      </article>
-
-      <article class="service-card" role="listitem"
-               data-photo="service-photo-deep-tissue" tabindex="0">
-        <div class="service-card-inner">
-          <div class="service-card-left">
-            <p class="service-number">02</p>
-            <h2>Deep Tissue</h2>
-            <p class="service-duration">60 min</p>
-          </div>
-          <div class="service-card-right">
-            <p class="service-desc">Targeted pressure reaching deeper layers of muscle and connective tissue. Ideal for chronic tension and stubborn knots.</p>
-            <div class="service-tags">
-              <span class="service-tag">Chronic Tension</span>
-              <span class="service-tag">Knots</span>
-              <span class="service-tag">Recovery</span>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <span class="service-price"><sup>from </sup>€100</span>
-          <a href="#reserve" class="service-btn">Book this service</a>
-        </div>
-      </article>
-
-      <article class="service-card" role="listitem"
-               data-photo="service-photo-sports" tabindex="0">
-        <div class="service-card-inner">
-          <div class="service-card-left">
-            <p class="service-number">03</p>
-            <h2>Sports</h2>
-            <p class="service-duration">60 min</p>
-          </div>
-          <div class="service-card-right">
-            <p class="service-desc">Designed for active bodies — techniques that prepare muscles for performance and accelerate recovery after exertion.</p>
-            <div class="service-tags">
-              <span class="service-tag">Performance</span>
-              <span class="service-tag">Recovery</span>
-              <span class="service-tag">Mobility</span>
-            </div>
-          </div>
-        </div>
-        <div class="service-card-footer">
-          <span class="service-price"><sup>from </sup>€100</span>
-          <a href="#reserve" class="service-btn">Book this service</a>
-        </div>
-      </article>
-
-    </div>
-  </div>
-
-  <!-- Add-ons Strip -->
-  <div class="addons-strip">
-    <p class="addons-label">Add-ons</p>
-    <div class="addons-grid">
-
-      <div class="addon-card">
-        <div class="addon-img-wrap">
-          <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/948d4f45e55154328dc84a4840bcd4364641f076.jpg"
-            alt="Aromatherapy essential oils" width="400" height="225" loading="lazy" />
-        </div>
-        <div class="addon-body">
-          <h3>Aromatherapy</h3>
-          <p>Therapeutic-grade essential oils — lavender, eucalyptus, or a custom blend to suit your mood.</p>
-          <span class="addon-price">+€15</span>
-        </div>
+        <a href="reserve.html" class="svc2-reserve-btn">Reserve</a>
       </div>
 
-      <div class="addon-card">
-        <div class="addon-img-wrap">
-          <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/11c6b8c2c069e686a41adfdc537d39828097f2bd.jpg"
-            alt="Cupping therapy on back" width="400" height="225" loading="lazy" />
-        </div>
-        <div class="addon-body">
-          <h3>Cupping Therapy</h3>
-          <p>Ancient suction technique to release deep fascial tension, improve circulation and accelerate muscle recovery.</p>
-          <span class="addon-price">+€20</span>
+      <!-- Service rows -->
+      <div class="svc2-list">
+
+        <button class="svc2-row active" data-photo="svc2-photo-swedish">
+          <div class="svc2-row-left">
+            <span class="svc2-row-name">Swedish</span>
+            <span class="svc2-row-meta">60 min · Relaxation · Stress Relief</span>
+          </div>
+          <span class="svc2-row-price">€90</span>
+        </button>
+
+        <button class="svc2-row" data-photo="svc2-photo-deep-tissue">
+          <div class="svc2-row-left">
+            <span class="svc2-row-name">Deep Tissue</span>
+            <span class="svc2-row-meta">60 min · Chronic Tension · Recovery</span>
+          </div>
+          <span class="svc2-row-price">€120</span>
+        </button>
+
+        <button class="svc2-row" data-photo="svc2-photo-sports">
+          <div class="svc2-row-left">
+            <span class="svc2-row-name">Sports Massage</span>
+            <span class="svc2-row-meta">60 min · Performance · Mobility</span>
+          </div>
+          <span class="svc2-row-price">€90</span>
+        </button>
+
+      </div>
+
+      <!-- Add-ons -->
+      <div class="svc2-addons">
+        <p class="svc2-addons-label">Add-ons</p>
+        <div class="svc2-addons-grid">
+
+          <div class="svc2-addon">
+            <span class="svc2-addon-name">Cupping Therapy</span>
+            <span class="svc2-addon-desc">Deep fascial release via suction</span>
+            <span class="svc2-addon-price">+€20</span>
+          </div>
+
+          <div class="svc2-addon">
+            <span class="svc2-addon-name">Aromatherapy</span>
+            <span class="svc2-addon-desc">Essential oils blended to your mood</span>
+            <span class="svc2-addon-price">+€15</span>
+          </div>
+
         </div>
       </div>
 
     </div>
   </div>
-
-  <div class="services-note">
-    <p>All sessions take place at your villa or hotel. <a href="#reserve">Contact us</a> for custom durations or combinations.</p>
-  </div>
-
 </section>
 
-  <!-- Footer note -->
-  <div class="services-note">
-    <p>All sessions take place at your villa or hotel. <a href="#reserve">Contact us</a> for custom durations or add-ons.</p>
-  </div>
-
-</section>
 
 
     <!-- Reviews -->
@@ -1684,29 +1531,17 @@
     </script>
 
     <script>
-  const cards = document.querySelectorAll('.service-card');
-  const photos = document.querySelectorAll('.service-photo');
-
-  cards.forEach(card => {
-    const activate = () => {
-      // Deactivate all
-      cards.forEach(c => c.classList.remove('active'));
-      photos.forEach(p => p.classList.remove('active'));
-      // Activate selected
-      card.classList.add('active');
-      const targetPhoto = document.getElementById(card.dataset.photo);
-      if (targetPhoto) targetPhoto.classList.add('active');
-    };
-
-    card.addEventListener('click', activate);
-    card.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        activate();
-      }
+  document.querySelectorAll('.svc2-row').forEach(row => {
+    row.addEventListener('click', () => {
+      document.querySelectorAll('.svc2-row').forEach(r => r.classList.remove('active'));
+      document.querySelectorAll('.svc2-photo').forEach(p => p.classList.remove('active'));
+      row.classList.add('active');
+      const photo = document.getElementById(row.dataset.photo);
+      if (photo) photo.classList.add('active');
     });
   });
 </script>
+
 
     
 </body>
