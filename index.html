@@ -11,8 +11,8 @@
         /* ── RESET ── */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* ── BASE ── */
         html { scroll-behavior: auto; }
-
         body {
             font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
             color: #4B4D39;
@@ -23,19 +23,17 @@
             flex-direction: column;
             min-height: 100dvh;
         }
-
-        main { flex: 1 0 auto; }
-        .site-footer { flex-shrink: 0; }
+        main { flex: 1; }
 
         /* ── NAVBAR ── */
-        nav#mainNav {
+        nav {
             position: fixed; top: 0; width: 100%;
             padding: 25px 50px;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 100; background: transparent;
             transition: background 0.3s ease, box-shadow 0.3s ease;
         }
-        nav#mainNav.scrolled {
+        nav.scrolled {
             background: rgba(237,230,212,0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -55,10 +53,10 @@
             letter-spacing: 3px; text-transform: uppercase;
             color: rgba(237,230,212,0.75); transition: color 0.3s ease; margin-top: 4px;
         }
-        nav#mainNav.scrolled .logo-name     { color: #4B4D39; }
-        nav#mainNav.scrolled .logo-location { color: rgba(75,77,57,0.6); }
-        nav#mainNav.menu-open .logo-name    { color: #4B4D39; }
-        nav#mainNav.menu-open .logo-location { color: rgba(75,77,57,0.6); }
+        nav.scrolled .logo-name     { color: #4B4D39; }
+        nav.scrolled .logo-location { color: rgba(75,77,57,0.6); }
+        nav.menu-open .logo-name    { color: #4B4D39; }
+        nav.menu-open .logo-location { color: rgba(75,77,57,0.6); }
 
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .nav-reserve-btn {
@@ -72,10 +70,10 @@
             white-space: nowrap;
         }
         .nav-reserve-btn:hover { background: #EDE6D4; color: #4B4D39; border-color: #EDE6D4; }
-        nav#mainNav.scrolled .nav-reserve-btn { color: #4B4D39; border-color: rgba(75,77,57,0.4); }
-        nav#mainNav.scrolled .nav-reserve-btn:hover { background: #4B4D39; color: #EDE6D4; border-color: #4B4D39; }
-        nav#mainNav.menu-open .nav-reserve-btn { color: #4B4D39; border-color: rgba(75,77,57,0.4); }
-        nav#mainNav.menu-open .nav-reserve-btn:hover { background: #4B4D39; color: #EDE6D4; border-color: #4B4D39; }
+        nav.scrolled .nav-reserve-btn { color: #4B4D39; border-color: rgba(75,77,57,0.4); }
+        nav.scrolled .nav-reserve-btn:hover { background: #4B4D39; color: #EDE6D4; border-color: #4B4D39; }
+        nav.menu-open .nav-reserve-btn { color: #4B4D39; border-color: rgba(75,77,57,0.4); }
+        nav.menu-open .nav-reserve-btn:hover { background: #4B4D39; color: #EDE6D4; border-color: #4B4D39; }
 
         /* ── HAMBURGER ── */
         .hamburger {
@@ -92,7 +90,7 @@
         .hamburger .bar:nth-child(2) { transform: translateY(5px); }
         .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
         .hamburger.open .bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
-        nav#mainNav.scrolled .hamburger .bar { background: #4B4D39; }
+        nav.scrolled .hamburger .bar { background: #4B4D39; }
         .hamburger.open .bar { background: #4B4D39 !important; }
 
         /* ── MENU OVERLAY ── */
@@ -245,7 +243,8 @@
         }
 
         .services-content-side {
-            background: #EDE6D4; padding: 80px 60px;
+            background: #EDE6D4;
+            padding: 80px 60px;
             display: flex; flex-direction: column; justify-content: center;
         }
         .services-header {
@@ -280,12 +279,14 @@
                         box-shadow 0.35s ease, background 0.35s ease;
         }
         .service-card:hover:not(.active) {
-            border-color: #4B4D39; transform: translateX(8px);
+            border-color: #4B4D39;
+            transform: translateX(8px);
             box-shadow: 0 8px 25px rgba(75,77,57,0.12);
         }
         .service-card.active {
             background: #4B4D39; border-color: #4B4D39;
-            transform: scale(1.02); box-shadow: 0 10px 30px rgba(75,77,57,0.25);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(75,77,57,0.25);
         }
         .service-card.active .service-card-name,
         .service-card.active .service-price,
@@ -323,7 +324,9 @@
             transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .service-cta:hover { background: #4B4D39; color: #EDE6D4; }
-        .service-card.active .service-cta { background: #EDE6D4; border-color: #EDE6D4; color: #4B4D39; }
+        .service-card.active .service-cta {
+            background: #EDE6D4; border-color: #EDE6D4; color: #4B4D39;
+        }
         .service-card.active .service-cta:hover { background: #fff; border-color: #fff; }
 
         /* ── REVIEWS ── */
@@ -369,15 +372,17 @@
             opacity: 0; transform: translateY(14px);
             transition: opacity 0.65s ease, transform 0.65s ease;
             pointer-events: none; z-index: 1;
+            display: flex; align-items: center; justify-content: center;
         }
         .reviews-quote.active {
             opacity: 1; transform: translateY(0);
-            pointer-events: auto; position: relative;
+            pointer-events: auto; position: relative; display: block;
         }
         .reviews-author {
             font-family: 'Lato', sans-serif; font-size: 0.78rem;
             letter-spacing: 2.5px; color: rgba(75,77,57,0.4);
-            text-transform: uppercase; transition: opacity 0.3s ease;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
         }
         .reviews-controls { display: flex; align-items: center; gap: 14px; }
         .reviews-arrow {
@@ -385,7 +390,7 @@
             border: 1px solid rgba(75,77,57,0.2); background: transparent;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
             color: #4B4D39; flex-shrink: 0;
-            transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+            transition: background 0.25s ease, border-color 0.25s ease;
         }
         .reviews-arrow:hover { background: #4B4D39; border-color: #4B4D39; color: #EDE6D4; }
         .reviews-arrow svg {
@@ -440,7 +445,8 @@
             letter-spacing: 2px; text-transform: uppercase;
             text-decoration: none; border-radius: 30px;
             padding: 0 32px; height: 50px; white-space: nowrap;
-            transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease,
+                        transform 0.3s ease, box-shadow 0.3s ease;
         }
         .contact-btn--primary { background: #EDE6D4; color: #4B4D39; border: 1px solid #EDE6D4; }
         .contact-btn--primary:hover { background: transparent; color: #EDE6D4; transform: translateY(-2px); }
@@ -452,7 +458,7 @@
         .contact-email-note {
             font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300;
             color: rgba(237,230,212,0.45); text-align: center;
-            margin-bottom: 40px; line-height: 1.6;
+            margin-bottom: 22px; line-height: 1.6;
         }
         .contact-email-note a {
             color: rgba(237,230,212,0.7); text-decoration: none;
@@ -460,29 +466,11 @@
             transition: color 0.25s ease, border-color 0.25s ease;
         }
         .contact-email-note a:hover { color: #EDE6D4; border-color: #EDE6D4; }
-        .contact-details {
-            display: flex; align-items: stretch; margin-bottom: 70px;
-            border: 1px solid rgba(237,230,212,0.12); border-radius: 14px; overflow: hidden;
-        }
-        .contact-detail-item {
-            display: flex; flex-direction: column; align-items: center; gap: 5px;
-            padding: 22px 40px; text-decoration: none;
-            transition: background 0.25s ease;
-        }
-        .contact-detail-item:hover { background: rgba(237,230,212,0.06); }
-        .contact-detail-label {
-            font-family: 'Lato', sans-serif; font-size: 0.62rem; letter-spacing: 2.5px;
-            text-transform: uppercase; color: rgba(237,230,212,0.35);
-        }
-        .contact-detail-value {
-            font-family: 'Lato', sans-serif; font-size: 0.88rem; font-weight: 300;
-            color: rgba(237,230,212,0.8); letter-spacing: 0.3px;
-        }
-        .contact-detail-divider {
-            width: 1px; background: rgba(237,230,212,0.12); flex-shrink: 0;
-        }
+
+        /* Form */
         .contact-form { width: 100%; max-width: 620px; }
         .contact-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
         .contact-field-wrap { position: relative; flex: 1; }
         .contact-field-wrap input { width: 100%; }
         .contact-field-wrap--phone { flex: 1; display: flex; align-items: stretch; }
@@ -494,6 +482,7 @@
             font-family: 'Lato', sans-serif; font-size: 0.8rem;
             color: rgba(237,230,212,0.35); pointer-events: none;
         }
+
         .contact-form input,
         .contact-form textarea {
             width: 100%; padding: 16px 18px; margin-bottom: 14px;
@@ -521,9 +510,11 @@
             background: #d9d1b8; transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(237,230,212,0.2);
         }
+
         .contact-phone-row { display: flex; margin-bottom: 14px; }
         .contact-phone-code {
-            min-width: 100px; flex-shrink: 0; padding: 16px 12px;
+            min-width: 100px; flex-shrink: 0;
+            padding: 16px 12px;
             border: 1px solid rgba(237,230,212,0.18); border-right: none;
             border-radius: 8px 0 0 8px;
             font-size: 0.88rem; font-family: 'Lato', sans-serif; font-weight: 300;
@@ -537,17 +528,14 @@
         }
 
         /* ── FOOTER ── */
-        .site-footer { background: #1a1a18; color: #EDE6D4; flex-shrink: 0; }
+        .site-footer { background: #1a1a18; color: #EDE6D4; margin-top: auto; }
         .footer-inner {
-            display: grid; grid-template-columns: 1fr 1fr;
+            display: grid; grid-template-columns: 1.4fr 1fr;
             gap: 60px; padding: 80px 60px 60px;
             max-width: 1200px; margin: 0 auto;
         }
         .footer-brand { display: flex; flex-direction: column; gap: 20px; }
-        .footer-logo {
-            display: flex; flex-direction: column;
-            align-items: flex-start; text-decoration: none; line-height: 1;
-        }
+        .footer-logo { display: flex; flex-direction: column; align-items: flex-start; text-decoration: none; line-height: 1; }
         .footer-logo-name {
             font-family: 'Gowun Batang', serif;
             font-size: 20px; font-weight: 400; color: #EDE6D4; letter-spacing: 0.5px;
@@ -567,11 +555,7 @@
             transition: color 0.3s ease;
         }
         .footer-ig:hover { color: #EDE6D4; }
-
-        /* Two columns: Navigate + Contact */
-        .footer-links {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
-        }
+        .footer-nav { display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; }
         .footer-col { display: flex; flex-direction: column; gap: 10px; }
         .footer-col-title {
             font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 400;
@@ -584,7 +568,6 @@
             transition: color 0.25s ease; line-height: 1.5;
         }
         .footer-col a:hover { color: #EDE6D4; }
-
         .footer-bar {
             border-top: 1px solid rgba(237,230,212,0.08);
             padding: 22px 60px;
@@ -616,24 +599,24 @@
 
         /* ── RESPONSIVE: 1024px ── */
         @media (max-width: 1024px) {
-            nav#mainNav { padding: 20px 35px; }
+            nav { padding: 20px 35px; }
             .definition-side, .text-side { padding: 80px 40px; }
             .footer-inner { padding: 60px 40px 50px; }
         }
 
         /* ── RESPONSIVE: 900px ── */
         @media (max-width: 900px) {
-            .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+            .footer-inner { grid-template-columns: 1fr; gap: 50px; }
         }
 
         /* ── RESPONSIVE: 768px ── */
         @media (max-width: 768px) {
-            nav#mainNav { padding: 16px 20px; }
+            nav { padding: 16px 20px; }
             .nav-reserve-btn { font-size: 10px; padding: 7px 14px; letter-spacing: 1.5px; }
             .menu-overlay { grid-template-columns: 1fr; }
             .overlay-photo { display: none; }
-            .overlay-left { padding: 120px 35px 80px; }
-            .hero-content { padding: 0 24px; }
+            .overlay-left  { padding: 120px 35px 80px; }
+            .hero-content  { padding: 0 24px; }
             .hero h1 { font-size: clamp(1.6rem,8vw,2.6rem); margin-bottom: 28px; }
             .cta-btn { padding: 0 40px; height: 50px; font-size: 12px; }
             .about-container { grid-template-columns: 1fr; min-height: auto; }
@@ -641,7 +624,7 @@
             .definition-word { font-size: clamp(3rem,15vw,5rem); }
             .text-side { padding: 50px 25px 70px; }
             .text-side h2 { font-size: clamp(2rem,8vw,2.8rem); }
-            .text-side p { font-size: 1rem; }
+            .text-side p  { font-size: 1rem; }
             .services-container { grid-template-columns: 1fr; }
             .services-image-side { min-height: 50vh; order: 1; }
             .services-content-side { padding: 60px 30px; order: 2; }
@@ -651,14 +634,11 @@
             .reviews-quote-wrap { min-height: 200px; }
             .reviews-quote-wrap::before { font-size: 6rem; top: -10px; }
             .contact { padding: 80px 25px 60px; }
-            .contact-details { flex-direction: column; border-radius: 12px; width: 100%; max-width: 420px; }
-            .contact-detail-item { padding: 18px 28px; width: 100%; align-items: flex-start; }
-            .contact-detail-divider { width: 100%; height: 1px; }
             .contact-form-row { grid-template-columns: 1fr; gap: 0; }
             .contact-phone-code { min-width: 90px; font-size: 0.82rem; }
             .contact-ctas { gap: 10px; }
             .footer-inner { padding: 50px 25px 40px; }
-            .footer-links { grid-template-columns: 1fr 1fr; }
+            .footer-nav { grid-template-columns: repeat(2,1fr); gap: 30px; }
             .footer-bar { padding: 20px 25px; flex-direction: column; align-items: flex-start; gap: 14px; }
             .footer-bar-links { gap: 20px; flex-wrap: wrap; }
         }
@@ -674,7 +654,7 @@
             .contact-ctas { flex-direction: column; align-items: stretch; }
             .contact-btn { justify-content: center; }
             .contact-ctas-or { text-align: center; }
-            .footer-links { grid-template-columns: 1fr; }
+            .footer-nav { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -711,7 +691,7 @@
         </div>
     </div>
 
-    <!-- ── MAIN ── -->
+    <!-- ── MAIN CONTENT ── -->
     <main>
 
         <!-- Hero -->
@@ -747,6 +727,8 @@
         <!-- Services -->
         <section class="services" id="services">
             <div class="services-container">
+
+                <!-- Left: featured image -->
                 <div class="services-image-side">
                     <div class="service-image active" data-service="swedish">
                         <img src="swedish-massage.jpg" alt="Swedish Massage" width="900" height="1200" loading="lazy">
@@ -769,6 +751,7 @@
                     <div class="image-overlay"></div>
                 </div>
 
+                <!-- Right: service cards -->
                 <div class="services-content-side">
                     <div class="services-header">
                         <h2 class="services-title">Our Services</h2>
@@ -777,7 +760,9 @@
                             <button class="nav-arrow next-arrow" aria-label="Next services">&#8250;</button>
                         </div>
                     </div>
+
                     <div class="services-slider">
+
                         <!-- Page 1 -->
                         <div class="services-page active">
                             <div class="service-card active" data-service="swedish">
@@ -789,6 +774,7 @@
                                 <p class="service-description">Gentle, flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
                                 <a href="reserve.html" class="service-cta">Book Swedish Massage</a>
                             </div>
+
                             <div class="service-card" data-service="deep-tissue">
                                 <div class="service-header-row">
                                     <h3 class="service-card-name">Deep Tissue Massage</h3>
@@ -798,6 +784,7 @@
                                 <p class="service-description">Targeted pressure to release chronic muscle tension and deep-seated knots. Ideal for those who need serious therapeutic work.</p>
                                 <a href="reserve.html" class="service-cta">Book Deep Tissue</a>
                             </div>
+
                             <div class="service-card" data-service="sports">
                                 <div class="service-header-row">
                                     <h3 class="service-card-name">Sports Massage</h3>
@@ -808,6 +795,7 @@
                                 <a href="reserve.html" class="service-cta">Book Sports Massage</a>
                             </div>
                         </div>
+
                         <!-- Page 2 -->
                         <div class="services-page">
                             <div class="service-card" data-service="hot-stone">
@@ -819,6 +807,7 @@
                                 <p class="service-description">Heated stones melt away tension and promote deep relaxation. The warmth enhances circulation and soothes tired muscles naturally.</p>
                                 <a href="reserve.html" class="service-cta">Book Hot Stone</a>
                             </div>
+
                             <div class="service-card" data-service="aromatherapy">
                                 <div class="service-header-row">
                                     <h3 class="service-card-name">Aromatherapy Massage</h3>
@@ -828,6 +817,7 @@
                                 <p class="service-description">Essential oils combined with gentle massage techniques to calm the mind, reduce stress, and restore balance to body and spirit.</p>
                                 <a href="reserve.html" class="service-cta">Book Aromatherapy</a>
                             </div>
+
                             <div class="service-card" data-service="couples">
                                 <div class="service-header-row">
                                     <h3 class="service-card-name">Couples Massage</h3>
@@ -838,9 +828,10 @@
                                 <a href="reserve.html" class="service-cta">Book Couples Massage</a>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+
+                    </div><!-- /.services-slider -->
+                </div><!-- /.services-content-side -->
+            </div><!-- /.services-container -->
         </section>
 
         <!-- Reviews -->
@@ -855,7 +846,9 @@
                     </svg>
                     Google Reviews
                 </div>
+
                 <h2 class="reviews-heading">What Our Clients <em>Say</em></h2>
+
                 <div class="reviews-stars" aria-label="5 out of 5 stars">
                     <svg viewBox="0 0 24 24" fill="#C9A84C" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     <svg viewBox="0 0 24 24" fill="#C9A84C" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -863,6 +856,7 @@
                     <svg viewBox="0 0 24 24" fill="#C9A84C" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     <svg viewBox="0 0 24 24" fill="#C9A84C" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
+
                 <div class="reviews-quote-wrap">
                     <blockquote class="reviews-quote active">Absolutely the best massage I've had. The therapist arrived at our villa perfectly on time, and within minutes it felt like the whole island had slowed down.</blockquote>
                     <blockquote class="reviews-quote">An experience unlike anything else in Mykonos. Deeply therapeutic, incredibly professional. I booked again the very next day.</blockquote>
@@ -870,7 +864,9 @@
                     <blockquote class="reviews-quote">The deep tissue work was exactly what my body needed after a week of non-stop activity. I felt brand new.</blockquote>
                     <blockquote class="reviews-quote">Seamless booking, punctual arrival, exceptional hands. This is the standard every massage service should aspire to.</blockquote>
                 </div>
+
                 <p class="reviews-author" id="reviewAuthor">Maribel M. — Mykonos, 2024</p>
+
                 <div class="reviews-controls">
                     <button class="reviews-arrow" id="reviewPrev" aria-label="Previous review">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
@@ -880,6 +876,7 @@
                         <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
                     </button>
                 </div>
+
                 <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK" target="_blank" rel="noopener noreferrer" class="reviews-cta">Read reviews on Google</a>
             </div>
         </section>
@@ -889,6 +886,7 @@
             <p class="contact-label">Get in touch</p>
             <h2 class="contact-heading">Contact</h2>
             <p class="contact-intro">Mobile massage service across Mykonos. We come to you — your villa, hotel, or retreat.</p>
+
             <div class="contact-ctas">
                 <a href="reserve.html" class="contact-btn contact-btn--primary">Reserve online</a>
                 <span class="contact-ctas-or">or</span>
@@ -901,25 +899,7 @@
                     WhatsApp
                 </a>
             </div>
-            <p class="contact-email-note">
-                Or email us directly at <a href="mailto:hello@myokomassage.com">hello@myokomassage.com</a>
-            </p>
-            <div class="contact-details">
-                <div class="contact-detail-item">
-                    <span class="contact-detail-label">Location</span>
-                    <span class="contact-detail-value">Mykonos, Greece</span>
-                </div>
-                <div class="contact-detail-divider"></div>
-                <a href="https://wa.me/306947077567" target="_blank" rel="noopener noreferrer" class="contact-detail-item">
-                    <span class="contact-detail-label">WhatsApp</span>
-                    <span class="contact-detail-value">+30 694 707 7567</span>
-                </a>
-                <div class="contact-detail-divider"></div>
-                <div class="contact-detail-item">
-                    <span class="contact-detail-label">Hours</span>
-                    <span class="contact-detail-value">Daily, 9:00 – 21:00</span>
-                </div>
-            </div>
+
             <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <div class="contact-form-row">
                     <div class="contact-field-wrap">
@@ -933,22 +913,22 @@
                 </div>
                 <div class="contact-phone-row">
                     <select class="contact-phone-code" name="phone_code" aria-label="Country code">
-                        <optgroup label="Common">
-                            <option value="+30">GR +30</option>
-                            <option value="+1">US +1</option>
-                            <option value="+44">GB +44</option>
-                            <option value="+49">DE +49</option>
-                            <option value="+33">FR +33</option>
-                            <option value="+39">IT +39</option>
-                            <option value="+34">ES +34</option>
-                            <option value="+31">NL +31</option>
-                            <option value="+46">SE +46</option>
-                            <option value="+47">NO +47</option>
-                            <option value="+45">DK +45</option>
-                            <option value="+41">CH +41</option>
-                            <option value="+971">AE +971</option>
-                            <option value="+972">IL +972</option>
-                            <option value="+7">RU +7</option>
+                        <optgroup label="Most Common">
+                            <option value="+30">Greece +30</option>
+                            <option value="+1">United States +1</option>
+                            <option value="+44">United Kingdom +44</option>
+                            <option value="+49">Germany +49</option>
+                            <option value="+33">France +33</option>
+                            <option value="+39">Italy +39</option>
+                            <option value="+34">Spain +34</option>
+                            <option value="+31">Netherlands +31</option>
+                            <option value="+46">Sweden +46</option>
+                            <option value="+47">Norway +47</option>
+                            <option value="+45">Denmark +45</option>
+                            <option value="+41">Switzerland +41</option>
+                            <option value="+971">United Arab Emirates +971</option>
+                            <option value="+972">Ireland +972</option>
+                            <option value="+7">Russia +7</option>
                         </optgroup>
                         <optgroup label="All Countries">
                             <option value="+93">AF +93</option>
@@ -1056,7 +1036,7 @@
             </form>
         </section>
 
-    </main>
+    </main><!-- /.main -->
 
     <!-- ── FOOTER ── -->
     <footer class="site-footer">
@@ -1069,7 +1049,7 @@
                 <p class="footer-about">Myōko is a premium mobile massage service operating across Mykonos. We bring skilled therapeutic hands to your villa, hotel, or retreat — blending Eastern wellness tradition with the unhurried spirit of the Greek islands.</p>
                 <a href="https://instagram.com/myokomassage" target="_blank" rel="noopener noreferrer" class="footer-ig">@myokomassage</a>
             </div>
-            <div class="footer-links">
+            <nav class="footer-nav" aria-label="Footer navigation">
                 <div class="footer-col">
                     <p class="footer-col-title">Navigate</p>
                     <a href="#home">Home</a>
@@ -1079,12 +1059,21 @@
                     <a href="#contact">Contact</a>
                 </div>
                 <div class="footer-col">
+                    <p class="footer-col-title">Services</p>
+                    <a href="reserve.html">Swedish Massage</a>
+                    <a href="reserve.html">Deep Tissue</a>
+                    <a href="reserve.html">Sports Massage</a>
+                    <a href="reserve.html">Hot Stone</a>
+                    <a href="reserve.html">Aromatherapy</a>
+                    <a href="reserve.html">Couples Massage</a>
+                </div>
+                <div class="footer-col">
                     <p class="footer-col-title">Contact</p>
                     <a href="mailto:hello@myokomassage.com">hello@myokomassage.com</a>
                     <a href="https://wa.me/306947077567" target="_blank" rel="noopener noreferrer">+30 694 707 7567</a>
                     <a href="https://instagram.com/myokomassage" target="_blank" rel="noopener noreferrer">Instagram</a>
                 </div>
-            </div>
+            </nav>
         </div>
         <div class="footer-bar">
             <span>© 2026 Myōko Massage · All rights reserved.</span>
@@ -1123,7 +1112,9 @@
             document.body.style.overflow = isOpen ? 'hidden' : '';
         });
 
-        document.querySelectorAll('.overlay-nav-link').forEach(l => l.addEventListener('click', closeMenu));
+        document.querySelectorAll('.overlay-nav-link').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
 
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && menuOverlay.classList.contains('open')) {
@@ -1154,8 +1145,10 @@
             const nextBtn   = document.querySelector('.next-arrow');
             let currentPage = 0;
 
-            function setImage(name) {
-                allImages.forEach(img => img.classList.toggle('active', img.dataset.service === name));
+            function setImage(serviceName) {
+                allImages.forEach(img => {
+                    img.classList.toggle('active', img.dataset.service === serviceName);
+                });
             }
 
             function updateArrows() {
@@ -1174,19 +1167,23 @@
                 updateArrows();
             }
 
-            prevBtn.addEventListener('click', () => { if (currentPage > 0) showPage(--currentPage); });
-            nextBtn.addEventListener('click', () => { if (currentPage < pages.length - 1) showPage(++currentPage); });
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 0) showPage(--currentPage);
+            });
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < pages.length - 1) showPage(++currentPage);
+            });
 
             allCards.forEach(card => {
-                card.addEventListener('click', function() {
+                card.addEventListener('click', function () {
                     allCards.forEach(c => c.classList.remove('active'));
                     this.classList.add('active');
                     setImage(this.dataset.service);
                 });
-                card.addEventListener('mouseenter', function() {
+                card.addEventListener('mouseenter', function () {
                     if (!this.classList.contains('active')) setImage(this.dataset.service);
                 });
-                card.addEventListener('mouseleave', function() {
+                card.addEventListener('mouseleave', function () {
                     if (!this.classList.contains('active')) {
                         const active = document.querySelector('.service-card.active');
                         if (active) setImage(active.dataset.service);
@@ -1222,7 +1219,7 @@
                 quotes[current].classList.add('active');
                 authorEl.style.opacity = '0';
                 setTimeout(() => {
-                    authorEl.textContent   = authors[current];
+                    authorEl.textContent  = authors[current];
                     authorEl.style.opacity = '1';
                 }, 300);
                 counterEl.textContent = `${current + 1} / ${quotes.length}`;
@@ -1232,10 +1229,14 @@
             prevBtn.addEventListener('click', () => goTo(current - 1));
             nextBtn.addEventListener('click', () => goTo(current + 1));
 
+            /* Start auto-rotate only when visible */
             new IntersectionObserver(entries => {
                 entries.forEach(e => {
-                    if (e.isIntersecting) timer = setTimeout(() => goTo(current + 1), INTERVAL);
-                    else clearTimeout(timer);
+                    if (e.isIntersecting) {
+                        timer = setTimeout(() => goTo(current + 1), INTERVAL);
+                    } else {
+                        clearTimeout(timer);
+                    }
                 });
             }, { threshold: 0.3 }).observe(document.getElementById('reviews'));
         })();
