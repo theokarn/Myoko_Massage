@@ -238,9 +238,14 @@
            SERVICES
         ══════════════════════════════ */
         .services { background: #EDE6D4; }
-        .services-container { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+        .services-container {
+            display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh;
+        }
 
-        .services-image-side { position: relative; overflow: hidden; background: #4B4D39; }
+        /* Image side — desktop only */
+        .services-image-side {
+            position: relative; overflow: hidden; background: #4B4D39;
+        }
         .service-image {
             position: absolute; inset: 0;
             opacity: 0; transition: opacity 0.8s ease;
@@ -252,6 +257,8 @@
             background: linear-gradient(to right, rgba(75,77,57,0.3), transparent);
             pointer-events: none; z-index: 1;
         }
+
+        /* Content side */
         .services-content-side {
             background: #EDE6D4; padding: 70px 55px;
             display: flex; flex-direction: column; justify-content: center;
@@ -272,7 +279,6 @@
             letter-spacing: 2.5px; text-transform: uppercase;
             color: rgba(75,77,57,0.45);
             min-width: 120px; text-align: center;
-            transition: opacity 0.3s ease;
         }
         .nav-arrow {
             background: transparent; border: 1.5px solid #4B4D39;
@@ -627,9 +633,16 @@
 
         /* ══════════════════════════════
            RESPONSIVE — 900px
+           Hide image panel, go single column
         ══════════════════════════════ */
         @media (max-width: 900px) {
             .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+            .services-image-side { display: none; }
+            .services-container {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            .services-content-side { padding: 70px 45px; }
         }
 
         /* ══════════════════════════════
@@ -650,10 +663,8 @@
             .text-side { padding: 50px 25px 70px; }
             .text-side h2 { font-size: clamp(2rem,8vw,2.8rem); }
             .text-side p  { font-size: 1rem; }
-            .services-container { grid-template-columns: 1fr; }
-            .services-image-side { min-height: 50vh; order: 1; }
-            .services-content-side { padding: 60px 30px; order: 2; }
-            .services-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .services-content-side { padding: 60px 25px; }
+            .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
             .service-card { padding: 20px 22px; }
             .service-card:hover:not(.active) { transform: none; }
             .reviews-section { padding: 80px 28px; }
@@ -757,6 +768,7 @@
         <section class="services" id="services">
             <div class="services-container">
 
+                <!-- Image panel — hidden below 900px -->
                 <div class="services-image-side">
                     <div class="service-image active" data-service="swedish">
                         <img src="swedish-massage.jpg" alt="Swedish Massage" width="900" height="1200" loading="lazy">
@@ -776,6 +788,7 @@
                     <div class="image-overlay"></div>
                 </div>
 
+                <!-- Content panel -->
                 <div class="services-content-side">
                     <div class="services-header">
                         <h2 class="services-title">Our Services</h2>
@@ -788,7 +801,7 @@
 
                     <div class="services-slider">
 
-                        <!-- Page 1: Core treatments -->
+                        <!-- Page 1 -->
                         <div class="services-page active">
                             <div class="service-card active" data-service="swedish">
                                 <div class="service-header-row">
@@ -824,7 +837,7 @@
                             </div>
                         </div>
 
-                        <!-- Page 2: Add-on therapies -->
+                        <!-- Page 2 -->
                         <div class="services-page">
                             <p class="services-addon-label">Add-on Therapies</p>
 
@@ -853,9 +866,10 @@
                             </div>
                         </div>
 
-                    </div><!-- /.services-slider -->
-                </div><!-- /.services-content-side -->
-            </div><!-- /.services-container -->
+                    </div>
+                </div>
+
+            </div>
         </section>
 
         <!-- Reviews -->
@@ -1142,7 +1156,6 @@
                 if (currentPage < pages.length - 1) showPage(++currentPage);
             });
 
-            /* Desktop: click + hover */
             allCards.forEach(card => {
                 card.addEventListener('click', function() {
                     allCards.forEach(c => c.classList.remove('active'));
@@ -1158,10 +1171,6 @@
                         if (active) setImage(active.dataset.service);
                     }
                 });
-            });
-
-            /* Mobile/tablet: single tap activates immediately */
-            allCards.forEach(card => {
                 card.addEventListener('touchstart', function(e) {
                     e.preventDefault();
                     allCards.forEach(c => c.classList.remove('active'));
