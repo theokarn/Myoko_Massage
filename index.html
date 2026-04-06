@@ -275,7 +275,22 @@
     font-size: clamp(2rem,4vw,3rem); font-weight: 400;
     color: #4B4D39; margin: 0;
 }
-.services-nav { display: flex; gap: 12px; }
+.services-nav {
+    display: flex;
+    gap: 12px;
+    align-items: center;  /* ADD this */
+}
+.services-page-label {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(75,77,57,0.45);
+    min-width: 110px;
+    text-align: center;
+    transition: opacity 0.3s ease;
+}
 .nav-arrow {
     background: transparent; border: 1.5px solid #4B4D39;
     color: #4B4D39; width: 38px; height: 38px;
@@ -803,9 +818,14 @@
             <div class="services-header">
                 <h2 class="services-title">Our Services</h2>
                 <div class="services-nav">
-                    <button class="nav-arrow prev-arrow" aria-label="Previous services">&#8249;</button>
-                    <button class="nav-arrow next-arrow" aria-label="Next services">&#8250;</button>
-                </div>
+    <button class="nav-arrow prev-arrow" aria-label="Previous page">
+        &#8249;
+    </button>
+    <span class="services-page-label" id="servicesPageLabel">Core Treatments</span>
+    <button class="nav-arrow next-arrow" aria-label="Next page">
+        &#8250;
+    </button>
+</div>
             </div>
 
             <div class="services-slider">
@@ -821,7 +841,6 @@
                             <p class="service-duration">60 minutes</p>
                         </div>
                         <p class="service-description">Gentle, flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
-                        <a href="reserve.html" class="service-link">Book this service →</a>
                     </div>
 
                     <div class="service-card" data-service="deep-tissue">
@@ -833,7 +852,6 @@
                             <p class="service-duration">60 minutes</p>
                         </div>
                         <p class="service-description">Targeted pressure to release chronic muscle tension and deep-seated knots. Ideal for those who need serious therapeutic work.</p>
-                        <a href="reserve.html" class="service-link">Book this service →</a>
                     </div>
 
                     <div class="service-card" data-service="sports">
@@ -845,7 +863,6 @@
                             <p class="service-duration">60 minutes</p>
                         </div>
                         <p class="service-description">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles and post-workout relief.</p>
-                        <a href="reserve.html" class="service-link">Book this service →</a>
                     </div>
                 </div>
 
@@ -863,7 +880,6 @@
                             <span class="service-badge">Add-on</span>
                         </div>
                         <p class="service-description">Essential oils blended with gentle massage techniques to calm the mind, reduce stress, and restore balance to body and spirit.</p>
-                        <a href="reserve.html" class="service-link">Book this service →</a>
                     </div>
 
                     <div class="service-card" data-service="cupping">
@@ -876,7 +892,6 @@
                             <span class="service-badge">Add-on</span>
                         </div>
                         <p class="service-description">Traditional suction cups lift and decompress tissue to release fascia, improve circulation, and draw out deep muscular tension.</p>
-                        <a href="reserve.html" class="service-link">Book this service →</a>
                     </div>
                 </div>
 
@@ -1188,26 +1203,34 @@
                 prevBtn.disabled = currentPage === 0;
                 nextBtn.disabled = currentPage === pages.length - 1;
             }
-            function showPage(idx) {
-                pages.forEach((p, i) => p.classList.toggle('active', i === idx));
-                const first = pages[idx].querySelector('.service-card');
-                if (first) {
-                    allCards.forEach(c => c.classList.remove('active'));
-                    first.classList.add('active');
-                    setImage(first.dataset.service);
-                }
-                updateArrows();
-            }
+            const pageLabels = ['Core Treatments', 'Add-on Therapies'];
+
+function showPage(idx) {
+    pages.forEach((p, i) => p.classList.toggle('active', i === idx));
+    // update label
+    document.getElementById('servicesPageLabel').textContent = pageLabels[idx];
+    const first = pages[idx].querySelector('.service-card');
+    if (first) {
+        allCards.forEach(c => c.classList.remove('active'));
+        first.classList.add('active');
+        setImage(first.dataset.service);
+    }
+    updateArrows();
+}
+
 
             prevBtn.addEventListener('click', () => { if (currentPage > 0) showPage(--currentPage); });
             nextBtn.addEventListener('click', () => { if (currentPage < pages.length - 1) showPage(++currentPage); });
 
-            allCards.forEach(card => {
-                card.addEventListener('click', function () {
-                    allCards.forEach(c => c.classList.remove('active'));
-                    this.classList.add('active');
-                    setImage(this.dataset.service);
-                });
+           // Mobile: single tap selects immediately
+allCards.forEach(card => {
+    card.addEventListener('touchstart', function(e) {
+        e.preventDefault(); // block ghost mouseenter
+        allCards.forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        setImage(this.dataset.service);
+    }, { passive: false });
+});
                 card.addEventListener('mouseenter', function () {
                     if (!this.classList.contains('active')) setImage(this.dataset.service);
                 });
