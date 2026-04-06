@@ -42,7 +42,6 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
         .logo {
             display: flex; flex-direction: column;
             align-items: flex-start; line-height: 1; text-decoration: none;
@@ -58,14 +57,11 @@
             letter-spacing: 3px; text-transform: uppercase;
             color: rgba(237,230,212,0.75); transition: color 0.3s ease; margin-top: 4px;
         }
-
         #mainNav.scrolled .logo-name      { color: #4B4D39; }
         #mainNav.scrolled .logo-location  { color: rgba(75,77,57,0.6); }
         #mainNav.menu-open .logo-name     { color: #4B4D39; }
         #mainNav.menu-open .logo-location { color: rgba(75,77,57,0.6); }
-
         .nav-right { display: flex; align-items: center; gap: 20px; }
-
         .nav-reserve-btn {
             font-family: 'Lato', sans-serif;
             font-size: 11px; font-weight: 500;
@@ -110,7 +106,6 @@
             transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1);
         }
         .menu-overlay.open { opacity: 1; pointer-events: all; }
-
         .overlay-left {
             display: flex; flex-direction: column; justify-content: center;
             padding: 140px 60px 80px 80px;
@@ -135,7 +130,6 @@
         .overlay-links li:nth-child(3) a { transition-delay: 0.20s; }
         .overlay-links li:nth-child(4) a { transition-delay: 0.26s; }
         .overlay-links li a:hover        { color: rgba(75,77,57,0.4); }
-
         .overlay-ig {
             font-family: 'Lato', sans-serif; font-size: 0.9rem;
             color: rgba(75,77,57,0.45); letter-spacing: 1.5px;
@@ -145,7 +139,6 @@
         }
         .menu-overlay.open .overlay-ig { opacity: 1; }
         .overlay-ig:hover               { color: #4B4D39; }
-
         .overlay-photo { display: block; position: relative; overflow: hidden; }
         .overlay-photo img {
             width: 100%; height: 100%; object-fit: cover;
@@ -209,7 +202,6 @@
         ══════════════════════════════ */
         .about { background: #EDE6D4; }
         .about-container { display: grid; grid-template-columns: 1fr 1fr; min-height: 85vh; }
-
         .definition-side {
             background: #fff;
             display: flex; align-items: center; justify-content: center; padding: 100px 60px;
@@ -228,7 +220,6 @@
             font-family: 'Lato', sans-serif; font-size: 1.15rem;
             color: #333; line-height: 1.7; margin: 0;
         }
-
         .text-side {
             background: #EDE6D4;
             display: flex; flex-direction: column; justify-content: center; padding: 100px 60px;
@@ -243,136 +234,116 @@
             color: #4B4D39; line-height: 1.8; margin: 0 0 20px 0; max-width: 550px;
         }
 
-       /* ══════════════════════════════
-   SERVICES
-══════════════════════════════ */
-.services { background: #EDE6D4; }
-.services-container { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+        /* ══════════════════════════════
+           SERVICES
+        ══════════════════════════════ */
+        .services { background: #EDE6D4; }
+        .services-container { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
 
-.services-image-side { position: relative; overflow: hidden; background: #4B4D39; }
-.service-image {
-    position: absolute; inset: 0;
-    opacity: 0; transition: opacity 0.8s ease;
-}
-.service-image.active { opacity: 1; }
-.service-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.image-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to right, rgba(75,77,57,0.3), transparent);
-    pointer-events: none; z-index: 1;
-}
+        .services-image-side { position: relative; overflow: hidden; background: #4B4D39; }
+        .service-image {
+            position: absolute; inset: 0;
+            opacity: 0; transition: opacity 0.8s ease;
+        }
+        .service-image.active { opacity: 1; }
+        .service-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .image-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to right, rgba(75,77,57,0.3), transparent);
+            pointer-events: none; z-index: 1;
+        }
+        .services-content-side {
+            background: #EDE6D4; padding: 70px 55px;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .services-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 36px;
+        }
+        .services-title {
+            font-family: 'Gowun Batang', serif;
+            font-size: clamp(2rem,4vw,3rem); font-weight: 400;
+            color: #4B4D39; margin: 0;
+        }
+        .services-nav { display: flex; align-items: center; gap: 10px; }
+        .services-page-label {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.68rem; font-weight: 400;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: rgba(75,77,57,0.45);
+            min-width: 120px; text-align: center;
+            transition: opacity 0.3s ease;
+        }
+        .nav-arrow {
+            background: transparent; border: 1.5px solid #4B4D39;
+            color: #4B4D39; width: 38px; height: 38px;
+            border-radius: 50%; font-size: 1.4rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center; padding: 0;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            line-height: 1;
+        }
+        .nav-arrow:hover:not(:disabled) { background: #4B4D39; color: #EDE6D4; transform: scale(1.08); }
+        .nav-arrow:disabled { opacity: 0.25; cursor: not-allowed; }
 
-.services-content-side {
-    background: #EDE6D4; padding: 70px 55px;
-    display: flex; flex-direction: column; justify-content: center;
-}
-.services-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 36px;
-}
-.services-title {
-    font-family: 'Gowun Batang', serif;
-    font-size: clamp(2rem,4vw,3rem); font-weight: 400;
-    color: #4B4D39; margin: 0;
-}
-.services-nav {
-    display: flex;
-    gap: 12px;
-    align-items: center;  /* ADD this */
-}
-.services-page-label {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 400;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: rgba(75,77,57,0.45);
-    min-width: 110px;
-    text-align: center;
-    transition: opacity 0.3s ease;
-}
-.nav-arrow {
-    background: transparent; border: 1.5px solid #4B4D39;
-    color: #4B4D39; width: 38px; height: 38px;
-    border-radius: 50%; font-size: 1.4rem;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center; padding: 0;
-    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    line-height: 1;
-}
-.nav-arrow:hover:not(:disabled) { background: #4B4D39; color: #EDE6D4; transform: scale(1.08); }
-.nav-arrow:disabled { opacity: 0.25; cursor: not-allowed; }
+        .services-slider { position: relative; }
+        .services-page { display: none; flex-direction: column; gap: 14px; }
+        .services-page.active { display: flex; }
 
-.services-slider { position: relative; }
-.services-page { display: none; flex-direction: column; gap: 14px; }
-.services-page.active { display: flex; }
+        .services-addon-label {
+            font-family: 'Lato', sans-serif; font-size: 0.62rem; font-weight: 400;
+            letter-spacing: 3px; text-transform: uppercase;
+            color: rgba(75,77,57,0.4); margin-bottom: 4px;
+        }
+        .service-card {
+            background: #fff; border: 1.5px solid transparent;
+            border-radius: 10px; padding: 22px 28px; cursor: pointer;
+            transition: border-color 0.3s ease, transform 0.3s ease,
+                        box-shadow 0.3s ease, background 0.3s ease;
+        }
+        .service-card:hover:not(.active) {
+            border-color: rgba(75,77,57,0.35); transform: translateX(6px);
+            box-shadow: 0 4px 18px rgba(75,77,57,0.08);
+        }
+        .service-card.active {
+            background: #4B4D39; border-color: #4B4D39;
+            transform: scale(1.01); box-shadow: 0 8px 24px rgba(75,77,57,0.22);
+        }
+        .service-card.active .service-card-name,
+        .service-card.active .service-price,
+        .service-card.active .service-duration,
+        .service-card.active .service-description { color: rgba(237,230,212,0.9) !important; }
+        .service-card.active .service-badge { background: rgba(237,230,212,0.15); color: #EDE6D4; }
 
-/* Add-on label above page 2 */
-.services-addon-label {
-    font-family: 'Lato', sans-serif; font-size: 0.62rem; font-weight: 400;
-    letter-spacing: 3px; text-transform: uppercase;
-    color: rgba(75,77,57,0.4); margin-bottom: 4px;
-}
-
-.service-card {
-    background: #fff; border: 1.5px solid transparent;
-    border-radius: 10px; padding: 22px 28px; cursor: pointer;
-    transition: border-color 0.3s ease, transform 0.3s ease,
-                box-shadow 0.3s ease, background 0.3s ease;
-}
-.service-card:hover:not(.active) {
-    border-color: rgba(75,77,57,0.35); transform: translateX(6px);
-    box-shadow: 0 4px 18px rgba(75,77,57,0.08);
-}
-.service-card.active {
-    background: #4B4D39; border-color: #4B4D39;
-    transform: scale(1.01); box-shadow: 0 8px 24px rgba(75,77,57,0.22);
-}
-.service-card.active .service-card-name,
-.service-card.active .service-price,
-.service-card.active .service-duration,
-.service-card.active .service-description,
-.service-card.active .service-link { color: rgba(237,230,212,0.9) !important; }
-.service-card.active .service-badge { background: rgba(237,230,212,0.15); color: #EDE6D4; }
-
-.service-header-row {
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin-bottom: 5px;
-}
-.service-card-name {
-    font-family: 'Gowun Batang', serif;
-    font-size: 1.45rem; font-weight: 400; color: #4B4D39; margin: 0;
-}
-.service-price {
-    font-family: 'Lato', sans-serif;
-    font-size: 1.25rem; font-weight: 700; color: #4B4D39;
-}
-.service-meta-row {
-    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
-}
-.service-duration {
-    font-family: 'Lato', sans-serif; font-size: 0.82rem;
-    color: #888; font-style: italic;
-}
-.service-badge {
-    font-family: 'Lato', sans-serif; font-size: 0.6rem; font-weight: 600;
-    letter-spacing: 1.8px; text-transform: uppercase;
-    background: rgba(75,77,57,0.08); color: rgba(75,77,57,0.55);
-    padding: 3px 9px; border-radius: 20px;
-}
-.service-description {
-    font-family: 'Lato', sans-serif; font-size: 0.9rem;
-    color: #555; line-height: 1.65; margin: 0 0 12px 0;
-}
-.service-link {
-    font-family: 'Lato', sans-serif; font-size: 0.72rem; font-weight: 500;
-    letter-spacing: 1.8px; text-transform: uppercase;
-    color: rgba(75,77,57,0.5); text-decoration: none;
-    border-bottom: 1px solid rgba(75,77,57,0.2); padding-bottom: 1px;
-    transition: color 0.25s ease, border-color 0.25s ease;
-    display: inline-block;
-}
-.service-link:hover { color: #4B4D39; border-color: #4B4D39; }
+        .service-header-row {
+            display: flex; justify-content: space-between; align-items: baseline;
+            margin-bottom: 5px;
+        }
+        .service-card-name {
+            font-family: 'Gowun Batang', serif;
+            font-size: 1.45rem; font-weight: 400; color: #4B4D39; margin: 0;
+        }
+        .service-price {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.25rem; font-weight: 700; color: #4B4D39;
+        }
+        .service-meta-row {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+        }
+        .service-duration {
+            font-family: 'Lato', sans-serif; font-size: 0.82rem;
+            color: #888; font-style: italic;
+        }
+        .service-badge {
+            font-family: 'Lato', sans-serif; font-size: 0.6rem; font-weight: 600;
+            letter-spacing: 1.8px; text-transform: uppercase;
+            background: rgba(75,77,57,0.08); color: rgba(75,77,57,0.55);
+            padding: 3px 9px; border-radius: 20px;
+        }
+        .service-description {
+            font-family: 'Lato', sans-serif; font-size: 0.9rem;
+            color: #555; line-height: 1.65; margin: 0;
+        }
 
         /* ══════════════════════════════
            REVIEWS
@@ -401,7 +372,6 @@
         .reviews-heading em { font-style: normal; font-weight: 700; }
         .reviews-stars { display: flex; gap: 5px; justify-content: center; }
         .reviews-stars svg { width: 20px; height: 20px; }
-
         .reviews-quote-wrap {
             position: relative; width: 100%; min-height: 150px;
             display: flex; align-items: center; justify-content: center;
@@ -515,11 +485,8 @@
             transition: color 0.25s ease, border-color 0.25s ease;
         }
         .contact-email-note a:hover { color: #EDE6D4; border-color: #EDE6D4; }
-
-        /* Form */
         .contact-form { width: 100%; max-width: 620px; }
         .contact-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
         .contact-field-wrap { position: relative; flex: 1; }
         .contact-field-wrap input { width: 100%; }
         .contact-field-wrap--phone { flex: 1; display: flex; align-items: stretch; }
@@ -558,7 +525,6 @@
             background: #d9d1b8; transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(237,230,212,0.2);
         }
-
         .contact-phone-row { display: flex; margin-bottom: 14px; }
         .contact-phone-code {
             min-width: 100px; flex-shrink: 0; padding: 16px 12px;
@@ -607,11 +573,7 @@
             transition: color 0.3s ease;
         }
         .footer-ig:hover { color: #EDE6D4; }
-
-        /* 2-column link grid — NO <nav>, NO Services column */
-        .footer-links {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
-        }
+        .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         .footer-col { display: flex; flex-direction: column; gap: 10px; }
         .footer-col-title {
             font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 400;
@@ -624,7 +586,6 @@
             transition: color 0.25s ease; line-height: 1.5;
         }
         .footer-col a:hover { color: #EDE6D4; }
-
         .footer-bar {
             border-top: 1px solid rgba(237,230,212,0.08); padding: 22px 60px;
             display: flex; justify-content: space-between; align-items: center;
@@ -693,7 +654,8 @@
             .services-image-side { min-height: 50vh; order: 1; }
             .services-content-side { padding: 60px 30px; order: 2; }
             .services-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .service-card { padding: 25px; }
+            .service-card { padding: 20px 22px; }
+            .service-card:hover:not(.active) { transform: none; }
             .reviews-section { padding: 80px 28px; }
             .reviews-quote-wrap { min-height: 200px; }
             .reviews-quote-wrap::before { font-size: 6rem; top: -10px; }
@@ -792,114 +754,109 @@
         </section>
 
         <!-- Services -->
-<section class="services" id="services">
-    <div class="services-container">
+        <section class="services" id="services">
+            <div class="services-container">
 
-        <div class="services-image-side">
-            <div class="service-image active" data-service="swedish">
-                <img src="swedish-massage.jpg" alt="Swedish Massage" width="900" height="1200" loading="lazy">
-            </div>
-            <div class="service-image" data-service="deep-tissue">
-                <img src="deep-tissue-massage.jpg" alt="Deep Tissue Massage" width="900" height="1200" loading="lazy">
-            </div>
-            <div class="service-image" data-service="sports">
-                <img src="sports-massage.jpg" alt="Sports Massage" width="900" height="1200" loading="lazy">
-            </div>
-            <div class="service-image" data-service="aromatherapy">
-                <img src="aromatherapy-massage.jpg" alt="Aromatherapy Massage" width="900" height="1200" loading="lazy">
-            </div>
-            <div class="service-image" data-service="cupping">
-                <img src="cupping-therapy.jpg" alt="Cupping Therapy" width="900" height="1200" loading="lazy">
-            </div>
-            <div class="image-overlay"></div>
-        </div>
-
-        <div class="services-content-side">
-            <div class="services-header">
-                <h2 class="services-title">Our Services</h2>
-                <div class="services-nav">
-    <button class="nav-arrow prev-arrow" aria-label="Previous page">
-        &#8249;
-    </button>
-    <span class="services-page-label" id="servicesPageLabel">Core Treatments</span>
-    <button class="nav-arrow next-arrow" aria-label="Next page">
-        &#8250;
-    </button>
-</div>
-            </div>
-
-            <div class="services-slider">
-
-                <!-- Page 1: Core treatments -->
-                <div class="services-page active">
-                    <div class="service-card active" data-service="swedish">
-                        <div class="service-header-row">
-                            <h3 class="service-card-name">Swedish Massage</h3>
-                            <span class="service-price">€100</span>
-                        </div>
-                        <div class="service-meta-row">
-                            <p class="service-duration">60 minutes</p>
-                        </div>
-                        <p class="service-description">Gentle, flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
+                <div class="services-image-side">
+                    <div class="service-image active" data-service="swedish">
+                        <img src="swedish-massage.jpg" alt="Swedish Massage" width="900" height="1200" loading="lazy">
                     </div>
-
-                    <div class="service-card" data-service="deep-tissue">
-                        <div class="service-header-row">
-                            <h3 class="service-card-name">Deep Tissue Massage</h3>
-                            <span class="service-price">€120</span>
-                        </div>
-                        <div class="service-meta-row">
-                            <p class="service-duration">60 minutes</p>
-                        </div>
-                        <p class="service-description">Targeted pressure to release chronic muscle tension and deep-seated knots. Ideal for those who need serious therapeutic work.</p>
+                    <div class="service-image" data-service="deep-tissue">
+                        <img src="deep-tissue-massage.jpg" alt="Deep Tissue Massage" width="900" height="1200" loading="lazy">
                     </div>
-
-                    <div class="service-card" data-service="sports">
-                        <div class="service-header-row">
-                            <h3 class="service-card-name">Sports Massage</h3>
-                            <span class="service-price">€90</span>
-                        </div>
-                        <div class="service-meta-row">
-                            <p class="service-duration">60 minutes</p>
-                        </div>
-                        <p class="service-description">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles and post-workout relief.</p>
+                    <div class="service-image" data-service="sports">
+                        <img src="sports-massage.jpg" alt="Sports Massage" width="900" height="1200" loading="lazy">
                     </div>
+                    <div class="service-image" data-service="aromatherapy">
+                        <img src="aromatherapy-massage.jpg" alt="Aromatherapy Massage" width="900" height="1200" loading="lazy">
+                    </div>
+                    <div class="service-image" data-service="cupping">
+                        <img src="cupping-therapy.jpg" alt="Cupping Therapy" width="900" height="1200" loading="lazy">
+                    </div>
+                    <div class="image-overlay"></div>
                 </div>
 
-                <!-- Page 2: Add-on therapies -->
-                <div class="services-page">
-                    <p class="services-addon-label">Add-on Therapies</p>
-
-                    <div class="service-card" data-service="aromatherapy">
-                        <div class="service-header-row">
-                            <h3 class="service-card-name">Aromatherapy</h3>
-                            <span class="service-price">€110</span>
+                <div class="services-content-side">
+                    <div class="services-header">
+                        <h2 class="services-title">Our Services</h2>
+                        <div class="services-nav">
+                            <button class="nav-arrow prev-arrow" aria-label="Previous services">&#8249;</button>
+                            <span class="services-page-label" id="servicesPageLabel">Core Treatments</span>
+                            <button class="nav-arrow next-arrow" aria-label="Next services">&#8250;</button>
                         </div>
-                        <div class="service-meta-row">
-                            <p class="service-duration">60 minutes</p>
-                            <span class="service-badge">Add-on</span>
-                        </div>
-                        <p class="service-description">Essential oils blended with gentle massage techniques to calm the mind, reduce stress, and restore balance to body and spirit.</p>
                     </div>
 
-                    <div class="service-card" data-service="cupping">
-                        <div class="service-header-row">
-                            <h3 class="service-card-name">Cupping Therapy</h3>
-                            <span class="service-price">€90</span>
-                        </div>
-                        <div class="service-meta-row">
-                            <p class="service-duration">45 minutes</p>
-                            <span class="service-badge">Add-on</span>
-                        </div>
-                        <p class="service-description">Traditional suction cups lift and decompress tissue to release fascia, improve circulation, and draw out deep muscular tension.</p>
-                    </div>
-                </div>
+                    <div class="services-slider">
 
-            </div><!-- /.services-slider -->
-        </div><!-- /.services-content-side -->
-    </div><!-- /.services-container -->
-</section>
+                        <!-- Page 1: Core treatments -->
+                        <div class="services-page active">
+                            <div class="service-card active" data-service="swedish">
+                                <div class="service-header-row">
+                                    <h3 class="service-card-name">Swedish Massage</h3>
+                                    <span class="service-price">€100</span>
+                                </div>
+                                <div class="service-meta-row">
+                                    <p class="service-duration">60 minutes</p>
+                                </div>
+                                <p class="service-description">Gentle, flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
+                            </div>
 
+                            <div class="service-card" data-service="deep-tissue">
+                                <div class="service-header-row">
+                                    <h3 class="service-card-name">Deep Tissue Massage</h3>
+                                    <span class="service-price">€120</span>
+                                </div>
+                                <div class="service-meta-row">
+                                    <p class="service-duration">60 minutes</p>
+                                </div>
+                                <p class="service-description">Targeted pressure to release chronic muscle tension and deep-seated knots. Ideal for those who need serious therapeutic work.</p>
+                            </div>
+
+                            <div class="service-card" data-service="sports">
+                                <div class="service-header-row">
+                                    <h3 class="service-card-name">Sports Massage</h3>
+                                    <span class="service-price">€90</span>
+                                </div>
+                                <div class="service-meta-row">
+                                    <p class="service-duration">60 minutes</p>
+                                </div>
+                                <p class="service-description">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles and post-workout relief.</p>
+                            </div>
+                        </div>
+
+                        <!-- Page 2: Add-on therapies -->
+                        <div class="services-page">
+                            <p class="services-addon-label">Add-on Therapies</p>
+
+                            <div class="service-card" data-service="aromatherapy">
+                                <div class="service-header-row">
+                                    <h3 class="service-card-name">Aromatherapy</h3>
+                                    <span class="service-price">€110</span>
+                                </div>
+                                <div class="service-meta-row">
+                                    <p class="service-duration">60 minutes</p>
+                                    <span class="service-badge">Add-on</span>
+                                </div>
+                                <p class="service-description">Essential oils blended with gentle massage techniques to calm the mind, reduce stress, and restore balance to body and spirit.</p>
+                            </div>
+
+                            <div class="service-card" data-service="cupping">
+                                <div class="service-header-row">
+                                    <h3 class="service-card-name">Cupping Therapy</h3>
+                                    <span class="service-price">€90</span>
+                                </div>
+                                <div class="service-meta-row">
+                                    <p class="service-duration">45 minutes</p>
+                                    <span class="service-badge">Add-on</span>
+                                </div>
+                                <p class="service-description">Traditional suction cups lift and decompress tissue to release fascia, improve circulation, and draw out deep muscular tension.</p>
+                            </div>
+                        </div>
+
+                    </div><!-- /.services-slider -->
+                </div><!-- /.services-content-side -->
+            </div><!-- /.services-container -->
+        </section>
 
         <!-- Reviews -->
         <section class="reviews-section fade-in-up" id="reviews">
@@ -959,9 +916,8 @@
                     WhatsApp
                 </a>
             </div>
-            <p class="contact-email-note">
-                Or email us at <a href="mailto:hello@myokomassage.com">hello@myokomassage.com</a>
-            </p>
+            <p class="contact-email-note">Or email us at <a href="mailto:hello@myokomassage.com">hello@myokomassage.com</a></p>
+
             <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <div class="contact-form-row">
                     <div class="contact-field-wrap">
@@ -996,96 +952,52 @@
                             <option value="+93">AF +93</option>
                             <option value="+355">AL +355</option>
                             <option value="+213">DZ +213</option>
-                            <option value="+376">AD +376</option>
-                            <option value="+244">AO +244</option>
                             <option value="+54">AR +54</option>
                             <option value="+374">AM +374</option>
+                            <option value="+61">AU +61</option>
+                            <option value="+43">AT +43</option>
+                            <option value="+32">BE +32</option>
+                            <option value="+55">BR +55</option>
+                            <option value="+86">CN +86</option>
+                            <option value="+57">CO +57</option>
+                            <option value="+385">HR +385</option>
+                            <option value="+357">CY +357</option>
+                            <option value="+420">CZ +420</option>
+                            <option value="+20">EG +20</option>
+                            <option value="+358">FI +358</option>
+                            <option value="+995">GE +995</option>
+                            <option value="+852">HK +852</option>
+                            <option value="+36">HU +36</option>
+                            <option value="+91">IN +91</option>
+                            <option value="+62">ID +62</option>
+                            <option value="+353">IE +353</option>
+                            <option value="+81">JP +81</option>
                             <option value="+962">JO +962</option>
                             <option value="+7">KZ +7</option>
                             <option value="+254">KE +254</option>
                             <option value="+82">KR +82</option>
                             <option value="+965">KW +965</option>
-                            <option value="+996">KG +996</option>
-                            <option value="+856">LA +856</option>
-                            <option value="+371">LV +371</option>
-                            <option value="+961">LB +961</option>
-                            <option value="+266">LS +266</option>
-                            <option value="+231">LR +231</option>
-                            <option value="+218">LY +218</option>
-                            <option value="+423">LI +423</option>
-                            <option value="+370">LT +370</option>
-                            <option value="+352">LU +352</option>
-                            <option value="+853">MO +853</option>
-                            <option value="+389">MK +389</option>
-                            <option value="+261">MG +261</option>
-                            <option value="+265">MW +265</option>
                             <option value="+60">MY +60</option>
-                            <option value="+960">MV +960</option>
-                            <option value="+223">ML +223</option>
-                            <option value="+356">MT +356</option>
-                            <option value="+222">MR +222</option>
-                            <option value="+230">MU +230</option>
                             <option value="+52">MX +52</option>
-                            <option value="+373">MD +373</option>
-                            <option value="+377">MC +377</option>
-                            <option value="+976">MN +976</option>
-                            <option value="+382">ME +382</option>
                             <option value="+212">MA +212</option>
-                            <option value="+258">MZ +258</option>
-                            <option value="+95">MM +95</option>
-                            <option value="+264">NA +264</option>
-                            <option value="+977">NP +977</option>
                             <option value="+64">NZ +64</option>
-                            <option value="+505">NI +505</option>
-                            <option value="+227">NE +227</option>
                             <option value="+234">NG +234</option>
-                            <option value="+968">OM +968</option>
                             <option value="+92">PK +92</option>
-                            <option value="+507">PA +507</option>
-                            <option value="+675">PG +675</option>
-                            <option value="+595">PY +595</option>
-                            <option value="+51">PE +51</option>
                             <option value="+63">PH +63</option>
                             <option value="+48">PL +48</option>
                             <option value="+351">PT +351</option>
                             <option value="+974">QA +974</option>
                             <option value="+40">RO +40</option>
-                            <option value="+250">RW +250</option>
                             <option value="+966">SA +966</option>
-                            <option value="+221">SN +221</option>
                             <option value="+381">RS +381</option>
-                            <option value="+232">SL +232</option>
                             <option value="+65">SG +65</option>
-                            <option value="+421">SK +421</option>
-                            <option value="+386">SI +386</option>
-                            <option value="+252">SO +252</option>
                             <option value="+27">ZA +27</option>
-                            <option value="+211">SS +211</option>
                             <option value="+94">LK +94</option>
-                            <option value="+249">SD +249</option>
-                            <option value="+597">SR +597</option>
-                            <option value="+268">SZ +268</option>
-                            <option value="+963">SY +963</option>
                             <option value="+886">TW +886</option>
-                            <option value="+992">TJ +992</option>
-                            <option value="+255">TZ +255</option>
                             <option value="+66">TH +66</option>
-                            <option value="+228">TG +228</option>
-                            <option value="+676">TO +676</option>
-                            <option value="+1-868">TT +1-868</option>
-                            <option value="+216">TN +216</option>
                             <option value="+90">TR +90</option>
-                            <option value="+993">TM +993</option>
-                            <option value="+256">UG +256</option>
                             <option value="+380">UA +380</option>
-                            <option value="+598">UY +598</option>
-                            <option value="+998">UZ +998</option>
-                            <option value="+678">VU +678</option>
-                            <option value="+58">VE +58</option>
                             <option value="+84">VN +84</option>
-                            <option value="+967">YE +967</option>
-                            <option value="+260">ZM +260</option>
-                            <option value="+263">ZW +263</option>
                         </optgroup>
                     </select>
                     <div class="contact-field-wrap contact-field-wrap--phone">
@@ -1129,7 +1041,7 @@
             </div>
         </div>
         <div class="footer-bar">
-            <span>© 2026 Myōko Massage · All rights reserved.</span>
+            <span>&copy; 2026 Myōko Massage &middot; All rights reserved.</span>
             <div class="footer-bar-links">
                 <a href="privacy-policy.html">Privacy Policy</a>
                 <a href="terms.html">Terms of Use</a>
@@ -1140,9 +1052,9 @@
 
     <script>
         /* ── Navbar scroll ── */
-        const mainNav = document.getElementById('mainNav');
+        const nav = document.getElementById('mainNav');
         window.addEventListener('scroll', () => {
-            mainNav.classList.toggle('scrolled', window.scrollY > 50);
+            nav.classList.toggle('scrolled', window.scrollY > 50);
         }, { passive: true });
 
         /* ── Menu toggle ── */
@@ -1152,7 +1064,7 @@
         function closeMenu() {
             menuOverlay.classList.remove('open');
             menuToggle.classList.remove('open');
-            mainNav.classList.remove('menu-open');
+            nav.classList.remove('menu-open');
             menuOverlay.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
         }
@@ -1160,12 +1072,14 @@
         menuToggle.addEventListener('click', () => {
             const isOpen = menuOverlay.classList.toggle('open');
             menuToggle.classList.toggle('open', isOpen);
-            mainNav.classList.toggle('menu-open', isOpen);
+            nav.classList.toggle('menu-open', isOpen);
             menuOverlay.setAttribute('aria-hidden', String(!isOpen));
             document.body.style.overflow = isOpen ? 'hidden' : '';
         });
 
-        document.querySelectorAll('.overlay-nav-link').forEach(l => l.addEventListener('click', closeMenu));
+        document.querySelectorAll('.overlay-nav-link').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
 
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && menuOverlay.classList.contains('open')) {
@@ -1189,57 +1103,71 @@
 
         /* ── Services ── */
         (function initServices() {
-            const allCards  = document.querySelectorAll('.service-card');
-            const allImages = document.querySelectorAll('.service-image');
-            const pages     = document.querySelectorAll('.services-page');
-            const prevBtn   = document.querySelector('.prev-arrow');
-            const nextBtn   = document.querySelector('.next-arrow');
-            let currentPage = 0;
+            const allCards   = document.querySelectorAll('.service-card');
+            const allImages  = document.querySelectorAll('.service-image');
+            const pages      = document.querySelectorAll('.services-page');
+            const prevBtn    = document.querySelector('.prev-arrow');
+            const nextBtn    = document.querySelector('.next-arrow');
+            const pageLabel  = document.getElementById('servicesPageLabel');
+            const pageLabels = ['Core Treatments', 'Add-on Therapies'];
+            let currentPage  = 0;
 
-            function setImage(name) {
-                allImages.forEach(img => img.classList.toggle('active', img.dataset.service === name));
+            function setImage(serviceName) {
+                allImages.forEach(img => {
+                    img.classList.toggle('active', img.dataset.service === serviceName);
+                });
             }
+
             function updateArrows() {
                 prevBtn.disabled = currentPage === 0;
                 nextBtn.disabled = currentPage === pages.length - 1;
             }
-            const pageLabels = ['Core Treatments', 'Add-on Therapies'];
 
-function showPage(idx) {
-    pages.forEach((p, i) => p.classList.toggle('active', i === idx));
-    // update label
-    document.getElementById('servicesPageLabel').textContent = pageLabels[idx];
-    const first = pages[idx].querySelector('.service-card');
-    if (first) {
-        allCards.forEach(c => c.classList.remove('active'));
-        first.classList.add('active');
-        setImage(first.dataset.service);
-    }
-    updateArrows();
-}
+            function showPage(idx) {
+                pages.forEach((p, i) => p.classList.toggle('active', i === idx));
+                if (pageLabel) pageLabel.textContent = pageLabels[idx] || '';
+                const first = pages[idx].querySelector('.service-card');
+                if (first) {
+                    allCards.forEach(c => c.classList.remove('active'));
+                    first.classList.add('active');
+                    setImage(first.dataset.service);
+                }
+                updateArrows();
+            }
 
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 0) showPage(--currentPage);
+            });
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < pages.length - 1) showPage(++currentPage);
+            });
 
-            prevBtn.addEventListener('click', () => { if (currentPage > 0) showPage(--currentPage); });
-            nextBtn.addEventListener('click', () => { if (currentPage < pages.length - 1) showPage(++currentPage); });
-
-           // Mobile: single tap selects immediately
-allCards.forEach(card => {
-    card.addEventListener('touchstart', function(e) {
-        e.preventDefault(); // block ghost mouseenter
-        allCards.forEach(c => c.classList.remove('active'));
-        this.classList.add('active');
-        setImage(this.dataset.service);
-    }, { passive: false });
-});
-                card.addEventListener('mouseenter', function () {
+            /* Desktop: click + hover */
+            allCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    allCards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    setImage(this.dataset.service);
+                });
+                card.addEventListener('mouseenter', function() {
                     if (!this.classList.contains('active')) setImage(this.dataset.service);
                 });
-                card.addEventListener('mouseleave', function () {
+                card.addEventListener('mouseleave', function() {
                     if (!this.classList.contains('active')) {
                         const active = document.querySelector('.service-card.active');
                         if (active) setImage(active.dataset.service);
                     }
                 });
+            });
+
+            /* Mobile/tablet: single tap activates immediately */
+            allCards.forEach(card => {
+                card.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    allCards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    setImage(this.dataset.service);
+                }, { passive: false });
             });
 
             updateArrows();
@@ -1282,8 +1210,11 @@ allCards.forEach(card => {
 
             new IntersectionObserver(entries => {
                 entries.forEach(e => {
-                    if (e.isIntersecting) timer = setTimeout(() => goTo(current + 1), INTERVAL);
-                    else clearTimeout(timer);
+                    if (e.isIntersecting) {
+                        timer = setTimeout(() => goTo(current + 1), INTERVAL);
+                    } else {
+                        clearTimeout(timer);
+                    }
                 });
             }, { threshold: 0.3 }).observe(document.getElementById('reviews'));
         })();
