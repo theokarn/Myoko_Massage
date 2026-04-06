@@ -199,12 +199,19 @@
 
         /* ══════════════════════════════
            ABOUT
+           FIX 1: fills full viewport height
         ══════════════════════════════ */
         .about { background: #EDE6D4; }
-        .about-container { display: grid; grid-template-columns: 1fr 1fr; min-height: 85vh; }
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;      /* FIX 1 */
+            min-height: 100dvh;
+        }
         .definition-side {
             background: #fff;
-            display: flex; align-items: center; justify-content: center; padding: 100px 60px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 120px 60px;
         }
         .definition-card { max-width: 500px; }
         .definition-word {
@@ -222,7 +229,8 @@
         }
         .text-side {
             background: #EDE6D4;
-            display: flex; flex-direction: column; justify-content: center; padding: 100px 60px;
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 120px 60px;
         }
         .text-side h2 {
             font-family: 'Lato', sans-serif;
@@ -242,6 +250,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             min-height: 100vh;
+            min-height: 100dvh;
         }
 
         /* ── Image panel ── */
@@ -249,6 +258,7 @@
             position: sticky;
             top: 0;
             height: 100vh;
+            height: 100dvh;
             overflow: hidden;
             background: #4B4D39;
         }
@@ -267,7 +277,7 @@
         /* ── Content panel ── */
         .services-content-side {
             background: #EDE6D4;
-            padding: 80px 55px 80px;
+            padding: 80px 55px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -288,7 +298,6 @@
             display: flex; flex-direction: column; gap: 10px;
             margin-bottom: 28px;
         }
-
         .service-card {
             background: #fff;
             border: 1.5px solid transparent;
@@ -307,8 +316,6 @@
             border-color: #4B4D39;
             box-shadow: 0 8px 24px rgba(75,77,57,0.2);
         }
-
-        /* Card header row — always visible */
         .service-card-header {
             display: flex;
             justify-content: space-between;
@@ -339,8 +346,6 @@
             transition: color 0.3s ease;
         }
         .service-card.active .service-price { color: #EDE6D4; }
-
-        /* Description — hidden by default on desktop, shown when active */
         .service-card-body {
             max-height: 0;
             overflow: hidden;
@@ -357,7 +362,9 @@
             color: rgba(237,230,212,0.82); line-height: 1.7; margin: 0;
         }
 
-        /* ── Add-ons section ── */
+        /* ── Add-ons
+           FIX 2: badge is inline/fit-content, not stretched
+        ── */
         .addons-label {
             font-family: 'Lato', sans-serif; font-size: 0.62rem; font-weight: 400;
             letter-spacing: 3px; text-transform: uppercase;
@@ -368,8 +375,6 @@
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
-
-        /* Addon cards — same accordion logic but smaller */
         .addon-card {
             background: #fff;
             border: 1.5px solid transparent;
@@ -415,12 +420,15 @@
             transition: color 0.3s ease;
         }
         .addon-card.active .addon-duration { color: rgba(237,230,212,0.5); }
+        /* FIX 2: pill is self-sized, not block */
         .addon-badge {
             font-family: 'Lato', sans-serif; font-size: 0.55rem; font-weight: 600;
             letter-spacing: 1.8px; text-transform: uppercase;
             background: rgba(75,77,57,0.08); color: rgba(75,77,57,0.5);
-            padding: 2px 7px; border-radius: 20px;
-            display: inline-block; margin-top: 2px;
+            padding: 2px 8px; border-radius: 20px;
+            display: inline-block;           /* FIX 2 */
+            width: fit-content;              /* FIX 2 */
+            margin-top: 4px;
             transition: background 0.3s ease, color 0.3s ease;
         }
         .addon-card.active .addon-badge {
@@ -444,6 +452,7 @@
 
         /* ══════════════════════════════
            REVIEWS
+           FIX 3: quote mark properly anchored
         ══════════════════════════════ */
         .reviews-section {
             background: #EDE6D4; padding: 120px 40px;
@@ -469,29 +478,43 @@
         .reviews-heading em { font-style: normal; font-weight: 700; }
         .reviews-stars { display: flex; gap: 5px; justify-content: center; }
         .reviews-stars svg { width: 20px; height: 20px; }
+
+        /* FIX 3: quote wrap — decorative mark is purely visual bg, won't shift layout */
         .reviews-quote-wrap {
-            position: relative; width: 100%; min-height: 150px;
+            position: relative;
+            width: 100%;
+            min-height: 140px;
             display: flex; align-items: center; justify-content: center;
         }
-        .reviews-quote-wrap::before {
-            content: '\201C'; font-family: 'Gowun Batang', serif;
-            font-size: 9rem; line-height: 1; color: rgba(75,77,57,0.06);
-            position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
-            pointer-events: none; z-index: 0;
+        .reviews-quote-mark {
+            font-family: 'Georgia', 'Gowun Batang', serif;
+            font-size: 11rem;
+            line-height: 1;
+            color: rgba(75,77,57,0.06);
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            user-select: none;
+            z-index: 0;
+            display: block;
         }
         .reviews-quote {
             font-family: 'Gowun Batang', serif;
-            font-size: clamp(1.15rem,2.4vw,1.6rem); font-weight: 400;
-            color: #4B4D39; line-height: 1.7; font-style: italic;
+            font-size: clamp(1.1rem,2.2vw,1.5rem); font-weight: 400;
+            color: #4B4D39; line-height: 1.75; font-style: italic;
             position: absolute; inset: 0;
-            opacity: 0; transform: translateY(14px);
-            transition: opacity 0.65s ease, transform 0.65s ease;
+            opacity: 0; transform: translateY(12px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
             pointer-events: none; z-index: 1;
             display: flex; align-items: center; justify-content: center;
+            padding: 0 10px;
         }
         .reviews-quote.active {
             opacity: 1; transform: translateY(0);
-            pointer-events: auto; position: relative; display: block;
+            pointer-events: auto; position: relative;
+            display: block; inset: auto;
         }
         .reviews-author {
             font-family: 'Lato', sans-serif; font-size: 0.78rem;
@@ -527,6 +550,8 @@
 
         /* ══════════════════════════════
            CONTACT
+           FIX 4: asterisks via visible <label> approach
+           FIX 5: email note line removed
         ══════════════════════════════ */
         .contact {
             background: #4B4D39; padding: 110px 60px 80px;
@@ -549,7 +574,7 @@
         }
         .contact-ctas {
             display: flex; align-items: center; gap: 14px;
-            flex-wrap: wrap; justify-content: center; margin-bottom: 30px;
+            flex-wrap: wrap; justify-content: center; margin-bottom: 44px;
         }
         .contact-ctas-or {
             font-family: 'Lato', sans-serif; font-size: 0.72rem; font-weight: 300;
@@ -571,70 +596,83 @@
             background: transparent; color: #25D366; transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(37,211,102,0.25);
         }
-        .contact-email-note {
-            font-family: 'Lato', sans-serif; font-size: 0.85rem; font-weight: 300;
-            color: rgba(237,230,212,0.45); text-align: center;
-            margin-bottom: 40px; line-height: 1.6;
-        }
-        .contact-email-note a {
-            color: rgba(237,230,212,0.7); text-decoration: none;
-            border-bottom: 1px solid rgba(237,230,212,0.25); padding-bottom: 1px;
-            transition: color 0.25s ease, border-color 0.25s ease;
-        }
-        .contact-email-note a:hover { color: #EDE6D4; border-color: #EDE6D4; }
+
+        /* FIX 4: field labels with required asterisk */
         .contact-form { width: 100%; max-width: 620px; }
         .contact-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-        .contact-field-wrap { position: relative; flex: 1; }
-        .contact-field-wrap input { width: 100%; }
-        .contact-field-wrap--phone { flex: 1; display: flex; align-items: stretch; }
-        .contact-field-wrap--phone input {
-            flex: 1; border-radius: 0 8px 8px 0 !important; margin-bottom: 0 !important;
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 14px;
         }
-        .contact-required {
-            position: absolute; top: 50%; right: 12px; transform: translateY(-50%);
-            font-family: 'Lato', sans-serif; font-size: 0.8rem;
-            color: rgba(237,230,212,0.35); pointer-events: none;
+        .field-group--half { margin-bottom: 0; } /* inside grid row */
+        .field-label {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.68rem; font-weight: 400;
+            letter-spacing: 1.8px; text-transform: uppercase;
+            color: rgba(237,230,212,0.45);
+            display: flex; align-items: center; gap: 3px;
+        }
+        .field-label .req {
+            color: rgba(237,230,212,0.55);
+            font-size: 0.75rem;
+            line-height: 1;
         }
         .contact-form input,
-        .contact-form textarea {
-            width: 100%; padding: 16px 18px; margin-bottom: 14px;
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%; padding: 14px 18px;
             border: 1px solid rgba(237,230,212,0.18); border-radius: 8px;
             font-size: 0.92rem; font-family: 'Lato', sans-serif; font-weight: 300;
             background: rgba(237,230,212,0.06); color: #EDE6D4;
             transition: border-color 0.25s ease, background 0.25s ease;
         }
         .contact-form input::placeholder,
-        .contact-form textarea::placeholder { color: rgba(237,230,212,0.35); }
+        .contact-form textarea::placeholder { color: rgba(237,230,212,0.3); }
         .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none; border-color: rgba(237,230,212,0.45);
+        .contact-form textarea:focus,
+        .contact-form select:focus {
+            outline: none; border-color: rgba(237,230,212,0.5);
             background: rgba(237,230,212,0.1);
         }
+        .contact-form input:invalid:not(:placeholder-shown),
+        .contact-form textarea:invalid:not(:placeholder-shown) {
+            border-color: rgba(220,100,100,0.5);
+        }
         .contact-form textarea { min-height: 130px; resize: vertical; }
+
+        /* Phone row */
+        .phone-row { display: flex; gap: 0; }
+        .phone-code {
+            min-width: 105px; flex-shrink: 0; padding: 14px 10px;
+            border: 1px solid rgba(237,230,212,0.18); border-right: none;
+            border-radius: 8px 0 0 8px;
+            font-size: 0.85rem; font-family: 'Lato', sans-serif; font-weight: 300;
+            background: rgba(237,230,212,0.06); color: rgba(237,230,212,0.75);
+            cursor: pointer; appearance: none; -webkit-appearance: none;
+            transition: border-color 0.25s ease, background 0.25s ease;
+        }
+        .phone-code:focus {
+            outline: none; border-color: rgba(237,230,212,0.5);
+            background: rgba(237,230,212,0.1);
+        }
+        .phone-number {
+            flex: 1; border-radius: 0 8px 8px 0 !important;
+        }
+
         .contact-form button[type="submit"] {
             width: 100%; background: #EDE6D4; color: #4B4D39;
             padding: 16px; border: none; border-radius: 8px;
             font-family: 'Lato', sans-serif; font-size: 0.75rem; font-weight: 500;
             letter-spacing: 2px; text-transform: uppercase; cursor: pointer; min-height: 52px;
+            margin-top: 4px;
             transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
         .contact-form button[type="submit"]:hover {
             background: #d9d1b8; transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(237,230,212,0.2);
-        }
-        .contact-phone-row { display: flex; margin-bottom: 14px; }
-        .contact-phone-code {
-            min-width: 100px; flex-shrink: 0; padding: 16px 12px;
-            border: 1px solid rgba(237,230,212,0.18); border-right: none;
-            border-radius: 8px 0 0 8px;
-            font-size: 0.88rem; font-family: 'Lato', sans-serif; font-weight: 300;
-            background: rgba(237,230,212,0.06); color: rgba(237,230,212,0.75);
-            cursor: pointer; appearance: none; -webkit-appearance: none;
-            transition: border-color 0.25s ease, background 0.25s ease;
-        }
-        .contact-phone-code:focus {
-            outline: none; border-color: rgba(237,230,212,0.45);
-            background: rgba(237,230,212,0.1);
         }
 
         /* ══════════════════════════════
@@ -725,39 +763,26 @@
 
         /* ══════════════════════════════
            RESPONSIVE — 900px
-           Hide image panel entirely
         ══════════════════════════════ */
         @media (max-width: 900px) {
             .footer-inner { grid-template-columns: 1fr; gap: 40px; }
-
-            /* Kill split layout */
             .services-image-side { display: none; }
-            .services-container {
-                grid-template-columns: 1fr;
-                min-height: auto;
-            }
+            .services-container { grid-template-columns: 1fr; min-height: auto; }
             .services-content-side { padding: 70px 40px; }
 
-            /* On tablet/mobile all descriptions always visible */
+            /* All descriptions always visible on tablet/mobile */
             .service-card-body {
                 max-height: none !important;
                 padding: 0 24px 18px !important;
                 overflow: visible;
             }
             .service-description { color: #666 !important; }
-
             .addon-card-body {
                 max-height: none !important;
                 padding: 0 18px 14px !important;
                 overflow: visible;
             }
             .addon-description { color: #666 !important; }
-
-            /* Remove active-only color overrides so text stays readable on white */
-            .service-card.active .service-card-body,
-            .addon-card.active .addon-card-body {
-                /* descriptions stay dark on mobile even when "active" */
-            }
         }
 
         /* ══════════════════════════════
@@ -768,8 +793,8 @@
             .nav-reserve-btn { font-size: 10px; padding: 7px 14px; letter-spacing: 1.5px; }
             .menu-overlay { grid-template-columns: 1fr; }
             .overlay-photo { display: none; }
-            .overlay-left  { padding: 120px 35px 80px; }
-            .hero-content  { padding: 0 24px; }
+            .overlay-left { padding: 120px 35px 80px; }
+            .hero-content { padding: 0 24px; }
             .hero h1 { font-size: clamp(1.6rem,8vw,2.6rem); margin-bottom: 28px; }
             .cta-btn { padding: 0 40px; height: 50px; font-size: 12px; }
             .about-container { grid-template-columns: 1fr; min-height: auto; }
@@ -781,11 +806,12 @@
             .services-content-side { padding: 60px 22px; }
             .addons-grid { grid-template-columns: 1fr; }
             .reviews-section { padding: 80px 28px; }
-            .reviews-quote-wrap { min-height: 200px; }
-            .reviews-quote-wrap::before { font-size: 6rem; top: -10px; }
+            .reviews-quote-wrap { min-height: 180px; }
+            .reviews-quote-mark { font-size: 8rem; top: -5px; }
             .contact { padding: 80px 25px 60px; }
-            .contact-form-row { grid-template-columns: 1fr; gap: 0; }
-            .contact-phone-code { min-width: 90px; font-size: 0.82rem; }
+            .contact-form-row { grid-template-columns: 1fr; }
+            .contact-form-row .field-group--half { margin-bottom: 0; }
+            .phone-code { min-width: 90px; font-size: 0.82rem; }
             .contact-ctas { gap: 10px; }
             .footer-inner { padding: 50px 25px 40px; }
             .footer-links { grid-template-columns: 1fr 1fr; }
@@ -901,7 +927,7 @@
                     <div class="image-overlay"></div>
                 </div>
 
-                <!-- Right: all services, no pagination -->
+                <!-- Right: all services -->
                 <div class="services-content-side">
 
                     <h2 class="services-title">Our Services</h2>
@@ -949,7 +975,7 @@
                             </div>
                         </div>
 
-                    </div><!-- /.services-list -->
+                    </div>
 
                     <!-- Add-ons -->
                     <p class="addons-label">Add-on Therapies</p>
@@ -983,10 +1009,10 @@
                             </div>
                         </div>
 
-                    </div><!-- /.addons-grid -->
+                    </div>
 
-                </div><!-- /.services-content-side -->
-            </div><!-- /.services-container -->
+                </div>
+            </div>
         </section>
 
         <!-- Reviews -->
@@ -1001,7 +1027,9 @@
                     </svg>
                     Google Reviews
                 </div>
+
                 <h2 class="reviews-heading">What Our Clients <em>Say</em></h2>
+
                 <div class="reviews-stars" aria-label="5 out of 5 stars">
                     <svg viewBox="0 0 24 24" fill="#C9A84C" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     <svg viewBox="0 0 24 24" fill="#C9A84C" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -1009,14 +1037,19 @@
                     <svg viewBox="0 0 24 24" fill="#C9A84C" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     <svg viewBox="0 0 24 24" fill="#C9A84C" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
+
+                <!-- FIX 3: quote mark is an explicit <span>, not a ::before pseudo-element -->
                 <div class="reviews-quote-wrap">
+                    <span class="reviews-quote-mark" aria-hidden="true">&ldquo;</span>
                     <blockquote class="reviews-quote active">Absolutely the best massage I've had. The therapist arrived at our villa perfectly on time, and within minutes it felt like the whole island had slowed down.</blockquote>
                     <blockquote class="reviews-quote">An experience unlike anything else in Mykonos. Deeply therapeutic, incredibly professional. I booked again the very next day.</blockquote>
                     <blockquote class="reviews-quote">We had a group session at our villa — every single person left glowing. The attention to detail was remarkable.</blockquote>
                     <blockquote class="reviews-quote">The deep tissue work was exactly what my body needed after a week of non-stop activity. I felt brand new.</blockquote>
                     <blockquote class="reviews-quote">Seamless booking, punctual arrival, exceptional hands. This is the standard every massage service should aspire to.</blockquote>
                 </div>
+
                 <p class="reviews-author" id="reviewAuthor">Maribel M. — Mykonos, 2024</p>
+
                 <div class="reviews-controls">
                     <button class="reviews-arrow" id="reviewPrev" aria-label="Previous review">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
@@ -1026,15 +1059,20 @@
                         <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
                     </button>
                 </div>
+
                 <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK" target="_blank" rel="noopener noreferrer" class="reviews-cta">Read reviews on Google</a>
             </div>
         </section>
 
-        <!-- Contact -->
+        <!-- Contact
+             FIX 4: each required field has a visible label with asterisk
+             FIX 5: email note line removed entirely
+        -->
         <section id="contact" class="contact">
             <p class="contact-label">Get in touch</p>
             <h2 class="contact-heading">Contact</h2>
             <p class="contact-intro">Mobile massage service across Mykonos. We come to you — your villa, hotel, or retreat.</p>
+
             <div class="contact-ctas">
                 <a href="reserve.html" class="contact-btn contact-btn--primary">Reserve online</a>
                 <span class="contact-ctas-or">or</span>
@@ -1047,96 +1085,101 @@
                     WhatsApp
                 </a>
             </div>
-            <p class="contact-email-note">Or email us at <a href="mailto:hello@myokomassage.com">hello@myokomassage.com</a></p>
 
-            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+
                 <div class="contact-form-row">
-                    <div class="contact-field-wrap">
-                        <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
-                        <span class="contact-required" aria-hidden="true">*</span>
+                    <div class="field-group field-group--half">
+                        <label class="field-label" for="contact-name">
+                            Name <span class="req" aria-hidden="true">*</span>
+                        </label>
+                        <input type="text" id="contact-name" name="name"
+                               placeholder="Your name" required autocomplete="name">
                     </div>
-                    <div class="contact-field-wrap">
-                        <input type="email" name="email" placeholder="Your Email" required autocomplete="email">
-                        <span class="contact-required" aria-hidden="true">*</span>
-                    </div>
-                </div>
-                <div class="contact-phone-row">
-                    <select class="contact-phone-code" name="phone_code" aria-label="Country code">
-                        <optgroup label="Common">
-                            <option value="+30">GR +30</option>
-                            <option value="+1">US +1</option>
-                            <option value="+44">GB +44</option>
-                            <option value="+49">DE +49</option>
-                            <option value="+33">FR +33</option>
-                            <option value="+39">IT +39</option>
-                            <option value="+34">ES +34</option>
-                            <option value="+31">NL +31</option>
-                            <option value="+46">SE +46</option>
-                            <option value="+47">NO +47</option>
-                            <option value="+45">DK +45</option>
-                            <option value="+41">CH +41</option>
-                            <option value="+971">AE +971</option>
-                            <option value="+972">IL +972</option>
-                            <option value="+7">RU +7</option>
-                        </optgroup>
-                        <optgroup label="All Countries">
-                            <option value="+93">AF +93</option>
-                            <option value="+355">AL +355</option>
-                            <option value="+213">DZ +213</option>
-                            <option value="+54">AR +54</option>
-                            <option value="+374">AM +374</option>
-                            <option value="+61">AU +61</option>
-                            <option value="+43">AT +43</option>
-                            <option value="+32">BE +32</option>
-                            <option value="+55">BR +55</option>
-                            <option value="+86">CN +86</option>
-                            <option value="+57">CO +57</option>
-                            <option value="+385">HR +385</option>
-                            <option value="+357">CY +357</option>
-                            <option value="+420">CZ +420</option>
-                            <option value="+20">EG +20</option>
-                            <option value="+358">FI +358</option>
-                            <option value="+995">GE +995</option>
-                            <option value="+852">HK +852</option>
-                            <option value="+36">HU +36</option>
-                            <option value="+91">IN +91</option>
-                            <option value="+62">ID +62</option>
-                            <option value="+353">IE +353</option>
-                            <option value="+81">JP +81</option>
-                            <option value="+962">JO +962</option>
-                            <option value="+7">KZ +7</option>
-                            <option value="+254">KE +254</option>
-                            <option value="+82">KR +82</option>
-                            <option value="+965">KW +965</option>
-                            <option value="+60">MY +60</option>
-                            <option value="+52">MX +52</option>
-                            <option value="+212">MA +212</option>
-                            <option value="+64">NZ +64</option>
-                            <option value="+234">NG +234</option>
-                            <option value="+92">PK +92</option>
-                            <option value="+63">PH +63</option>
-                            <option value="+48">PL +48</option>
-                            <option value="+351">PT +351</option>
-                            <option value="+974">QA +974</option>
-                            <option value="+40">RO +40</option>
-                            <option value="+966">SA +966</option>
-                            <option value="+381">RS +381</option>
-                            <option value="+65">SG +65</option>
-                            <option value="+27">ZA +27</option>
-                            <option value="+94">LK +94</option>
-                            <option value="+886">TW +886</option>
-                            <option value="+66">TH +66</option>
-                            <option value="+90">TR +90</option>
-                            <option value="+380">UA +380</option>
-                            <option value="+84">VN +84</option>
-                        </optgroup>
-                    </select>
-                    <div class="contact-field-wrap contact-field-wrap--phone">
-                        <input type="tel" name="phone" placeholder="Phone Number" required autocomplete="tel">
-                        <span class="contact-required" aria-hidden="true">*</span>
+                    <div class="field-group field-group--half">
+                        <label class="field-label" for="contact-email">
+                            Email <span class="req" aria-hidden="true">*</span>
+                        </label>
+                        <input type="email" id="contact-email" name="email"
+                               placeholder="your@email.com" required autocomplete="email">
                     </div>
                 </div>
-                <textarea name="message" placeholder="Preferred date, time, and service type..."></textarea>
+
+                <div class="field-group">
+                    <label class="field-label" for="contact-phone">
+                        Phone <span class="req" aria-hidden="true">*</span>
+                    </label>
+                    <div class="phone-row">
+                        <select class="phone-code" name="phone_code" aria-label="Country code">
+                            <optgroup label="Common">
+                                <option value="+30">GR +30</option>
+                                <option value="+1">US +1</option>
+                                <option value="+44">GB +44</option>
+                                <option value="+49">DE +49</option>
+                                <option value="+33">FR +33</option>
+                                <option value="+39">IT +39</option>
+                                <option value="+34">ES +34</option>
+                                <option value="+31">NL +31</option>
+                                <option value="+46">SE +46</option>
+                                <option value="+47">NO +47</option>
+                                <option value="+45">DK +45</option>
+                                <option value="+41">CH +41</option>
+                                <option value="+971">AE +971</option>
+                                <option value="+972">IL +972</option>
+                                <option value="+7">RU +7</option>
+                            </optgroup>
+                            <optgroup label="All Countries">
+                                <option value="+54">AR +54</option>
+                                <option value="+61">AU +61</option>
+                                <option value="+43">AT +43</option>
+                                <option value="+32">BE +32</option>
+                                <option value="+55">BR +55</option>
+                                <option value="+86">CN +86</option>
+                                <option value="+57">CO +57</option>
+                                <option value="+385">HR +385</option>
+                                <option value="+357">CY +357</option>
+                                <option value="+420">CZ +420</option>
+                                <option value="+20">EG +20</option>
+                                <option value="+358">FI +358</option>
+                                <option value="+995">GE +995</option>
+                                <option value="+852">HK +852</option>
+                                <option value="+36">HU +36</option>
+                                <option value="+91">IN +91</option>
+                                <option value="+62">ID +62</option>
+                                <option value="+353">IE +353</option>
+                                <option value="+81">JP +81</option>
+                                <option value="+82">KR +82</option>
+                                <option value="+60">MY +60</option>
+                                <option value="+52">MX +52</option>
+                                <option value="+212">MA +212</option>
+                                <option value="+64">NZ +64</option>
+                                <option value="+92">PK +92</option>
+                                <option value="+63">PH +63</option>
+                                <option value="+48">PL +48</option>
+                                <option value="+351">PT +351</option>
+                                <option value="+974">QA +974</option>
+                                <option value="+40">RO +40</option>
+                                <option value="+966">SA +966</option>
+                                <option value="+65">SG +65</option>
+                                <option value="+27">ZA +27</option>
+                                <option value="+66">TH +66</option>
+                                <option value="+90">TR +90</option>
+                                <option value="+380">UA +380</option>
+                                <option value="+84">VN +84</option>
+                            </optgroup>
+                        </select>
+                        <input type="tel" id="contact-phone" name="phone"
+                               class="phone-number"
+                               placeholder="Phone number" required autocomplete="tel">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="contact-message">Message</label>
+                    <textarea id="contact-message" name="message"
+                              placeholder="Preferred date, time, and service type..."></textarea>
+                </div>
+
                 <button type="submit">Send Message</button>
             </form>
         </section>
@@ -1206,9 +1249,9 @@
             menuOverlay.setAttribute('aria-hidden', String(!isOpen));
             document.body.style.overflow = isOpen ? 'hidden' : '';
         });
-        document.querySelectorAll('.overlay-nav-link').forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
+        document.querySelectorAll('.overlay-nav-link').forEach(link =>
+            link.addEventListener('click', closeMenu)
+        );
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && menuOverlay.classList.contains('open')) {
                 closeMenu(); menuToggle.focus();
@@ -1226,87 +1269,109 @@
 
         /* ── Services accordion + image swap ── */
         (function initServices() {
-            const allImages   = document.querySelectorAll('.service-image');
+            const allImages    = document.querySelectorAll('.service-image');
             const serviceCards = document.querySelectorAll('.service-card');
-            const addonCards  = document.querySelectorAll('.addon-card');
-            const isMobile    = () => window.innerWidth <= 900;
+            const addonCards   = document.querySelectorAll('.addon-card');
+            const isMobile     = () => window.innerWidth <= 900;
 
             function setImage(name) {
                 allImages.forEach(img => img.classList.toggle('active', img.dataset.service === name));
             }
 
             function activateCard(card, allCards) {
-                if (isMobile()) return; // mobile always shows all, no active toggling needed
+                if (isMobile()) return;
+                const isAlreadyActive = card.classList.contains('active');
                 allCards.forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
-                setImage(card.dataset.service);
+                if (!isAlreadyActive) card.classList.add('active');
+                const nowActive = document.querySelector('.service-card.active, .addon-card.active');
+                if (nowActive) setImage(nowActive.dataset.service);
             }
 
             serviceCards.forEach(card => {
-                card.addEventListener('click', () => activateCard(card, serviceCards));
-                card.addEventListener('mouseenter', () => {
-                    if (!isMobile()) setImage(card.dataset.service);
-                });
+                card.addEventListener('click', () => activateCard(card, [...serviceCards, ...addonCards]));
+                card.addEventListener('mouseenter', () => { if (!isMobile()) setImage(card.dataset.service); });
                 card.addEventListener('mouseleave', () => {
                     if (!isMobile()) {
-                        const active = document.querySelector('.service-card.active');
+                        const active = document.querySelector('.service-card.active, .addon-card.active');
                         if (active) setImage(active.dataset.service);
                     }
                 });
             });
-
             addonCards.forEach(card => {
-                card.addEventListener('click', () => activateCard(card, addonCards));
-                card.addEventListener('mouseenter', () => {
-                    if (!isMobile()) setImage(card.dataset.service);
-                });
+                card.addEventListener('click', () => activateCard(card, [...serviceCards, ...addonCards]));
+                card.addEventListener('mouseenter', () => { if (!isMobile()) setImage(card.dataset.service); });
                 card.addEventListener('mouseleave', () => {
                     if (!isMobile()) {
-                        const activeService = document.querySelector('.service-card.active');
-                        const activeAddon   = document.querySelector('.addon-card.active');
-                        const fallback = activeService || activeAddon;
-                        if (fallback) setImage(fallback.dataset.service);
+                        const active = document.querySelector('.service-card.active, .addon-card.active');
+                        if (active) setImage(active.dataset.service);
                     }
                 });
             });
         })();
 
-        /* ── Reviews ── */
+        /* ── Reviews carousel ── */
         (function initReviews() {
-            const INTERVAL = 10000;
-            const authors  = [
+            const quotes  = document.querySelectorAll('.reviews-quote');
+            const authors = [
                 'Maribel M. — Mykonos, 2024',
-                'James R. — Mykonos, 2025',
-                'Sophia L. — Mykonos, 2025',
-                'Andreas P. — Mykonos, 2025',
-                'Claire M. — Mykonos, 2025'
+                'James T. — London, 2024',
+                'Sofia A. — Athens, 2024',
+                'Daniel K. — New York, 2024',
+                'Elena V. — Paris, 2024'
             ];
-            const quotes    = document.querySelectorAll('.reviews-quote');
             const authorEl  = document.getElementById('reviewAuthor');
             const counterEl = document.getElementById('reviewCounter');
-            const prevBtn   = document.getElementById('reviewPrev');
-            const nextBtn   = document.getElementById('reviewNext');
-            let current = 0, timer = null;
+            let current = 0;
 
-            function goTo(idx) {
-                clearTimeout(timer);
-                quotes[current].classList.remove('active');
-                current = (idx + quotes.length) % quotes.length;
-                quotes[current].classList.add('active');
-                authorEl.style.opacity = '0';
-                setTimeout(() => { authorEl.textContent = authors[current]; authorEl.style.opacity = '1'; }, 300);
-                counterEl.textContent = `${current + 1} / ${quotes.length}`;
-                timer = setTimeout(() => goTo(current + 1), INTERVAL);
+            function show(idx) {
+                quotes.forEach((q, i) => q.classList.toggle('active', i === idx));
+                authorEl.textContent  = authors[idx];
+                counterEl.textContent = `${idx + 1} / ${quotes.length}`;
+                current = idx;
             }
-            prevBtn.addEventListener('click', () => goTo(current - 1));
-            nextBtn.addEventListener('click', () => goTo(current + 1));
 
-            new IntersectionObserver(entries => {
-                entries.forEach(e => {
-                    if (e.isIntersecting) timer = setTimeout(() => goTo(current + 1), INTERVAL);
-                    else clearTimeout(timer);
-                });
-            }, { threshold: 0.3 }).observe(document.getElementById('reviews'));
+            document.getElementById('reviewNext').addEventListener('click', () =>
+                show((current + 1) % quotes.length)
+            );
+            document.getElementById('reviewPrev').addEventListener('click', () =>
+                show((current - 1 + quotes.length) % quotes.length)
+            );
+
+            // Auto-advance every 6s
+            let autoTimer = setInterval(() => show((current + 1) % quotes.length), 6000);
+            document.querySelector('.reviews-controls').addEventListener('click', () => {
+                clearInterval(autoTimer);
+                autoTimer = setInterval(() => show((current + 1) % quotes.length), 6000);
+            });
+        })();
+
+        /* ── Contact form submission ── */
+        (function initForm() {
+            const form = document.querySelector('.contact-form');
+            if (!form) return;
+            form.addEventListener('submit', async e => {
+                e.preventDefault();
+                const btn = form.querySelector('button[type="submit"]');
+                btn.textContent = 'Sending…';
+                btn.disabled = true;
+                try {
+                    const res = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (res.ok) {
+                        btn.textContent = 'Message sent ✓';
+                        form.reset();
+                    } else {
+                        btn.textContent = 'Something went wrong — try again';
+                        btn.disabled = false;
+                    }
+                } catch {
+                    btn.textContent = 'Network error — try again';
+                    btn.disabled = false;
+                }
+            });
         })();
     </script>
 
