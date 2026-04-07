@@ -534,21 +534,11 @@
         opacity 0.24s ease,
         padding 0.42s cubic-bezier(0.23,1,0.32,1);
 }
-        .service-card-body-inner {
-            overflow: hidden;
-            padding: 0 24px;
-            transition: padding 0.45s cubic-bezier(0.23,1,0.32,1);
-        }
-
         .service-card.active .service-card-body {
     max-height: 140px;
     opacity: 1;
     padding: 0 24px 20px;
 }
-        .service-card.active .service-card-body-inner {
-            padding: 0 24px 20px;
-        }
-
         .service-description {
             font-family: 'Lato', sans-serif;
             font-size: 0.88rem;
@@ -659,21 +649,11 @@
         opacity 0.24s ease,
         padding 0.42s cubic-bezier(0.23,1,0.32,1);
 }
-        .addon-card-body-inner {
-            overflow: hidden;
-            padding: 0 18px;
-            transition: padding 0.45s cubic-bezier(0.23,1,0.32,1);
-        }
-
         .addon-card.active .addon-card-body {
     max-height: 130px;
     opacity: 1;
     padding: 0 18px 16px;
 }
-        .addon-card.active .addon-card-body-inner {
-            padding: 0 18px 16px;
-        }
-
         .addon-description {
             font-family: 'Lato', sans-serif;
             font-size: 0.82rem;
@@ -1423,50 +1403,77 @@
                     <p class="services-subtitle">Explore our experiences — tailored to your request.</p>
 
                     <div class="services-list">
-                        <div class="service-card active" data-service="swedish">
-                            <div class="service-card-header">
-                                <div class="service-card-left">
-                                    <h3 class="service-card-name">Swedish Massage</h3>
-                                    <p class="service-duration">60 minutes</p>
-                                </div>
-                                <span class="service-price">€100</span>
-                            </div>
-                            <div class="service-card-body">
-                                <div class="service-card-body-inner">
-                                    <p class="service-description">Gentle, flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
-                                </div>
-                            </div>
-                        </div>
+    <div class="service-card active" data-service="swedish">
+        <div class="service-card-header">
+            <div class="service-card-left">
+                <h3 class="service-card-name">Swedish Massage</h3>
+                <p class="service-duration">60 minutes</p>
+            </div>
+            <span class="service-price">€100</span>
+        </div>
+        <div class="service-card-body">
+            <p class="service-description">Gentle, flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
+        </div>
+    </div>
 
-                        <div class="service-card" data-service="deep-tissue">
-                            <div class="service-card-header">
-                                <div class="service-card-left">
-                                    <h3 class="service-card-name">Deep Tissue Massage</h3>
-                                    <p class="service-duration">60 minutes</p>
-                                </div>
-                                <span class="service-price">€120</span>
-                            </div>
-                            <div class="service-card-body">
-                                <div class="service-card-body-inner">
-                                    <p class="service-description">Targeted pressure to release chronic muscle tension and deep-seated knots. Ideal for those who need serious therapeutic work.</p>
-                                </div>
-                            </div>
-                        </div>
+    <div class="service-card" data-service="deep-tissue">
+        <div class="service-card-header">
+            <div class="service-card-left">
+                <h3 class="service-card-name">Deep Tissue Massage</h3>
+                <p class="service-duration">60 minutes</p>
+            </div>
+            <span class="service-price">€120</span>
+        </div>
+        <div class="service-card-body">
+            <p class="service-description">Targeted pressure to release chronic muscle tension and deep-seated knots. Ideal for those who need serious therapeutic work.</p>
+        </div>
+    </div>
 
-                        <div class="service-card" data-service="sports">
-                            <div class="service-card-header">
-                                <div class="service-card-left">
-                                    <h3 class="service-card-name">Sports Massage</h3>
-                                    <p class="service-duration">60 minutes</p>
-                                </div>
-                                <span class="service-price">€90</span>
-                            </div>
-                            <div class="service-card-body">
-                                <div class="service-card-body-inner">
-                                    <p class="service-description">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles and post-workout relief.</p>
-                                </div>
-                            </div>
-                        </div>
+    <div class="service-card" data-service="sports">
+        <div class="service-card-header">
+            <div class="service-card-left">
+                <h3 class="service-card-name">Sports Massage</h3>
+                <p class="service-duration">60 minutes</p>
+            </div>
+            <span class="service-price">€90</span>
+        </div>
+        <div class="service-card-body">
+            <p class="service-description">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles and post-workout relief.</p>
+        </div>
+    </div>
+</div>
+
+<p class="addons-label">Add-on Therapies</p>
+
+<div class="addons-grid">
+    <div class="addon-card" data-service="aromatherapy">
+        <div class="addon-card-header">
+            <div class="addon-card-top">
+                <h3 class="addon-card-name">Aromatherapy</h3>
+                <span class="addon-price">€110</span>
+            </div>
+            <p class="addon-duration">60 minutes</p>
+            <span class="addon-badge">Add-on</span>
+        </div>
+        <div class="addon-card-body">
+            <p class="addon-description">Essential oils blended with gentle massage techniques to calm the mind and restore balance.</p>
+        </div>
+    </div>
+
+    <div class="addon-card" data-service="cupping">
+        <div class="addon-card-header">
+            <div class="addon-card-top">
+                <h3 class="addon-card-name">Cupping Therapy</h3>
+                <span class="addon-price">€90</span>
+            </div>
+            <p class="addon-duration">45 minutes</p>
+            <span class="addon-badge">Add-on</span>
+        </div>
+        <div class="addon-card-body">
+            <p class="addon-description">Suction cups lift tissue to release fascia, improve circulation, and ease deep muscular tension.</p>
+        </div>
+    </div>
+</div>
                     </div>
 
                     <p class="addons-label">Add-on Therapies</p>
