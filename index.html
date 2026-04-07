@@ -453,21 +453,16 @@
             margin-bottom: 28px;
         }
 
-        .service-card,
-        .addon-card {
-            background: #fff;
-            border: 1.5px solid transparent;
-            border-radius: 10px;
-            padding: 0;
-            cursor: pointer;
-            overflow: hidden;
-            transition:
-                border-color 0.35s ease,
-                box-shadow 0.35s ease,
-                background-color 0.35s ease,
-                transform 0.35s ease;
-            will-change: transform, box-shadow, background-color;
-        }
+       .service-card {
+    background: #fff;
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    transform: translateZ(0);
+    transition: border-color 0.28s ease, box-shadow 0.28s ease, background-color 0.28s ease;
+}
 
         .service-card:hover:not(.active),
         .addon-card:hover:not(.active) {
@@ -530,11 +525,15 @@
         .service-card.active .service-price { color: #EDE6D4; }
 
         .service-card-body {
-            display: grid;
-            grid-template-rows: 0fr;
-            transition: grid-template-rows 0.45s cubic-bezier(0.23,1,0.32,1);
-        }
-
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0 24px;
+    transition:
+        max-height 0.42s cubic-bezier(0.23,1,0.32,1),
+        opacity 0.24s ease,
+        padding 0.42s cubic-bezier(0.23,1,0.32,1);
+}
         .service-card-body-inner {
             overflow: hidden;
             padding: 0 24px;
@@ -542,9 +541,10 @@
         }
 
         .service-card.active .service-card-body {
-            grid-template-rows: 1fr;
-        }
-
+    max-height: 140px;
+    opacity: 1;
+    padding: 0 24px 20px;
+}
         .service-card.active .service-card-body-inner {
             padding: 0 24px 20px;
         }
@@ -572,6 +572,17 @@
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
+
+.addon-card {
+    background: #fff;
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    transform: translateZ(0);
+    transition: border-color 0.28s ease, box-shadow 0.28s ease, background-color 0.28s ease;
+}
 
         .addon-card-header {
             padding: 16px 18px;
@@ -639,11 +650,15 @@
         }
 
         .addon-card-body {
-            display: grid;
-            grid-template-rows: 0fr;
-            transition: grid-template-rows 0.45s cubic-bezier(0.23,1,0.32,1);
-        }
-
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0 18px;
+    transition:
+        max-height 0.42s cubic-bezier(0.23,1,0.32,1),
+        opacity 0.24s ease,
+        padding 0.42s cubic-bezier(0.23,1,0.32,1);
+}
         .addon-card-body-inner {
             overflow: hidden;
             padding: 0 18px;
@@ -651,9 +666,10 @@
         }
 
         .addon-card.active .addon-card-body {
-            grid-template-rows: 1fr;
-        }
-
+    max-height: 130px;
+    opacity: 1;
+    padding: 0 18px 16px;
+}
         .addon-card.active .addon-card-body-inner {
             padding: 0 18px 16px;
         }
@@ -1753,15 +1769,14 @@
                 });
             }
 
-            function activateCard(card) {
-                if (isMobile()) return;
-                if (card.classList.contains('active')) return;
+           function activateCard(card, allCards) {
+    if (isMobile()) return;
+    if (card.classList.contains('active')) return;
 
-                allCards.forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
-                setImage(card.dataset.service);
-            }
-
+    allCards.forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+    setImage(card.dataset.service);
+}
             allCards.forEach(card => {
                 card.addEventListener('click', () => activateCard(card));
 
