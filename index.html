@@ -525,19 +525,20 @@
         .service-card.active .service-price { color: #EDE6D4; }
 
         .service-card-body {
-    max-height: 0;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+        .service-card-body-inner {
     overflow: hidden;
-    opacity: 0;
     padding: 0 24px;
-    transition:
-        max-height 0.42s cubic-bezier(0.23,1,0.32,1),
-        opacity 0.24s ease,
-        padding 0.42s cubic-bezier(0.23,1,0.32,1);
 }
         .service-card.active .service-card-body {
-    max-height: 140px;
-    opacity: 1;
+    grid-template-rows: 1fr;
+}
+        .service-card.active .service-card-body-inner {
     padding: 0 24px 20px;
+    transition: padding 0.45s cubic-bezier(0.16,1,0.3,1);
 }
         .service-description {
             font-family: 'Lato', sans-serif;
@@ -640,19 +641,20 @@
         }
 
         .addon-card-body {
-    max-height: 0;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+        .addon-card-body-inner {
     overflow: hidden;
-    opacity: 0;
     padding: 0 18px;
-    transition:
-        max-height 0.42s cubic-bezier(0.23,1,0.32,1),
-        opacity 0.24s ease,
-        padding 0.42s cubic-bezier(0.23,1,0.32,1);
 }
         .addon-card.active .addon-card-body {
-    max-height: 130px;
-    opacity: 1;
+    grid-template-rows: 1fr;
+}
+        .addon-card.active .addon-card-body-inner {
     padding: 0 18px 16px;
+    transition: padding 0.45s cubic-bezier(0.16,1,0.3,1);
 }
         .addon-description {
             font-family: 'Lato', sans-serif;
@@ -1238,26 +1240,11 @@
             .services-container { grid-template-columns: 1fr; min-height: auto; }
             .services-content-side { padding: 70px 40px; }
 
-            .service-card-body {
-                display: block;
-            }
-
-            .service-card-body-inner {
-                padding: 0 24px 18px !important;
-                overflow: visible;
-            }
-
+            .service-card-body { grid-template-rows: 1fr !important; }
+            .service-card-body-inner { padding: 0 24px 18px !important; }
             .service-description { color: #666 !important; }
-
-            .addon-card-body {
-                display: block;
-            }
-
-            .addon-card-body-inner {
-                padding: 0 18px 14px !important;
-                overflow: visible;
-            }
-
+            .addon-card-body { grid-template-rows: 1fr !important; }
+            .addon-card-body-inner { padding: 0 18px 14px !important; }
             .addon-description { color: #666 !important; }
         }
 
@@ -1366,13 +1353,13 @@
                     <div class="definition-card">
                         <p class="definition-word">myōko</p>
                         <p class="definition-pronunciation">[mjōˈkō] noun</p>
-                        <p class="definition-text">A meeting of east and west; the harmony of skilled hands and island serenity, brought directly to you.</p>
+                        <p class="definition-text">The art of exquisite skill. Derived from the Kanji's <i>Myō</i> (妙) and <i>Kō</i> (巧).</p>
                     </div>
                 </div>
                 <div class="text-side fade-in-right">
-                    <h2>About Myōko</h2>
-                    <p>We bring the art of therapeutic massage to your doorstep in Mykonos. Whether you're at your villa, hotel, or beachside retreat, our mobile service delivers personalised relaxation and recovery treatments designed for your body's unique needs.</p>
-                    <p>Trained in Swedish, deep tissue, and sports massage techniques, we combine ancient wellness wisdom with modern therapeutic practice.</p>
+                    <h2>About Us</h2>
+                    <p>Myōko was founded on the expertise of physical therapy. Combining that knowledge with the passion for the profession, Myōko stands at the forefront of excellence, care and dedication.</p>
+                    <p>Embark on this experience like <strong>never before</strong>.</p>
                 </div>
             </div>
         </section>
@@ -1412,8 +1399,10 @@
             <span class="service-price">€100</span>
         </div>
         <div class="service-card-body">
-            <p class="service-description">Gentle, flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
-        </div>
+                <div class="service-card-body-inner">
+                    <p class="service-description">Gentle, flowing strokes to promote relaxation, improve circulation, and ease muscle tension. Perfect for unwinding after a day in the sun.</p>
+                </div>
+            </div>
     </div>
 
     <div class="service-card" data-service="deep-tissue">
@@ -1425,8 +1414,10 @@
             <span class="service-price">€120</span>
         </div>
         <div class="service-card-body">
-            <p class="service-description">Targeted pressure to release chronic muscle tension and deep-seated knots. Ideal for those who need serious therapeutic work.</p>
-        </div>
+                <div class="service-card-body-inner">
+                    <p class="service-description">Targeted pressure to release chronic muscle tension and deep-seated knots. Ideal for those who need serious therapeutic work.</p>
+                </div>
+            </div>
     </div>
 
     <div class="service-card" data-service="sports">
@@ -1438,8 +1429,10 @@
             <span class="service-price">€90</span>
         </div>
         <div class="service-card-body">
-            <p class="service-description">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles and post-workout relief.</p>
-        </div>
+                <div class="service-card-body-inner">
+                    <p class="service-description">Dynamic techniques to enhance performance, prevent injury, and accelerate recovery. Perfect for active lifestyles and post-workout relief.</p>
+                </div>
+            </div>
     </div>
 </div>
 
@@ -1456,8 +1449,10 @@
             <span class="addon-badge">Add-on</span>
         </div>
         <div class="addon-card-body">
-            <p class="addon-description">Essential oils blended with gentle massage techniques to calm the mind and restore balance.</p>
-        </div>
+                <div class="addon-card-body-inner">
+                    <p class="addon-description">Essential oils blended with gentle massage techniques to calm the mind and restore balance.</p>
+                </div>
+            </div>
     </div>
 
     <div class="addon-card" data-service="cupping">
@@ -1470,47 +1465,12 @@
             <span class="addon-badge">Add-on</span>
         </div>
         <div class="addon-card-body">
-            <p class="addon-description">Suction cups lift tissue to release fascia, improve circulation, and ease deep muscular tension.</p>
-        </div>
+                <div class="addon-card-body-inner">
+                    <p class="addon-description">Suction cups lift tissue to release fascia, improve circulation, and ease deep muscular tension.</p>
+                </div>
+            </div>
     </div>
 </div>
-                    </div>
-
-                    <p class="addons-label">Add-on Therapies</p>
-
-                    <div class="addons-grid">
-                        <div class="addon-card" data-service="aromatherapy">
-                            <div class="addon-card-header">
-                                <div class="addon-card-top">
-                                    <h3 class="addon-card-name">Aromatherapy</h3>
-                                    <span class="addon-price">€110</span>
-                                </div>
-                                <p class="addon-duration">60 minutes</p>
-                                <span class="addon-badge">Add-on</span>
-                            </div>
-                            <div class="addon-card-body">
-                                <div class="addon-card-body-inner">
-                                    <p class="addon-description">Essential oils blended with gentle massage techniques to calm the mind and restore balance.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="addon-card" data-service="cupping">
-                            <div class="addon-card-header">
-                                <div class="addon-card-top">
-                                    <h3 class="addon-card-name">Cupping Therapy</h3>
-                                    <span class="addon-price">€90</span>
-                                </div>
-                                <p class="addon-duration">45 minutes</p>
-                                <span class="addon-badge">Add-on</span>
-                            </div>
-                            <div class="addon-card-body">
-                                <div class="addon-card-body-inner">
-                                    <p class="addon-description">Suction cups lift tissue to release fascia, improve circulation, and ease deep muscular tension.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -1776,7 +1736,7 @@
                 });
             }
 
-           function activateCard(card, allCards) {
+           function activateCard(card) {
     if (isMobile()) return;
     if (card.classList.contains('active')) return;
 
@@ -1785,6 +1745,19 @@
     setImage(card.dataset.service);
 }
             allCards.forEach(card => {
+                let touchMoved = false;
+
+                card.addEventListener('touchstart', () => { touchMoved = false; }, { passive: true });
+                card.addEventListener('touchmove', () => { touchMoved = true; }, { passive: true });
+                card.addEventListener('touchend', e => {
+                    if (!touchMoved) {
+                        e.preventDefault();
+                        allCards.forEach(c => c.classList.remove('active'));
+                        card.classList.add('active');
+                        setImage(card.dataset.service);
+                    }
+                });
+
                 card.addEventListener('click', () => activateCard(card));
 
                 card.addEventListener('mouseenter', () => {
