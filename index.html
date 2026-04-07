@@ -1726,15 +1726,18 @@
         });
 
         const fadeObserver = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('appear');
-                    fadeObserver.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.12 });
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('appear');
+                fadeObserver.unobserve(e.target);
+            }
+        });
+    }, {
+        threshold: 0.18,
+        rootMargin: "0px 0px -20% 0px"
+    });
 
-        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-up')
+    document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-up')
             .forEach(el => fadeObserver.observe(el));
 
         (function initServices() {
