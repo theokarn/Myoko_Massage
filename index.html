@@ -1285,7 +1285,108 @@
  min-width: 102px;
  }
  }
- </style>
+ 
+        /* ── COOKIE BANNER ── */
+        .cookie-banner {
+            position: fixed;
+            left: 24px;
+            right: 24px;
+            bottom: 24px;
+            z-index: 300;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+        .cookie-banner.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .cookie-card {
+            width: min(560px, 100%);
+            background: rgba(237,230,212,0.97);
+            border: 1px solid rgba(75,77,57,0.14);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            padding: 20px 20px 16px;
+        }
+        .cookie-title {
+            font-family: 'Gowun Batang', serif;
+            font-size: 1.05rem;
+            color: #4B4D39;
+            margin-bottom: 8px;
+        }
+        .cookie-text {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: rgba(75,77,57,0.78);
+            margin-bottom: 14px;
+        }
+        .cookie-text a { color: #4B4D39; text-underline-offset: 3px; }
+        .cookie-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .cookie-btn {
+            min-height: 42px;
+            padding: 0 20px;
+            border-radius: 999px;
+            border: 1px solid rgba(75,77,57,0.18);
+            font-family: 'Lato', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+            background: transparent;
+            color: #4B4D39;
+        }
+        .cookie-btn:hover { transform: translateY(-1px); }
+        .cookie-btn-primary { background: #4B4D39; color: #EDE6D4; border-color: #4B4D39; }
+        .cookie-btn-primary:hover { background: #3d3f2e; border-color: #3d3f2e; }
+        .cookie-btn-secondary:hover { background: rgba(75,77,57,0.06); }
+        .cookie-link-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            min-height: auto;
+            letter-spacing: 1.2px;
+            text-transform: none;
+            font-size: 0.82rem;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .cookie-manage-pill {
+            position: fixed;
+            left: 18px;
+            bottom: 18px;
+            z-index: 250;
+            border: 1px solid rgba(75,77,57,0.12);
+            background: rgba(237,230,212,0.92);
+            color: #4B4D39;
+            backdrop-filter: blur(10px);
+            border-radius: 999px;
+            min-height: 36px;
+            padding: 0 14px;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+        }
+        .cookie-manage-pill.show { display: inline-flex; }
+
+    </style>
 </head>
 <body>
 
@@ -1804,6 +1905,97 @@
  }
  });
  })();
- </script>
+ 
+        /* ── COOKIE CONSENT ── */
+        (function initCookies() {
+            const COOKIE_KEY = 'myoko_cookie_v1';
+            const GA_ID = 'G-XXXXXXXXXX'; // replace with your real GA ID
+            let gaLoaded = false;
+
+            const banner  = document.getElementById('cookieBanner');
+            const pill    = document.getElementById('cookieManage');
+            const btnAccept   = document.getElementById('cookieAccept');
+            const btnReject   = document.getElementById('cookieReject');
+            const btnManage   = document.getElementById('cookieManage');
+            const btnCustom   = document.getElementById('cookieCustomize');
+
+            function loadGA() {
+                if (gaLoaded || GA_ID === 'G-XXXXXXXXXX') return;
+                window.dataLayer = window.dataLayer || [];
+                window.gtag = function(){ dataLayer.push(arguments); };
+                gtag('js', new Date());
+                gtag('config', GA_ID);
+                const s = document.createElement('script');
+                s.async = true;
+                s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+                document.head.appendChild(s);
+                gaLoaded = true;
+            }
+
+            function getPrefs() {
+                try { return JSON.parse(localStorage.getItem(COOKIE_KEY)); }
+                catch { return null; }
+            }
+
+            function savePrefs(analytics) {
+                localStorage.setItem(COOKIE_KEY, JSON.stringify({ analytics: analytics, ts: Date.now() }));
+            }
+
+            function showBanner() {
+                banner.classList.add('show');
+                pill.classList.remove('show');
+            }
+
+            function hideBanner() {
+                banner.classList.remove('show');
+                pill.classList.add('show');
+            }
+
+            function applyPrefs(prefs) {
+                if (prefs && prefs.analytics) loadGA();
+            }
+
+            btnAccept.addEventListener('click', function() {
+                savePrefs(true);
+                applyPrefs({ analytics: true });
+                hideBanner();
+            });
+
+            btnReject.addEventListener('click', function() {
+                savePrefs(false);
+                hideBanner();
+            });
+
+            btnCustom.addEventListener('click', function() {
+                window.location.href = 'cookies.html';
+            });
+
+            btnManage.addEventListener('click', showBanner);
+
+            var stored = getPrefs();
+            if (stored) {
+                applyPrefs(stored);
+                hideBanner();
+            } else {
+                setTimeout(showBanner, 800);
+            }
+        })();
+
+    </script>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-card" role="dialog" aria-label="Cookie preferences">
+            <p class="cookie-title">Cookies</p>
+            <p class="cookie-text">We use essential cookies to keep the site running, plus optional analytics cookies (Google Analytics) and form cookies (Freeform). You can change this anytime via <a href="cookies.html">Cookie Policy</a>.</p>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-btn-primary" id="cookieAccept" type="button">Accept All</button>
+                <button class="cookie-btn cookie-btn-secondary" id="cookieReject" type="button">Reject</button>
+                <button class="cookie-btn cookie-link-btn" id="cookieCustomize" type="button">Manage settings</button>
+            </div>
+        </div>
+    </div>
+    <button class="cookie-manage-pill" id="cookieManage" type="button">Cookie settings</button>
+
 </body>
 </html>
