@@ -1391,30 +1391,6 @@
             background: #fff;
             border-color: #fff;
         }
-        .cookie-pill {
-            position: fixed;
-            left: 20px;
-            bottom: 20px;
-            z-index: 9990;
-            display: none;
-            align-items: center;
-            height: 30px;
-            padding: 0 13px;
-            border-radius: 999px;
-            border: 1px solid rgba(75,77,57,0.13);
-            background: rgba(237,230,212,0.82);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            font-family: 'Lato', sans-serif;
-            font-size: 0.60rem;
-            letter-spacing: 1.8px;
-            text-transform: uppercase;
-            color: rgba(75,77,57,0.45);
-            cursor: pointer;
-            transition: color 0.2s ease, border-color 0.2s ease;
-        }
-        .cookie-pill:hover { color: #4B4D39; border-color: rgba(75,77,57,0.28); }
-        .cookie-pill.show { display: inline-flex; }
         @media (max-width: 640px) {
             .cookie-card {
                 border-radius: 22px;
@@ -1800,7 +1776,6 @@
             </div>
         </div>
     </div>
-    <button class="cookie-pill" id="cookiePill" type="button">Cookie settings</button>
 
     <script>
  const nav = document.getElementById('mainNav');
@@ -1880,17 +1855,6 @@
                     if (!touchMoved) { e.preventDefault(); activateCard(card); }
                 });
                 card.addEventListener('click', () => activateCard(card));
-
- card.addEventListener('mouseenter', () => {
- if (!isMobile()) setImage(card.dataset.service);
- });
-
- card.addEventListener('mouseleave', () => {
- if (!isMobile()) {
- const active = document.querySelector('.service-card.active, .addon-card.active');
- if (active) setImage(active.dataset.service);
- }
- });
  });
  })();
 
@@ -1969,12 +1933,11 @@
             var gaLoaded = false;
 
             var banner = document.getElementById('cookieBanner');
-            var pill   = document.getElementById('cookiePill');
             var btnA   = document.getElementById('cookieAccept');
             var btnR   = document.getElementById('cookieReject');
             var btnM   = document.getElementById('cookieManageInline');
 
-            if (!banner || !pill || !btnA || !btnR) {
+            if (!banner || !btnA || !btnR) {
                 console.warn('Cookie banner elements not found');
                 return;
             }
@@ -2002,18 +1965,15 @@
 
             function showBanner() {
                 banner.classList.add('show');
-                pill.classList.remove('show');
             }
 
             function hideBanner() {
                 banner.classList.remove('show');
-                pill.classList.add('show');
             }
 
             btnA.addEventListener('click', function() { savePrefs(true); loadGA(); hideBanner(); });
             btnR.addEventListener('click', function() { savePrefs(false); hideBanner(); });
             if (btnM) btnM.addEventListener('click', function() { window.location.href = 'cookies.html'; });
-            pill.addEventListener('click', showBanner);
 
             var prefs = getPrefs();
             if (prefs !== null) {
