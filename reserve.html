@@ -247,11 +247,7 @@
             flex-shrink: 0;
         }
 
-        .prog-step {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .prog-step { display: flex; align-items: center; gap: 8px; }
 
         .prog-dot {
             width: 26px;
@@ -291,7 +287,7 @@
         .prog-step.active .prog-dot,
         .prog-step.done .prog-dot { background: #4B4D39; border-color: #4B4D39; color: #EDE6D4; }
         .prog-step.active .prog-label { color: #4B4D39; font-weight: 700; }
-        .prog-step.done .prog-label { color: rgba(75,77,57,0.45); }
+        .prog-step.done .prog-label  { color: rgba(75,77,57,0.45); }
         .prog-line.done { background: #4B4D39; }
 
         /* ── STEPS ── */
@@ -302,11 +298,7 @@
             flex-direction: column;
         }
 
-        .step {
-            display: none;
-            flex-direction: column;
-            flex: 1;
-        }
+        .step { display: none; flex-direction: column; flex: 1; }
 
         .step.active {
             display: flex;
@@ -337,12 +329,7 @@
         }
 
         /* ── CARDS ── */
-        .card-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            flex: 1;
-        }
+        .card-list { display: flex; flex-direction: column; gap: 10px; flex: 1; }
 
         .card {
             background: #fff;
@@ -360,7 +347,6 @@
         }
 
         .card:hover { border-color: rgba(75,77,57,0.22); transform: translateX(5px); box-shadow: 0 4px 18px rgba(75,77,57,0.07); }
-
         .card.selected { background: #4B4D39; border-color: #4B4D39; transform: translateX(5px); box-shadow: 0 6px 22px rgba(75,77,57,0.18); }
 
         .card-body { display: flex; flex-direction: column; gap: 2px; }
@@ -437,7 +423,7 @@
             border: 1.5px solid rgba(75,77,57,0.14);
             border-radius: 8px;
             font-family: 'Inter', sans-serif;
-            font-size: 16px; /* prevents iOS zoom */
+            font-size: 16px;
             font-weight: 300;
             background: #fff;
             color: #4B4D39;
@@ -454,12 +440,9 @@
         .form-group input::placeholder,
         .form-group textarea::placeholder { color: rgba(75,77,57,0.28); }
 
-        /* iOS date input: show placeholder-like text when empty */
         .form-group input[type="date"] { color: #4B4D39; }
-        .form-group input[type="date"]:invalid,
-        .form-group input[type="date"]::-webkit-datetime-edit {
-            color: rgba(75,77,57,0.5);
-        }
+        .form-group input[type="date"]::-webkit-datetime-edit { color: rgba(75,77,57,0.5); }
+        .form-group input[type="date"]:valid::-webkit-datetime-edit { color: #4B4D39; }
 
         .form-group textarea { min-height: 88px; resize: vertical; }
 
@@ -476,31 +459,77 @@
         }
         .select-wrap select { padding-right: 36px; }
 
-        /* ── SUMMARY ── */
+        /* ── SUMMARY BOX ── */
         .summary-box {
-            background: #fff;
-            border-radius: 12px;
+            border: 1.5px solid rgba(75,77,57,0.13);
+            border-radius: 14px;
             overflow: hidden;
             margin-top: 4px;
+            background: transparent;
+        }
+
+        .summary-box-header {
+            padding: 10px 22px;
+            background: #4B4D39;
+            display: flex;
+            align-items: center;
+        }
+
+        .summary-box-header span {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(237,230,212,0.75);
         }
 
         .sum-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 13px 22px;
+            padding: 12px 22px;
             border-bottom: 1px solid rgba(75,77,57,0.07);
+            background: #fff;
         }
 
         .sum-row:last-child { border-bottom: none; }
 
-        .sum-row.total-row { background: rgba(75,77,57,0.03); border-top: 1.5px solid rgba(75,77,57,0.1); }
+        .sum-row.total-row {
+            background: rgba(75,77,57,0.04);
+            border-top: 1.5px solid rgba(75,77,57,0.1);
+            padding: 14px 22px;
+        }
 
-        .sum-label { font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 300; color: rgba(75,77,57,0.6); }
-        .sum-val   { font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 400; color: #4B4D39; }
+        .sum-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: rgba(75,77,57,0.55);
+        }
 
-        .sum-row.total-row .sum-label,
-        .sum-row.total-row .sum-val { font-weight: 600; font-size: 0.98rem; color: #4B4D39; }
+        .sum-val {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #4B4D39;
+        }
+
+        .sum-row.total-row .sum-label {
+            font-family: 'Lato', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #4B4D39;
+        }
+
+        .sum-row.total-row .sum-val {
+            font-family: 'Gowun Batang', serif;
+            font-size: 1.35rem;
+            font-weight: 400;
+            color: #4B4D39;
+        }
 
         .tax-note {
             font-family: 'Inter', sans-serif;
@@ -578,7 +607,6 @@
         }
 
         .success-screen.visible { display: flex; animation: fadeUp 0.45s ease forwards; }
-
         .success-icon { font-size: 2.4rem; margin-bottom: 18px; }
 
         .success-screen h2 {
@@ -619,14 +647,14 @@
 
         .btn-home:hover { background: #383a28; transform: translateY(-2px); }
 
-        /* ── RESPONSIVE: TABLET ── */
+        /* ── TABLET ── */
         @media (max-width: 1024px) {
             nav { padding: 20px 35px; }
             .progress { padding: 90px 40px 0; }
             .steps { padding: 28px 40px 50px; }
         }
 
-        /* ── RESPONSIVE: MOBILE ── */
+        /* ── MOBILE ── */
         @media (max-width: 768px) {
             body {
                 overflow: auto;
@@ -654,34 +682,26 @@
 
             .content-side {
                 overflow-y: visible;
-                /* Extra bottom padding so content clears Safari's browser bar */
                 padding-bottom: env(safe-area-inset-bottom, 20px);
             }
 
-            .progress {
-                padding: 80px 20px 0;
-            }
-
+            .progress { padding: 80px 20px 0; }
             .prog-line { max-width: 28px; margin: 0 6px; }
             .prog-label { font-size: 0.6rem; letter-spacing: 1.2px; }
 
-            .steps {
-                padding: 24px 20px 40px;
-            }
-
+            .steps { padding: 24px 20px 40px; }
             .step-title { font-size: clamp(1.6rem, 6.5vw, 2rem); }
             .step-hint  { font-size: 0.85rem; margin-bottom: 20px; }
 
             .card { padding: 16px 18px; }
-            .card:hover   { transform: none; }
+            .card:hover    { transform: none; }
             .card.selected { transform: none; }
-            .card-name { font-size: 1.1rem; }
+            .card-name  { font-size: 1.1rem; }
             .card-price { font-size: 1rem; }
-            .card-desc { display: none; }
+            .card-desc  { display: none; }
 
             .form-row { grid-template-columns: 1fr; }
 
-            /* Date field iOS fix */
             input[type="date"] {
                 -webkit-appearance: none;
                 appearance: none;
@@ -689,7 +709,6 @@
                 line-height: normal;
             }
 
-            /* Select dropdown iOS fix */
             select {
                 -webkit-appearance: none;
                 appearance: none;
@@ -698,22 +717,10 @@
 
             .btn-back.hidden { display: none; }
 
-            .step-nav {
-                margin-top: 20px;
-                gap: 10px;
-            }
+            .step-nav { margin-top: 20px; gap: 10px; }
 
-            /* On mobile the Back button stays compact, Next fills remaining space */
-            .btn-back {
-                padding: 0 20px;
-                flex-shrink: 0;
-            }
-
-            .btn-next {
-                padding: 0 20px;
-                letter-spacing: 1.2px;
-                font-size: 10.5px;
-            }
+            .btn-back { padding: 0 20px; flex-shrink: 0; }
+            .btn-next { padding: 0 20px; letter-spacing: 1.2px; font-size: 10.5px; }
 
             .menu-overlay { grid-template-columns: 1fr; }
             .overlay-photo { display: none; }
@@ -725,7 +732,7 @@
 
         @media (max-width: 480px) {
             .prog-label { display: none; }
-            .prog-line { max-width: 18px; }
+            .prog-line  { max-width: 18px; }
         }
     </style>
 </head>
@@ -758,7 +765,7 @@
     </div>
 
     <div class="page">
-        <!-- Photo side (desktop only) -->
+
         <div class="photo-side">
             <div class="photo-slide active" id="slide-default"><img src="swedish-massage.jpg" alt=""></div>
             <div class="photo-slide" id="slide-swedish"><img src="swedish-massage.jpg" alt="Swedish Massage"></div>
@@ -769,8 +776,8 @@
             <div class="photo-caption" id="photoCaption">Myōko Massage · Mykonos</div>
         </div>
 
-        <!-- Content side -->
         <div class="content-side">
+
             <div class="progress" id="progressBar">
                 <div class="prog-step active" id="ps1">
                     <div class="prog-dot">1</div>
@@ -943,6 +950,9 @@
                         </div>
 
                         <div class="summary-box">
+                            <div class="summary-box-header">
+                                <span>Booking Summary</span>
+                            </div>
                             <div class="sum-row" id="sumServiceRow">
                                 <span class="sum-label" id="sumServiceLabel">—</span>
                                 <span class="sum-val"   id="sumServiceVal">—</span>
@@ -1000,7 +1010,7 @@
             }
         });
 
-        // ── PHOTO SLIDE ──
+        // ── PHOTO ──
         function setPhoto(slideId, caption) {
             document.querySelectorAll('.photo-slide').forEach(s => s.classList.remove('active'));
             const slide = document.getElementById(slideId);
@@ -1052,15 +1062,14 @@
 
         // ── PROGRESS ──
         function updateProgress(step) {
-            const dots  = [document.getElementById('ps1'), document.getElementById('ps2'), document.getElementById('ps3')];
-            const lines = [document.getElementById('pl1'), document.getElementById('pl2')];
-            dots.forEach((d, i) => {
-                d.classList.remove('active', 'done');
-                if (i + 1 < step) d.classList.add('done');
-                if (i + 1 === step) d.classList.add('active');
+            ['ps1','ps2','ps3'].forEach((id, i) => {
+                const el = document.getElementById(id);
+                el.classList.remove('active','done');
+                if (i + 1 < step) el.classList.add('done');
+                if (i + 1 === step) el.classList.add('active');
             });
-            lines.forEach((l, i) => {
-                l.classList.toggle('done', i + 1 < step);
+            ['pl1','pl2'].forEach((id, i) => {
+                document.getElementById(id).classList.toggle('done', i + 1 < step);
             });
         }
 
@@ -1073,25 +1082,25 @@
         }
 
         document.getElementById('btn1').addEventListener('click', () => showStep(2));
+
         document.getElementById('btn2').addEventListener('click', () => {
-            // Populate summary
             document.getElementById('fService').value = state.service;
-            document.getElementById('fAddon').value   = state.addon;
+            document.getElementById('fAddon').value   = state.addon !== 'None' ? state.addon : 'None';
 
             document.getElementById('sumServiceLabel').textContent = state.service;
             document.getElementById('sumServiceVal').textContent   = '€' + state.servicePrice;
 
             if (state.addon !== 'None' && state.addonPrice > 0) {
-                document.getElementById('sumAddonLabel').textContent = state.addon;
-                document.getElementById('sumAddonVal').textContent   = '€' + state.addonPrice;
-                document.getElementById('sumAddonRow').style.display = '';
+                document.getElementById('sumAddonLabel').textContent  = state.addon;
+                document.getElementById('sumAddonVal').textContent    = '€' + state.addonPrice;
+                document.getElementById('sumAddonRow').style.display  = '';
             } else {
-                document.getElementById('sumAddonRow').style.display = 'none';
+                document.getElementById('sumAddonRow').style.display  = 'none';
             }
 
             const total = state.servicePrice + state.addonPrice;
-            document.getElementById('fTotal').value               = '€' + total;
-            document.getElementById('sumTotal').textContent       = '€' + total;
+            document.getElementById('fTotal').value         = '€' + total;
+            document.getElementById('sumTotal').textContent = '€' + total;
 
             showStep(3);
         });
@@ -1103,7 +1112,7 @@
         document.getElementById('reserveForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = this.querySelector('[type="submit"]');
-            btn.disabled = true;
+            btn.disabled    = true;
             btn.textContent = 'Sending...';
 
             try {
@@ -1119,12 +1128,12 @@
                     document.getElementById('successScreen').classList.add('visible');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
-                    btn.disabled = false;
+                    btn.disabled    = false;
                     btn.textContent = 'Send Reservation';
                     alert('Something went wrong. Please try again.');
                 }
             } catch {
-                btn.disabled = false;
+                btn.disabled    = false;
                 btn.textContent = 'Send Reservation';
                 alert('Network error. Please check your connection and try again.');
             }
