@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Reserve | Myōko Massage</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,6 +25,7 @@
             overflow: hidden;
         }
 
+        /* ── NAV ── */
         nav {
             position: fixed;
             top: 0;
@@ -49,10 +50,7 @@
             transition: opacity 0.3s ease;
         }
 
-        nav.menu-open .logo {
-            opacity: 1;
-            pointer-events: all;
-        }
+        nav.menu-open .logo { opacity: 1; pointer-events: all; }
 
         .logo-name {
             font-family: 'Gowun Batang', serif;
@@ -68,7 +66,7 @@
             font-weight: 400;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: rgba(75, 77, 57, 0.6);
+            color: rgba(75,77,57,0.6);
             margin-top: 4px;
         }
 
@@ -93,15 +91,15 @@
             background: #4B4D39;
             border-radius: 2px;
             position: absolute;
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), background 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), background 0.3s ease;
         }
 
         .hamburger .bar:nth-child(1) { transform: translateY(-5px); }
         .hamburger .bar:nth-child(2) { transform: translateY(5px); }
-
         .hamburger.open .bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
         .hamburger.open .bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
 
+        /* ── MENU OVERLAY ── */
         .menu-overlay {
             position: fixed;
             inset: 0;
@@ -111,20 +109,16 @@
             grid-template-columns: 1fr 1fr;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1);
         }
 
-        .menu-overlay.open {
-            opacity: 1;
-            pointer-events: all;
-        }
+        .menu-overlay.open { opacity: 1; pointer-events: all; }
 
         .overlay-left {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 80px 60px 80px 80px;
-            padding-top: 140px;
+            padding: 140px 60px 80px 80px;
         }
 
         .overlay-links {
@@ -146,28 +140,20 @@
             display: block;
             opacity: 0;
             transform: translateX(-20px);
-            transition:
-                opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1),
-                transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
-                color 0.2s ease;
+            transition: opacity 0.45s cubic-bezier(0.23,1,0.32,1), transform 0.45s cubic-bezier(0.23,1,0.32,1), color 0.2s ease;
         }
 
-        .menu-overlay.open .overlay-links li a {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
+        .menu-overlay.open .overlay-links li a { opacity: 1; transform: translateX(0); }
         .overlay-links li:nth-child(1) a { transition-delay: 0.08s; }
         .overlay-links li:nth-child(2) a { transition-delay: 0.14s; }
         .overlay-links li:nth-child(3) a { transition-delay: 0.20s; }
         .overlay-links li:nth-child(4) a { transition-delay: 0.26s; }
-
-        .overlay-links li a:hover { color: rgba(75, 77, 57, 0.4); }
+        .overlay-links li a:hover { color: rgba(75,77,57,0.4); }
 
         .overlay-ig {
             font-family: 'Lato', sans-serif;
             font-size: 0.9rem;
-            color: rgba(75, 77, 57, 0.45);
+            color: rgba(75,77,57,0.45);
             letter-spacing: 1.5px;
             text-decoration: none;
             opacity: 0;
@@ -195,11 +181,9 @@
             transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
         }
 
-        .menu-overlay.open .overlay-photo img {
-            opacity: 1;
-            transform: scale(1);
-        }
+        .menu-overlay.open .overlay-photo img { opacity: 1; transform: scale(1); }
 
+        /* ── PAGE LAYOUT ── */
         .page {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -255,10 +239,12 @@
             overflow-y: auto;
         }
 
+        /* ── PROGRESS ── */
         .progress {
             display: flex;
             align-items: center;
             padding: 100px 60px 0;
+            flex-shrink: 0;
         }
 
         .prog-step {
@@ -303,25 +289,12 @@
         }
 
         .prog-step.active .prog-dot,
-        .prog-step.done .prog-dot {
-            background: #4B4D39;
-            border-color: #4B4D39;
-            color: #EDE6D4;
-        }
+        .prog-step.done .prog-dot { background: #4B4D39; border-color: #4B4D39; color: #EDE6D4; }
+        .prog-step.active .prog-label { color: #4B4D39; font-weight: 700; }
+        .prog-step.done .prog-label { color: rgba(75,77,57,0.45); }
+        .prog-line.done { background: #4B4D39; }
 
-        .prog-step.active .prog-label {
-            color: #4B4D39;
-            font-weight: 700;
-        }
-
-        .prog-step.done .prog-label {
-            color: rgba(75,77,57,0.45);
-        }
-
-        .prog-line.done {
-            background: #4B4D39;
-        }
-
+        /* ── STEPS ── */
         .steps {
             flex: 1;
             padding: 32px 60px 60px;
@@ -341,14 +314,8 @@
         }
 
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .step-title {
@@ -366,8 +333,10 @@
             font-weight: 300;
             color: rgba(75,77,57,0.5);
             margin-bottom: 28px;
+            line-height: 1.6;
         }
 
+        /* ── CARDS ── */
         .card-list {
             display: flex;
             flex-direction: column;
@@ -385,33 +354,16 @@
             justify-content: space-between;
             align-items: center;
             gap: 16px;
-            transition:
-                border-color 0.25s ease,
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                background 0.25s ease;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
         }
 
-        .card:hover {
-            border-color: rgba(75,77,57,0.22);
-            transform: translateX(5px);
-            box-shadow: 0 4px 18px rgba(75,77,57,0.07);
-        }
+        .card:hover { border-color: rgba(75,77,57,0.22); transform: translateX(5px); box-shadow: 0 4px 18px rgba(75,77,57,0.07); }
 
-        .card.selected {
-            background: #4B4D39;
-            border-color: #4B4D39;
-            transform: translateX(5px);
-            box-shadow: 0 6px 22px rgba(75,77,57,0.18);
-        }
+        .card.selected { background: #4B4D39; border-color: #4B4D39; transform: translateX(5px); box-shadow: 0 6px 22px rgba(75,77,57,0.18); }
 
-        .card-body {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
+        .card-body { display: flex; flex-direction: column; gap: 2px; }
 
         .card-badge {
             font-family: 'Lato', sans-serif;
@@ -427,58 +379,19 @@
             transition: background 0.25s ease, color 0.25s ease;
         }
 
-        .card.selected .card-badge {
-            background: rgba(237,230,212,0.18);
-            color: #EDE6D4;
-        }
+        .card.selected .card-badge { background: rgba(237,230,212,0.18); color: #EDE6D4; }
 
-        .card-name {
-            font-family: 'Gowun Batang', serif;
-            font-size: 1.3rem;
-            color: #4B4D39;
-            transition: color 0.25s ease;
-        }
-
-        .card-dur {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.78rem;
-            color: rgba(75,77,57,0.45);
-            font-style: italic;
-            transition: color 0.25s ease;
-        }
-
-        .card-desc {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.84rem;
-            color: rgba(75,77,57,0.5);
-            line-height: 1.5;
-            margin-top: 5px;
-            max-width: 380px;
-            transition: color 0.25s ease;
-        }
+        .card-name { font-family: 'Gowun Batang', serif; font-size: 1.3rem; color: #4B4D39; transition: color 0.25s ease; }
+        .card-dur  { font-family: 'Lato', sans-serif; font-size: 0.78rem; color: rgba(75,77,57,0.45); font-style: italic; transition: color 0.25s ease; }
+        .card-desc { font-family: 'Lato', sans-serif; font-size: 0.84rem; color: rgba(75,77,57,0.5); line-height: 1.5; margin-top: 5px; max-width: 380px; transition: color 0.25s ease; }
 
         .card.selected .card-name { color: #EDE6D4; }
-
         .card.selected .card-dur,
-        .card.selected .card-desc {
-            color: rgba(237,230,212,0.6);
-        }
+        .card.selected .card-desc { color: rgba(237,230,212,0.6); }
 
-        .card-right {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex-shrink: 0;
-        }
+        .card-right { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
 
-        .card-price {
-            font-family: 'Lato', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #4B4D39;
-            transition: color 0.25s ease;
-        }
-
+        .card-price { font-family: 'Lato', sans-serif; font-size: 1.2rem; font-weight: 700; color: #4B4D39; transition: color 0.25s ease; }
         .card.selected .card-price { color: #EDE6D4; }
 
         .card-arrow {
@@ -495,50 +408,19 @@
             transition: all 0.25s ease;
         }
 
-        .card.selected .card-arrow {
-            border-color: rgba(237,230,212,0.35);
-            color: #EDE6D4;
-        }
+        .card.selected .card-arrow { border-color: rgba(237,230,212,0.35); color: #EDE6D4; }
 
-        .card.none-card {
-            background: transparent;
-            border: 2px dashed rgba(75,77,57,0.18);
-            justify-content: center;
-        }
+        .card.none-card { background: transparent; border: 2px dashed rgba(75,77,57,0.18); justify-content: center; }
+        .card.none-card .card-name { font-family: 'Lato', sans-serif; font-size: 0.95rem; font-weight: 400; color: rgba(75,77,57,0.4); }
+        .card.none-card.selected { background: #4B4D39; border-style: solid; }
+        .card.none-card.selected .card-name { color: #EDE6D4; }
 
-        .card.none-card .card-name {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 400;
-            color: rgba(75,77,57,0.4);
-        }
+        /* ── FORM ── */
+        .reserve-form { display: flex; flex-direction: column; gap: 13px; }
 
-        .card.none-card.selected {
-            background: #4B4D39;
-            border-style: solid;
-        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
 
-        .card.none-card.selected .card-name {
-            color: #EDE6D4;
-        }
-
-        .reserve-form {
-            display: flex;
-            flex-direction: column;
-            gap: 13px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 13px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+        .form-group { display: flex; flex-direction: column; gap: 5px; }
 
         .form-group label {
             font-family: 'Lato', sans-serif;
@@ -555,7 +437,7 @@
             border: 1.5px solid rgba(75,77,57,0.14);
             border-radius: 8px;
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
+            font-size: 16px; /* prevents iOS zoom */
             font-weight: 300;
             background: #fff;
             color: #4B4D39;
@@ -567,25 +449,21 @@
 
         .form-group input:focus,
         .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #4B4D39;
-        }
+        .form-group select:focus { outline: none; border-color: #4B4D39; }
 
         .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(75,77,57,0.28);
+        .form-group textarea::placeholder { color: rgba(75,77,57,0.28); }
+
+        /* iOS date input: show placeholder-like text when empty */
+        .form-group input[type="date"] { color: #4B4D39; }
+        .form-group input[type="date"]:invalid,
+        .form-group input[type="date"]::-webkit-datetime-edit {
+            color: rgba(75,77,57,0.5);
         }
 
-        .form-group textarea {
-            min-height: 88px;
-            resize: vertical;
-        }
+        .form-group textarea { min-height: 88px; resize: vertical; }
 
-        .select-wrap {
-            position: relative;
-        }
-
+        .select-wrap { position: relative; }
         .select-wrap::after {
             content: '↓';
             position: absolute;
@@ -596,17 +474,14 @@
             color: rgba(75,77,57,0.38);
             pointer-events: none;
         }
+        .select-wrap select { padding-right: 36px; }
 
-        .select-wrap select {
-            padding-right: 36px;
-        }
-
+        /* ── SUMMARY ── */
         .summary-box {
             background: #fff;
             border-radius: 12px;
             overflow: hidden;
-            margin-top: 8px;
-            margin-bottom: 2px;
+            margin-top: 4px;
         }
 
         .sum-row {
@@ -619,39 +494,23 @@
 
         .sum-row:last-child { border-bottom: none; }
 
-        .sum-row.total-row {
-            background: rgba(75,77,57,0.03);
-            border-top: 1.5px solid rgba(75,77,57,0.1);
-        }
+        .sum-row.total-row { background: rgba(75,77,57,0.03); border-top: 1.5px solid rgba(75,77,57,0.1); }
 
-        .sum-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.92rem;
-            font-weight: 300;
-            color: rgba(75,77,57,0.6);
-        }
-
-        .sum-val {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.92rem;
-            font-weight: 400;
-            color: #4B4D39;
-        }
+        .sum-label { font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 300; color: rgba(75,77,57,0.6); }
+        .sum-val   { font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 400; color: #4B4D39; }
 
         .sum-row.total-row .sum-label,
-        .sum-row.total-row .sum-val {
-            font-weight: 600;
-            font-size: 0.98rem;
-            color: #4B4D39;
-        }
+        .sum-row.total-row .sum-val { font-weight: 600; font-size: 0.98rem; color: #4B4D39; }
 
         .tax-note {
             font-family: 'Inter', sans-serif;
             font-size: 0.72rem;
             font-weight: 300;
             color: rgba(75,77,57,0.4);
+            text-align: center;
         }
 
+        /* ── STEP NAV ── */
         .step-nav {
             display: flex;
             justify-content: space-between;
@@ -676,49 +535,38 @@
             transition: all 0.25s ease;
             display: inline-flex;
             align-items: center;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
-        .btn-back:hover {
-            border-color: #4B4D39;
-            background: rgba(75,77,57,0.04);
-        }
-
-        .btn-back.hidden {
-            visibility: hidden;
-            pointer-events: none;
-        }
+        .btn-back:hover { border-color: #4B4D39; background: rgba(75,77,57,0.04); }
+        .btn-back.hidden { visibility: hidden; pointer-events: none; }
 
         .btn-next {
             background: #4B4D39;
             border: none;
             color: #EDE6D4;
             height: 48px;
-            padding: 0 42px;
+            padding: 0 32px;
             border-radius: 30px;
             font-family: 'Lato', sans-serif;
             font-size: 11px;
             font-weight: 500;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.25s ease;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            flex: 1;
         }
 
-        .btn-next:hover {
-            background: #383a28;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(75,77,57,0.22);
-        }
+        .btn-next:hover { background: #383a28; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(75,77,57,0.22); }
+        .btn-next:disabled { opacity: 0.28; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        .btn-next:disabled {
-            opacity: 0.28;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
+        /* ── SUCCESS ── */
         .success-screen {
             display: none;
             flex-direction: column;
@@ -729,15 +577,9 @@
             flex: 1;
         }
 
-        .success-screen.visible {
-            display: flex;
-            animation: fadeUp 0.45s ease forwards;
-        }
+        .success-screen.visible { display: flex; animation: fadeUp 0.45s ease forwards; }
 
-        .success-icon {
-            font-size: 2.4rem;
-            margin-bottom: 18px;
-        }
+        .success-icon { font-size: 2.4rem; margin-bottom: 18px; }
 
         .success-screen h2 {
             font-family: 'Gowun Batang', serif;
@@ -771,30 +613,33 @@
             text-transform: uppercase;
             display: inline-flex;
             align-items: center;
+            white-space: nowrap;
             transition: all 0.25s ease;
         }
 
-        .btn-home:hover {
-            background: #383a28;
-            transform: translateY(-2px);
-        }
+        .btn-home:hover { background: #383a28; transform: translateY(-2px); }
 
+        /* ── RESPONSIVE: TABLET ── */
         @media (max-width: 1024px) {
             nav { padding: 20px 35px; }
             .progress { padding: 90px 40px 0; }
             .steps { padding: 28px 40px 50px; }
         }
 
+        /* ── RESPONSIVE: MOBILE ── */
         @media (max-width: 768px) {
             body {
                 overflow: auto;
                 height: auto;
+                min-height: 100vh;
+                min-height: 100dvh;
             }
 
             .page {
                 grid-template-columns: 1fr;
                 height: auto;
                 min-height: 100vh;
+                min-height: 100dvh;
             }
 
             .photo-side { display: none; }
@@ -805,46 +650,77 @@
                 box-shadow: 0 1px 0 rgba(75,77,57,0.08);
             }
 
-            .logo {
-                opacity: 1 !important;
-                pointer-events: all !important;
+            .logo { opacity: 1 !important; pointer-events: all !important; }
+
+            .content-side {
+                overflow-y: visible;
+                /* Extra bottom padding so content clears Safari's browser bar */
+                padding-bottom: env(safe-area-inset-bottom, 20px);
             }
 
-            .logo-name { color: #4B4D39; }
-            .logo-location { color: rgba(75,77,57,0.6); }
+            .progress {
+                padding: 80px 20px 0;
+            }
 
-            .hamburger .bar { background: #4B4D39; }
-
-            .content-side { overflow-y: visible; }
-
-            .progress { padding: 80px 20px 0; }
             .prog-line { max-width: 28px; margin: 0 6px; }
-            .prog-label { font-size: 0.6rem; }
+            .prog-label { font-size: 0.6rem; letter-spacing: 1.2px; }
 
-            .steps { padding: 24px 20px 50px; }
+            .steps {
+                padding: 24px 20px 40px;
+            }
+
             .step-title { font-size: clamp(1.6rem, 6.5vw, 2rem); }
+            .step-hint  { font-size: 0.85rem; margin-bottom: 20px; }
 
             .card { padding: 16px 18px; }
-            .card:hover { transform: none; }
+            .card:hover   { transform: none; }
             .card.selected { transform: none; }
-            .card-name { font-size: 1.15rem; }
-            .card-price { font-size: 1.05rem; }
+            .card-name { font-size: 1.1rem; }
+            .card-price { font-size: 1rem; }
             .card-desc { display: none; }
 
             .form-row { grid-template-columns: 1fr; }
 
-            .form-group input,
-            .form-group textarea,
-            .form-group select {
-                font-size: 16px;
+            /* Date field iOS fix */
+            input[type="date"] {
+                -webkit-appearance: none;
+                appearance: none;
+                min-height: 48px;
+                line-height: normal;
+            }
+
+            /* Select dropdown iOS fix */
+            select {
+                -webkit-appearance: none;
+                appearance: none;
+                min-height: 48px;
             }
 
             .btn-back.hidden { display: none; }
-            .btn-next { flex: 1; justify-content: center; }
+
+            .step-nav {
+                margin-top: 20px;
+                gap: 10px;
+            }
+
+            /* On mobile the Back button stays compact, Next fills remaining space */
+            .btn-back {
+                padding: 0 20px;
+                flex-shrink: 0;
+            }
+
+            .btn-next {
+                padding: 0 20px;
+                letter-spacing: 1.2px;
+                font-size: 10.5px;
+            }
 
             .menu-overlay { grid-template-columns: 1fr; }
             .overlay-photo { display: none; }
             .overlay-left { padding: 120px 35px 80px; }
+
+            .summary-box { margin-top: 2px; }
+            .tax-note { margin-top: 4px; }
         }
 
         @media (max-width: 480px) {
@@ -882,6 +758,7 @@
     </div>
 
     <div class="page">
+        <!-- Photo side (desktop only) -->
         <div class="photo-side">
             <div class="photo-slide active" id="slide-default"><img src="swedish-massage.jpg" alt=""></div>
             <div class="photo-slide" id="slide-swedish"><img src="swedish-massage.jpg" alt="Swedish Massage"></div>
@@ -892,6 +769,7 @@
             <div class="photo-caption" id="photoCaption">Myōko Massage · Mykonos</div>
         </div>
 
+        <!-- Content side -->
         <div class="content-side">
             <div class="progress" id="progressBar">
                 <div class="prog-step active" id="ps1">
@@ -911,6 +789,8 @@
             </div>
 
             <div class="steps">
+
+                <!-- STEP 1 -->
                 <div class="step active" id="step1">
                     <h2 class="step-title">Choose Your Experience</h2>
                     <p class="step-hint">Select the massage that suits you best.</p>
@@ -944,7 +824,7 @@
                             <div class="card-body">
                                 <div class="card-name">Sports Massage</div>
                                 <div class="card-dur">70 minutes</div>
-                                <div class="card-desc">Combination of targeted strokes with stretching and mobility exercises. Cupping Therapy is included - free of charge.</div>
+                                <div class="card-desc">Combination of targeted strokes with stretching and mobility exercises. Cupping Therapy included free of charge.</div>
                             </div>
                             <div class="card-right">
                                 <div class="card-price">€120</div>
@@ -959,6 +839,7 @@
                     </div>
                 </div>
 
+                <!-- STEP 2 -->
                 <div class="step" id="step2">
                     <h2 class="step-title">Enhance Your Session</h2>
                     <p class="step-hint">Add an optional treatment to your massage.</p>
@@ -1003,40 +884,39 @@
                     </div>
                 </div>
 
+                <!-- STEP 3 -->
                 <div class="step" id="step3">
                     <h2 class="step-title">Your Details</h2>
-                    <p class="step-hint">Thank you for choosing Myōko Massage. We will confirm your reservation within 24 hours via email and WhatsApp.</p>
+                    <p class="step-hint">We will confirm your reservation within 24 hours via email and WhatsApp.</p>
 
                     <form class="reserve-form" id="reserveForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                         <input type="hidden" name="service" id="fService">
-                        <input type="hidden" name="addon" id="fAddon">
-                        <input type="hidden" name="total" id="fTotal">
+                        <input type="hidden" name="addon"   id="fAddon">
+                        <input type="hidden" name="total"   id="fTotal">
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Full Name</label>
-                                <input id="name" type="text" name="name" placeholder="Your name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input id="email" type="email" name="email" placeholder="your@email.com" required>
-                            </div>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input id="name" type="text" name="name" placeholder="Your name" autocomplete="name" required>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input id="phone" type="tel" name="phone" placeholder="+30 694 000 0000" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="date">Preferred Date</label>
-                                <input id="date" type="date" name="date" required>
-                            </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input id="email" type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
                         </div>
 
-                        <div class="form-group" id="timeGroup">
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input id="phone" type="tel" name="phone" placeholder="+30 694 000 0000" autocomplete="tel" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Preferred Date</label>
+                            <input id="date" type="date" name="date" required>
+                        </div>
+
+                        <div class="form-group">
                             <label for="timeSelect">Preferred Time</label>
-                            <div class="select-wrap" id="timeSelectWrap">
+                            <div class="select-wrap">
                                 <select id="timeSelect" name="time" required>
                                     <option value="" disabled selected>Select a time slot</option>
                                     <option>08:00</option>
@@ -1065,11 +945,11 @@
                         <div class="summary-box">
                             <div class="sum-row" id="sumServiceRow">
                                 <span class="sum-label" id="sumServiceLabel">—</span>
-                                <span class="sum-val" id="sumServiceVal">—</span>
+                                <span class="sum-val"   id="sumServiceVal">—</span>
                             </div>
                             <div class="sum-row" id="sumAddonRow">
                                 <span class="sum-label" id="sumAddonLabel">—</span>
-                                <span class="sum-val" id="sumAddonVal">—</span>
+                                <span class="sum-val"   id="sumAddonVal">—</span>
                             </div>
                             <div class="sum-row total-row">
                                 <span class="sum-label">Total</span>
@@ -1086,20 +966,23 @@
                     </form>
                 </div>
 
+                <!-- SUCCESS -->
                 <div class="success-screen" id="successScreen">
                     <div class="success-icon">🌿</div>
                     <h2>Reservation Received</h2>
-                    <p>Thank you for choosing Myōko Massage. We will confirm your reservation within the next 24 hours via email and WhatsApp.</p>
+                    <p>Thank you for choosing Myōko Massage. We will confirm your reservation within 24 hours via email and WhatsApp.</p>
                     <a href="index.html" class="btn-home">Back to Home</a>
                 </div>
+
             </div>
         </div>
     </div>
 
     <script>
-        const menuToggle = document.getElementById('menuToggle');
+        // ── MENU ──
+        const menuToggle  = document.getElementById('menuToggle');
         const menuOverlay = document.getElementById('menuOverlay');
-        const mainNav = document.getElementById('mainNav');
+        const mainNav     = document.getElementById('mainNav');
 
         menuToggle.addEventListener('click', () => {
             const open = menuToggle.classList.toggle('open');
@@ -1117,38 +1000,7 @@
             }
         });
 
-        function setupTime() {
-            const group = document.getElementById('timeGroup');
-            const wrap = document.getElementById('timeSelectWrap');
-
-            if (window.innerWidth <= 768 && wrap && !group.querySelector('input[type="time"]')) {
-                wrap.remove();
-
-                const inp = document.createElement('input');
-                inp.type = 'time';
-                inp.name = 'time';
-                inp.required = true;
-                inp.min = '08:00';
-                inp.max = '21:00';
-                inp.step = '3600';
-                inp.style.fontSize = '16px';
-
-                group.appendChild(inp);
-            }
-        }
-
-        setupTime();
-        window.addEventListener('resize', setupTime);
-    </script>
-
-    <script>
-        const state = {
-            service: '',
-            servicePrice: 0,
-            addon: 'None',
-            addonPrice: 0
-        };
-
+        // ── PHOTO SLIDE ──
         function setPhoto(slideId, caption) {
             document.querySelectorAll('.photo-slide').forEach(s => s.classList.remove('active'));
             const slide = document.getElementById(slideId);
@@ -1156,166 +1008,128 @@
             document.getElementById('photoCaption').textContent = caption || 'Myōko Massage · Mykonos';
         }
 
+        // ── STATE ──
+        const state = {
+            service: '',
+            servicePrice: 0,
+            addon: 'None',
+            addonPrice: 0
+        };
+
+        // ── STEP 1 CARDS ──
         document.querySelectorAll('#step1 .card').forEach(card => {
             card.addEventListener('mouseenter', () => setPhoto(card.dataset.slide, card.dataset.name));
-
             card.addEventListener('mouseleave', () => {
-                if (!document.querySelector('#step1 .card.selected')) {
-                    setPhoto('slide-default', '');
-                }
+                if (!document.querySelector('#step1 .card.selected')) setPhoto('slide-default', '');
             });
-
             card.addEventListener('click', () => {
                 document.querySelectorAll('#step1 .card').forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
-
-                state.service = card.dataset.name;
+                state.service      = card.dataset.name;
                 state.servicePrice = parseInt(card.dataset.price, 10);
-
                 setPhoto(card.dataset.slide, card.dataset.name);
                 document.getElementById('btn1').disabled = false;
             });
         });
 
+        // ── STEP 2 CARDS ──
         document.querySelectorAll('#step2 .card').forEach(card => {
             card.addEventListener('mouseenter', () => {
                 setPhoto(card.dataset.slide, card.dataset.name !== 'None' ? card.dataset.name : '');
             });
-
             card.addEventListener('mouseleave', () => {
-                const selected = document.querySelector('#step2 .card.selected');
-                if (selected) {
-                    setPhoto(
-                        selected.dataset.slide,
-                        selected.dataset.name !== 'None' ? selected.dataset.name : ''
-                    );
-                }
+                const sel = document.querySelector('#step2 .card.selected');
+                if (sel) setPhoto(sel.dataset.slide, sel.dataset.name !== 'None' ? sel.dataset.name : '');
             });
-
             card.addEventListener('click', () => {
                 document.querySelectorAll('#step2 .card').forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
-
-                state.addon = card.dataset.name;
-                state.addonPrice = parseInt(card.dataset.price, 10) || 0;
-
+                state.addon      = card.dataset.name;
+                state.addonPrice = parseInt(card.dataset.price, 10);
                 setPhoto(card.dataset.slide, card.dataset.name !== 'None' ? card.dataset.name : '');
             });
         });
 
-        function setProgress(n) {
-            ['ps1', 'ps2', 'ps3'].forEach((id, i) => {
-                const el = document.getElementById(id);
-                el.classList.remove('active', 'done');
-
-                if (i + 1 === n) el.classList.add('active');
-                if (i + 1 < n) el.classList.add('done');
+        // ── PROGRESS ──
+        function updateProgress(step) {
+            const dots  = [document.getElementById('ps1'), document.getElementById('ps2'), document.getElementById('ps3')];
+            const lines = [document.getElementById('pl1'), document.getElementById('pl2')];
+            dots.forEach((d, i) => {
+                d.classList.remove('active', 'done');
+                if (i + 1 < step) d.classList.add('done');
+                if (i + 1 === step) d.classList.add('active');
             });
-
-            document.getElementById('pl1').classList.toggle('done', n > 1);
-            document.getElementById('pl2').classList.toggle('done', n > 2);
-        }
-
-        function goStep(n) {
-            document.querySelectorAll('.step').forEach((step, i) => {
-                step.classList.toggle('active', i + 1 === n);
+            lines.forEach((l, i) => {
+                l.classList.toggle('done', i + 1 < step);
             });
-
-            setProgress(n);
-            setPhoto('slide-default', '');
-            document.querySelector('.content-side').scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function buildSummary() {
-            const total = state.servicePrice + state.addonPrice;
-
-            document.getElementById('sumServiceLabel').textContent = state.service || 'Massage';
-            document.getElementById('sumServiceVal').textContent = `€${state.servicePrice}`;
-
-            const addonRow = document.getElementById('sumAddonRow');
-
-            if (state.addon && state.addon !== 'None' && state.addonPrice > 0) {
-                addonRow.style.display = 'flex';
-                document.getElementById('sumAddonLabel').textContent = state.addon;
-                document.getElementById('sumAddonVal').textContent = `€${state.addonPrice}`;
-            } else {
-                addonRow.style.display = 'none';
-            }
-
-            document.getElementById('sumTotal').textContent = `€${total}`;
-
-            document.getElementById('fService').value = state.service;
-            document.getElementById('fAddon').value = state.addon || 'None';
-            document.getElementById('fTotal').value = `€${total}`;
+        // ── STEP NAVIGATION ──
+        function showStep(n) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + n).classList.add('active');
+            updateProgress(n);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        document.getElementById('btn1').addEventListener('click', () => {
-            goStep(2);
-        });
-
+        document.getElementById('btn1').addEventListener('click', () => showStep(2));
         document.getElementById('btn2').addEventListener('click', () => {
-            buildSummary();
-            goStep(3);
-        });
+            // Populate summary
+            document.getElementById('fService').value = state.service;
+            document.getElementById('fAddon').value   = state.addon;
 
-        document.getElementById('back2').addEventListener('click', () => {
-            goStep(1);
-        });
+            document.getElementById('sumServiceLabel').textContent = state.service;
+            document.getElementById('sumServiceVal').textContent   = '€' + state.servicePrice;
 
-        document.getElementById('back3').addEventListener('click', () => {
-            goStep(2);
-        });
-
-        const dateInput = document.getElementById('date');
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const dd = String(today.getDate()).padStart(2, '0');
-        dateInput.min = `${yyyy}-${mm}-${dd}`;
-
-        const reserveForm = document.getElementById('reserveForm');
-        const successScreen = document.getElementById('successScreen');
-
-        reserveForm.addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            buildSummary();
-
-            const formAction = reserveForm.getAttribute('action');
-            if (!formAction || formAction.includes('YOUR_FORM_ID')) {
-                alert('Please replace YOUR_FORM_ID with your real Formspree form ID first.');
-                return;
+            if (state.addon !== 'None' && state.addonPrice > 0) {
+                document.getElementById('sumAddonLabel').textContent = state.addon;
+                document.getElementById('sumAddonVal').textContent   = '€' + state.addonPrice;
+                document.getElementById('sumAddonRow').style.display = '';
+            } else {
+                document.getElementById('sumAddonRow').style.display = 'none';
             }
 
-            const submitBtn = reserveForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
+            const total = state.servicePrice + state.addonPrice;
+            document.getElementById('fTotal').value               = '€' + total;
+            document.getElementById('sumTotal').textContent       = '€' + total;
 
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
+            showStep(3);
+        });
+
+        document.getElementById('back2').addEventListener('click', () => showStep(1));
+        document.getElementById('back3').addEventListener('click', () => showStep(2));
+
+        // ── FORM SUBMIT ──
+        document.getElementById('reserveForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('[type="submit"]');
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
 
             try {
-                const response = await fetch(formAction, {
+                const res = await fetch(this.action, {
                     method: 'POST',
-                    body: new FormData(reserveForm),
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    body: new FormData(this),
+                    headers: { 'Accept': 'application/json' }
                 });
 
-                if (response.ok) {
-                    document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
-                    successScreen.classList.add('visible');
+                if (res.ok) {
+                    document.getElementById('step3').classList.remove('active');
                     document.getElementById('progressBar').style.display = 'none';
+                    document.getElementById('successScreen').classList.add('visible');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
+                    btn.disabled = false;
+                    btn.textContent = 'Send Reservation';
                     alert('Something went wrong. Please try again.');
                 }
-            } catch (error) {
-                alert('Something went wrong. Please check your internet connection and try again.');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
+            } catch {
+                btn.disabled = false;
+                btn.textContent = 'Send Reservation';
+                alert('Network error. Please check your connection and try again.');
             }
         });
     </script>
+
 </body>
 </html>
