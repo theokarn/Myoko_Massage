@@ -1730,7 +1730,7 @@
  <span class="footer-logo-name">Myōko Massage</span>
  <span class="footer-logo-location">Mykonos</span>
  </a>
- <p class="footer-about">Myōko is a premium mobile massage service operating across Mykonos. We bring skilled therapeutic hands to your villa, hotel, or retreat — blending Eastern wellness tradition with the unhurried spirit of the Greek islands.</p>
+ <p class="footer-about">Myōko is a premium mobile massage service operating across Mykonos. We bring skilled therapeutic hands to your villa, hotel, or retreat — blending knowledge and passion with the unhurried spirit of the Greek islands.</p>
  </div>
 
  <div class="footer-links">
@@ -1766,7 +1766,7 @@
     <div class="cookie-banner" id="cookieBanner">
         <div class="cookie-card">
             <div class="cookie-text-wrap">
-                <p class="cookie-text">We use analytics &amp; form cookies to improve your experience. See our <a href="cookies.html">Cookie Policy</a>.</p>
+                <p class="cookie-text">We use analytics cookies to improve your experience. See our <a href="cookies.html">Cookie Policy</a>.</p>
             </div>
             <div class="cookie-actions">
                 <button class="cookie-btn cookie-btn-manage" id="cookieManageInline" type="button">Preferences</button>
@@ -1926,62 +1926,115 @@
  })();
  
         /* ── COOKIE CONSENT ── */
-        (function () {
-            var KEY = 'myoko_cookie_v1';
-            var GA_ID = 'G-XXXXXXXXXX'; /* ← replace with your real GA Measurement ID */
-            var gaLoaded = false;
+    (function () {
+        var KEY   = 'myoko_cookie_v1';
+        var GA_ID = 'G-XXXXXXXXXX'; /* ← replace with your real GA Measurement ID */
+        var gaLoaded = false;
 
-            var banner = document.getElementById('cookieBanner');
-            var btnA   = document.getElementById('cookieAccept');
-            var btnR   = document.getElementById('cookieReject');
-            var btnM   = document.getElementById('cookieManageInline');
+        /* ── Consent Mode v2: set denied defaults BEFORE any GA script loads ── */
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag('consent', 'default', {
+            analytics_storage:    'denied',
+            ad_storage:           'denied',
+            ad_user_data:         'denied',
+            ad_personalization:   'denied',
+            wait_for_update:      500
+        });
 
-            if (!banner || !btnA || !btnR) {
-                console.warn('Cookie banner elements not found');
-                return;
-            }
+        /* ── DOM refs ── */
+        var banner = document.getElementById('cookieBanner');
+        var btnA   = document.getElementById('cookieAccept');
+        var btnR   = document.getElementById('cookieReject');
+        var btnM   = document.getElementById('cookieManageInline');
 
-            function loadGA() {
-                if (gaLoaded || GA_ID === 'G-XXXXXXXXXX') return;
-                window.dataLayer = window.dataLayer || [];
-                window.gtag = function(){ window.dataLayer.push(arguments); };
+        if (!banner || !btnA || !btnR) {
+            console.warn('Cookie banner elements not found');
+            return;
+        }
+
+        /* ── GA4 loader ── */
+        function loadGA() {
+            if (gaLoaded || GA_ID === 'G-XXXXXXXXXX') return;
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+            document.head.appendChild(s);
+            s.onload = function () {
                 window.gtag('js', new Date());
                 window.gtag('config', GA_ID);
-                var s = document.createElement('script');
-                s.async = true;
-                s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-                document.head.appendChild(s);
-                gaLoaded = true;
-            }
+            };
+            gaLoaded = true;
+        }
 
-            function getPrefs() {
-                try { return JSON.parse(localStorage.getItem(KEY)); } catch(e) { return null; }
-            }
+        /* ── Update consent signals ── */
+        function grantConsent(analytics, ads) {
+            window.gtag('consent', 'update', {
+                analytics_storage:  analytics ? 'granted' : 'denied',
+                ad_storage:         ads       ? 'granted' : 'denied',
+                ad_user_data:       ads       ? 'granted' : 'denied',
+                ad_personalization: ads       ? 'granted' : 'denied'
+            });
+        }
 
-            function savePrefs(analytics) {
-                try { localStorage.setItem(KEY, JSON.stringify({ analytics: analytics, ts: Date.now() })); } catch(e) {}
-            }
+        /* ── localStorage helpers ── */
+        function getPrefs() {
+            try {
+                var p = JSON.parse(localStorage.getItem(KEY));
+                if (!p) return null;
+                var ONE_YEAR = 365 * 24 * 60 * 60 * 1000;
+                if (Date.now() - p.ts > ONE_YEAR) {
+                    localStorage.removeItem(KEY);
+                    return null;
+                }
+                return p;
+            } catch (e) { return null; }
+        }
 
-            function showBanner() {
-                banner.classList.add('show');
-            }
+        function savePrefs(analytics, ads) {
+            try {
+                localStorage.setItem(KEY, JSON.stringify({
+                    analytics: analytics,
+                    ads:       ads,
+                    ts:        Date.now()
+                }));
+            } catch (e) {}
+        }
 
-            function hideBanner() {
-                banner.classList.remove('show');
-            }
+        /* ── Banner visibility ── */
+        function showBanner() { banner.classList.add('show'); }
+        function hideBanner()  { banner.classList.remove('show'); }
 
-            btnA.addEventListener('click', function() { savePrefs(true); loadGA(); hideBanner(); });
-            btnR.addEventListener('click', function() { savePrefs(false); hideBanner(); });
-            if (btnM) btnM.addEventListener('click', function() { window.location.href = 'cookies.html'; });
+        /* ── Button handlers ── */
+        btnA.addEventListener('click', function () {
+            savePrefs(true, true);
+            grantConsent(true, true);
+            loadGA();
+            hideBanner();
+        });
 
-            var prefs = getPrefs();
-            if (prefs !== null) {
-                if (prefs.analytics) loadGA();
-                hideBanner();
-            } else {
-                setTimeout(showBanner, 900);
-            }
-        })();
+        btnR.addEventListener('click', function () {
+            savePrefs(false, false);
+            grantConsent(false, false);
+            hideBanner();
+        });
+
+        if (btnM) {
+            btnM.addEventListener('click', function () {
+                window.location.href = 'cookies.html';
+            });
+        }
+
+        /* ── On page load: honour saved prefs ── */
+        var prefs = getPrefs();
+        if (prefs !== null) {
+            grantConsent(prefs.analytics, prefs.ads);
+            if (prefs.analytics) loadGA();
+        } else {
+            setTimeout(showBanner, 900);
+        }
+
+    })();
 
     </script>
 </body>
