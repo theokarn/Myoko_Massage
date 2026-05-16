@@ -2191,155 +2191,155 @@
  })();
  
     (function () {
-        var KEY   = 'myoko_cookie_v1';
-        var GA_ID = 'G-XXXXXXXXXX'; /* ← replace with your real GA Measurement ID */
-        var gaLoaded = false;
+    var KEY   = 'myoko_cookie_v1';
+    var GA_ID = 'G-XXXXXXXXXX'; /* ← replace with your real GA Measurement ID */
+    var gaLoaded = false;
 
-        /* ── Consent Mode v2 defaults (denied before anything loads) ── */
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function () { window.dataLayer.push(arguments); };
-        window.gtag('consent', 'default', {
-            analytics_storage:  'denied',
-            ad_storage:         'denied',
-            ad_user_       'denied',
-            ad_personalization: 'denied',
-            wait_for_update:    500
+    /* ── Consent Mode v2 defaults (denied before anything loads) ── */
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', {
+        analytics_storage:  'denied',
+        ad_storage:         'denied',
+        ad_user_       'denied',
+        ad_personalization: 'denied',
+        wait_for_update:    500
+    });
+
+    /* ── DOM refs ── */
+    var banner       = document.getElementById('cookieBanner');
+    var btnA         = document.getElementById('cookieAccept');
+    var btnR         = document.getElementById('cookieReject');
+    var btnM         = document.getElementById('cookieManageInline');
+    var overlay      = document.getElementById('cookieModalOverlay');
+    var modalClose   = document.getElementById('cookieModalClose');
+    var modalSave    = document.getElementById('modalSave');
+    var modalReject  = document.getElementById('modalRejectAll');
+    var togAnalytics = document.getElementById('prefAnalytics');
+    var togAds       = document.getElementById('prefAds');
+
+    if (!banner || !btnA || !btnR || !overlay) {
+        console.warn('Cookie banner or modal elements not found');
+        return;
+    }
+
+    /* ── GA4 loader ── */
+    function loadGA() {
+        if (gaLoaded || GA_ID === 'G-XXXXXXXXXX') return;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(s);
+        s.onload = function () {
+            window.gtag('js', new Date());
+            window.gtag('config', GA_ID);
+        };
+        gaLoaded = true;
+    }
+
+    /* ── Consent signal updater ── */
+    function grantConsent(analytics, ads) {
+        window.gtag('consent', 'update', {
+            analytics_storage:  analytics ? 'granted' : 'denied',
+            ad_storage:         ads       ? 'granted' : 'denied',
+            ad_user_       ads       ? 'granted' : 'denied',
+            ad_personalization: ads       ? 'granted' : 'denied'
         });
+    }
 
-        /* ── DOM refs ── */
-        var banner       = document.getElementById('cookieBanner');
-        var btnA         = document.getElementById('cookieAccept');
-        var btnR         = document.getElementById('cookieReject');
-        var btnM         = document.getElementById('cookieManageInline');
-        var overlay      = document.getElementById('cookieModalOverlay');
-        var modalClose   = document.getElementById('cookieModalClose');
-        var modalSave    = document.getElementById('modalSave');
-        var modalReject  = document.getElementById('modalRejectAll');
-        var togAnalytics = document.getElementById('prefAnalytics');
-        var togAds       = document.getElementById('prefAds');
-
-        if (!banner || !btnA || !btnR || !overlay) {
-            console.warn('Cookie banner or modal elements not found');
-            return;
-        }
-
-        /* ── GA4 loader ── */
-        function loadGA() {
-            if (gaLoaded || GA_ID === 'G-XXXXXXXXXX') return;
-            var s = document.createElement('script');
-            s.async = true;
-            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-            document.head.appendChild(s);
-            s.onload = function () {
-                window.gtag('js', new Date());
-                window.gtag('config', GA_ID);
-            };
-            gaLoaded = true;
-        }
-
-        /* ── Consent signal updater ── */
-        function grantConsent(analytics, ads) {
-            window.gtag('consent', 'update', {
-                analytics_storage:  analytics ? 'granted' : 'denied',
-                ad_storage:         ads       ? 'granted' : 'denied',
-                ad_user_       ads       ? 'granted' : 'denied',
-                ad_personalization: ads       ? 'granted' : 'denied'
-            });
-        }
-
-        /* ── localStorage helpers ── */
-        function getPrefs() {
-            try {
-                var p = JSON.parse(localStorage.getItem(KEY));
-                if (!p) return null;
-                var ONE_YEAR = 365 * 24 * 60 * 60 * 1000;
-                if (Date.now() - p.ts > ONE_YEAR) {
-                    localStorage.removeItem(KEY);
-                    return null;
-                }
-                return p;
-            } catch (e) { return null; }
-        }
-
-        function savePrefs(analytics, ads) {
-            try {
-                localStorage.setItem(KEY, JSON.stringify({
-                    analytics: analytics,
-                    ads:       ads,
-                    ts:        Date.now()
-                }));
-            } catch (e) {}
-        }
-
-        /* ── Banner visibility ── */
-        function showBanner() { banner.classList.add('show'); }
-        function hideBanner()  { banner.classList.remove('show'); }
-
-        /* ── Modal visibility ── */
-        function showModal(prefill) {
-            if (prefill) {
-                togAnalytics.checked = !!prefill.analytics;
-                togAds.checked       = !!prefill.ads;
-            } else {
-                togAnalytics.checked = false;
-                togAds.checked       = false;
+    /* ── localStorage helpers ── */
+    function getPrefs() {
+        try {
+            var p = JSON.parse(localStorage.getItem(KEY));
+            if (!p) return null;
+            var ONE_YEAR = 365 * 24 * 60 * 60 * 1000;
+            if (Date.now() - p.ts > ONE_YEAR) {
+                localStorage.removeItem(KEY);
+                return null;
             }
-            overlay.classList.add('show');
-        }
-        function hideModal() { overlay.classList.remove('show'); }
+            return p;
+        } catch (e) { return null; }
+    }
 
-        /* ── Apply prefs helper ── */
-        function applyAndClose(analytics, ads) {
-            savePrefs(analytics, ads);
-            grantConsent(analytics, ads);
-            if (analytics) loadGA();
-            hideBanner();
-            hideModal();
-        }
+    function savePrefs(analytics, ads) {
+        try {
+            localStorage.setItem(KEY, JSON.stringify({
+                analytics: analytics,
+                ads:       ads,
+                ts:        Date.now()
+            }));
+        } catch (e) {}
+    }
 
-        /* ── Banner buttons ── */
-        btnA.addEventListener('click', function () {
-            applyAndClose(true, true);
-        });
-        btnR.addEventListener('click', function () {
-            applyAndClose(false, false);
-        });
-        btnM.addEventListener('click', function () {
-            hideBanner();
-            showModal(getPrefs());
-        });
+    /* ── Banner visibility ── */
+    function showBanner() { banner.classList.add('show'); }
+    function hideBanner()  { banner.classList.remove('show'); }
 
-        /* ── Modal buttons ── */
-        modalSave.addEventListener('click', function () {
-            applyAndClose(togAnalytics.checked, togAds.checked);
-        });
-        modalReject.addEventListener('click', function () {
-            applyAndClose(false, false);
-        });
-        modalClose.addEventListener('click', function () {
-            hideModal();
-            /* re-show banner only if no prefs saved yet */
-            if (!getPrefs()) showBanner();
-        });
-
-        /* ── Close modal on overlay background tap ── */
-        overlay.addEventListener('click', function (e) {
-            if (e.target === overlay) {
-                hideModal();
-                if (!getPrefs()) showBanner();
-            }
-        });
-
-        /* ── On page load ── */
-        var prefs = getPrefs();
-        if (prefs !== null) {
-            grantConsent(prefs.analytics, prefs.ads);
-            if (prefs.analytics) loadGA();
+    /* ── Modal visibility ── */
+    function showModal(prefill) {
+        if (prefill) {
+            togAnalytics.checked = !!prefill.analytics;
+            togAds.checked       = !!prefill.ads;
         } else {
-            setTimeout(showBanner, 900);
+            togAnalytics.checked = false;
+            togAds.checked       = false;
         }
+        overlay.classList.add('show');
+    }
+    function hideModal() { overlay.classList.remove('show'); }
 
-    })();
+    /* ── Apply prefs helper ── */
+    function applyAndClose(analytics, ads) {
+        savePrefs(analytics, ads);
+        grantConsent(analytics, ads);
+        if (analytics) loadGA();
+        hideBanner();
+        hideModal();
+    }
+
+    /* ── Banner buttons ── */
+    btnA.addEventListener('click', function () {
+        applyAndClose(true, true);
+    });
+    btnR.addEventListener('click', function () {
+        applyAndClose(false, false);
+    });
+    btnM.addEventListener('click', function () {
+        hideBanner();
+        showModal(getPrefs());
+    });
+
+    /* ── Modal buttons ── */
+    modalSave.addEventListener('click', function () {
+        applyAndClose(togAnalytics.checked, togAds.checked);
+    });
+    modalReject.addEventListener('click', function () {
+        applyAndClose(false, false);
+    });
+    modalClose.addEventListener('click', function () {
+        hideModal();
+        if (!getPrefs()) showBanner();
+    });
+
+    /* ── Close modal on overlay background tap ── */
+    overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) {
+            hideModal();
+            if (!getPrefs()) showBanner();
+        }
+    });
+
+    /* ── On page load ── */
+    var prefs = getPrefs();
+    if (prefs !== null) {
+        grantConsent(prefs.analytics, prefs.ads);
+        if (prefs.analytics) loadGA();
+    } else {
+        setTimeout(showBanner, 900);
+    }
+
+})();
+
 </script>
 </body>
 </html>
